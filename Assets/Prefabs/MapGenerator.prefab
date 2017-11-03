@@ -52,4 +52,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 0}
-  tiles: []
+  tilePrefabs:
+  - {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+  - {fileID: 1050143185150086, guid: 56a3031e0d5324f4f9daad2d0d79b413, type: 2}
+  - {fileID: 1529209515441392, guid: 8cb12754adabec048bbc3c02882c3fca, type: 2}
+  - {fileID: 1763689811583484, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
+  - {fileID: 1708775984971098, guid: b43307b0c000d1f469f1c2939f576b9f, type: 2}
