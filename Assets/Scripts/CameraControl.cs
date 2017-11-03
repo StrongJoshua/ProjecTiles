@@ -11,16 +11,16 @@ public class CameraControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyUp (KeyCode.UpArrow)) {
+		if (Input.GetKey (KeyCode.UpArrow)) {
 			cam.gameObject.transform.position += Vector3.forward;
 		}
-		else if (Input.GetKeyUp (KeyCode.DownArrow)) {
+		else if (Input.GetKey (KeyCode.DownArrow)) {
 			cam.gameObject.transform.position += Vector3.back;
 		}
-		else if (Input.GetKeyUp (KeyCode.RightArrow)) {
+		else if (Input.GetKey (KeyCode.RightArrow)) {
 			cam.gameObject.transform.position += Vector3.right;
 		}
-		else if (Input.GetKeyUp (KeyCode.LeftArrow)) {
+		else if (Input.GetKey (KeyCode.LeftArrow)) {
 			cam.gameObject.transform.position += Vector3.left;
 		}
 		else if (Input.GetAxis("Mouse ScrollWheel") > 0 && cam.orthographicSize < 13) {
