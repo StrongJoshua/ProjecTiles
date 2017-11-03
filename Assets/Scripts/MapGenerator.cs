@@ -22,9 +22,10 @@ public class MapGenerator : MonoBehaviour {
                 int tileInt = (int)char.GetNumericValue(c);
                 Instantiate(tilePrefabs[tileInt], new Vector3(x, 0, z), Quaternion.identity);
                 tiles.Add(new Point(x, z), tileInt);
+                x += 3;
             }
             x = 0;
-            z++;
+            z += 3;
         }
 	}
 
