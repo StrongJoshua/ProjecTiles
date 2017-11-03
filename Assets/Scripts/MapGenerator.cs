@@ -8,14 +8,17 @@ public class MapGenerator : MonoBehaviour {
 	void Start () {
         StringReader sr = new StringReader(map.text);
         string line;
-        int x = 0, y = 0;
+        int x = 0, z = 0;
         while((line = sr.ReadLine()) != null)
         {
             foreach(char c in line)
             {
                 if (c == ',')
                     continue;
+                Instantiate(tiles[(int)char.GetNumericValue(c)], new Vector3(x++, 0, z), Quaternion.identity);
             }
+            x = 0;
+            z++;
         }
 	}
 	
