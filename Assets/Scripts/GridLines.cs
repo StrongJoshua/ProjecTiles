@@ -6,7 +6,7 @@ public class GridLines : MonoBehaviour {
     public int tileStartX, tileStartZ;
     public int stepSize;
     public int mapSizeX, mapSizeZ;
-    public Color color;
+    public Color color = new Color(0, 0, 0, 1);
 
     private float startX, startZ;
 
