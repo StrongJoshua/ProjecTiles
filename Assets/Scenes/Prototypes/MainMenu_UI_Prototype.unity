@@ -695,7 +695,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 802916652afdd0d4eb8f04f6882e22fe, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 802916652afdd0d4eb8f04f6882e22fe, type: 3}
       propertyPath: m_LocalScale.x
@@ -854,6 +854,7 @@ GameObject:
   - component: {fileID: 1221727354}
   - component: {fileID: 1221727355}
   - component: {fileID: 1221727356}
+  - component: {fileID: 1221727357}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -955,6 +956,23 @@ Skybox:
   m_GameObject: {fileID: 1221727349}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: 39cace2863926444a9a78daa8ae26413, type: 2}
+--- !u!114 &1221727357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1221727349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdaf246fc72001f4ab11d1f901fb27ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileStartX: 0
+  tileStartZ: 0
+  stepSize: 3
+  mapSizeX: 15
+  mapSizeZ: 15
+  color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1377185939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1207,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4098335390778252, guid: 30dcd68047600cd4eb4161fc792ec374, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
         type: 2}
@@ -1236,7 +1254,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2e9ef25530b7bc7439b906047b422915, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2e9ef25530b7bc7439b906047b422915, type: 3}
       propertyPath: m_LocalScale.x
@@ -1405,7 +1423,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4703b28d978182b46995fab694f12e37, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4703b28d978182b46995fab694f12e37, type: 3}
       propertyPath: m_LocalScale.x
@@ -1521,7 +1539,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 3f1eb2b6c4925dc4e87c5a0a2b97b446, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 3f1eb2b6c4925dc4e87c5a0a2b97b446, type: 3}
       propertyPath: m_LocalScale.x

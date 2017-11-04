@@ -276,6 +276,7 @@ GameObject:
   - component: {fileID: 1647810234}
   - component: {fileID: 1647810239}
   - component: {fileID: 1647810240}
+  - component: {fileID: 1647810241}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -379,3 +380,20 @@ MonoBehaviour:
   cam: {fileID: 1647810237}
   maxZoom: 2
   minZoom: 25
+--- !u!114 &1647810241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1647810233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdaf246fc72001f4ab11d1f901fb27ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileStartX: 0
+  tileStartZ: 0
+  stepSize: 3
+  mapSizeX: 15
+  mapSizeZ: 15
+  color: {r: 0, g: 0, b: 0, a: 0}
