@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour {
 	public Camera cam;
+	public int maxZoom;
+	public int minZoom;
 	// Use this for initialization
 	void Start () {
 		
@@ -18,15 +20,15 @@ public class CameraControl : MonoBehaviour {
 			cam.gameObject.transform.position += Vector3.back;
 		}
 		else if (Input.GetKey (KeyCode.RightArrow)) {
-			cam.gameObject.transform.position += Vector3.right;
+			cam.gameObject.transform.position += transform.TransformDirection( Vector3.right ); 
 		}
 		else if (Input.GetKey (KeyCode.LeftArrow)) {
-			cam.gameObject.transform.position += Vector3.left;
+			cam.gameObject.transform.position += transform.TransformDirection( Vector3.left );
 		}
-		else if (Input.GetAxis("Mouse ScrollWheel") > 0 && cam.orthographicSize < 13) {
+		else if (Input.GetAxis("Mouse ScrollWheel") > 0 && cam.orthographicSize < minZoom) {
 			cam.orthographicSize+=0.3f;
 		}
-		else if (Input.GetAxis("Mouse ScrollWheel") < 0 && cam.orthographicSize > 2) {
+		else if (Input.GetAxis("Mouse ScrollWheel") < 0 && cam.orthographicSize > maxZoom) {
 			cam.orthographicSize-=0.3f;
 		}
 

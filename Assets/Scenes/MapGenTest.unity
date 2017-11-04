@@ -134,7 +134,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 1647810235}
   - component: {fileID: 1647810234}
   - component: {fileID: 1647810239}
+  - component: {fileID: 1647810240}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -358,9 +359,23 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1647810233}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: c6148824475845d4fa33a650a710bbbe, type: 2}
+--- !u!114 &1647810240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1647810233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c818b1df70ae3b45a3fc5f9504084fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1647810237}
+  maxZoom: 2
+  minZoom: 25
