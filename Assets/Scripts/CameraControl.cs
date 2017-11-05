@@ -15,6 +15,7 @@ public class CameraControl : MonoBehaviour {
 	public int x, y;
 	public Text coordinates;
 	public MapGenerator map;
+	public SelectedHighlight selector;
 	// Use this for initialization
 	void Start () {
 		moving = false;
@@ -23,10 +24,16 @@ public class CameraControl : MonoBehaviour {
 		x = 0;
 		y = 0;
 	}
+	void OnPreRender()
+	{
+		selector.curTileX = x;
+		selector.curTileY = y;
+	}
 	
 	// Update is called once per frame
 	void Update () {
 		coordinates.text = map.GetTileType(x,y) + "";
+
 		if (Input.GetKeyUp (KeyCode.UpArrow) || Input.GetKeyUp (KeyCode.DownArrow) || Input.GetKeyUp (KeyCode.RightArrow) || Input.GetKeyUp (KeyCode.LeftArrow)) {
 			lastTime = 0;
 			delay = 0.2f;
@@ -78,7 +85,7 @@ public class CameraControl : MonoBehaviour {
 			
 		}
 
-		iTween.MoveUpdate (this.gameObject, highlight.transform.position + new Vector3(0,15f,-45f), 1f);
+		iTween.MoveUpdate (this.gameObject, highlight.transform.position + new Vector3(0,20f,-45f), 1f);
 		
 	}
 
