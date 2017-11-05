@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraControl : MonoBehaviour {
 	public Camera cam;
@@ -12,6 +13,7 @@ public class CameraControl : MonoBehaviour {
 	float delay;
 	float lastTime;
 	public int x, y;
+	public Text coordinates;
 	// Use this for initialization
 	void Start () {
 		moving = false;
@@ -23,6 +25,7 @@ public class CameraControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		coordinates.text = "X:" + x + " Y:" + y;
 		if (Time.timeSinceLevelLoad - lastTime > delay) {
 			lastTime = Time.timeSinceLevelLoad;
 			if (Input.GetKey (KeyCode.UpArrow) && y < 14) {
