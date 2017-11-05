@@ -1,38 +1,53 @@
 ﻿using System.IO;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour {
     public TextAsset map;
     public GameObject[] tilePrefabs;
-    private Dictionary<Point, int> tiles;
+    public int step;
+    private int[,] tiles;
 	// Use this for initialization
 	void Start () {
-        tiles = new Dictionary<Point, int>();
         StringReader sr = new StringReader(map.text);
         string line;
-        int x = 0, z = 0;
+        ArrayList rows = new ArrayList();
+        int width = 0;
         while((line = sr.ReadLine()) != null)
         {
+            ArrayList row = new ArrayList();
             foreach(char c in line)
             {
                 if (c == ',')
                     continue;
                 int tileInt = (int)char.GetNumericValue(c);
-                Instantiate(tilePrefabs[tileInt], new Vector3(x, 0, z), Quaternion.identity);
-                tiles.Add(new Point(x, z), tileInt);
-                x += 3;
+                row.Add(tileInt);
             }
-            x = 0;
-            z += 3;
+            width = row.Count;
+            rows.Add(row);
+        }
+
+        tiles = new int[rows.Count, width];
+        int i = 0;
+        int j = 0;
+        foreach(ArrayList arr in rows)
+        {
+            foreach(int k in arr)
+            {
+                tiles[i, j] = k;
+                Instantiate(tilePrefabs[k], new Vector3((tiles.GetLength(0) - j - 1) * step, 0, i * step), Quaternion.identity);
+                j++;
+                Debug.Log(k);
+            }
+            i++;
+            j = 0;
         }
 	}
 
-    public int getTile(Point p)
+    public int getTile(int x, int y)
     {
-        int val;
-        if (tiles.TryGetValue(p, out val)) return val;
-        throw new Exception("Tile " + p + " does not exist.");
+        return tiles[x, y];
     }
 }
