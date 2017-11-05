@@ -28,25 +28,27 @@ public class MapGenerator : MonoBehaviour {
             width = row.Count;
             rows.Add(row);
         }
-
-        tiles = new int[rows.Count, width];
-        int i = 0;
-        int j = 0;
+        int height = rows.Count;
+        tiles = new int[width, height];
+        int x = 0;
+        int y = 0;
         foreach(ArrayList arr in rows)
         {
             foreach(int k in arr)
             {
-                tiles[i, j] = k;
-                Instantiate(tilePrefabs[k], new Vector3((tiles.GetLength(0) - j - 1) * step, 0, i * step), Quaternion.identity);
-                j++;
+                tiles[x, height - 1 - y] = k;
+                Instantiate(tilePrefabs[k], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity);
+                x++;
             }
-            i++;
-            j = 0;
+            y++;
+            x = 0;
         }
 	}
 
     public Tile GetTile(int x, int y)
     {
+        if (x < 0 || y < 0 || x >= tiles.GetLength(0) || y >= tiles.GetLength(1))
+            return null;
         return Tile.GetTile(tiles[x, y]);
     }
 }
