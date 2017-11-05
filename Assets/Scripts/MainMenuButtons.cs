@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuButtons : MonoBehaviour {
-    public GameObject mainMenuGroup, creditsGroup;
+    public GameObject mainMenuGroup, creditsGroup, backButton;
     public AudioClip click;
     public EventSystem eventSystem;
 
@@ -14,13 +14,16 @@ public class MainMenuButtons : MonoBehaviour {
     {
         mainMenuGroup.SetActive(false);
         creditsGroup.SetActive(true);
-        eventSystem.SetSelectedGameObject(creditsGroup.GetComponentInChildren<Button>().gameObject);
+		backButton.SetActive (true);
+        //eventSystem.SetSelectedGameObject(creditsGroup.GetComponentInChildren<Button>().gameObject);
     }
 
     public void showMainMenu ()
     {
         creditsGroup.SetActive(false);
+		backButton.SetActive (false);
         mainMenuGroup.SetActive(true);
+		creditsGroup.GetComponent<RectTransform> ().position = new Vector3 (1000, -380, 0);
         eventSystem.SetSelectedGameObject(mainMenuGroup.GetComponentInChildren<Button>().gameObject);
     }
 
@@ -33,4 +36,14 @@ public class MainMenuButtons : MonoBehaviour {
     {
         SceneManager.LoadScene("MapGenTest");
     }
+
+	void Update()
+	{
+		if (creditsGroup.activeSelf) {
+			creditsGroup.GetComponent<RectTransform>().position += new Vector3 (0,100*Time.deltaTime,0);
+		}
+		if (creditsGroup.GetComponent<RectTransform> ().position.y > 1900) {
+			showMainMenu ();
+		}
+	}
 }
