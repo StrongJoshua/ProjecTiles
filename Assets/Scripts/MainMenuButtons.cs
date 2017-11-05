@@ -16,7 +16,7 @@ public class MainMenuButtons : MonoBehaviour {
         creditsGroup.SetActive(true);
 		backButton.SetActive (true);
 		creditsGroup.GetComponent<RectTransform> ().position = new Vector3 (Screen.width/2f, -Screen.height/3f, 0);
-        //eventSystem.SetSelectedGameObject(creditsGroup.GetComponentInChildren<Button>().gameObject);
+		eventSystem.SetSelectedGameObject(backButton);
     }
 
     public void showMainMenu ()
