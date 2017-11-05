@@ -652,12 +652,12 @@ MonoBehaviour:
   cam: {fileID: 1647810237}
   maxZoom: 2
   minZoom: 25
-  currentTile: {fileID: 0}
   highlight: {fileID: 1439020178}
   x: 0
   y: 0
   coordinates: {fileID: 194165816}
   map: {fileID: 2063454713}
+  step: 3
   selector: {fileID: 1647810243}
   tweenTime: 1
 --- !u!114 &1647810241

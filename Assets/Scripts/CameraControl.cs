@@ -40,25 +40,17 @@ public class CameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        xDel = 0;
+        yDel = 0;
+
+        if (Input.GetKey(KeyCode.UpArrow))
             yDel += 1;
-        else if (Input.GetKeyUp(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.DownArrow))
             yDel -= 1;
-
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-            yDel -= 1;
-        else if (Input.GetKeyUp(KeyCode.DownArrow))
-            yDel += 1;
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
             xDel += 1;
-        else if (Input.GetKeyUp(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
             xDel -= 1;
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-            xDel -= 1;
-        else if (Input.GetKeyUp(KeyCode.LeftArrow))
-            xDel += 1;
 
         moveHighlight();
         coordinates.text = map.GetTileType(x, y) + "";
