@@ -14,23 +14,26 @@ public class CameraControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey (KeyCode.UpArrow)) {
-			cam.gameObject.transform.position += Vector3.forward;
+		if (Input.GetKeyDown (KeyCode.UpArrow)) {
+			iTween.MoveTo (cam.gameObject, cam.gameObject.transform.position + Vector3.back * 3, 1f);
 		}
-		else if (Input.GetKey (KeyCode.DownArrow)) {
-			cam.gameObject.transform.position += Vector3.back;
+		else if (Input.GetKeyDown (KeyCode.DownArrow)) {
+			iTween.MoveTo (cam.gameObject, cam.gameObject.transform.position + Vector3.forward * 3, 1f);
 		}
-		else if (Input.GetKey (KeyCode.RightArrow)) {
-			cam.gameObject.transform.position += transform.TransformDirection( Vector3.right ); 
+		else if (Input.GetKeyDown (KeyCode.RightArrow)) {
+			//cam.gameObject.transform.position += transform.TransformDirection( Vector3.right ); 
+			iTween.MoveTo (cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection( Vector3.right ) * 3, 1f);
 		}
-		else if (Input.GetKey (KeyCode.LeftArrow)) {
-			cam.gameObject.transform.position += transform.TransformDirection( Vector3.left );
+		else if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+			//cam.gameObject.transform.position += transform.TransformDirection( Vector3.left );
+			iTween.MoveTo (cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection( Vector3.left ) * 3, 1f);
 		}
-		else if (Input.GetAxis("Mouse ScrollWheel") > 0 && cam.orthographicSize < minZoom) {
-			cam.orthographicSize+=0.3f;
+		else if (Input.GetAxis("Mouse ScrollWheel") > 0) {
+			iTween.MoveTo (cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection( Vector3.forward ) * 6, 0.3f);
 		}
-		else if (Input.GetAxis("Mouse ScrollWheel") < 0 && cam.orthographicSize > maxZoom) {
-			cam.orthographicSize-=0.3f;
+		else if (Input.GetAxis("Mouse ScrollWheel") < 0) {
+			iTween.MoveTo (cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection( Vector3.back ) * 6, 0.3f);
+			
 		}
 
 		
@@ -39,6 +42,6 @@ public class CameraControl : MonoBehaviour {
 	public void updateTile(GameObject tile)
 	{
 		currentTile = tile;
-		//iTween.MoveTo (tile.transform.position);
+		iTween.MoveTo (cam.gameObject, tile.transform.position, 0.5f);
 	}
 }
