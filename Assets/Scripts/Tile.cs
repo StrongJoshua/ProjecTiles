@@ -9,7 +9,8 @@ public class Tile {
         water,
         hill,
         swamp,
-        forest
+        forest,
+		unknown
     }
 
     public static readonly Tile Plain = new Tile(1);
