@@ -39,25 +39,29 @@ public class CameraControl : MonoBehaviour {
 			delay = 0.2f;
 		}
 		if (Time.timeSinceLevelLoad - lastTime > delay) {
-			if (Input.GetKey (KeyCode.UpArrow) && y < 14) {
-				//moving = true;
-				highlight.transform.position += Vector3.forward * 3;
-				y++;
-				lastTime = Time.timeSinceLevelLoad;
-				if(delay > 0.1f)
-					delay -= 0.04f;
-//			iTween.MoveTo (cam.gameObject, iTween.Hash("position", cam.gameObject.transform.position + Vector3.forward * 3,"time", 0.2f, "oncomplete","unlock", 
-//				"oncompletetarget", this.gameObject, "oncompleteparams", new Hashtable()));
-			} else if (Input.GetKey (KeyCode.DownArrow) && y > 0) {
-				//moving = true;
-				highlight.transform.position += Vector3.back * 3;
-				y--;
-				lastTime = Time.timeSinceLevelLoad;
-				if(delay > 0.1f)
-					delay -= 0.04f;
+            if (Input.GetKey(KeyCode.UpArrow) && y < 14)
+            {
+                //moving = true;
+                highlight.transform.position += Vector3.forward * 3;
+                y++;
+                lastTime = Time.timeSinceLevelLoad;
+                if (delay > 0.1f)
+                    delay -= 0.04f;
+                //			iTween.MoveTo (cam.gameObject, iTween.Hash("position", cam.gameObject.transform.position + Vector3.forward * 3,"time", 0.2f, "oncomplete","unlock", 
+                //				"oncompletetarget", this.gameObject, "oncompleteparams", new Hashtable()));
+            }
+            else if (Input.GetKey(KeyCode.DownArrow) && y > 0)
+            {
+                //moving = true;
+                highlight.transform.position += Vector3.back * 3;
+                y--;
+                lastTime = Time.timeSinceLevelLoad;
+                if (delay > 0.1f)
+                    delay -= 0.04f;
+            }
 //			iTween.MoveTo (cam.gameObject, iTween.Hash("position", cam.gameObject.transform.position + Vector3.back * 3,"time", 0.2f, "oncomplete","unlock", 
 //				"oncompletetarget", this.gameObject, "oncompleteparams", new Hashtable()));
-			} else if (Input.GetKey (KeyCode.RightArrow) && x < 14) {
+			if (Input.GetKey (KeyCode.RightArrow) && x < 14) {
 				//moving = true;
 				highlight.transform.position += Vector3.right * 3;
 				x++;
