@@ -663,6 +663,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 715728328}
+--- !u!1 &1002421533 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1409518396931874, guid: 17c4f559e57524b499864a202cb6ea3b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1217760495}
 --- !u!1001 &1021008627
 Prefab:
   m_ObjectHideFlags: 0
@@ -1397,6 +1402,7 @@ MonoBehaviour:
   mainMenuGroup: {fileID: 1432070194}
   creditsGroup: {fileID: 1220205617}
   click: {fileID: 8300000, guid: 9f04b173e3dccff46bb7a8a43e02efaf, type: 3}
+  eventSystem: {fileID: 1710139394}
 --- !u!224 &1222146012
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1833,7 +1839,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1002421533}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
 --- !u!4 &1710139395
@@ -1843,7 +1849,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1710139392}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -456, y: -238.5, z: 0}
+  m_LocalPosition: {x: -456, y: -238.50002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 515148905}
