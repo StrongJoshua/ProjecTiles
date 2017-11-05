@@ -3,104 +3,99 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CameraControl : MonoBehaviour {
-	public Camera cam;
-	public int maxZoom;
-	public int minZoom;
-	public GameObject currentTile;
-	public GameObject highlight;
-	bool moving;
-	float delay;
-	float lastTime;
-	public int x, y;
-	public Text coordinates;
-	public MapGenerator map;
-	public SelectedHighlight selector;
-	// Use this for initialization
-	void Start () {
-		moving = false;
-		delay = 0.2f;
-		lastTime = Time.timeSinceLevelLoad;
-		x = 0;
-		y = 0;
-	}
-	void OnPreRender()
-	{
-		selector.curTileX = x;
-		selector.curTileY = y;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		coordinates.text = map.GetTileType(x,y) + "";
+public class CameraControl : MonoBehaviour
+{
+    public Camera cam;
+    public int maxZoom;
+    public int minZoom;
+    public GameObject highlight;
+    public int x, y;
+    public Text coordinates;
+    public MapGenerator map;
+    public int step;
+    public SelectedHighlight selector;
+    public float tweenTime;
 
-		if (Input.GetKeyUp (KeyCode.UpArrow) || Input.GetKeyUp (KeyCode.DownArrow) || Input.GetKeyUp (KeyCode.RightArrow) || Input.GetKeyUp (KeyCode.LeftArrow)) {
-			lastTime = 0;
-			delay = 0.2f;
-		}
-		if (Time.timeSinceLevelLoad - lastTime > delay) {
-            if (Input.GetKey(KeyCode.UpArrow) && y < 14)
+    private int xDel, yDel;
+    private float delay, lastTime;
+
+    private const float defaultDelay = .2f;
+
+    void Start()
+    {
+        delay = defaultDelay;
+        lastTime = 0;
+        x = 0;
+        y = 0;
+        xDel = 0;
+        yDel = 0;
+    }
+
+    void OnPreRender()
+    {
+        selector.curTileX = x;
+        selector.curTileY = y;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+            yDel += 1;
+        else if (Input.GetKeyUp(KeyCode.UpArrow))
+            yDel -= 1;
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+            yDel -= 1;
+        else if (Input.GetKeyUp(KeyCode.DownArrow))
+            yDel += 1;
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+            xDel += 1;
+        else if (Input.GetKeyUp(KeyCode.RightArrow))
+            xDel -= 1;
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+            xDel -= 1;
+        else if (Input.GetKeyUp(KeyCode.LeftArrow))
+            xDel += 1;
+
+        moveHighlight();
+        coordinates.text = map.GetTileType(x, y) + "";
+        
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.forward) * 6, 0.3f);
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.back) * 6, 0.3f);
+
+        }
+
+    }
+
+    private void moveHighlight()
+    {
+        if (Time.timeSinceLevelLoad - lastTime > delay)
+        {
+            if (xDel == 0 && yDel == 0)
             {
-                //moving = true;
-                highlight.transform.position += Vector3.forward * 3;
-                y++;
-                lastTime = Time.timeSinceLevelLoad;
-                if (delay > 0.1f)
-                    delay -= 0.04f;
-                //			iTween.MoveTo (cam.gameObject, iTween.Hash("position", cam.gameObject.transform.position + Vector3.forward * 3,"time", 0.2f, "oncomplete","unlock", 
-                //				"oncompletetarget", this.gameObject, "oncompleteparams", new Hashtable()));
-            }
-            else if (Input.GetKey(KeyCode.DownArrow) && y > 0)
-            {
-                //moving = true;
-                highlight.transform.position += Vector3.back * 3;
-                y--;
-                lastTime = Time.timeSinceLevelLoad;
-                if (delay > 0.1f)
-                    delay -= 0.04f;
-            }
-//			iTween.MoveTo (cam.gameObject, iTween.Hash("position", cam.gameObject.transform.position + Vector3.back * 3,"time", 0.2f, "oncomplete","unlock", 
-//				"oncompletetarget", this.gameObject, "oncompleteparams", new Hashtable()));
-			if (Input.GetKey (KeyCode.RightArrow) && x < 14) {
-				//moving = true;
-				highlight.transform.position += Vector3.right * 3;
-				x++;
-				lastTime = Time.timeSinceLevelLoad;
-				if(delay > 0.1f)
-					delay -= 0.04f;
-//			iTween.MoveTo (cam.gameObject, iTween.Hash("position", cam.gameObject.transform.position + Vector3.right * 3,"time", 0.2f, "oncomplete","unlock", 
-//				"oncompletetarget", this.gameObject, "oncompleteparams", new Hashtable()));
-			} else if (Input.GetKey (KeyCode.LeftArrow) && x > 0) {
-				//moving = true;
-				highlight.transform.position += Vector3.left * 3;
-				x--;
-				lastTime = Time.timeSinceLevelLoad;
-				if(delay > 0.1f)
-					delay -= 0.04f;
-//			iTween.MoveTo (cam.gameObject, iTween.Hash("position", cam.gameObject.transform.position + Vector3.left * 3,"time", 0.2f, "oncomplete","unlock", 
-//				"oncompletetarget", this.gameObject, "oncompleteparams", new Hashtable()));
-			}
-		}
-		if (Input.GetAxis("Mouse ScrollWheel") > 0) {
-			iTween.MoveTo (cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection( Vector3.forward ) * 6, 0.3f);
-		}
-		else if (Input.GetAxis("Mouse ScrollWheel") < 0) {
-			iTween.MoveTo (cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection( Vector3.back ) * 6, 0.3f);
-			
-		}
+                lastTime = 0;
+                delay = defaultDelay;
+            } else {
+                x += xDel;
+                y += yDel;
+                x = Mathf.Max(Mathf.Min(x, map.SizeX - 1), 0);
+                y = Mathf.Max(Mathf.Min(y, map.SizeY - 1), 0);
+                highlight.transform.position = new Vector3(x * step, 0, y * step);
 
-		iTween.MoveUpdate (this.gameObject, highlight.transform.position + new Vector3(0,20f,-45f), 1f);
-		
-	}
+                if (delay > .1f)
+                    delay -= .04f;
+                lastTime = Time.timeSinceLevelLoad;
+            }
+        }
 
-	public void updateTile(GameObject tile)
-	{
-		currentTile = tile;
-		iTween.MoveTo (cam.gameObject, tile.transform.position, 0.5f);
-	}
-	public void unlock()
-	{
-		print ("called");
-		moving = false;
-	}
+        iTween.MoveUpdate(this.gameObject, highlight.transform.position + new Vector3(0, 20f, -45f), tweenTime);
+    }
 }

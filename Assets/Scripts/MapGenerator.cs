@@ -58,4 +58,13 @@ public class MapGenerator : MonoBehaviour {
 		return (Tile.TileType)tiles [x, y];
 	}
 
+    public int SizeX
+    {
+        get { return tiles.GetLength(0); }
+    }
+
+    public int SizeY
+    {
+        get { return tiles.GetLength(1); }
+    }
 }
