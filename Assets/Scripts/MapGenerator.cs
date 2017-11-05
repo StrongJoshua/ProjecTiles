@@ -46,8 +46,8 @@ public class MapGenerator : MonoBehaviour {
         }
 	}
 
-    public int getTile(int x, int y)
+    public Tile GetTile(int x, int y)
     {
-        return tiles[x, y];
+        return Tile.GetTile(tiles[x, y]);
     }
 }
