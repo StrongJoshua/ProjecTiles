@@ -6,7 +6,7 @@ public class GridLines : MonoBehaviour {
     public int tileStartX, tileStartZ;
     public int stepSize;
     public int mapSizeX, mapSizeZ;
-    public Color color = new Color(158f/256f, 158f/256f, 158f/256f, 158f/256f);
+    public Color color = new Color(158f/255f, 158f/255f, 158f/255f, 158f/255f);
 
     private float startX, startZ;
 
@@ -59,6 +59,7 @@ public class GridLines : MonoBehaviour {
             }
             GL.End();
         }
+
         GL.PopMatrix();
     }
 }

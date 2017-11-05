@@ -301,6 +301,7 @@ GameObject:
   - component: {fileID: 1647810240}
   - component: {fileID: 1647810241}
   - component: {fileID: 1647810242}
+  - component: {fileID: 1647810243}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -412,7 +413,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1647810233}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cdaf246fc72001f4ab11d1f901fb27ed, type: 3}
   m_Name: 
@@ -431,6 +432,23 @@ Skybox:
   m_GameObject: {fileID: 1647810233}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: 39cace2863926444a9a78daa8ae26413, type: 2}
+--- !u!114 &1647810243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1647810233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2ac2068d436744b8235731441ea7f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectColor: {r: 0.42352942, g: 0.8666667, b: 1, a: 0.61960787}
+  tileStartX: 0
+  tileStartZ: 0
+  stepSize: 3
+  curTileX: 0
+  curTileY: 0
 --- !u!1 &1717250380
 GameObject:
   m_ObjectHideFlags: 0
