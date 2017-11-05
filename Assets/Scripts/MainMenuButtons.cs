@@ -16,7 +16,8 @@ public class MainMenuButtons : MonoBehaviour {
         mainMenuGroup.SetActive(false);
         creditsGroup.SetActive(true);
 		backButton.SetActive (true);
-		creditsGroup.GetComponent<RectTransform> ().position = new Vector3 (Screen.width/2f, -Screen.height/2f, 0);
+		creditsGroup.GetComponent<RectTransform> ().position = new Vector3 (Screen.width/2f, -300 * (Screen.width/800f), 0);
+
 		eventSystem.SetSelectedGameObject(backButton);
     }
 
@@ -25,7 +26,7 @@ public class MainMenuButtons : MonoBehaviour {
         creditsGroup.SetActive(false);
 		backButton.SetActive (false);
         mainMenuGroup.SetActive(true);
-		creditsGroup.GetComponent<RectTransform> ().position = new Vector3 (Screen.width/2f, -Screen.height/2f, 0);
+		creditsGroup.GetComponent<RectTransform> ().position = new Vector3 (Screen.width/2f, -300 * (Screen.width/800f), 0);
         eventSystem.SetSelectedGameObject(mainMenuGroup.GetComponentInChildren<Button>().gameObject);
     }
 
