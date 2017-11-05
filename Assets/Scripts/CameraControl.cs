@@ -11,35 +11,42 @@ public class CameraControl : MonoBehaviour {
 	bool moving;
 	float delay;
 	float lastTime;
+	public int x, y;
 	// Use this for initialization
 	void Start () {
 		moving = false;
 		delay = 0.1f;
 		lastTime = Time.timeSinceLevelLoad;
+		x = 0;
+		y = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Time.timeSinceLevelLoad - lastTime > delay) {
 			lastTime = Time.timeSinceLevelLoad;
-			if (Input.GetKey (KeyCode.UpArrow)) {
+			if (Input.GetKey (KeyCode.UpArrow) && y < 14) {
 				//moving = true;
 				highlight.transform.position += Vector3.forward * 3;
+				y++;
 //			iTween.MoveTo (cam.gameObject, iTween.Hash("position", cam.gameObject.transform.position + Vector3.forward * 3,"time", 0.2f, "oncomplete","unlock", 
 //				"oncompletetarget", this.gameObject, "oncompleteparams", new Hashtable()));
-			} else if (Input.GetKey (KeyCode.DownArrow)) {
+			} else if (Input.GetKey (KeyCode.DownArrow) && y > 0) {
 				//moving = true;
 				highlight.transform.position += Vector3.back * 3;
+				y--;
 //			iTween.MoveTo (cam.gameObject, iTween.Hash("position", cam.gameObject.transform.position + Vector3.back * 3,"time", 0.2f, "oncomplete","unlock", 
 //				"oncompletetarget", this.gameObject, "oncompleteparams", new Hashtable()));
-			} else if (Input.GetKey (KeyCode.RightArrow)) {
+			} else if (Input.GetKey (KeyCode.RightArrow) && x < 14) {
 				//moving = true;
 				highlight.transform.position += Vector3.right * 3;
+				x++;
 //			iTween.MoveTo (cam.gameObject, iTween.Hash("position", cam.gameObject.transform.position + Vector3.right * 3,"time", 0.2f, "oncomplete","unlock", 
 //				"oncompletetarget", this.gameObject, "oncompleteparams", new Hashtable()));
-			} else if (Input.GetKey (KeyCode.LeftArrow)) {
+			} else if (Input.GetKey (KeyCode.LeftArrow) && x > 0) {
 				//moving = true;
 				highlight.transform.position += Vector3.left * 3;
+				x--;
 //			iTween.MoveTo (cam.gameObject, iTween.Hash("position", cam.gameObject.transform.position + Vector3.left * 3,"time", 0.2f, "oncomplete","unlock", 
 //				"oncompletetarget", this.gameObject, "oncompleteparams", new Hashtable()));
 			}
