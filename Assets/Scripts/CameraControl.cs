@@ -6,6 +6,7 @@ public class CameraControl : MonoBehaviour {
 	public Camera cam;
 	public int maxZoom;
 	public int minZoom;
+	public GameObject currentTile;
 	// Use this for initialization
 	void Start () {
 		
@@ -33,5 +34,11 @@ public class CameraControl : MonoBehaviour {
 		}
 
 		
+	}
+
+	public void updateTile(GameObject tile)
+	{
+		currentTile = tile;
+		//iTween.MoveTo (tile.transform.position);
 	}
 }
