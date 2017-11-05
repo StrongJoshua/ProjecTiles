@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1662,6 +1662,11 @@ Prefab:
       propertyPath: map
       value: 
       objectReference: {fileID: 4900000, guid: 3404e3eb37169cd4891d488a24e1af56, type: 3}
+    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
+        type: 2}
+      propertyPath: step
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30dcd68047600cd4eb4161fc792ec374, type: 2}
   m_IsPrefabParent: 0
@@ -2168,7 +2173,19 @@ Prefab:
       propertyPath: m_Text
       value: 'Maps
 
-        UI'
+        UI
+
+        Shading'
+      objectReference: {fileID: 0}
+    - target: {fileID: 224071296339187710, guid: db2a76a772e23ae41a6b568abb3ad517,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 224071296339187710, guid: db2a76a772e23ae41a6b568abb3ad517,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -55
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db2a76a772e23ae41a6b568abb3ad517, type: 2}
