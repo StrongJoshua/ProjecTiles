@@ -39,7 +39,6 @@ public class MapGenerator : MonoBehaviour {
                 tiles[i, j] = k;
                 Instantiate(tilePrefabs[k], new Vector3((tiles.GetLength(0) - j - 1) * step, 0, i * step), Quaternion.identity);
                 j++;
-                Debug.Log(k);
             }
             i++;
             j = 0;
