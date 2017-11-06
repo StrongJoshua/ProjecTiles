@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CameraControl : MonoBehaviour
+public class UserControl : MonoBehaviour
 {
     public Camera cam;
     public int maxZoom;
@@ -12,14 +12,14 @@ public class CameraControl : MonoBehaviour
     public int x, y;
     public Text coordinates;
     public MapGenerator map;
-    public int step;
-    public SelectedHighlight selector;
-    public float tweenTime;
+    public float lerpSmooth;
 
     private int xDel, yDel;
     private float delay, lastTime;
 
     private const float defaultDelay = .2f;
+
+    private SelectedHighlight selector;
 
     void Start()
     {
@@ -29,6 +29,7 @@ public class CameraControl : MonoBehaviour
         y = 0;
         xDel = 0;
         yDel = 0;
+        selector = cam.GetComponent<SelectedHighlight>();
     }
 
     void OnPreRender()
@@ -62,9 +63,7 @@ public class CameraControl : MonoBehaviour
         else if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
             iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.back) * 6, 0.3f);
-
         }
-
     }
 
     private void moveHighlight()
@@ -80,14 +79,13 @@ public class CameraControl : MonoBehaviour
                 y += yDel;
                 x = Mathf.Max(Mathf.Min(x, map.SizeX - 1), 0);
                 y = Mathf.Max(Mathf.Min(y, map.SizeY - 1), 0);
-                highlight.transform.position = new Vector3(x * step, 0, y * step);
+                highlight.transform.position = new Vector3(x * MapGenerator.step, 0, y * MapGenerator.step);
 
                 if (delay > .1f)
                     delay -= .04f;
                 lastTime = Time.timeSinceLevelLoad;
             }
         }
-
-        iTween.MoveUpdate(this.gameObject, highlight.transform.position + new Vector3(0, 20f, -45f), tweenTime);
+        cam.gameObject.transform.position = Vector3.Lerp(cam.transform.position, highlight.transform.position + new Vector3(0, 20f, -45f), lerpSmooth);
     }
 }
