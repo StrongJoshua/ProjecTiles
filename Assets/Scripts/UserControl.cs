@@ -98,5 +98,9 @@ public class UserControl : MonoBehaviour
         Unit unit = gameManager.unitAt(x, y);
         if (unit == null)
             unitInfo.SetActive(false);
+        else
+        {
+            unitInfo.SetActive(true);
+        }
     }
 }

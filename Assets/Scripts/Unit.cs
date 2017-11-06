@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour {
-	
+    new public string name;
+
 	public int AP;
 	public int health;
 	private int x;
