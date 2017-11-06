@@ -9,8 +9,8 @@ public class MapGenerator : MonoBehaviour {
     public GameObject[] tilePrefabs;
     public int step;
     private int[,] tiles;
-	// Use this for initialization
-	void Start () {
+
+	void Awake () {
         StringReader sr = new StringReader(map.text);
         string line;
         ArrayList rows = new ArrayList();
