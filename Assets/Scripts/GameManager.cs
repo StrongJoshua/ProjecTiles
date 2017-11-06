@@ -7,15 +7,28 @@ public class GameManager : MonoBehaviour {
     public int enemyCount;
     public GameObject[] unitTypes;
 
-    private GameObject[] enemies;
+    private Unit[] enemies;
 
 	// Use this for initialization
 	void Start () {
-        enemies = new GameObject[enemyCount];
+        enemies = new Unit[enemyCount];
         for(int i = 0; i < enemyCount; i++)
         {
-            Vector3 position = new Vector3(Random.Range(0, map.SizeX) * map.step, .5f, Random.Range(0, map.SizeY) * map.step);
-            enemies[i] = Instantiate(unitTypes[Random.Range(0, unitTypes.Length)], position, Quaternion.identity);
+            enemies[i] = Instantiate(unitTypes[Random.Range(0, unitTypes.Length)], Vector3.zero, Quaternion.identity).GetComponent<Unit>();
+            bool isValid = false;
+            while (!isValid)
+            {
+                int tileX = Random.Range(0, map.SizeX);
+                int tileY = Random.Range(0, map.SizeY);
+                if (!map.GetTile(tileX, tileY).AllowsSpawn)
+                    continue;
+                foreach (Unit u in enemies)
+                    if (u != null && u.X == tileX && u.Y == tileY)
+                        continue;
+                enemies[i].X = tileX;
+                enemies[i].Y = tileY;
+                isValid = true;
+            }
         }
 	}
 	

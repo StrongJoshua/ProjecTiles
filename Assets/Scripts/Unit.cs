@@ -6,8 +6,8 @@ public class Unit : MonoBehaviour {
 	
 	public int AP;
 	public int health;
-	public int x;
-	public int y;
+	private int x;
+	private int y;
 
 	public int maxAP;
 	public int apChargeRate;
@@ -24,6 +24,26 @@ public class Unit : MonoBehaviour {
 	public float healthGrowth;
 
     public Team team;
+
+    public int X
+    {
+        get { return x; }
+        set
+        {
+            this.x = value;
+            this.transform.position = new Vector3(x * MapGenerator.step, .5f, y * MapGenerator.step);
+        }
+    }
+
+    public int Y
+    {
+        get { return y; }
+        set
+        {
+            this.y = value;
+            this.transform.position = new Vector3(x * MapGenerator.step, .5f, y * MapGenerator.step);
+        }
+    }
 
 	public enum Team
 	{

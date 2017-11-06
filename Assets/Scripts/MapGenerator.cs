@@ -7,7 +7,7 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour {
     public TextAsset map;
     public GameObject[] tilePrefabs;
-    public int step;
+    public static readonly int step = 3;
     private int[,] tiles;
 
 	void Awake () {
