@@ -9,13 +9,6 @@ public class Unit : MonoBehaviour {
 	public int x;
 	public int y;
 
-	public int basemaxAP;
-	public int baseAPChargeRate;
-	public int basePerception;
-	public int baseAccuracy;
-	public int baseDefense;
-	public int baseMaxHealth;
-
 	public int maxAP;
 	public int apChargeRate;
 	public int perception;
@@ -29,6 +22,8 @@ public class Unit : MonoBehaviour {
 	public float accuracyGrowth;
 	public float defenseGrowth;
 	public float healthGrowth;
+
+    public Team team;
 
 	public enum Team
 	{
@@ -45,4 +40,8 @@ public class Unit : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    private void levelUp()
+    {
+    }
 }
