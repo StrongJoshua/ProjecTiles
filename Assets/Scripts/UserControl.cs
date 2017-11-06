@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UserControl : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class UserControl : MonoBehaviour
     public MapGenerator map;
     public GameManager gameManager;
     public GameObject unitInfo;
+
+	public GameObject pauseMenu;
+	public bool paused = false;
 
     private int xDel, yDel;
     private float delay, lastTime;
@@ -32,11 +36,13 @@ public class UserControl : MonoBehaviour
         y = 0;
         xDel = 0;
         yDel = 0;
-        selector = cam.GetComponent<SelectedHighlight>();
+		selector = cam.gameObject.GetComponent<SelectedHighlight>();
+		pauseMenu.SetActive(false);
     }
 
     void OnPreRender()
     {
+		print(x);
         selector.curTileX = x;
         selector.curTileY = y;
     }
@@ -44,30 +50,47 @@ public class UserControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        xDel = 0;
-        yDel = 0;
+		if(!paused){
+	        xDel = 0;
+	        yDel = 0;
 
-        if (Input.GetKey(KeyCode.UpArrow))
-            yDel += 1;
-        if (Input.GetKey(KeyCode.DownArrow))
-            yDel -= 1;
-        if (Input.GetKey(KeyCode.RightArrow))
-            xDel += 1;
-        if (Input.GetKey(KeyCode.LeftArrow))
-            xDel -= 1;
+	        if (Input.GetKey(KeyCode.UpArrow))
+	            yDel += 1;
+	        if (Input.GetKey(KeyCode.DownArrow))
+	            yDel -= 1;
+	        if (Input.GetKey(KeyCode.RightArrow))
+	            xDel += 1;
+	        if (Input.GetKey(KeyCode.LeftArrow))
+	            xDel -= 1;
 
-        moveHighlight();
-        coordinates.text = map.GetTileType(x, y) + "";
-        showUnitInfo();
-        
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
-        {
-            iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.forward) * 6, 0.3f);
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0)
-        {
-            iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.back) * 6, 0.3f);
-        }
+	        moveHighlight();
+	        coordinates.text = map.GetTileType(x, y) + "";
+	        showUnitInfo();
+	        
+	        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+	        {
+	            iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.forward) * 6, 0.3f);
+	        }
+	        else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+	        {
+	            iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.back) * 6, 0.3f);
+	        }
+		}
+
+		if(Input.GetKeyDown(KeyCode.Escape))
+		{
+			if(paused)
+			{
+				paused = false;
+				pauseMenu.SetActive(paused);
+			}
+			else
+			{
+				paused = true;
+				pauseMenu.SetActive(paused);
+			}
+
+		}	
     }
 
     private void moveHighlight()
@@ -99,4 +122,15 @@ public class UserControl : MonoBehaviour
         if (unit == null)
             unitInfo.SetActive(false);
     }
+
+	public void resume()
+	{
+		paused = false;
+		pauseMenu.SetActive(false);
+	}
+
+	public void mainMenu()
+	{
+		SceneManager.LoadScene("MainMenu");
+	}
 }

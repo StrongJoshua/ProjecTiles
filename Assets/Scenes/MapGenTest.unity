@@ -200,9 +200,9 @@ RectTransform:
   m_Father: {fileID: 2008007718}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 690.2, y: -39.7}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -109.79999, y: -39.7}
   m_SizeDelta: {x: 194.95001, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &194165816
@@ -439,7 +439,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1202006892}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1921142597}
+        m_MethodName: resume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1202006892
@@ -709,9 +720,9 @@ MonoBehaviour:
   selectColor: {r: 0.42352942, g: 0.8666667, b: 1, a: 0.61960787}
   tileStartX: 0
   tileStartZ: 0
-  stepSize: 3
   curTileX: 0
   curTileY: 0
+  control: {fileID: 1921142597}
 --- !u!1 &1717250380
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,7 +895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1837063602
 RectTransform:
   m_ObjectHideFlags: 0
@@ -990,6 +1001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1912892305}
   - component: {fileID: 1912892306}
+  - component: {fileID: 1912892307}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1025,6 +1037,19 @@ MonoBehaviour:
   enemyCount: 5
   unitTypes:
   - {fileID: 1023700816672368, guid: 82284d29cd69bf94890a1f6d28d578e8, type: 2}
+--- !u!114 &1912892307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1912892304}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f42e9f028ffb141b9b9b1e92002773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1837063601}
+  paused: 0
 --- !u!1 &1921142596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,6 +1088,8 @@ MonoBehaviour:
   map: {fileID: 2063454713}
   gameManager: {fileID: 1912892306}
   unitInfo: {fileID: 1493090179}
+  pauseMenu: {fileID: 1837063601}
+  paused: 0
 --- !u!4 &1921142598
 Transform:
   m_ObjectHideFlags: 0
@@ -1151,7 +1178,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1955460563}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1921142597}
+        m_MethodName: mainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1955460563
