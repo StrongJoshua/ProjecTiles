@@ -5,13 +5,15 @@ using UnityEngine;
 public class SelectedHighlight : MonoBehaviour {
     public Color selectColor = new Color(108f / 255f, 221f / 255f, 0, 255f / 255f);
     public int tileStartX, tileStartZ;
-    public int stepSize;
+    private int stepSize;
     public int curTileX, curTileY;
+	public UserControl control;
 
     private float startX, startZ;
 
     void Start()
-    {
+	{
+		stepSize = MapGenerator.step;
         startX = (float)tileStartX - (float)stepSize / 2;
         startZ = (float)tileStartZ - (float)stepSize / 2;
     }
@@ -36,7 +38,11 @@ public class SelectedHighlight : MonoBehaviour {
             selectMaterial.SetInt("_ZTest", 0);
         }
     }
-
+	void OnPreRender()
+	{
+		curTileX = control.x;
+		curTileY = control.y;
+	}
     void OnPostRender()
     {
         CreateSelectMaterial();
