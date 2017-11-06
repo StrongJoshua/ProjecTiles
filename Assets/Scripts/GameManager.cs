@@ -31,9 +31,12 @@ public class GameManager : MonoBehaviour {
             }
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public Unit unitAt(int x, int y)
+    {
+        foreach (Unit u in enemies)
+            if (u != null && u.X == x && u.Y == y)
+                return u;
+        return null;
+    }
 }
