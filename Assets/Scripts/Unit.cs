@@ -43,5 +43,22 @@ public class Unit : MonoBehaviour {
 
     private void levelUp()
     {
+        if (increase(maxAPGrowth))
+            maxAP++;
+        if (increase(apChargeRateGrowth))
+            apChargeRate++;
+        if (increase(perceptionGrowth))
+            perception++;
+        if (increase(accuracyGrowth))
+            accuracy++;
+        if (increase(defenseGrowth))
+            defense++;
+        if (increase(healthGrowth))
+            health++;
+    }
+
+    private bool increase(float growth)
+    {
+        return Random.Range(0, 1f) <= growth;
     }
 }
