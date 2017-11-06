@@ -11,8 +11,11 @@ public class UserControl : MonoBehaviour
     public GameObject highlight;
     public int x, y;
     public Text coordinates;
-    public MapGenerator map;
     public float lerpSmooth;
+
+    public MapGenerator map;
+    public GameManager gameManager;
+    public GameObject unitInfo;
 
     private int xDel, yDel;
     private float delay, lastTime;
@@ -55,6 +58,7 @@ public class UserControl : MonoBehaviour
 
         moveHighlight();
         coordinates.text = map.GetTileType(x, y) + "";
+        showUnitInfo();
         
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
@@ -87,5 +91,12 @@ public class UserControl : MonoBehaviour
             }
         }
         cam.gameObject.transform.position = Vector3.Lerp(cam.transform.position, highlight.transform.position + new Vector3(0, 20f, -45f), lerpSmooth);
+    }
+
+    private void showUnitInfo()
+    {
+        Unit unit = gameManager.unitAt(x, y);
+        if (unit == null)
+            unitInfo.SetActive(false);
     }
 }
