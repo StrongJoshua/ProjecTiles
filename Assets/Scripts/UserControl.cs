@@ -16,6 +16,7 @@ public class UserControl : MonoBehaviour
 
     public MapGenerator map;
     public GameManager gameManager;
+    public Canvas canvas;
     public GameObject unitInfo;
 
 	public GameObject pauseMenu;
@@ -124,17 +125,40 @@ public class UserControl : MonoBehaviour
         else
         {
             unitInfo.SetActive(true);
+            populateInfoWindow(unit);
+            unitInfo.transform.position = new Vector3(Screen.width / 2, Screen.height / 2 - unitInfo.GetComponent<RectTransform>().rect.height / 2 * canvas.scaleFactor);
         }
     }
 
-	public void resume()
+	public void resumeGame()
 	{
 		paused = false;
 		pauseMenu.SetActive(false);
 	}
 
-	public void mainMenu()
+	public void loadMainMenu()
 	{
 		SceneManager.LoadScene("MainMenu");
 	}
+
+    private void populateInfoWindow(Unit unit)
+    {
+        foreach(Text text in unitInfo.GetComponentsInChildren<Text>())
+        {
+            if (text.name == "Name")
+                text.text = unit.name;
+            else if (text.name == "HP")
+                text.text = unit.Health + "/" + unit.maxHealth;
+            else if (text.name == "AP")
+                text.text = unit.AP + "/" + unit.maxAP;
+            else if (text.name == "APCharge")
+                text.text = unit.apChargeRate + "";
+            else if (text.name == "Def")
+                text.text = unit.defense + "";
+            else if (text.name == "Percep")
+                text.text = unit.perception + "";
+            else if (text.name == "Acc")
+                text.text = unit.accuracy + "";
+        }
+    }
 }

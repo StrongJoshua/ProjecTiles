@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
         for(int i = 0; i < enemyCount; i++)
         {
             enemies[i] = Instantiate(unitTypes[Random.Range(0, unitTypes.Length)], Vector3.zero, Quaternion.identity).GetComponent<Unit>();
+            enemies[i].team = Unit.Team.enemy;
             bool isValid = false;
             while (!isValid)
             {

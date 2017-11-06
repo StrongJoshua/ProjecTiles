@@ -5,24 +5,24 @@ using UnityEngine;
 public class Unit : MonoBehaviour {
     new public string name;
 
-	public int AP;
-	public int health;
+    private int health;
+    public int AP;
 	private int x;
 	private int y;
 
-	public int maxAP;
+    public int maxHealth;
+    public int maxAP;
 	public int apChargeRate;
-	public int perception;
+    public int defense;
+    public int perception;
 	public int accuracy;
-	public int defense;
-	public int maxHealth;
 
-	public float maxAPGrowth;
+    public float healthGrowth;
+    public float maxAPGrowth;
 	public float apChargeRateGrowth;
-	public float perceptionGrowth;
+    public float defenseGrowth;
+    public float perceptionGrowth;
 	public float accuracyGrowth;
-	public float defenseGrowth;
-	public float healthGrowth;
 
     public Team team;
 
@@ -46,6 +46,11 @@ public class Unit : MonoBehaviour {
         }
     }
 
+    public int Health
+    {
+        get { return health; }
+    }
+
 	public enum Team
 	{
 		player,
@@ -53,8 +58,8 @@ public class Unit : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
-		
+	void Awake () {
+        health = maxHealth;
 	}
 	
 	// Update is called once per frame
@@ -64,18 +69,18 @@ public class Unit : MonoBehaviour {
 
     private void levelUp()
     {
+        if (increase(healthGrowth))
+            maxHealth++;
         if (increase(maxAPGrowth))
             maxAP++;
         if (increase(apChargeRateGrowth))
             apChargeRate++;
+        if (increase(defenseGrowth))
+            defense++;
         if (increase(perceptionGrowth))
             perception++;
         if (increase(accuracyGrowth))
             accuracy++;
-        if (increase(defenseGrowth))
-            defense++;
-        if (increase(healthGrowth))
-            health++;
     }
 
     private bool increase(float growth)
