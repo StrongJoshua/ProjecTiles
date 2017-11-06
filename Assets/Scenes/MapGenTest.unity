@@ -224,6 +224,38 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2e9ef25530b7bc7439b906047b422915, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &165729577 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 2e9ef25530b7bc7439b906047b422915, type: 3}
+  m_PrefabInternal: {fileID: 165729576}
+--- !u!114 &165729578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 165729577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb0cc1f185ea9641a06a83c568cc1d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AP: 10
+  health: 20
+  x: 0
+  y: 0
+  maxAP: 10
+  apChargeRate: 1
+  perception: 10
+  accuracy: 10
+  defense: 10
+  maxHealth: 20
+  maxAPGrowth: 1
+  apChargeRateGrowth: 1
+  perceptionGrowth: 1
+  accuracyGrowth: 1
+  defenseGrowth: 1
+  healthGrowth: 1
+  team: 0
 --- !u!1 &194165814
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,7 +710,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
 --- !u!114 &1647810239
 MonoBehaviour:
@@ -1017,7 +1049,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1912892306
 MonoBehaviour:
