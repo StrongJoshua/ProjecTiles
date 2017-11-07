@@ -7,13 +7,20 @@ using UnityEngine.UI;
 
 public class MainMenuButtons : MonoBehaviour {
     public GameObject mainMenuGroup, creditsGroup, backButton;
-    public AudioClip click;
+    public AudioClip click, hover;
     public EventSystem eventSystem;
+    public Animator anim;
+    public DontDestroy remover;
+
 	Rect ScreenRect = new Rect(0,0,Screen.width,Screen.height);
 
     public void showCredits ()
     {
-        mainMenuGroup.SetActive(false);
+        remover.callback = (GameObject gameObject) =>
+        {
+            mainMenuGroup.SetActive(false);
+        };
+        anim.SetTrigger("RemoveMenu");
         creditsGroup.SetActive(true);
 		backButton.SetActive (true);
 		//negative of half the canvas size (800x600) times the Screen width divided by the canvas width. Screen width/canvas width is the scale factor of the canvas.
@@ -36,8 +43,21 @@ public class MainMenuButtons : MonoBehaviour {
         GetComponent<AudioSource>().PlayOneShot(click);
     }
 
+    public void playHover()
+    {
+        GetComponent<AudioSource>().PlayOneShot(hover);
+    }
+
     public void startGame()
     {
+        // Start animating buttons to fly off
+        // Calls an animation event once done to remove elements
+        remover.callback = (GameObject gameObject) =>
+        {
+            Destroy(gameObject);
+        };
+        anim.SetTrigger("RemoveMenu");
+
         SceneManager.LoadScene("MapGenTest");
     }
 
