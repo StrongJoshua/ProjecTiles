@@ -7,6 +7,7 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour {
     public TextAsset map;
     public GameObject[] tilePrefabs;
+    public Transform parent;
     public static readonly int step = 3;
     private int[,] tiles;
 
@@ -37,7 +38,7 @@ public class MapGenerator : MonoBehaviour {
             foreach(int k in arr)
             {
                 tiles[x, height - 1 - y] = k;
-                Instantiate(tilePrefabs[k], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity);
+                Instantiate(tilePrefabs[k], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity, parent);
                 x++;
             }
             y++;
