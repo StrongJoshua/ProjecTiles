@@ -53,10 +53,9 @@ public class GameManager : MonoBehaviour {
     public void moveSelectedUnit(int selectedX, int selectedY, int x, int y)
     {
         Unit unit = characters[selectedX, selectedY];
-        if (unit == null || unit.team == Unit.Team.enemy)
-        {
+
+        if (unit == null || unit.team == Unit.Team.enemy || characters[x, y] != null)
             return;
-        }
 
         unit.moveTo(x, y);
 
