@@ -76,6 +76,27 @@ public class UserControl : MonoBehaviour
 	        {
 	            iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.back) * 6, 0.3f);
 	        }
+
+            if(Input.GetAxis("Fire1") != 0)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                Debug.Log("Clciked");
+                if(Physics.Raycast(ray, out hit))
+                {
+                    Debug.Log("Clicked: " + hit.collider.gameObject.transform.parent.tag);
+                    if (hit.collider.gameObject.transform.parent.tag == "Tile") {
+                        TileInfo info = hit.collider.gameObject.GetComponent<TileInfo>();
+                        if (info != null)
+                        {
+                            moveHighlightAbsolute(info.x, info.y);
+                            coordinates.text = map.GetTileType(x, y) + "";
+                            showUnitInfo();
+                        }
+                    }
+                  //  Debug.Log ("object that was hit: "+ourObject);
+                }
+            }
 		}
 
 		if(Input.GetKeyDown(KeyCode.Escape))
@@ -92,6 +113,32 @@ public class UserControl : MonoBehaviour
 			}
 
 		}	
+    }
+
+    private void moveHighlightAbsolute(int newX, int newY)
+    {
+        if (Time.timeSinceLevelLoad - lastTime > delay)
+        {
+            if (newX == 0 && newY == 0)
+            {
+                lastTime = 0;
+                delay = defaultDelay;
+            }
+            else
+            {
+                x = newX;
+                y = newY;
+                x = Mathf.Max(Mathf.Min(x, map.SizeX - 1), 0);
+                y = Mathf.Max(Mathf.Min(y, map.SizeY - 1), 0);
+                highlight.transform.position = new Vector3(x * MapGenerator.step, 0, y * MapGenerator.step);
+
+                if (delay > .1f)
+                    delay -= .04f;
+                lastTime = Time.timeSinceLevelLoad;
+            }
+        }
+        cam.gameObject.transform.position = Vector3.Lerp(cam.transform.position, highlight.transform.position + new Vector3(0, 20f, -45f), lerpSmooth);
+  
     }
 
     private void moveHighlight()

@@ -38,7 +38,13 @@ public class MapGenerator : MonoBehaviour {
             foreach(int k in arr)
             {
                 tiles[x, height - 1 - y] = k;
-                Instantiate(tilePrefabs[k], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity, parent);
+                GameObject tile = Instantiate(tilePrefabs[k], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity, parent);
+                TileInfo info = tile.GetComponent<TileInfo>();
+                if (info == null) {
+                    info = tile.AddComponent<TileInfo>();
+                }
+                info.x = x;
+                info.y = height - y - 1;
                 x++;
             }
             y++;
