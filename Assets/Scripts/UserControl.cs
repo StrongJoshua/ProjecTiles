@@ -77,14 +77,12 @@ public class UserControl : MonoBehaviour
 	            iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.back) * 6, 0.3f);
 	        }
 
-            if(Input.GetAxis("Fire1") != 0)
+            if(Input.GetButtonDown("Fire1"))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-                Debug.Log("Clciked");
                 if(Physics.Raycast(ray, out hit))
                 {
-                    Debug.Log("Clicked: " + hit.collider.gameObject.transform.parent.tag);
                     if (hit.collider.gameObject.transform.parent.tag == "Tile") {
                         TileInfo info = hit.collider.gameObject.GetComponent<TileInfo>();
                         if (info != null)
@@ -95,6 +93,23 @@ public class UserControl : MonoBehaviour
                         }
                     }
                   //  Debug.Log ("object that was hit: "+ourObject);
+                }
+            }
+            if (Input.GetButtonDown("Fire2"))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.collider.gameObject.transform.parent.tag == "Tile")
+                    {
+                        TileInfo info = hit.collider.gameObject.GetComponent<TileInfo>();
+                        if (info != null)
+                        {
+                            // Move selected unit to clicked target
+                            gameManager.moveSelectedUnit(x, y, info.x, info.y);
+                        }
+                    }
                 }
             }
 		}

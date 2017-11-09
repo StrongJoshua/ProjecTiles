@@ -39,12 +39,15 @@ public class MapGenerator : MonoBehaviour {
             {
                 tiles[x, height - 1 - y] = k;
                 GameObject tile = Instantiate(tilePrefabs[k], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity, parent);
+
+                // Set up individual tile info
                 TileInfo info = tile.GetComponent<TileInfo>();
                 if (info == null) {
                     info = tile.AddComponent<TileInfo>();
                 }
                 info.x = x;
                 info.y = height - y - 1;
+
                 x++;
             }
             y++;
