@@ -43,7 +43,6 @@ public class UserControl : MonoBehaviour
 
     void OnPreRender()
     {
-		print(x);
         selector.curTileX = x;
         selector.curTileY = y;
     }
