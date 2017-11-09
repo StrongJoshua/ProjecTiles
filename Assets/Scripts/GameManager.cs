@@ -47,10 +47,7 @@ public class GameManager : MonoBehaviour {
 
     public Unit unitAt(int x, int y)
     {
-        foreach (Unit u in enemies)
-            if (u != null && u.X == x && u.Y == y)
-                return u;
-        return null;
+        return characters[x, y];
     }
 
     public void moveSelectedUnit(int selectedX, int selectedY, int x, int y)
