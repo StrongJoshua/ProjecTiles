@@ -20,14 +20,19 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         enemies = new Unit[enemyCount];
         characters = new Unit[map.SizeX, map.SizeY];
-        player.initialize();
+        playerUnits = player.initialize();
 
         for (int i = 0; i < enemyCount; i++)
         {
             enemies[i] = Instantiate(unitTypes[Random.Range(0, unitTypes.Length)], Vector3.zero, Quaternion.identity).GetComponent<Unit>();
             enemies[i].team = Unit.Team.enemy;
+            enemies[i].GetComponentsInChildren<SkinnedMeshRenderer>()[0]
+                .material.color = enemyColor;
             addUnit(enemies[i]);
-        }        
+        }
+
+        foreach (Unit u in playerUnits)
+            addUnit(u);
 	}
 
     public void addUnit(Unit unit)
