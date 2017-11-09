@@ -58,8 +58,6 @@ public class Unit : MonoBehaviour {
 		enemy
 	}
 
-    private NavMeshAgent agent;
-
 	// Use this for initialization
 	void Awake () {
         health = maxHealth;
@@ -67,8 +65,6 @@ public class Unit : MonoBehaviour {
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        agent.updatePosition = false;
     }
 	
 	// Update is called once per frame
@@ -99,10 +95,7 @@ public class Unit : MonoBehaviour {
 
     public void moveTo(int targetX, int targetY)
     {
-        agent.updatePosition = true;
-        //this.x = targetX;
-        //this.y = targetY;
-        Debug.Log("Going to " + targetX + " " + targetY);
-        agent.destination = new Vector3(targetX * MapGenerator.step, .5f, targetY * MapGenerator.step);
+        this.X = targetX;
+        this.Y = targetY;
     }
 }
