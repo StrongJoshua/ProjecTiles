@@ -221,5 +221,8 @@ public class UserControl : MonoBehaviour
             else if (text.name == "Acc")
                 text.text = unit.accuracy + "";
         }
+        Color color = unit.team == Unit.Team.enemy ? gameManager.enemyColor : gameManager.playerColor;
+        color.a = unitInfo.GetComponent<Image>().color.a;
+        unitInfo.GetComponent<Image>().color = color;
     }
 }

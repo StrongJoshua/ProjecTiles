@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
     public GameObject[] unitTypes;
     public Player player;
 
+    public Color playerColor, enemyColor;
+
     // map tile x and y => which unit is occupying tile
     public Unit[,] characters;
 
