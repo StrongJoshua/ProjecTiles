@@ -10,8 +10,9 @@ public class MapGenerator : MonoBehaviour {
     public GameObject[] tilePrefabs;
     public Transform parent;
     public static readonly int step = 3;
-    private int[,] tiles;
-    public GameObject[,] tileObjects; 
+    private Tile[,] tiles;
+    public GameObject[,] tileObjects;
+
 
 	void Awake () {
         StringReader sr = new StringReader(map.text);
@@ -32,7 +33,7 @@ public class MapGenerator : MonoBehaviour {
             rows.Add(row);
         }
         int height = rows.Count;
-        tiles = new int[width, height];
+        tiles = new Tile[width, height];
         int x = 0;
         int y = 0;
         tileObjects = new GameObject[width, height];
@@ -40,7 +41,7 @@ public class MapGenerator : MonoBehaviour {
         {
             foreach(int k in arr)
             {
-                tiles[x, height - 1 - y] = k;
+                tiles[x, height - 1 - y] = Tile.GetTile(k);
                 GameObject tile = Instantiate(tilePrefabs[k], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity, parent);
 
                 // Set up NavMesh
@@ -72,13 +73,13 @@ public class MapGenerator : MonoBehaviour {
     {
         if (x < 0 || y < 0 || x >= tiles.GetLength(0) || y >= tiles.GetLength(1))
             return null;
-        return Tile.GetTile(tiles[x, y]);
+        return tiles[x, y];
     }
 	public Tile.TileType GetTileType(int x, int y)
 	{
 		if (x < 0 || y < 0 || x >= tiles.GetLength (0) || y >= tiles.GetLength (1))
 			return Tile.TileType.unknown;
-		return (Tile.TileType)tiles [x, y];
+		return tiles[x, y].Type;
 	}
 
     public int SizeX

@@ -13,11 +13,17 @@ public class Tile {
 		unknown
     }
 
-    public static readonly Tile Plain = new Tile(1, true);
-    public static readonly Tile Water = new Tile(4, false);
-    public static readonly Tile Hill = new Tile(3, false);
-    public static readonly Tile Swamp = new Tile(2, true);
-    public static readonly Tile Forest = new Tile(2, true);
+    public static readonly Tile Plain = new Tile(TileType.plain, 2, true);
+    public static readonly Tile Water = new Tile(TileType.water, 8, false);
+    public static readonly Tile Hill = new Tile(TileType.hill, 6, false);
+    public static readonly Tile Swamp = new Tile(TileType.swamp, 4, true);
+    public static readonly Tile Forest = new Tile(TileType.forest, 4, true);
+
+    private TileType type;
+    public TileType Type
+    {
+        get { return type; }
+    }
 
     private int movementCost;
     public int MovementCost
@@ -31,8 +37,9 @@ public class Tile {
         get { return allowsSpawn; }
     }
 
-    Tile(int movementCost, bool allowsSpawn)
+    Tile(TileType type, int movementCost, bool allowsSpawn)
     {
+        this.type = type;
         this.movementCost = movementCost;
         this.allowsSpawn = allowsSpawn;
     }
