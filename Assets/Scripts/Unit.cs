@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Unit : MonoBehaviour {
     new public string name;
@@ -57,10 +58,18 @@ public class Unit : MonoBehaviour {
 		enemy
 	}
 
+    private NavMeshAgent agent;
+
 	// Use this for initialization
 	void Awake () {
         health = maxHealth;
 	}
+
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updatePosition = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -86,5 +95,14 @@ public class Unit : MonoBehaviour {
     private bool increase(float growth)
     {
         return Random.Range(0, 1f) <= growth;
+    }
+
+    public void moveTo(int targetX, int targetY)
+    {
+        agent.updatePosition = true;
+        //this.x = targetX;
+        //this.y = targetY;
+        Debug.Log("Going to " + targetX + " " + targetY);
+        agent.destination = new Vector3(targetX * MapGenerator.step, .5f, targetY * MapGenerator.step);
     }
 }

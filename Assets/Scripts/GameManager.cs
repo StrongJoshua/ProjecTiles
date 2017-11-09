@@ -19,28 +19,12 @@ public class GameManager : MonoBehaviour {
         enemies = new Unit[enemyCount];
         characters = new Unit[map.SizeX, map.SizeY];
         player.initialize();
-        //return; // todo: remove
 
         for (int i = 0; i < enemyCount; i++)
         {
             enemies[i] = Instantiate(unitTypes[Random.Range(0, unitTypes.Length)], Vector3.zero, Quaternion.identity).GetComponent<Unit>();
             enemies[i].team = Unit.Team.enemy;
             addUnit(enemies[i]);
-            //bool isValid = false;
-            //while (!isValid)
-            //{
-            //    int tileX = Random.Range(0, map.SizeX);
-            //    int tileY = Random.Range(0, map.SizeY);
-            //    if (!map.GetTile(tileX, tileY).AllowsSpawn)
-            //        continue;
-            //    foreach (Unit u in enemies)
-            //        if (u != null && u.X == tileX && u.Y == tileY)
-            //            continue;
-            //    enemies[i].X = tileX;
-            //    enemies[i].Y = tileY;
-            //    characters[tileX, tileY] = enemies[i];
-            //    isValid = true;
-            //}
         }        
 	}
 
@@ -77,8 +61,7 @@ public class GameManager : MonoBehaviour {
             return;
         }
 
-        unit.X = x;
-        unit.Y = y;
+        unit.moveTo(x, y);
 
         characters[selectedX, selectedY] = null;
         characters[x, y] = unit;

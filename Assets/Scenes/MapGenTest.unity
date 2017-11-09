@@ -1885,6 +1885,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1912892305}
   - component: {fileID: 1912892306}
+  - component: {fileID: 1912892307}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1918,6 +1919,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 2063454713}
   enemyCount: 5
+  playerUnitCount: 0
+  unitTypes:
+  - {fileID: 1023700816672368, guid: 82284d29cd69bf94890a1f6d28d578e8, type: 2}
+  player: {fileID: 1912892307}
+--- !u!114 &1912892307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1912892304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9029e23e0a989a442bdf774dfa67033e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitList: []
+  map: {fileID: 2063454713}
+  manager: {fileID: 1912892306}
+  unitCount: 4
   unitTypes:
   - {fileID: 1023700816672368, guid: 82284d29cd69bf94890a1f6d28d578e8, type: 2}
 --- !u!1 &1916566395

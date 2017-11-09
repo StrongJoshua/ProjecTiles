@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MapGenerator : MonoBehaviour {
     public TextAsset map;
@@ -10,6 +11,7 @@ public class MapGenerator : MonoBehaviour {
     public Transform parent;
     public static readonly int step = 3;
     private int[,] tiles;
+    public GameObject[,] tileObjects; 
 
 	void Awake () {
         StringReader sr = new StringReader(map.text);
@@ -33,12 +35,20 @@ public class MapGenerator : MonoBehaviour {
         tiles = new int[width, height];
         int x = 0;
         int y = 0;
-        foreach(ArrayList arr in rows)
+        tileObjects = new GameObject[width, height];
+        foreach (ArrayList arr in rows)
         {
             foreach(int k in arr)
             {
                 tiles[x, height - 1 - y] = k;
                 GameObject tile = Instantiate(tilePrefabs[k], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity, parent);
+
+                // Set up NavMesh
+                NavMeshSurface surface = tile.GetComponent<NavMeshSurface>();
+                if (surface != null)
+                {
+                    surface.BuildNavMesh();
+                }
 
                 // Set up individual tile info
                 TileInfo info = tile.GetComponent<TileInfo>();
@@ -48,11 +58,14 @@ public class MapGenerator : MonoBehaviour {
                 info.x = x;
                 info.y = height - y - 1;
 
+                tileObjects[x, height - y - 1] = tile;
+
                 x++;
             }
             y++;
             x = 0;
         }
+
 	}
 
     public Tile GetTile(int x, int y)

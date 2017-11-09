@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4277801766355936}
   - component: {fileID: 95148337524097948}
   - component: {fileID: 114603131709148816}
+  - component: {fileID: 195579133538511956}
   m_Layer: 0
   m_Name: Infantry
   m_TagString: Untagged
@@ -1524,19 +1525,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Infantry
   AP: 10
-  health: 20
+  maxHealth: 20
   maxAP: 10
   apChargeRate: 1
+  defense: 10
   perception: 10
   accuracy: 10
-  defense: 10
-  maxHealth: 20
+  healthGrowth: 1
   maxAPGrowth: 1
   apChargeRateGrowth: 1
+  defenseGrowth: 1
   perceptionGrowth: 1
   accuracyGrowth: 1
-  defenseGrowth: 1
-  healthGrowth: 1
   team: 0
 --- !u!137 &137121390926746938
 SkinnedMeshRenderer:
@@ -1623,3 +1623,24 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.000402499, y: -0.0019140281, z: 0.0008687964}
     m_Extent: {x: 0.0227435, y: 0.041617025, z: 0.0186464}
   m_DirtyAABB: 0
+--- !u!195 &195579133538511956
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1023700816672368}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 5
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
