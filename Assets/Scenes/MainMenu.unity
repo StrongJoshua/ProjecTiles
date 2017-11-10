@@ -897,7 +897,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Jan Risse: Maps, UI, Shading
+  m_Text: 'Jan Risse: Maps, UI, Shading, AI
 
 
     Rishi Raj: Models, UI, Camera
@@ -906,7 +906,7 @@ MonoBehaviour:
     Aaron Andrews: UI
 
 
-    David Riazati:
+    David Riazati: UI
 
 
     Button sound from freesound.org

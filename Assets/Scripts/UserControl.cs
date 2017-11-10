@@ -196,6 +196,8 @@ public class UserControl : MonoBehaviour
             unitInfo.transform.position = new Vector3(Screen.width / 2, Screen.height / 2 - unitInfo.GetComponent<RectTransform>().rect.height / 2 * canvas.scaleFactor);
             if (unit.team == Unit.Team.player)
                 showMovement(unit, x, y);
+            else
+                hideMovement();
         }
     }
 
