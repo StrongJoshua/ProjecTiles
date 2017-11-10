@@ -1760,7 +1760,7 @@ MonoBehaviour:
   hover: {fileID: 8300000, guid: a25fe13a39c5ac84c87fb7e835ef4054, type: 3}
   eventSystem: {fileID: 1710139394}
   anim: {fileID: 1432070198}
-  remover: {fileID: 0}
+  remover: {fileID: 1432070197}
 --- !u!224 &1222146012
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1943,6 +1943,7 @@ GameObject:
   - component: {fileID: 1432070195}
   - component: {fileID: 1432070196}
   - component: {fileID: 1432070198}
+  - component: {fileID: 1432070197}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -1981,6 +1982,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a31549ece0919a42bd8f7fdbddadc61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1432070197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432070194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45e6422f36f9924fb2949a7fbb25a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!95 &1432070198
