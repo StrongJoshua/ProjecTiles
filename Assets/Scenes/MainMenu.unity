@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657886, g: 0.4964127, b: 0.57481724, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -560,8 +560,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 515148901}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 574, y: 267.5, z: 0}
-  m_LocalScale: {x: 1.435, y: 1.435, z: 1.435}
+  m_LocalPosition: {x: 361.5, y: 153, z: 0}
+  m_LocalScale: {x: 0.90375, y: 0.90375, z: 0.90375}
   m_Children:
   - {fileID: 1710139395}
   - {fileID: 1432070195}
@@ -1760,7 +1760,7 @@ MonoBehaviour:
   hover: {fileID: 8300000, guid: a25fe13a39c5ac84c87fb7e835ef4054, type: 3}
   eventSystem: {fileID: 1710139394}
   anim: {fileID: 1432070198}
-  remover: {fileID: 1432070197}
+  remover: {fileID: 0}
 --- !u!224 &1222146012
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1942,7 +1942,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1432070195}
   - component: {fileID: 1432070196}
-  - component: {fileID: 1432070197}
   - component: {fileID: 1432070198}
   m_Layer: 5
   m_Name: Main Menu
@@ -1958,7 +1957,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1432070194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -176.00003, y: 44.411163, z: 0}
+  m_LocalPosition: {x: -176, y: 27.294601, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1611772747}
@@ -1982,17 +1981,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a31549ece0919a42bd8f7fdbddadc61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1432070197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1432070194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46812fe5e15db554d879931c92c2c800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!95 &1432070198
