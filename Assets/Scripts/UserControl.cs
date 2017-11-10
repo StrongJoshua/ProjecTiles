@@ -214,7 +214,7 @@ public class UserControl : MonoBehaviour
     {
         paused = true;
         pauseMenu.SetActive(true);
-        eventSystem.SetSelectedGameObject(pauseMenu.GetComponentInChildren<Button>().gameObject);
+        EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponentInChildren<Button>().gameObject);
         Time.timeScale = 0;
     }
 
