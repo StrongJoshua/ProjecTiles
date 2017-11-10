@@ -50,22 +50,25 @@ public class UserControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if(!paused){
-	        xDel = 0;
-	        yDel = 0;
+        if (!paused) {
+            xDel = 0;
+            yDel = 0;
 
-	        if (Input.GetKey(KeyCode.UpArrow))
-	            yDel += 1;
-	        if (Input.GetKey(KeyCode.DownArrow))
-	            yDel -= 1;
-	        if (Input.GetKey(KeyCode.RightArrow))
-	            xDel += 1;
-	        if (Input.GetKey(KeyCode.LeftArrow))
-	            xDel -= 1;
+            if (Input.GetKey(KeyCode.UpArrow))
+                yDel += 1;
+            if (Input.GetKey(KeyCode.DownArrow))
+                yDel -= 1;
+            if (Input.GetKey(KeyCode.RightArrow))
+                xDel += 1;
+            if (Input.GetKey(KeyCode.LeftArrow))
+                xDel -= 1;
 
-	        moveHighlight();
-	        coordinates.text = map.GetTileType(x, y) + "";
-	        showUnitInfo();
+            moveHighlight();
+            if (xDel != 0 || yDel != 0)
+            {
+                coordinates.text = map.GetTileType(x, y) + "";
+                showUnitInfo();
+            }
 	        
 	        if (Input.GetAxis("Mouse ScrollWheel") > 0)
 	        {
@@ -182,12 +185,17 @@ public class UserControl : MonoBehaviour
     {
         Unit unit = gameManager.unitAt(x, y);
         if (unit == null)
+        {
             unitInfo.SetActive(false);
+            hideMovement();
+        }
         else
         {
             unitInfo.SetActive(true);
             populateInfoWindow(unit);
             unitInfo.transform.position = new Vector3(Screen.width / 2, Screen.height / 2 - unitInfo.GetComponent<RectTransform>().rect.height / 2 * canvas.scaleFactor);
+            if (unit.team == Unit.Team.player)
+                showMovement(unit, x, y);
         }
     }
 
@@ -224,5 +232,24 @@ public class UserControl : MonoBehaviour
         Color color = unit.team == Unit.Team.enemy ? gameManager.enemyColor : gameManager.playerColor;
         color.a = unitInfo.GetComponent<Image>().color.a;
         unitInfo.GetComponent<Image>().color = color;
+    }
+
+    private void showMovement(Unit u, int x, int y)
+    {
+        GameObject[,] objects = map.highlights;
+        bool[,] movement = AStar.movementMatrix(u.AP, map.Tiles, x, y);
+        for(int i = 0; i < movement.GetLength(0); i++)
+            for(int j = 0; j < movement.GetLength(1); j++)
+            {
+                if (!movement[i, j])
+                    continue;
+                objects[i, j].SetActive(true);
+            }
+    }
+
+    private void hideMovement()
+    {
+        foreach (GameObject go in map.highlights)
+            go.SetActive(false);
     }
 }

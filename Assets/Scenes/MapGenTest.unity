@@ -1368,6 +1368,32 @@ Prefab:
       propertyPath: parent
       value: 
       objectReference: {fileID: 2061618496}
+    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
+        type: 2}
+      propertyPath: highlightPlane
+      value: 
+      objectReference: {fileID: 1117509993441026, guid: 3759411bb0a839f44ba600260b963948,
+        type: 2}
+    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
+        type: 2}
+      propertyPath: highlightColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
+        type: 2}
+      propertyPath: highlightColor.a
+      value: 0.21568628
+      objectReference: {fileID: 0}
+    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
+        type: 2}
+      propertyPath: highlightColor.r
+      value: 0.3019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
+        type: 2}
+      propertyPath: highlightColor.g
+      value: 0.3019608
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30dcd68047600cd4eb4161fc792ec374, type: 2}
   m_IsPrefabParent: 0
@@ -1927,12 +1953,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9029e23e0a989a442bdf774dfa67033e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitList: []
   map: {fileID: 2063454713}
   manager: {fileID: 1912892306}
   unitCount: 4
-  unitTypes:
-  - {fileID: 1023700816672368, guid: 82284d29cd69bf94890a1f6d28d578e8, type: 2}
 --- !u!1 &1916566395
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,9 +12,11 @@ public class MapGenerator : MonoBehaviour {
     public static readonly int step = 3;
     private Tile[,] tiles;
     public GameObject[,] tileObjects;
+    public GameObject[,] highlights;
+    public GameObject highlightPlane;
+    public Color highlightColor;
 
-
-	void Awake () {
+    void Awake () {
         StringReader sr = new StringReader(map.text);
         string line;
         ArrayList rows = new ArrayList();
@@ -36,20 +38,19 @@ public class MapGenerator : MonoBehaviour {
         tiles = new Tile[width, height];
         int x = 0;
         int y = 0;
+
         tileObjects = new GameObject[width, height];
+        highlights = new GameObject[width, height];
+
         foreach (ArrayList arr in rows)
         {
             foreach(int k in arr)
             {
                 tiles[x, height - 1 - y] = Tile.GetTile(k);
                 GameObject tile = Instantiate(tilePrefabs[k], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity, parent);
-
-                // Set up NavMesh
-                NavMeshSurface surface = tile.GetComponent<NavMeshSurface>();
-                if (surface != null)
-                {
-                    surface.BuildNavMesh();
-                }
+                GameObject highlight = Instantiate(highlightPlane, tile.transform.position + new Vector3(0, .6f, 0), Quaternion.identity, tile.transform);
+                highlight.SetActive(false);
+                highlight.GetComponent<MeshRenderer>().material.color = highlightColor;
 
                 // Set up individual tile info
                 TileInfo info = tile.GetComponent<TileInfo>();
@@ -60,6 +61,7 @@ public class MapGenerator : MonoBehaviour {
                 info.y = height - y - 1;
 
                 tileObjects[x, height - y - 1] = tile;
+                highlights[x, height - y - 1] = highlight;
 
                 x++;
             }
@@ -90,5 +92,10 @@ public class MapGenerator : MonoBehaviour {
     public int SizeY
     {
         get { return tiles.GetLength(1); }
+    }
+
+    public Tile[,] Tiles
+    {
+        get { return tiles; }
     }
 }
