@@ -14,6 +14,11 @@ public class MainMenuButtons : MonoBehaviour {
 
 	Rect ScreenRect = new Rect(0,0,Screen.width,Screen.height);
 
+    void Start()
+    {
+        EventSystem.current.SetSelectedGameObject(mainMenuGroup.GetComponentInChildren<Button>().gameObject);
+    }
+
     public void showCredits ()
     {
         remover.callback = (GameObject gameObject) =>
@@ -24,7 +29,8 @@ public class MainMenuButtons : MonoBehaviour {
         creditsGroup.SetActive(true);
 		backButton.SetActive (true);
 		//negative of half the canvas size (800x600) times the Screen width divided by the canvas width. Screen width/canvas width is the scale factor of the canvas.
-		creditsGroup.GetComponent<RectTransform> ().position = new Vector3 (Screen.width/2f, -300 * (Screen.width/800f), 0);
+        EventSystem.current.SetSelectedGameObject(backButton);
+        creditsGroup.GetComponent<RectTransform>().position = new Vector3(Screen.width / 2f, -300 * (Screen.width / 800f), 0);
 
 		eventSystem.SetSelectedGameObject(backButton);
     }
