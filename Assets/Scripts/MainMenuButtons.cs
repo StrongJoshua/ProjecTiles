@@ -10,7 +10,7 @@ public class MainMenuButtons : MonoBehaviour {
     public AudioClip click, hover;
     public EventSystem eventSystem;
     public Animator anim;
-    public DontDestroy remover;
+    public AnimationEventHandler remover;
 
 	Rect ScreenRect = new Rect(0,0,Screen.width,Screen.height);
 
@@ -41,6 +41,7 @@ public class MainMenuButtons : MonoBehaviour {
 		backButton.SetActive (false);
         mainMenuGroup.SetActive(true);
 		creditsGroup.GetComponent<RectTransform> ().position = new Vector3 (Screen.width/2f, -300 * (Screen.width/800f), 0);
+        EventSystem.current.SetSelectedGameObject(mainMenuGroup.GetComponentInChildren<Button>().gameObject);
         eventSystem.SetSelectedGameObject(mainMenuGroup.GetComponentInChildren<Button>().gameObject);
     }
 

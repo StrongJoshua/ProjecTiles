@@ -1,18 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System;
-
-public class DontDestroy : MonoBehaviour {
-
+public class AnimationEventHandler : MonoBehaviour {
     public Action<GameObject> callback;
 
-    // Use this for initialization
     void Awake()
     {
         callback = null;
-        DontDestroyOnLoad(transform.gameObject);
     }
 
     void DoDestroy()
