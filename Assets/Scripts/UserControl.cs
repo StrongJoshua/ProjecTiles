@@ -244,8 +244,9 @@ public class UserControl : MonoBehaviour
             for(int j = 0; j < movement.GetLength(1); j++)
             {
                 if (!movement[i, j])
-                    continue;
-                objects[i, j].SetActive(true);
+                    objects[i, j].SetActive(false);
+                else
+                    objects[i, j].SetActive(true);
             }
     }
 
