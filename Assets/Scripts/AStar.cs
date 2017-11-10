@@ -6,7 +6,7 @@ public class AStar : MonoBehaviour {
     public static bool[,] movementMatrix(int ap, Tile[,] tiles, int x, int y)
     {
         bool[,] matrix = new bool[tiles.GetLength(0), tiles.GetLength(1)];
-        recurseSearch(ap, tiles, x, y, matrix);
+        recurseSearch(ap + tiles[x, y].MovementCost, tiles, x, y, matrix);
         return matrix;
     }
 
@@ -14,7 +14,7 @@ public class AStar : MonoBehaviour {
     {
         if (x < 0 || y < 0 || x >= tiles.GetLength(0) || y >= tiles.GetLength(1))
             return;
-        if (matrix[x, y] || ap - tiles[x, y].MovementCost < 0)
+        if (ap - tiles[x, y].MovementCost < 0)
             return;
         matrix[x, y] = true;
         ap -= tiles[x, y].MovementCost;
