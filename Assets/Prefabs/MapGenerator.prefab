@@ -58,3 +58,7 @@ MonoBehaviour:
   - {fileID: 1529209515441392, guid: 8cb12754adabec048bbc3c02882c3fca, type: 2}
   - {fileID: 1763689811583484, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
   - {fileID: 1708775984971098, guid: b43307b0c000d1f469f1c2939f576b9f, type: 2}
+  parent: {fileID: 0}
+  highlightPlane: {fileID: 1117509993441026, guid: 3759411bb0a839f44ba600260b963948,
+    type: 2}
+  highlightColor: {r: 0.3019608, g: 0.3019608, b: 1, a: 0.21568628}
