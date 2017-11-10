@@ -39,6 +39,8 @@ public class UserControl : MonoBehaviour
         yDel = 0;
 		selector = cam.gameObject.GetComponent<SelectedHighlight>();
 		pauseMenu.SetActive(false);
+        coordinates.text = map.GetTileType(x, y) + "";
+        showUnitInfo();
     }
 
     void OnPreRender()
@@ -120,13 +122,11 @@ public class UserControl : MonoBehaviour
 		{
 			if(paused)
 			{
-				paused = false;
-				pauseMenu.SetActive(paused);
+                resumeGame();
 			}
 			else
 			{
-				paused = true;
-				pauseMenu.SetActive(paused);
+                pauseGame();
 			}
 
 		}	
@@ -205,10 +205,19 @@ public class UserControl : MonoBehaviour
 	{
 		paused = false;
 		pauseMenu.SetActive(false);
+        Time.timeScale = 1;
 	}
+
+    public void pauseGame()
+    {
+        paused = true;
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
 
 	public void loadMainMenu()
 	{
+        resumeGame();
 		SceneManager.LoadScene("MainMenu");
 	}
 
