@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class UserControl : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class UserControl : MonoBehaviour
     public Canvas canvas;
     public GameObject unitInfo;
 
+    public EventSystem eventSystem;
 	public GameObject pauseMenu;
 	public bool paused = false;
 
@@ -212,6 +214,7 @@ public class UserControl : MonoBehaviour
     {
         paused = true;
         pauseMenu.SetActive(true);
+        eventSystem.SetSelectedGameObject(pauseMenu.GetComponentInChildren<Button>().gameObject);
         Time.timeScale = 0;
     }
 
