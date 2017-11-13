@@ -21,13 +21,8 @@ public class FireProjectile : MonoBehaviour
 	void Update ()
 	{
 		if (Input.GetKeyDown (KeyCode.F)) {
-			if (projectile.GetComponent<Projectile> ().type == Projectile.ProjectileType.shotgun) {
-				for (int i = 0; i < 10; i++) {
-					GameObject temp = Instantiate (projectile);
-					temp.transform.position = transform.position + new Vector3 (0, 1, 0);
-					temp.GetComponent<Rigidbody> ().AddForce (new Vector3 (Random.Range (-accuracySpread, accuracySpread), 0, speed));
-				}
-			} else {
+			int numToFire = projectile.GetComponent<Projectile> ().type == Projectile.ProjectileType.shotgun ? 5 : 1;
+			for (int i = 0; i < numToFire; i++) {
 				GameObject temp = Instantiate (projectile);
 				temp.transform.position = transform.position + new Vector3 (0, 1, 0);
 				temp.GetComponent<Rigidbody> ().AddForce (new Vector3 (Random.Range (-accuracySpread, accuracySpread), 0, speed));
