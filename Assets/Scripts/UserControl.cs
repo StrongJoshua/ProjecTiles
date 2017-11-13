@@ -31,9 +31,17 @@ public class UserControl : MonoBehaviour
     private const float defaultDelay = .2f;
 
     private SelectedHighlight selector;
+    private Phase phase;
 
     public bool Paused {
         get { return pauseMenu.activeSelf; }
+    }
+
+    private enum Phase
+    {
+        free,
+        movement,
+        shoot
     }
 
     void Start()
@@ -53,6 +61,7 @@ public class UserControl : MonoBehaviour
 
         coordinates.text = map.GetTileType(x, y) + "";
         showUnitInfo(gameManager.unitAt(x, y));
+        phase = Phase.free;
     }
 
     void OnPreRender()
@@ -133,7 +142,13 @@ public class UserControl : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.Z))
             {
-                openUnitWindow(unit);
+                if (phase == Phase.free)
+                {
+                    openUnitWindow(unit);
+                } else if(phase == Phase.movement)
+                {
+
+                }
             }
 		}
 
@@ -210,16 +225,20 @@ public class UserControl : MonoBehaviour
         if (unit == null)
         {
             unitInfo.SetActive(false);
-            hideMovement();
+            if(phase != Phase.movement)
+                hideMovement();
         }
         else
         {
             unitInfo.SetActive(true);
             populateInfoWindow(unit);
-            if (unit.team == Unit.Team.player)
-                showMovement(unit, x, y);
-            else
-                hideMovement();
+            if (phase == Phase.free)
+            {
+                if (unit.team == Unit.Team.player)
+                    showMovement(unit, x, y);
+                else
+                    hideMovement();
+            }
         }
     }
 
@@ -305,15 +324,20 @@ public class UserControl : MonoBehaviour
     {
         resumeGame();
         unitMenu.SetActive(false);
+        phase = Phase.free;
+        showUnitInfo(gameManager.unitAt(x, y));
     }
 
     public void movementPhase()
     {
-
+        mapControl = true;
+        phase = Phase.movement;
+        unitMenu.SetActive(false);
     }
 
     public void shootPhase()
     {
-
+        phase = Phase.shoot;
+        unitMenu.SetActive(false);
     }
 }
