@@ -46,6 +46,11 @@ public class UserControl : MonoBehaviour
         yDel = 0;
 		selector = cam.gameObject.GetComponent<SelectedHighlight>();
 		pauseMenu.SetActive(false);
+
+        unitInfo.transform.position = new Vector3(Screen.width / 2, Screen.height / 2 - unitInfo.GetComponent<RectTransform>().rect.height / 2 * canvas.scaleFactor);
+        RectTransform rt = unitMenu.GetComponent<RectTransform>();
+        unitMenu.transform.position = new Vector3(Screen.width / 2 + rt.rect.width * 3 / 4 * canvas.scaleFactor, Screen.height / 2 + rt.rect.height / 2 * canvas.scaleFactor);
+
         coordinates.text = map.GetTileType(x, y) + "";
         showUnitInfo(gameManager.unitAt(x, y));
     }
@@ -211,7 +216,6 @@ public class UserControl : MonoBehaviour
         {
             unitInfo.SetActive(true);
             populateInfoWindow(unit);
-            unitInfo.transform.position = new Vector3(Screen.width / 2, Screen.height / 2 - unitInfo.GetComponent<RectTransform>().rect.height / 2 * canvas.scaleFactor);
             if (unit.team == Unit.Team.player)
                 showMovement(unit, x, y);
             else
