@@ -306,4 +306,14 @@ public class UserControl : MonoBehaviour
         resumeGame();
         unitMenu.SetActive(false);
     }
+
+    public void movementPhase()
+    {
+
+    }
+
+    public void shootPhase()
+    {
+
+    }
 }
