@@ -19,10 +19,11 @@ public class UserControl : MonoBehaviour
     public GameManager gameManager;
     public Canvas canvas;
     public GameObject unitInfo;
+    public GameObject unitMenu;
 
     public EventSystem eventSystem;
-	public GameObject pauseMenu;
-	public bool paused = false;
+    public GameObject pauseMenu;
+    public bool mapControl = true;
 
     private int xDel, yDel;
     private float delay, lastTime;
@@ -30,6 +31,10 @@ public class UserControl : MonoBehaviour
     private const float defaultDelay = .2f;
 
     private SelectedHighlight selector;
+
+    public bool Paused {
+        get { return pauseMenu.activeSelf; }
+    }
 
     void Start()
     {
@@ -42,7 +47,7 @@ public class UserControl : MonoBehaviour
 		selector = cam.gameObject.GetComponent<SelectedHighlight>();
 		pauseMenu.SetActive(false);
         coordinates.text = map.GetTileType(x, y) + "";
-        showUnitInfo();
+        showUnitInfo(gameManager.unitAt(x, y));
     }
 
     void OnPreRender()
@@ -54,7 +59,7 @@ public class UserControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!paused) {
+        if (!Paused) {
             xDel = 0;
             yDel = 0;
 
@@ -68,10 +73,13 @@ public class UserControl : MonoBehaviour
                 xDel -= 1;
 
             moveHighlight();
+ 
+            Unit unit = gameManager.unitAt(x, y);
+
             if (xDel != 0 || yDel != 0)
             {
                 coordinates.text = map.GetTileType(x, y) + "";
-                showUnitInfo();
+                showUnitInfo(unit);
             }
 	        
 	        if (Input.GetAxis("Mouse ScrollWheel") > 0)
@@ -95,7 +103,7 @@ public class UserControl : MonoBehaviour
                         {
                             moveHighlightAbsolute(info.x, info.y);
                             coordinates.text = map.GetTileType(x, y) + "";
-                            showUnitInfo();
+                            showUnitInfo(unit);
                         }
                     }
                   //  Debug.Log ("object that was hit: "+ourObject);
@@ -118,11 +126,15 @@ public class UserControl : MonoBehaviour
                     }
                 }
             }
+            if(Input.GetKeyDown(KeyCode.Z))
+            {
+                openUnitWindow(unit);
+            }
 		}
 
 		if(Input.GetKeyDown(KeyCode.Escape))
 		{
-			if(paused)
+			if(Paused)
 			{
                 resumeGame();
 			}
@@ -131,7 +143,12 @@ public class UserControl : MonoBehaviour
                 pauseGame();
 			}
 
-		}	
+		}
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            closeAll();
+        }
     }
 
     private void moveHighlightAbsolute(int newX, int newY)
@@ -162,7 +179,7 @@ public class UserControl : MonoBehaviour
 
     private void moveHighlight()
     {
-        if (Time.timeSinceLevelLoad - lastTime > delay)
+        if (mapControl && Time.timeSinceLevelLoad - lastTime > delay)
         {
             if (xDel == 0 && yDel == 0)
             {
@@ -183,9 +200,8 @@ public class UserControl : MonoBehaviour
         cam.gameObject.transform.position = Vector3.Lerp(cam.transform.position, highlight.transform.position + new Vector3(0, 20f, -45f), lerpSmooth);
     }
 
-    private void showUnitInfo()
+    private void showUnitInfo(Unit unit)
     {
-        Unit unit = gameManager.unitAt(x, y);
         if (unit == null)
         {
             unitInfo.SetActive(false);
@@ -205,14 +221,15 @@ public class UserControl : MonoBehaviour
 
 	public void resumeGame()
 	{
-		paused = false;
+		mapControl = true;
 		pauseMenu.SetActive(false);
         Time.timeScale = 1;
 	}
 
     public void pauseGame()
     {
-        paused = true;
+        mapControl = false;
+        unitMenu.SetActive(false);
         pauseMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponentInChildren<Button>().gameObject);
         Time.timeScale = 0;
@@ -266,5 +283,23 @@ public class UserControl : MonoBehaviour
     {
         foreach (GameObject go in map.highlights)
             go.SetActive(false);
+    }
+
+    private void openUnitWindow(Unit unit)
+    {
+        if (unit == null)
+            return;
+        if (unit.team == Unit.Team.player)
+        {
+            unitMenu.SetActive(true);
+            mapControl = false;
+            eventSystem.SetSelectedGameObject(unitMenu.GetComponentInChildren<Button>().gameObject);
+        }
+    }
+
+    private void closeAll()
+    {
+        resumeGame();
+        unitMenu.SetActive(false);
     }
 }
