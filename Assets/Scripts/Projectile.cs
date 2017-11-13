@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 	public float lifetime;
+	public float damage;
+	public ProjectileType type;
 	float startTime;
-	// Use this for initialization
+
+	public enum ProjectileType {
+	laser,
+	shotgun,
+	sniper,
+	slug
+	}
+
+
 	void Start () {
 		startTime = Time.timeSinceLevelLoad;
 	}
@@ -13,7 +23,10 @@ public class Projectile : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Time.timeSinceLevelLoad - startTime > lifetime) {
-			Destroy (gameObject);
+			if (type != ProjectileType.slug)
+				Destroy (gameObject);
+			else {
+			}
 		}
 	}
 
