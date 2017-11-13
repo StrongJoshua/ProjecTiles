@@ -31,13 +31,12 @@ public class FireProjectile : MonoBehaviour
 			for (int i = 0; i < numToFire; i++) {
 				GameObject temp = Instantiate (projectile);
 				temp.transform.rotation = transform.rotation;
-				temp.transform.Rotate (new Vector3(90,0,0));
+				temp.transform.Rotate (new Vector3 (90, 0, 0));
 				temp.transform.position = transform.position + transform.forward + transform.up;
 				Vector3 aim = this.transform.forward * projectileSpeed;
-				aim.x = aim.x + Random.Range (-450, 450);
-				print (aim.ToString ());
+				aim.x = aim.x + Random.Range (-accuracySpread, accuracySpread);
+				//print (aim.ToString ());
 				temp.GetComponent<Rigidbody> ().AddForce (aim);
-
 			}
 		}
 			
