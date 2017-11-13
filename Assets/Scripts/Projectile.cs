@@ -11,7 +11,6 @@ public class Projectile : MonoBehaviour {
 	public enum ProjectileType {
 	laser,
 	shotgun,
-	sniper,
 	slug
 	}
 
