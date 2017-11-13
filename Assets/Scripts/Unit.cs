@@ -26,6 +26,9 @@ public class Unit : MonoBehaviour {
 	public float accuracyGrowth;
 
     public Team team;
+	public GameObject projectile;
+	public float accuracySpread;
+	public float projectileSpeed;
 
     public int X
     {
@@ -98,4 +101,18 @@ public class Unit : MonoBehaviour {
         this.X = targetX;
         this.Y = targetY;
     }
+	public void fire()
+	{
+		int numToFire = projectile.GetComponent<Projectile> ().type == Projectile.ProjectileType.shotgun ? 5 : 1;
+		for (int i = 0; i < numToFire; i++) {
+			GameObject temp = Instantiate (projectile);
+			temp.transform.rotation = transform.rotation;
+			temp.transform.Rotate (new Vector3 (90, 0, 0));
+			temp.transform.position = transform.position + transform.forward + transform.up;
+			Vector3 aim = this.transform.forward * projectileSpeed;
+			aim.x = aim.x + Random.Range (-accuracySpread, accuracySpread);
+			print (aim.ToString ());
+			temp.GetComponent<Rigidbody> ().AddForce (aim);
+		}
+	}
 }
