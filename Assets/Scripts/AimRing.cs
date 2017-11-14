@@ -15,16 +15,12 @@ public class AimRing : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Grab the current mouse position on the screen
-		Vector3 mousePosition = camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y, Input.mousePosition.z));
-
-//		RaycastHit hit;
-//		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-//		if (Physics.Raycast (ray, out hit)) {
-//			Debug.DrawLine (ray.origin, hit.point, Color.red);
-//			//Rotates toward the mouse
-//			Vector3 dir = (hit.point - transform.position).normalized;
-//			transform.rotation = Quaternion.Euler (dir);
-//		}
+		if (Input.GetKey (KeyCode.D)) {
+			transform.Rotate (0,0,-70f * Time.deltaTime);
+		}
+		if (Input.GetKey (KeyCode.A)) {
+			transform.Rotate (0,0,70f * Time.deltaTime);
+		}
 
 	
 	}
