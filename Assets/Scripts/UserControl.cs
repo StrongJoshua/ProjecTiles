@@ -328,6 +328,7 @@ public class UserControl : MonoBehaviour
         unitMenu.SetActive(false);
         phase = Phase.free;
         showUnitInfo(gameManager.unitAt(x, y));
+        arrow.SetActive(false);
     }
 
     public void movementPhase()
@@ -350,9 +351,11 @@ public class UserControl : MonoBehaviour
     {
         if(map.highlights[x, y].activeSelf)
         {
-            updatePath(x, y);
+            updateToPath(x, y);
+            updateMovementArrow(true);
         } else
         {
+            path = new List<Vector2>();
             updateMovementArrow(false);
         }
     }
@@ -365,10 +368,10 @@ public class UserControl : MonoBehaviour
             return;
         }
         arrow.SetActive(true);
-        arrow.transform.position = new Vector3(MapGenerator.step * x, .7f, MapGenerator.step * y);
+        arrow.GetComponent<ArrowBuilder>().setPath(path);
     }
 
-    private void updatePath(int x, int y)
+    private void updateToPath(int x, int y)
     {
         Vector2 pos = new Vector2(x, y);
         if(path.Contains(pos))
@@ -379,11 +382,21 @@ public class UserControl : MonoBehaviour
         {
             path.Add(pos);
             int cost = 0;
+            bool connected = true;
+            Vector2 last = new Vector2(-1, -1);
             foreach(Vector2 v in path)
             {
+                if (last == new Vector2(-1, -1))
+                    last = v;
+                else if (Mathf.Abs(last.x - v.x) + Mathf.Abs(last.y - v.y) > 1)
+                {
+                    connected = false;
+                    break;
+                }
+
                 cost += map.Tiles[(int)v.x, (int)v.y].MovementCost;
             }
-            if(cost > selected.AP)
+            if(!connected || cost > selected.AP)
             {
                 path = AStar.AStarSearch(map.Tiles, new Vector2(selected.X, selected.Y), new Vector2(x, y));
             }
