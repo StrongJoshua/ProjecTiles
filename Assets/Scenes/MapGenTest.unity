@@ -2428,6 +2428,8 @@ MonoBehaviour:
   eventSystem: {fileID: 113123972}
   pauseMenu: {fileID: 1837063601}
   mapControl: 1
+  movementArrow: {fileID: 1025770016786372, guid: b821284db92d49e469eb692c50ac6a67,
+    type: 2}
 --- !u!4 &1921142598
 Transform:
   m_ObjectHideFlags: 0

@@ -2,4 +2,7 @@
 ### Tiles
 ![Tiles](Screenshots/TilesScreenshot.PNG)
 ### Sample Map
-![Tiles](Screenshots/MapGenTest.PNG)
+![Map](Screenshots/MapGenTest.PNG)
+### Game View
+![Game](Screenshots/GameView.PNG)
+

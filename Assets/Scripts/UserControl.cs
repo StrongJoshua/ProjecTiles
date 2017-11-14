@@ -25,6 +25,8 @@ public class UserControl : MonoBehaviour
     public GameObject pauseMenu;
     public bool mapControl = true;
 
+    public GameObject movementArrow;
+
     private int xDel, yDel;
     private float delay, lastTime;
 
@@ -32,6 +34,10 @@ public class UserControl : MonoBehaviour
 
     private SelectedHighlight selector;
     private Phase phase;
+
+    private Unit selected;
+    private GameObject arrow;
+    private List<Vector2> path;
 
     public bool Paused {
         get { return pauseMenu.activeSelf; }
@@ -94,6 +100,10 @@ public class UserControl : MonoBehaviour
             {
                 coordinates.text = map.GetTileType(x, y) + "";
                 showUnitInfo(unit);
+                if(phase == Phase.movement)
+                {
+                    updatePath();
+                }
             }
 	        
 	        if (Input.GetAxis("Mouse ScrollWheel") > 0)
@@ -333,11 +343,58 @@ public class UserControl : MonoBehaviour
         mapControl = true;
         phase = Phase.movement;
         unitMenu.SetActive(false);
+        arrow = Instantiate(movementArrow);
+        selected = gameManager.unitAt(x, y);
+        path = new List<Vector2>();
     }
 
     public void shootPhase()
     {
         phase = Phase.shoot;
         unitMenu.SetActive(false);
+    }
+
+    private void updatePath()
+    {
+        if(map.highlights[x, y].activeSelf)
+        {
+            updatePath(x, y);
+        } else
+        {
+            updateMovementArrow(false);
+        }
+    }
+
+    private void updateMovementArrow(bool show)
+    {
+        if(!show)
+        {
+            arrow.SetActive(false);
+            return;
+        }
+        arrow.SetActive(true);
+        arrow.transform.position = new Vector3(MapGenerator.step * x, .7f, MapGenerator.step * y);
+    }
+
+    private void updatePath(int x, int y)
+    {
+        Vector2 pos = new Vector2(x, y);
+        if(path.Contains(pos))
+        {
+            int index = path.IndexOf(pos);
+            path.RemoveRange(index + 1, path.Count - index);
+        } else
+        {
+            path.Add(pos);
+            int cost = 0;
+            foreach(Vector2 v in path)
+            {
+                cost += map.Tiles[(int)v.x, (int)v.y].MovementCost;
+            }
+            if(cost > selected.AP)
+            {
+                path = AStar.AStarSearch(map.Tiles, new Vector2(selected.X, selected.Y), new Vector2(x, y));
+            }
+        }
     }
 }

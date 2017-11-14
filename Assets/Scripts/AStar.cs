@@ -23,4 +23,9 @@ public class AStar : MonoBehaviour {
         recurseSearch(ap, tiles, x, y + 1, matrix);
         recurseSearch(ap, tiles, x, y - 1, matrix);
     }
+
+    public static List<Vector2> AStarSearch(Tile[,] tiles, Vector2 start, Vector2 end)
+    {
+        return new List<Vector2>();
+    }
 }
