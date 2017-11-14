@@ -25,6 +25,7 @@ public class Projectile : MonoBehaviour {
 			if (type != ProjectileType.slug)
 				Destroy (gameObject);
 			else {
+				Destroy (gameObject);
 			}
 		}
 	}
