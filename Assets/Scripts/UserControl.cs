@@ -83,13 +83,13 @@ public class UserControl : MonoBehaviour
             xDel = 0;
             yDel = 0;
 
-            if (Input.GetKey(KeyCode.UpArrow))
+			if (Input.GetKey(KeyCode.UpArrow) || Input.GetAxis("Vertical") > 0)
                 yDel += 1;
-            if (Input.GetKey(KeyCode.DownArrow))
+			if (Input.GetKey(KeyCode.DownArrow) || Input.GetAxis("Vertical") < 0)
                 yDel -= 1;
-            if (Input.GetKey(KeyCode.RightArrow))
+			if (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") > 0)
                 xDel += 1;
-            if (Input.GetKey(KeyCode.LeftArrow))
+			if (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") < 0)
                 xDel -= 1;
 
             bool didMove = moveHighlight();
@@ -150,7 +150,7 @@ public class UserControl : MonoBehaviour
                     }
                 }
             }
-            if(Input.GetKeyDown(KeyCode.Z))
+			if(Input.GetKeyDown(KeyCode.Z) || Input.GetButtonDown("Fire1"))
             {
                 if (phase == Phase.free)
                 {
@@ -162,7 +162,7 @@ public class UserControl : MonoBehaviour
             }
 		}
 
-		if(Input.GetKeyDown(KeyCode.Escape))
+		if(Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Pause"))
 		{
 			if(Paused)
 			{
@@ -175,7 +175,7 @@ public class UserControl : MonoBehaviour
 
 		}
 
-        if (Input.GetKeyDown(KeyCode.X))
+		if (Input.GetKeyDown(KeyCode.X) || Input.GetButtonDown("Cancel"))
         {
             closeAll();
         }
