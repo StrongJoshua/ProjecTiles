@@ -92,11 +92,11 @@ public class UserControl : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftArrow))
                 xDel -= 1;
 
-            moveHighlight();
+            bool didMove = moveHighlight();
  
             Unit unit = gameManager.unitAt(x, y);
 
-            if (xDel != 0 || yDel != 0)
+            if (didMove)
             {
                 coordinates.text = map.GetTileType(x, y) + "";
                 showUnitInfo(unit);
@@ -199,8 +199,9 @@ public class UserControl : MonoBehaviour
   
     }
 
-    private void moveHighlight()
+    private bool moveHighlight()
     {
+        bool didMove = false;
         if (mapControl && Time.timeSinceLevelLoad - lastTime > delay)
         {
             if (xDel == 0 && yDel == 0)
@@ -217,9 +218,11 @@ public class UserControl : MonoBehaviour
                 if (delay > .1f)
                     delay -= .04f;
                 lastTime = Time.timeSinceLevelLoad;
+                didMove = true;
             }
         }
         cam.gameObject.transform.position = Vector3.Lerp(cam.transform.position, highlight.transform.position + new Vector3(0, 20f, -45f), lerpSmooth);
+        return didMove;
     }
 
     private void showUnitInfo(Unit unit)
@@ -339,6 +342,7 @@ public class UserControl : MonoBehaviour
         arrow = Instantiate(movementArrow);
         selected = gameManager.unitAt(x, y);
         path = new List<Vector2>();
+        path.Add(new Vector2(selected.X, selected.Y));
     }
 
     public void shootPhase()
@@ -351,7 +355,7 @@ public class UserControl : MonoBehaviour
     {
         if(map.highlights[x, y].activeSelf)
         {
-            updateToPath(x, y);
+            addToPath(x, y);
             updateMovementArrow(true);
         } else
         {
@@ -371,33 +375,35 @@ public class UserControl : MonoBehaviour
         arrow.GetComponent<ArrowBuilder>().setPath(path);
     }
 
-    private void updateToPath(int x, int y)
+    private void addToPath(int x, int y)
     {
+        print("Add to path: " + x + ", " + y);
         Vector2 pos = new Vector2(x, y);
         if(path.Contains(pos))
         {
             int index = path.IndexOf(pos);
-            path.RemoveRange(index + 1, path.Count - index);
+            path = path.GetRange(0, index);
         } else
         {
             path.Add(pos);
             int cost = 0;
             bool connected = true;
-            Vector2 last = new Vector2(-1, -1);
+            Vector2 last = new Vector2(selected.X, selected.Y);
             foreach(Vector2 v in path)
             {
-                if (last == new Vector2(-1, -1))
-                    last = v;
-                else if (Mathf.Abs(last.x - v.x) + Mathf.Abs(last.y - v.y) > 1)
+                if ((int)Mathf.Abs(last.x - v.x) + (int)Mathf.Abs(last.y - v.y) > 1)
                 {
+                    print(last + " not connected to " + v);
                     connected = false;
                     break;
                 }
 
+                last = v;
                 cost += map.Tiles[(int)v.x, (int)v.y].MovementCost;
             }
             if(!connected || cost > selected.AP)
             {
+                print("Path not connected. Resorting to AStar search.");
                 path = AStar.AStarSearch(map.Tiles, new Vector2(selected.X, selected.Y), new Vector2(x, y));
             }
         }
