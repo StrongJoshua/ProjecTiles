@@ -30,6 +30,9 @@ public class Unit : MonoBehaviour {
 	public float gunSpread;
 	public float projectileSpeed;
 
+	public bool selected;
+
+
     public int X
     {
         get { return x; }
@@ -68,13 +71,34 @@ public class Unit : MonoBehaviour {
 
     void Start()
     {
+		selected = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(selected)
+		{
+			if (Input.GetKey (KeyCode.D) || Input.GetAxis("Aim") > 0) {
+				transform.Rotate (0, 240f * Time.deltaTime * Input.GetAxis("Aim"),0);
+			}
+			if (Input.GetKey (KeyCode.A) || Input.GetAxis("Aim") < 0) {
+				transform.Rotate (0, 240f * Time.deltaTime * Input.GetAxis("Aim"),0);
+			}
+			if (Input.GetKeyDown (KeyCode.F) || Input.GetButtonDown("Fire1")) {
+				fire();
+			}
+			if (Input.GetKeyDown (KeyCode.Z) || Input.GetButtonDown("Cancel")) {
+				selected = false;
+				transform.GetChild(2).gameObject.SetActive(false);
+			}
+		}
+			
 	}
-
+	public void selectUnit()
+		{
+			selected = true;
+			transform.GetChild(2).gameObject.SetActive(true);
+		}
     private void levelUp()
     {
         if (increase(healthGrowth))

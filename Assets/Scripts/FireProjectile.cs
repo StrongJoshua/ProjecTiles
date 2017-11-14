@@ -20,14 +20,8 @@ public class FireProjectile : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.F)) {
-//			int numToFire = projectile.GetComponent<Projectile> ().type == Projectile.ProjectileType.shotgun ? 5 : 1;
-//			for (int i = 0; i < numToFire; i++) {
-//				GameObject temp = Instantiate (projectile);
-//				temp.transform.position = transform.position + new Vector3 (0, 1, 0);
-//				temp.GetComponent<Rigidbody> ().AddForce (new Vector3 (Random.Range (-accuracySpread, accuracySpread), 0, speed));
-//			}
-			int numToFire = projectile.GetComponent<Projectile> ().type == Projectile.ProjectileType.shotgun ? 5 : 1;
+		if (Input.GetKeyDown (KeyCode.F) || Input.GetButtonDown("Fire1")) {
+			int numToFire = projectile.GetComponent<Projectile> ().type == Projectile.ProjectileType.shotgun ? 10 : 1;
 			for (int i = 0; i < numToFire; i++) {
 				GameObject temp = Instantiate (projectile);
 				temp.transform.rotation = transform.rotation;
@@ -35,7 +29,6 @@ public class FireProjectile : MonoBehaviour
 				temp.transform.position = transform.position + transform.forward + transform.up;
 				Vector3 aim = this.transform.forward * projectileSpeed;
 				aim.x = aim.x + Random.Range (-gunSpread, gunSpread);
-				//print (aim.ToString ());
 				temp.GetComponent<Rigidbody> ().AddForce (aim);
 			}
 		}

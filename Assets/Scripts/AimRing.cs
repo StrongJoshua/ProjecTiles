@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AimRing : MonoBehaviour {
-	public Camera camera;
-	float lockX;
-	float lockZ;
 	// Use this for initialization
 	void Start () {
-		lockX = transform.rotation.x;
-		lockZ = transform.rotation.z;
 	}
 	
 	// Update is called once per frame

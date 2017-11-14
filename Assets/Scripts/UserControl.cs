@@ -115,7 +115,7 @@ public class UserControl : MonoBehaviour
 	            iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.back) * 6, 0.3f);
 	        }
 
-            if(Input.GetButtonDown("Fire1") && mapControl)
+			if(Input.GetMouseButtonDown(0) && mapControl)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -133,7 +133,7 @@ public class UserControl : MonoBehaviour
                   //  Debug.Log ("object that was hit: "+ourObject);
                 }
             }
-            if (Input.GetButtonDown("Fire2") && mapControl)
+			if (Input.GetMouseButtonDown(1) && mapControl)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -349,6 +349,7 @@ public class UserControl : MonoBehaviour
     {
         phase = Phase.shoot;
         unitMenu.SetActive(false);
+		gameManager.unitAt(x, y).selectUnit();
     }
 
     private void updatePath()
