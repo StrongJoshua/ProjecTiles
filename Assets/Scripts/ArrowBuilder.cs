@@ -6,7 +6,7 @@ public class ArrowBuilder : MonoBehaviour {
 
     private GameObject head, body;
 
-    private void Start()
+    private void Awake()
     {
         foreach(LineRenderer lr in GetComponentsInChildren<LineRenderer>())
         {
@@ -20,17 +20,13 @@ public class ArrowBuilder : MonoBehaviour {
     public void setPath(List<Vector2> path)
     {
         Vector3[] positions = new Vector3[path.Count];
-        print("Path (length = " + (positions.Length) + ")");
         for(int i = 0; i < path.Count; i++)
         {
-            print(path[i]);
             positions[i] = new Vector3(path[i].x * MapGenerator.step, .7f, path[i].y * MapGenerator.step);
         }
-        string s = "Setting positions to: ";
-        foreach (Vector3 v in positions)
-            s += v + " ";
-        print(s);
+        body.GetComponent<LineRenderer>().positionCount = positions.Length;
         body.GetComponent<LineRenderer>().SetPositions(positions);
         head.transform.position = positions[positions.Length - 1];
+        head.transform.rotation = Quaternion.FromToRotation(Vector3.forward, positions[positions.Length - 1] - positions[positions.Length - 2]);
     }
 }

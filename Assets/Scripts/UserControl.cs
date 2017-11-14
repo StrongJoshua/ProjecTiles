@@ -68,6 +68,9 @@ public class UserControl : MonoBehaviour
         coordinates.text = map.GetTileType(x, y) + "";
         showUnitInfo(gameManager.unitAt(x, y));
         phase = Phase.free;
+
+        arrow = Instantiate(movementArrow);
+        arrow.SetActive(false);
     }
 
     void OnPreRender()
@@ -83,13 +86,13 @@ public class UserControl : MonoBehaviour
             xDel = 0;
             yDel = 0;
 
-			if (Input.GetKey(KeyCode.UpArrow) || Input.GetAxis("Vertical") > 0)
+			if (Input.GetAxis("Vertical") > 0)
                 yDel += 1;
-			if (Input.GetKey(KeyCode.DownArrow) || Input.GetAxis("Vertical") < 0)
+			if (Input.GetAxis("Vertical") < 0)
                 yDel -= 1;
-			if (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") > 0)
+			if (Input.GetAxis("Horizontal") > 0)
                 xDel += 1;
-			if (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") < 0)
+			if (Input.GetAxis("Horizontal") < 0)
                 xDel -= 1;
 
             bool didMove = moveHighlight();
@@ -154,7 +157,7 @@ public class UserControl : MonoBehaviour
             {
                 if (phase == Phase.free)
                 {
-                    openUnitWindow(unit);
+                    openUnitMenu(unit);
                 } else if(phase == Phase.movement)
                 {
 
@@ -313,7 +316,7 @@ public class UserControl : MonoBehaviour
             go.SetActive(false);
     }
 
-    private void openUnitWindow(Unit unit)
+    private void openUnitMenu(Unit unit)
     {
         if (unitMenu.activeSelf || unit == null)
             return;
@@ -327,6 +330,7 @@ public class UserControl : MonoBehaviour
 
     private void closeAll()
     {
+        print("Close all");
         resumeGame();
         unitMenu.SetActive(false);
         phase = Phase.free;
@@ -339,7 +343,6 @@ public class UserControl : MonoBehaviour
         mapControl = true;
         phase = Phase.movement;
         unitMenu.SetActive(false);
-        arrow = Instantiate(movementArrow);
         selected = gameManager.unitAt(x, y);
         path = new List<Vector2>();
         path.Add(new Vector2(selected.X, selected.Y));
@@ -378,23 +381,21 @@ public class UserControl : MonoBehaviour
 
     private void addToPath(int x, int y)
     {
-        print("Add to path: " + x + ", " + y);
         Vector2 pos = new Vector2(x, y);
         if(path.Contains(pos))
         {
             int index = path.IndexOf(pos);
-            path = path.GetRange(0, index);
+            path = path.GetRange(0, index+1);
         } else
         {
             path.Add(pos);
             int cost = 0;
             bool connected = true;
             Vector2 last = new Vector2(selected.X, selected.Y);
-            foreach(Vector2 v in path)
+            foreach(Vector2 v in path.GetRange(1, path.Count - 1))
             {
                 if ((int)Mathf.Abs(last.x - v.x) + (int)Mathf.Abs(last.y - v.y) > 1)
                 {
-                    print(last + " not connected to " + v);
                     connected = false;
                     break;
                 }
@@ -404,7 +405,6 @@ public class UserControl : MonoBehaviour
             }
             if(!connected || cost > selected.AP)
             {
-                print("Path not connected. Resorting to AStar search.");
                 path = AStar.AStarSearch(map.Tiles, new Vector2(selected.X, selected.Y), new Vector2(x, y));
             }
         }

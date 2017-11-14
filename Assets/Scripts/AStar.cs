@@ -45,6 +45,7 @@ public class AStar : MonoBehaviour {
             {
                 Vector2 parent = parents[end];
                 List<Vector2> path = new List<Vector2>();
+                path.Add(end);
                 while(parent != nullVector)
                 {
                     path.Insert(0, parent);
