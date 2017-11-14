@@ -185,23 +185,15 @@ public class UserControl : MonoBehaviour
     {
         if (Time.timeSinceLevelLoad - lastTime > delay)
         {
-            if (newX == 0 && newY == 0)
-            {
-                lastTime = 0;
-                delay = defaultDelay;
-            }
-            else
-            {
-                x = newX;
-                y = newY;
-                x = Mathf.Max(Mathf.Min(x, map.SizeX - 1), 0);
-                y = Mathf.Max(Mathf.Min(y, map.SizeY - 1), 0);
-                highlight.transform.position = new Vector3(x * MapGenerator.step, 0, y * MapGenerator.step);
+            x = newX;
+            y = newY;
+            x = Mathf.Max(Mathf.Min(x, map.SizeX - 1), 0);
+            y = Mathf.Max(Mathf.Min(y, map.SizeY - 1), 0);
+            highlight.transform.position = new Vector3(x * MapGenerator.step, 0, y * MapGenerator.step);
 
-                if (delay > .1f)
-                    delay -= .04f;
-                lastTime = Time.timeSinceLevelLoad;
-            }
+            if (delay > .1f)
+                delay -= .04f;
+            lastTime = Time.timeSinceLevelLoad;
         }
         cam.gameObject.transform.position = Vector3.Lerp(cam.transform.position, highlight.transform.position + new Vector3(0, 20f, -45f), lerpSmooth);
   
