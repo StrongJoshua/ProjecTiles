@@ -946,7 +946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 1010233834427942, guid: 139a4838b872107429af190d34d3bd02, type: 2}
   projectileSpeed: 500
-  accuracySpread: 300
+  gunSpread: 200
 --- !u!1001 &1632274228
 Prefab:
   m_ObjectHideFlags: 0

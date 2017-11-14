@@ -27,7 +27,7 @@ public class Unit : MonoBehaviour {
 
     public Team team;
 	public GameObject projectile;
-	public float accuracySpread;
+	public float gunSpread;
 	public float projectileSpeed;
 
     public int X
@@ -110,8 +110,8 @@ public class Unit : MonoBehaviour {
 			temp.transform.Rotate (new Vector3 (90, 0, 0));
 			temp.transform.position = transform.position + transform.forward + transform.up;
 			Vector3 aim = this.transform.forward * projectileSpeed;
-			aim.x = aim.x + Random.Range (-accuracySpread, accuracySpread);
-			print (aim.ToString ());
+			aim.x = aim.x + Random.Range (-gunSpread * (200-2.5f*accuracy)/100f, gunSpread * (200-2.5f*accuracy)/100f);
+			//print (aim.ToString ());
 			temp.GetComponent<Rigidbody> ().AddForce (aim);
 		}
 	}

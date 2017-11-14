@@ -10,7 +10,7 @@ public class FireProjectile : MonoBehaviour
 	 * How accurate the projectile is, higher value decreases accuracy as
 	 * it increases the possible spread of values of the projectiles initial vector path 
 	*/
-	public float accuracySpread;
+	public float gunSpread;
 	// Use this for initialization
 	void Start ()
 	{
@@ -34,7 +34,7 @@ public class FireProjectile : MonoBehaviour
 				temp.transform.Rotate (new Vector3 (90, 0, 0));
 				temp.transform.position = transform.position + transform.forward + transform.up;
 				Vector3 aim = this.transform.forward * projectileSpeed;
-				aim.x = aim.x + Random.Range (-accuracySpread, accuracySpread);
+				aim.x = aim.x + Random.Range (-gunSpread, gunSpread);
 				//print (aim.ToString ());
 				temp.GetComponent<Rigidbody> ().AddForce (aim);
 			}
