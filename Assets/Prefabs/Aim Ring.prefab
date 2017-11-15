@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4172454563527446}
+  - component: {fileID: 114655686956814438}
   m_Layer: 0
   m_Name: Aim Ring
   m_TagString: Untagged
@@ -212,3 +213,14 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1761787351935168}
   m_Mesh: {fileID: 4300000, guid: 1c72a3e4e210193479609c3e9e41a05f, type: 3}
+--- !u!114 &114655686956814438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1113359203273572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a073296123aa040af90d17744298eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

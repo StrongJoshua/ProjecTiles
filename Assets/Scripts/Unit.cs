@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour {
     public static Vector3 nullVector = new Vector3(-1, -1, -1);
@@ -29,6 +30,7 @@ public class Unit : MonoBehaviour {
 
     public Team team;
 	public GameObject projectile;
+    public Image APBar;
 	public float gunSpread;
 	public float projectileSpeed;
 
@@ -110,6 +112,9 @@ public class Unit : MonoBehaviour {
                 gameManager.movementCallback(this);
             }
         }
+        Vector3 scale = APBar.rectTransform.localScale;
+        scale.x = (float) AP / maxAP;
+        APBar.rectTransform.localScale = scale;
 	}
 	public void selectUnit()
 		{
