@@ -35,9 +35,9 @@ public class Unit : MonoBehaviour {
     public Animator anim;
 
 	public float gunSpread;
-	public float projectileSpeed;
 
 	public bool selected;
+
 
     public float movementSpeed = 1;
 
@@ -45,6 +45,12 @@ public class Unit : MonoBehaviour {
     private List<Vector2> path;
     private Vector3 target;
     internal GameManager gameManager;
+
+	//Putting this info here for now
+	public int attackCost = 5;
+
+
+
 
     public int X
     {
@@ -69,6 +75,15 @@ public class Unit : MonoBehaviour {
     public int Health
     {
         get { return health; }
+		set 
+		{ 
+			if (health - value < 0)
+				health = 0;
+			else if (health < 0)
+				health = 0;
+			else
+				health = value;
+		}
     }
 
 	public enum Team
@@ -81,8 +96,8 @@ public class Unit : MonoBehaviour {
 	void Awake () {
         health = maxHealth;
         target = nullVector;
-
-    }
+		AP = maxAP;
+	}
 
     void Start()
     {
@@ -92,20 +107,26 @@ public class Unit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (AP < 0)
+			AP = 0;
+		
 		if(selected)
 		{
-			if (Input.GetKey (KeyCode.D) || Input.GetAxis("Aim") > 0) {
-				transform.Rotate (0, 240f * Time.deltaTime * Input.GetAxis("Aim"),0);
+			float InputAxis = (Input.GetButton("keyAim")) ? Input.GetAxisRaw("keyAim") : Input.GetAxis("Aim");
+
+
+			if (InputAxis > 0) {
+				transform.Rotate (0, 240f * Time.deltaTime * InputAxis,0);
 			}
-			if (Input.GetKey (KeyCode.A) || Input.GetAxis("Aim") < 0) {
-				transform.Rotate (0, 240f * Time.deltaTime * Input.GetAxis("Aim"),0);
+			if (InputAxis < 0) {
+				transform.Rotate (0, 240f * Time.deltaTime * InputAxis,0);
 			}
 			if (Input.GetKeyDown (KeyCode.F) || Input.GetButtonDown("Fire1")) {
 				fire();
 			}
 			if (Input.GetKeyDown (KeyCode.Z) || Input.GetButtonDown("Cancel")) {
 				selected = false;
-				transform.GetChild(2).gameObject.SetActive(false);
+				transform.GetChild(1).gameObject.SetActive(false);
 			}
 		}
         anim.SetBool("isMoving", isMoving);
@@ -127,11 +148,11 @@ public class Unit : MonoBehaviour {
         scale.x = (float) AP / maxAP;
         APBar.rectTransform.localScale = scale;
 	}
-	public void selectUnit()
-		{
-			selected = true;
-			transform.GetChild(2).gameObject.SetActive(true);
-		}
+		
+	public void selectUnit() {
+		selected = true;
+		transform.GetChild(1).gameObject.SetActive(true);
+	}
     private void levelUp()
     {
         if (increase(healthGrowth))
@@ -157,21 +178,31 @@ public class Unit : MonoBehaviour {
     {
         this.X = targetX;
         this.Y = targetY;
+
     }
 	public void fire()
 	{
-		int numToFire = projectile.GetComponent<Projectile> ().type == Projectile.ProjectileType.shotgun ? 5 : 1;
+		Projectile projectileInfo = projectile.GetComponent<Projectile> (); 
+		int numToFire = projectileInfo.numToFire;
+		float speed = projectileInfo.speed;
 		for (int i = 0; i < numToFire; i++) {
-			GameObject temp = Instantiate (projectile);
-			temp.transform.rotation = transform.rotation;
+			GameObject temp = Instantiate (projectile, transform.position + transform.forward + transform.up, transform.rotation);
 			temp.transform.Rotate (new Vector3 (90, 0, 0));
-			temp.transform.position = transform.position + transform.forward + transform.up;
-			Vector3 aim = this.transform.forward * projectileSpeed;
+			Vector3 aim = this.transform.forward * speed;
 			aim.x = aim.x + Random.Range (-gunSpread * (200-2.5f*accuracy)/100f, gunSpread * (200-2.5f*accuracy)/100f);
 			//print (aim.ToString ());
 			temp.GetComponent<Rigidbody> ().AddForce (aim);
 		}
+
+		costAP (attackCost);
 	}
+
+	public void takeDamage(int incomingDamage) {
+		//For now just deincrement health, we can consider armor and stuff later
+		Health -= incomingDamage;
+		Debug.Log (incomingDamage);
+	}
+
 
     public void setTarget(Vector2 mapTarget)
     {
@@ -188,4 +219,5 @@ public class Unit : MonoBehaviour {
     {
         this.AP -= ap;
     }
+
 }

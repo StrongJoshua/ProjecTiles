@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
     public Unit[,] characters;
 
     private Unit[] enemies;
-    private Unit[] playerUnits;
+    public Unit[] playerUnits;
 
     private Dictionary<Unit, List<Vector2>> pathManager;
 
@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour {
             return;
 
         unit.moveTo(x, y);
+
 
         characters[selectedX, selectedY] = null;
         characters[x, y] = unit;

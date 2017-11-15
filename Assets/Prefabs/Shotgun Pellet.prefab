@@ -112,8 +112,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 1
-  damage: 10
-  type: 1
+  maxDamage: 0
+  numToFire: 0
+  speed: 0
 --- !u!135 &135730621300235036
 SphereCollider:
   m_ObjectHideFlags: 1

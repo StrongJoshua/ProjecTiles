@@ -33,9 +33,10 @@ public class UserControl : MonoBehaviour
     private const float defaultDelay = .2f;
 
     private SelectedHighlight selector;
-    private Phase phase;
+    public Phase phase;
 
     private Unit selected;
+	private List<Unit> myUnits;
     private GameObject arrow;
     private List<Vector2> path;
 
@@ -43,7 +44,7 @@ public class UserControl : MonoBehaviour
         get { return pauseMenu.activeSelf; }
     }
 
-    private enum Phase
+    public enum Phase
     {
         free,
         movement,
@@ -124,7 +125,8 @@ public class UserControl : MonoBehaviour
                 RaycastHit hit;
                 if(Physics.Raycast(ray, out hit))
                 {
-                    if (hit.collider.gameObject.transform.parent.tag == "Tile") {
+					
+					if (hit.collider.gameObject.transform.parent != null && hit.collider.gameObject.transform.parent.tag == "Tile") {
                         TileInfo info = hit.collider.gameObject.GetComponent<TileInfo>();
                         if (info != null)
                         {
@@ -136,13 +138,13 @@ public class UserControl : MonoBehaviour
                   //  Debug.Log ("object that was hit: "+ourObject);
                 }
             }
-			if (Input.GetMouseButtonDown(1) && mapControl)
+			if (Input.GetMouseButtonDown(1) && mapControl && phase == Phase.movement)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (hit.collider.gameObject.transform.parent.tag == "Tile")
+					if (hit.collider.gameObject.transform.parent != null && hit.collider.gameObject.transform.parent.tag == "Tile")
                     {
                         TileInfo info = hit.collider.gameObject.GetComponent<TileInfo>();
                         if (info != null)

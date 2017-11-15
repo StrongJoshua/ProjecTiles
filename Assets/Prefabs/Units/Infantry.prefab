@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4277801766355936}
   - component: {fileID: 95148337524097948}
   - component: {fileID: 114603131709148816}
+  - component: {fileID: 136007506557872484}
   m_Layer: 0
   m_Name: Infantry
   m_TagString: Untagged
@@ -1496,7 +1497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1904113282498144
 GameObject:
   m_ObjectHideFlags: 1
@@ -3359,9 +3360,11 @@ MonoBehaviour:
   APBar: {fileID: 114300596039280758}
   anim: {fileID: 95953657671208634}
   gunSpread: 100
-  projectileSpeed: 500
   selected: 0
   movementSpeed: 1
+  gunSpread: 30
+  selected: 0
+  attackCost: 3
 --- !u!114 &114668176556250098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3384,7 +3387,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ad770bd666af94b9370e2ed83893bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!137 &137662458440290170
+--- !u!136 &136007506557872484
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1023700816672368}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.343265
+  m_Height: 5.953823
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.36, z: 0.06475866}
+--- !u!137 &137121390926746938
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

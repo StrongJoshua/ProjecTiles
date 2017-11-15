@@ -4,33 +4,43 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 	public float lifetime;
-	public float damage;
-	public ProjectileType type;
+	public int maxDamage;
+	int currDamage;
 	float startTime;
-
-	public enum ProjectileType {
-	laser,
-	shotgun,
-	slug
-	}
+	public int numToFire;
+	public float speed;
 
 
-	void Start () {
+
+
+	protected virtual void Awake () {
 		startTime = Time.timeSinceLevelLoad;
+		currDamage = maxDamage;
+
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
 		if (Time.timeSinceLevelLoad - startTime > lifetime) {
-			if (type != ProjectileType.slug)
+			
 				Destroy (gameObject);
-			else {
-				Destroy (gameObject);
-			}
+		
 		}
 	}
 
 	void OnTriggerEnter()
 	{
 	}
+
+	protected virtual void OnCollisionEnter(Collision col) {
+		Unit hitUnit = col.gameObject.GetComponent<Unit> (); 
+		
+		if (hitUnit != null) {
+			Debug.Log ("DING DING");
+			hitUnit.takeDamage (currDamage);
+		}
+
+		Destroy (gameObject);
+	}
+		
 }

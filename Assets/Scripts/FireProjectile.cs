@@ -21,7 +21,7 @@ public class FireProjectile : MonoBehaviour
 	void Update ()
 	{
 		if (Input.GetKeyDown (KeyCode.F) || Input.GetButtonDown("Fire1")) {
-			int numToFire = projectile.GetComponent<Projectile> ().type == Projectile.ProjectileType.shotgun ? 10 : 1;
+			int numToFire = projectile.GetComponent<Projectile> ().numToFire;
 			for (int i = 0; i < numToFire; i++) {
 				GameObject temp = Instantiate (projectile);
 				temp.transform.rotation = transform.rotation;
