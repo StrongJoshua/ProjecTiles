@@ -364,7 +364,7 @@ public class UserControl : MonoBehaviour
             updateMovementArrow(true);
         } else
         {
-            path = new List<Vector2>();
+            path.RemoveRange(1, path.Count - 1);
             updateMovementArrow(false);
         }
     }
@@ -417,10 +417,11 @@ public class UserControl : MonoBehaviour
         {
             return;
         }
-        selected.moveOnPath(path.GetRange(1, path.Count - 1));
+        gameManager.moveUnitOnPath(selected, path.GetRange(1, path.Count - 1));
         selected = null;
         path = null;
         updateMovementArrow(false);
+        hideMovement();
         phase = Phase.free;
     }
 }

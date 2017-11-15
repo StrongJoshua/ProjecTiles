@@ -16,11 +16,14 @@ public class GameManager : MonoBehaviour {
     private Unit[] enemies;
     private Unit[] playerUnits;
 
+    private Dictionary<Unit, List<Vector2>> pathManager;
+
 	// Use this for initialization
 	void Start () {
         enemies = new Unit[enemyCount];
         characters = new Unit[map.SizeX, map.SizeY];
         playerUnits = player.initialize();
+        pathManager = new Dictionary<Unit, List<Vector2>>();
 
         for (int i = 0; i < enemyCount; i++)
         {
@@ -50,6 +53,8 @@ public class GameManager : MonoBehaviour {
         unit.X = tileX;
         unit.Y = tileY;
         characters[tileX, tileY] = unit;
+
+        unit.gameManager = this;
     }
 
     public Unit unitAt(int x, int y)
@@ -68,5 +73,27 @@ public class GameManager : MonoBehaviour {
 
         characters[selectedX, selectedY] = null;
         characters[x, y] = unit;
+    }
+
+    public void moveUnitOnPath(Unit unit, List<Vector2> path)
+    {
+        unit.setTarget(path[0]);
+        pathManager.Add(unit, path);
+    }
+
+    public void movementCallback(Unit unit)
+    {
+        List<Vector2> path = pathManager[unit];
+        characters[unit.X, unit.Y] = null;
+        unit.X = (int)path[0].x;
+        unit.Y = (int)path[0].y;
+        characters[unit.X, unit.Y] = unit;
+        path.RemoveAt(0);
+        if (path.Count == 0)
+        {
+            pathManager.Remove(unit);
+            return;
+        }
+        unit.setTarget(path[0]);
     }
 }

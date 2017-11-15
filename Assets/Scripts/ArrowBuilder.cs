@@ -26,7 +26,13 @@ public class ArrowBuilder : MonoBehaviour {
         }
         body.GetComponent<LineRenderer>().positionCount = positions.Length;
         body.GetComponent<LineRenderer>().SetPositions(positions);
-        head.transform.position = positions[positions.Length - 1];
-        head.transform.rotation = Quaternion.FromToRotation(Vector3.forward, positions[positions.Length - 1] - positions[positions.Length - 2]);
+        if (positions.Length <= 1)
+            head.SetActive(false);
+        else
+        {
+            head.SetActive(true);
+            head.transform.position = positions[positions.Length - 1];
+            head.transform.rotation = Quaternion.FromToRotation(Vector3.forward, positions[positions.Length - 1] - positions[positions.Length - 2]);
+        }
     }
 }

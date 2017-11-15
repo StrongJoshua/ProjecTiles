@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Unit : MonoBehaviour {
+    public static Vector3 nullVector = new Vector3(-1, -1, -1);
+
     new public string name;
 
     private int health;
@@ -36,6 +38,7 @@ public class Unit : MonoBehaviour {
 
     private List<Vector2> path;
     private Vector3 target;
+    internal GameManager gameManager;
 
     public int X
     {
@@ -71,7 +74,9 @@ public class Unit : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         health = maxHealth;
-	}
+        target = nullVector;
+
+    }
 
     void Start()
     {
@@ -96,21 +101,13 @@ public class Unit : MonoBehaviour {
 				transform.GetChild(2).gameObject.SetActive(false);
 			}
 		}
-		if(path != null)
+		if(target != nullVector)
         {
             this.transform.position += (target - this.transform.position).normalized * MapGenerator.step * movementSpeed * Time.deltaTime;
             if((target - this.transform.position).magnitude <= .1f)
             {
-                this.transform.position = target;
-                if(path.Count == 0)
-                {
-                    path = null;
-                    target = Vector3.zero;
-                } else
-                {
-                    target = new Vector3(path[0].x * MapGenerator.step, .5f, path[0].y * MapGenerator.step);
-                    path.RemoveAt(0);
-                }
+                target = nullVector;
+                gameManager.movementCallback(this);
             }
         }
 	}
@@ -160,10 +157,8 @@ public class Unit : MonoBehaviour {
 		}
 	}
 
-    public void moveOnPath(List<Vector2> path)
+    public void setTarget(Vector2 mapTarget)
     {
-        target = new Vector3(path[0].x * MapGenerator.step, .5f, path[0].y * MapGenerator.step);
-        this.path = path;
-        this.path.RemoveAt(0);
+        this.target = new Vector3(mapTarget.x * MapGenerator.step, .5f, mapTarget.y * MapGenerator.step);
     }
 }
