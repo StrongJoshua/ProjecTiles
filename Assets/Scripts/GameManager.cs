@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour {
 
     private Dictionary<Unit, List<Vector2>> pathManager;
 
+    private bool update = false;
+
 	// Use this for initialization
 	void Start () {
         enemies = new Unit[enemyCount];
@@ -88,12 +90,21 @@ public class GameManager : MonoBehaviour {
         unit.X = (int)path[0].x;
         unit.Y = (int)path[0].y;
         characters[unit.X, unit.Y] = unit;
+        unit.costAP(map.Tiles[unit.X, unit.Y].MovementCost);
         path.RemoveAt(0);
         if (path.Count == 0)
         {
             pathManager.Remove(unit);
+            update = true;
             return;
         }
         unit.setTarget(path[0]);
+    }
+
+    public bool updateAvailable()
+    {
+        bool b = update;
+        update = false;
+        return b;
     }
 }

@@ -161,4 +161,9 @@ public class Unit : MonoBehaviour {
     {
         this.target = new Vector3(mapTarget.x * MapGenerator.step, .5f, mapTarget.y * MapGenerator.step);
     }
+
+    public void costAP(int ap)
+    {
+        this.AP -= ap;
+    }
 }

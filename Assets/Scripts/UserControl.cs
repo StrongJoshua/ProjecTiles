@@ -99,7 +99,7 @@ public class UserControl : MonoBehaviour
  
             Unit unit = gameManager.unitAt(x, y);
 
-            if (didMove)
+            if (didMove || gameManager.updateAvailable())
             {
                 coordinates.text = map.GetTileType(x, y) + "";
                 showUnitInfo(unit);
