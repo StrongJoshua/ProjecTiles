@@ -1482,7 +1482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1889551844080574
 GameObject:
   m_ObjectHideFlags: 1
@@ -3345,7 +3345,7 @@ MonoBehaviour:
   AP: 10
   maxHealth: 20
   maxAP: 10
-  apChargeRate: 1
+  apChargeRate: 2
   defense: 10
   perception: 10
   accuracy: 10
@@ -3363,6 +3363,7 @@ MonoBehaviour:
   selected: 0
   movementSpeed: 1
   attackCost: 3
+  currTime: 0
 --- !u!114 &114668176556250098
 MonoBehaviour:
   m_ObjectHideFlags: 1

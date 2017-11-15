@@ -47,7 +47,8 @@ public class Unit : MonoBehaviour {
     internal GameManager gameManager;
 
 	//Putting this info here for now
-	public int attackCost = 5;
+	public int attackCost = 2;
+	public float currTime;
 
 
 
@@ -103,12 +104,17 @@ public class Unit : MonoBehaviour {
     {
         isMoving = false;
 		selected = false;
+		currTime = Time.timeSinceLevelLoad;
     }
 	
 	// Update is called once per frame
 	void Update () {
 		if (AP < 0)
 			AP = 0;
+		if (AP < maxAP && Time.timeSinceLevelLoad - currTime > apChargeRate) {
+			AP++;
+			currTime = Time.timeSinceLevelLoad;
+		}
 		
 		if(selected)
 		{
@@ -182,19 +188,21 @@ public class Unit : MonoBehaviour {
     }
 	public void fire()
 	{
-		Projectile projectileInfo = projectile.GetComponent<Projectile> (); 
-		int numToFire = projectileInfo.numToFire;
-		float speed = projectileInfo.speed;
-		for (int i = 0; i < numToFire; i++) {
-			GameObject temp = Instantiate (projectile, transform.position + transform.forward + transform.up, transform.rotation);
-			temp.transform.Rotate (new Vector3 (90, 0, 0));
-			Vector3 aim = this.transform.forward * speed;
-			aim.x = aim.x + Random.Range (-gunSpread * (200-2.5f*accuracy)/100f, gunSpread * (200-2.5f*accuracy)/100f);
-			//print (aim.ToString ());
-			temp.GetComponent<Rigidbody> ().AddForce (aim);
-		}
+		if (AP > 0) {
+			Projectile projectileInfo = projectile.GetComponent<Projectile> (); 
+			int numToFire = projectileInfo.numToFire;
+			float speed = projectileInfo.speed;
+			for (int i = 0; i < numToFire; i++) {
+				GameObject temp = Instantiate (projectile, transform.position + transform.forward + transform.up, transform.rotation);
+				temp.transform.Rotate (new Vector3 (90, 0, 0));
+				Vector3 aim = this.transform.forward * speed;
+				aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
+				//print (aim.ToString ());
+				temp.GetComponent<Rigidbody> ().AddForce (aim);
+			}
 
-		costAP (attackCost);
+			costAP (attackCost);
+		}
 	}
 
 	public void takeDamage(int incomingDamage) {
