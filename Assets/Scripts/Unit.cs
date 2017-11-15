@@ -111,7 +111,7 @@ public class Unit : MonoBehaviour {
 	void Update () {
 		if (AP < 0)
 			AP = 0;
-		if (AP < maxAP && Time.timeSinceLevelLoad - currTime > apChargeRate) {
+		if (AP < maxAP && Time.timeSinceLevelLoad - currTime > apChargeRate && !anim.GetBool("isMoving") && !selected) {
 			AP++;
 			currTime = Time.timeSinceLevelLoad;
 		}
