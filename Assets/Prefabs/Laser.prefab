@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 2
-  maxDamage: 0
+  maxDamage: 2
   numToFire: 1
   speed: 1000
 --- !u!136 &136015171842617880

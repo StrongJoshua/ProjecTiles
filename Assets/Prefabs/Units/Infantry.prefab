@@ -1129,7 +1129,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4231236762033184}
-  - component: {fileID: 137662458440290170}
+  - component: {fileID: 137121390926746938}
   m_Layer: 0
   m_Name: Human_Mesh
   m_TagString: Untagged
@@ -3362,8 +3362,6 @@ MonoBehaviour:
   gunSpread: 100
   selected: 0
   movementSpeed: 1
-  gunSpread: 30
-  selected: 0
   attackCost: 3
 --- !u!114 &114668176556250098
 MonoBehaviour:
