@@ -32,6 +32,10 @@ public class Unit : MonoBehaviour {
 
 	public bool selected;
 
+    public float movementSpeed = 1;
+
+    private List<Vector2> path;
+    private Vector3 target;
 
     public int X
     {
@@ -92,7 +96,23 @@ public class Unit : MonoBehaviour {
 				transform.GetChild(2).gameObject.SetActive(false);
 			}
 		}
-			
+		if(path != null)
+        {
+            this.transform.position += (target - this.transform.position).normalized * MapGenerator.step * movementSpeed * Time.deltaTime;
+            if((target - this.transform.position).magnitude <= .1f)
+            {
+                this.transform.position = target;
+                if(path.Count == 0)
+                {
+                    path = null;
+                    target = Vector3.zero;
+                } else
+                {
+                    target = new Vector3(path[0].x * MapGenerator.step, .5f, path[0].y * MapGenerator.step);
+                    path.RemoveAt(0);
+                }
+            }
+        }
 	}
 	public void selectUnit()
 		{
@@ -139,4 +159,11 @@ public class Unit : MonoBehaviour {
 			temp.GetComponent<Rigidbody> ().AddForce (aim);
 		}
 	}
+
+    public void moveOnPath(List<Vector2> path)
+    {
+        target = new Vector3(path[0].x * MapGenerator.step, .5f, path[0].y * MapGenerator.step);
+        this.path = path;
+        this.path.RemoveAt(0);
+    }
 }

@@ -160,7 +160,8 @@ public class UserControl : MonoBehaviour
                     openUnitMenu(unit);
                 } else if(phase == Phase.movement)
                 {
-
+                    // This is slightly broken because when Z is used to confirm the Move option in the unit menu, this if branch actually gets taken
+                    confirmMovement();
                 }
             }
 		}
@@ -408,5 +409,18 @@ public class UserControl : MonoBehaviour
                 path = AStar.AStarSearch(map.Tiles, new Vector2(selected.X, selected.Y), new Vector2(x, y));
             }
         }
+    }
+
+    private void confirmMovement()
+    {
+        if(path.Count <= 1)
+        {
+            return;
+        }
+        selected.moveOnPath(path.GetRange(1, path.Count - 1));
+        selected = null;
+        path = null;
+        updateMovementArrow(false);
+        phase = Phase.free;
     }
 }
