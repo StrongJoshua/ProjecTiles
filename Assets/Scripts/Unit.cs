@@ -27,10 +27,13 @@ public class Unit : MonoBehaviour {
     public float defenseGrowth;
     public float perceptionGrowth;
 	public float accuracyGrowth;
+    
 
     public Team team;
 	public GameObject projectile;
     public Image APBar;
+    public Animator anim;
+
 	public float gunSpread;
 	public float projectileSpeed;
 
@@ -38,6 +41,7 @@ public class Unit : MonoBehaviour {
 
     public float movementSpeed = 1;
 
+    private bool isMoving;
     private List<Vector2> path;
     private Vector3 target;
     internal GameManager gameManager;
@@ -82,6 +86,7 @@ public class Unit : MonoBehaviour {
 
     void Start()
     {
+        isMoving = false;
 		selected = false;
     }
 	
@@ -103,12 +108,18 @@ public class Unit : MonoBehaviour {
 				transform.GetChild(2).gameObject.SetActive(false);
 			}
 		}
+        anim.SetBool("isMoving", isMoving);
 		if(target != nullVector)
         {
+            Vector3 targetPoint = transform.position - new Vector3(target.x, transform.position.y, target.z);
+            Quaternion targetRotation = Quaternion.LookRotation(-targetPoint, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 2.0f);
+
             this.transform.position += (target - this.transform.position).normalized * MapGenerator.step * movementSpeed * Time.deltaTime;
             if((target - this.transform.position).magnitude <= .1f)
             {
                 target = nullVector;
+                finishMovement();
                 gameManager.movementCallback(this);
             }
         }
@@ -164,7 +175,13 @@ public class Unit : MonoBehaviour {
 
     public void setTarget(Vector2 mapTarget)
     {
+        isMoving = true;
         this.target = new Vector3(mapTarget.x * MapGenerator.step, .5f, mapTarget.y * MapGenerator.step);
+    }
+
+    public void finishMovement()
+    {
+        isMoving = false;
     }
 
     public void costAP(int ap)
