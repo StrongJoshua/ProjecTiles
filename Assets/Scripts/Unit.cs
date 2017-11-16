@@ -206,7 +206,7 @@ public class Unit : MonoBehaviour {
     }
 	public void fire()
 	{
-		if (AP > 0) {
+		if (canShoot()) {
 			Projectile projectileInfo = projectile.GetComponent<Projectile> (); 
 			int numToFire = projectileInfo.numToFire;
 			float speed = projectileInfo.speed;
@@ -256,5 +256,10 @@ public class Unit : MonoBehaviour {
     public void startle()
     {
         // TODO call startle animation
+    }
+
+    public bool canShoot()
+    {
+        return AP >= attackCost;
     }
 }

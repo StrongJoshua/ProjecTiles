@@ -325,6 +325,7 @@ public class UserControl : MonoBehaviour
             unitMenu.SetActive(true);
             mapControl = false;
             eventSystem.SetSelectedGameObject(unitMenu.GetComponentInChildren<Button>().gameObject);
+            unitMenu.GetComponentsInChildren<Button>()[1].enabled = unit.canShoot();
         }
     }
 
