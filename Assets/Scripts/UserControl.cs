@@ -100,14 +100,11 @@ public class UserControl : MonoBehaviour
  
             Unit unit = gameManager.unitAt(x, y);
 
-            if (didMove || gameManager.updateAvailable())
+            coordinates.text = map.GetTileType(x, y) + "";
+            showUnitInfo(unit);
+            if(phase == Phase.movement && didMove)
             {
-                coordinates.text = map.GetTileType(x, y) + "";
-                showUnitInfo(unit);
-                if(phase == Phase.movement)
-                {
-                    updatePath();
-                }
+                updatePath();
             }
 	        
 	        if (Input.GetAxis("Mouse ScrollWheel") > 0)

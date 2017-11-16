@@ -60,7 +60,7 @@ public class Unit : MonoBehaviour {
         set
         {
             this.x = value;
-            this.transform.position = new Vector3(x * MapGenerator.step, .5f, y * MapGenerator.step);
+            this.transform.position = new Vector3(x * MapGenerator.step, this.transform.position.y, y * MapGenerator.step);
         }
     }
 
@@ -70,7 +70,7 @@ public class Unit : MonoBehaviour {
         set
         {
             this.y = value;
-            this.transform.position = new Vector3(x * MapGenerator.step, .5f, y * MapGenerator.step);
+            this.transform.position = new Vector3(x * MapGenerator.step, this.transform.position.y, y * MapGenerator.step);
         }
     }
 
@@ -240,7 +240,7 @@ public class Unit : MonoBehaviour {
     public void setTarget(Vector2 mapTarget)
     {
         isMoving = true;
-        this.target = new Vector3(mapTarget.x * MapGenerator.step, .5f, mapTarget.y * MapGenerator.step);
+        this.target = new Vector3(mapTarget.x * MapGenerator.step, this.transform.position.y, mapTarget.y * MapGenerator.step);
     }
 
     public void finishMovement()

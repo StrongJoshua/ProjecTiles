@@ -38,7 +38,8 @@ public class GameManager : MonoBehaviour {
         Unit[] units = new Unit[count];
         for (int i = 0; i < count; i++)
         {
-            GameObject newObj = Instantiate(unitTypes[Random.Range(0, unitTypes.Length)], Vector3.zero, Quaternion.identity);
+            GameObject unitType = unitTypes[Random.Range(0, unitTypes.Length)];
+            GameObject newObj = Instantiate(unitType, unitType.transform.position + new Vector3(0, .5f, 0), Quaternion.identity);
             newObj.transform.parent = container;
             Unit newUnit = newObj.GetComponent<Unit>();
             newUnit.team = team;
