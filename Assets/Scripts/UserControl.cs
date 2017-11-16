@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System.Threading;
+using System.ComponentModel;
 
 public class UserControl : MonoBehaviour
 {
@@ -247,7 +249,11 @@ public class UserControl : MonoBehaviour
             if (phase == Phase.free)
             {
                 if (unit.team == Unit.Team.player)
-                    showMovement(unit, x, y);
+                {
+                    Thread t = new Thread(() => showMovement(unit, x, y));
+                    t.IsBackground = true;
+                    t.Start();
+                }
                 else
                     hideMovement();
             }
@@ -307,10 +313,13 @@ public class UserControl : MonoBehaviour
         for(int i = 0; i < movement.GetLength(0); i++)
             for(int j = 0; j < movement.GetLength(1); j++)
             {
-                if (!movement[i, j])
-                    objects[i, j].SetActive(false);
+                // Need to create new local variables because i and j are at max when these actions are actually executed
+                int k = i;
+                int l = j;
+                if (!movement[k, l])
+                    gameManager.CallOnMainThread(() => objects[k, l].SetActive(false));
                 else
-                    objects[i, j].SetActive(true);
+                    gameManager.CallOnMainThread(() => objects[k, l].SetActive(true));
             }
     }
 

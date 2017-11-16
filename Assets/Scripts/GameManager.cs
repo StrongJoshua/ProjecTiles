@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour {
     public Transform playerContainer;
 
     private Dictionary<Unit, List<Vector2>> pathManager;
+
+    private Queue<Action> actions;
 
     private bool hasUpdate;
     public bool HasUpdate
@@ -45,6 +48,8 @@ public class GameManager : MonoBehaviour {
         enemies = generateUnits(enemiesContainer, enemyCount, enemyColor, Unit.Team.enemy);
         playerUnits = generateUnits(playerContainer, enemyCount, playerColor, Unit.Team.player);
         hasUpdate = false;
+
+        actions = new Queue<Action>();
 	}
 
     Unit[] generateUnits(Transform container, int count, Color color, Unit.Team team)
@@ -52,7 +57,7 @@ public class GameManager : MonoBehaviour {
         Unit[] units = new Unit[count];
         for (int i = 0; i < count; i++)
         {
-            GameObject unitType = unitTypes[Random.Range(0, unitTypes.Length)];
+            GameObject unitType = unitTypes[UnityEngine.Random.Range(0, unitTypes.Length)];
             GameObject newObj = Instantiate(unitType, unitType.transform.position + new Vector3(0, .5f, 0), Quaternion.identity);
             newObj.transform.parent = container;
             Unit newUnit = newObj.GetComponent<Unit>();
@@ -67,14 +72,14 @@ public class GameManager : MonoBehaviour {
 
     public void addUnit(Unit unit)
     {
-        int tileX = Random.Range(0, map.SizeX);
-        int tileY = Random.Range(0, map.SizeY);
+        int tileX = UnityEngine.Random.Range(0, map.SizeX);
+        int tileY = UnityEngine.Random.Range(0, map.SizeY);
 
 
         while (!map.GetTile(tileX, tileY).AllowsSpawn || characters[tileX, tileY] != null)
         {
-            tileX = Random.Range(0, map.SizeX);
-            tileY = Random.Range(0, map.SizeY);
+            tileX = UnityEngine.Random.Range(0, map.SizeX);
+            tileY = UnityEngine.Random.Range(0, map.SizeY);
         }
 
         unit.X = tileX;
@@ -141,5 +146,16 @@ public class GameManager : MonoBehaviour {
     public void apCallback(Unit unit)
     {
         hasUpdate = true;
+    }
+
+    public void CallOnMainThread(Action action)
+    {
+        actions.Enqueue(action);
+    }
+
+    private void Update()
+    {
+        while (actions.Count > 0)
+            actions.Dequeue().Invoke();
     }
 }
