@@ -112,7 +112,7 @@ public class Unit : MonoBehaviour {
 	void Update () {
 		if (AP < 0)
 			AP = 0;
-        if (AP < maxAP && Time.timeSinceLevelLoad - currTime > apChargeRate && isMoving && !selected)
+        if (AP < maxAP && Time.timeSinceLevelLoad - currTime > apChargeRate && !isMoving && !selected)
         {
 			AP++;
 			currTime = Time.timeSinceLevelLoad;
