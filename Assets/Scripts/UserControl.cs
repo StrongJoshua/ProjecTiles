@@ -339,6 +339,8 @@ public class UserControl : MonoBehaviour
 
     private void hideMovement()
     {
+        if (!isShowingMovement)
+            return;
         isShowingMovement = false;
         foreach (GameObject go in map.highlights)
             gameManager.CallOnMainThread(() => go.SetActive(false));
