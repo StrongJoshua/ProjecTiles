@@ -231,7 +231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4012603743006050
 Transform:
   m_ObjectHideFlags: 1
@@ -694,13 +694,14 @@ MonoBehaviour:
   movementSpeed: 1
   attackCost: 3
   currTime: 0
+  aimRing: {fileID: 1885521710621652}
 --- !u!114 &114668176556250098
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1885521710621652}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15a073296123aa040af90d17744298eb, type: 3}
   m_Name: 

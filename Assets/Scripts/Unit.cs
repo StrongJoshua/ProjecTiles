@@ -50,8 +50,7 @@ public class Unit : MonoBehaviour {
 	//Putting this info here for now
 	public int attackCost = 2;
 	public float currTime;
-
-
+	public GameObject aimRing;
 
 
     public int X
@@ -106,6 +105,7 @@ public class Unit : MonoBehaviour {
         isMoving = false;
 		selected = false;
 		currTime = Time.timeSinceLevelLoad;
+		aimRing.SetActive (false);
     }
 	
 	// Update is called once per frame
@@ -133,9 +133,11 @@ public class Unit : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.F) || Input.GetButtonDown("Fire1")) {
 				fire();
 			}
-			if (Input.GetKeyDown (KeyCode.Z) || Input.GetButtonDown("Cancel")) {
+			if (Input.GetKeyDown (KeyCode.X) || Input.GetButtonDown("Cancel")) {
 				selected = false;
-				transform.GetChild(1).gameObject.SetActive(false);
+				//Aim Ring has to be first child
+				transform.GetChild(0).gameObject.SetActive(false);
+				aimRing.SetActive (false);
 			}
 		}
         if (anim != null)
@@ -175,7 +177,8 @@ public class Unit : MonoBehaviour {
 		
 	public void selectUnit() {
 		selected = true;
-		transform.GetChild(1).gameObject.SetActive(true);
+		transform.GetChild(0).gameObject.SetActive(true);
+		aimRing.SetActive (true);
 	}
     private void levelUp()
     {
