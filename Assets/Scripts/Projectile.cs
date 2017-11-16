@@ -27,8 +27,16 @@ public class Projectile : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter()
+	void OnTriggerEnter(Collider col)
 	{
+		Unit hitUnit = col.gameObject.GetComponent<Unit> (); 
+
+		if (hitUnit != null) {
+			//Debug.Log ("DING DING");
+			if(hitUnit.team != team)
+				hitUnit.takeDamage (currDamage);
+			Destroy (gameObject);
+		}
 	}
 
 	protected virtual void OnCollisionEnter(Collision col) {
