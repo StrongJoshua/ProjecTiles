@@ -38,9 +38,8 @@ public class Projectile : MonoBehaviour {
 		if (hitUnit != null) {
             //Debug.Log ("DING DING");
 			hitUnit.takeDamage (currDamage);
+			Destroy (gameObject);
 		}
-
-		Destroy (gameObject);
 	}
 		
 }
