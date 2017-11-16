@@ -100,9 +100,12 @@ public class UserControl : MonoBehaviour
  
             Unit unit = gameManager.unitAt(x, y);
 
-            coordinates.text = map.GetTileType(x, y) + "";
-            showUnitInfo(unit);
-            updateUnitMenu();
+            if (gameManager.HasUpdate)
+            {
+                coordinates.text = map.GetTileType(x, y) + "";
+                showUnitInfo(unit);
+                updateUnitMenu();
+            }
             if(phase == Phase.movement && didMove)
             {
                 updatePath();
@@ -300,7 +303,7 @@ public class UserControl : MonoBehaviour
     private void showMovement(Unit u, int x, int y)
     {
         GameObject[,] objects = map.highlights;
-        bool[,] movement = AStar.movementMatrix(u.AP, map.Tiles, x, y);
+        bool[,] movement = AStar.movementMatrix(u.AP, map.Tiles, x, y, u.isFlying);
         for(int i = 0; i < movement.GetLength(0); i++)
             for(int j = 0; j < movement.GetLength(1); j++)
             {

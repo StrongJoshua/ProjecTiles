@@ -21,6 +21,21 @@ public class GameManager : MonoBehaviour {
 
     private Dictionary<Unit, List<Vector2>> pathManager;
 
+    private bool hasUpdate;
+    public bool HasUpdate
+    {
+        get
+        {
+            if (hasUpdate)
+            {
+                hasUpdate = false;
+                return true;
+            }
+            else
+                return false;
+        }
+    }
+
 	// Use this for initialization
 	void Start () {
         enemies = new Unit[enemyCount];
@@ -29,6 +44,7 @@ public class GameManager : MonoBehaviour {
 
         enemies = generateUnits(enemiesContainer, enemyCount, enemyColor, Unit.Team.enemy);
         playerUnits = generateUnits(playerContainer, enemyCount, playerColor, Unit.Team.player);
+        hasUpdate = false;
 	}
 
     Unit[] generateUnits(Transform container, int count, Color color, Unit.Team team)
@@ -107,6 +123,7 @@ public class GameManager : MonoBehaviour {
         characters[unit.X, unit.Y] = unit;
         unit.costAP(map.Tiles[unit.X, unit.Y].MovementCost);
         path.RemoveAt(0);
+        hasUpdate = true;
         if (path.Count == 0)
         {
             pathManager.Remove(unit);
@@ -119,5 +136,10 @@ public class GameManager : MonoBehaviour {
             return;
         }
         unit.setTarget(path[0]);
+    }
+
+    public void apCallback(Unit unit)
+    {
+        hasUpdate = true;
     }
 }
