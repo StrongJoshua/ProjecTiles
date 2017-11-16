@@ -31,7 +31,7 @@ public class Unit : MonoBehaviour {
 
     public Team team;
 	public GameObject projectile;
-    public Image APBar;
+    public Image APBar, healthBar;
     public Animator anim;
 
 	public float gunSpread;
@@ -214,7 +214,10 @@ public class Unit : MonoBehaviour {
 	public void takeDamage(int incomingDamage) {
 		//For now just deincrement health, we can consider armor and stuff later
 		Health -= incomingDamage;
-		Debug.Log (incomingDamage);
+        Vector3 scale = healthBar.rectTransform.localScale;
+        scale.x = (float)health / maxHealth;
+        healthBar.rectTransform.localScale = scale;
+        //Debug.Log (incomingDamage);
 	}
 
 
