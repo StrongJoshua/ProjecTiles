@@ -89,6 +89,11 @@ public class GameManager : MonoBehaviour {
 
     public void moveUnitOnPath(Unit unit, List<Vector2> path)
     {
+        if (characters[(int)path[0].x, (int)path[0].y] != null)
+        {
+            unit.startle();
+            return;
+        }
         unit.setTarget(path[0]);
         pathManager.Add(unit, path);
     }
