@@ -9,8 +9,7 @@ public class Projectile : MonoBehaviour {
 	float startTime;
 	public int numToFire;
 	public float speed;
-
-
+	public Unit.Team team;
 
 
 	protected virtual void Awake () {
@@ -37,7 +36,8 @@ public class Projectile : MonoBehaviour {
 		
 		if (hitUnit != null) {
             //Debug.Log ("DING DING");
-			hitUnit.takeDamage (currDamage);
+			if(hitUnit.team != team)
+				hitUnit.takeDamage (currDamage);
 			Destroy (gameObject);
 		}
 	}

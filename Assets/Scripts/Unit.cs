@@ -211,6 +211,7 @@ public class Unit : MonoBehaviour {
 	{
 		if (canShoot()) {
 			Projectile projectileInfo = projectile.GetComponent<Projectile> (); 
+			projectileInfo.team = team;
 			int numToFire = projectileInfo.numToFire;
 			float speed = projectileInfo.speed;
 			for (int i = 0; i < numToFire; i++) {
