@@ -115,6 +115,8 @@ public class Unit : MonoBehaviour {
 			AP++;
 			currTime = Time.timeSinceLevelLoad;
 		}
+		if (Health < 0)
+			Die ();
 		
 		if(selected)
 		{
@@ -153,6 +155,10 @@ public class Unit : MonoBehaviour {
         Vector3 scale = APBar.rectTransform.localScale;
         scale.x = (float) AP / maxAP;
         APBar.rectTransform.localScale = scale;
+	}
+
+	public void Die() {
+		Destroy (gameObject);
 	}
 		
 	public void selectUnit() {
