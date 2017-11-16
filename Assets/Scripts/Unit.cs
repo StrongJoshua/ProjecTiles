@@ -234,7 +234,7 @@ public class Unit : MonoBehaviour {
         Vector3 scale = healthBar.rectTransform.localScale;
         scale.x = (float)health / maxHealth;
         healthBar.rectTransform.localScale = scale;
-        if (Health <= 0)
+        if (health <= 0)
         {
             Die();
         }
@@ -267,4 +267,8 @@ public class Unit : MonoBehaviour {
     {
         return AP >= attackCost;
     }
+	public void heal(int amount)
+	{
+		health += amount;
+	}
 }
