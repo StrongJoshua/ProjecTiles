@@ -10,7 +10,8 @@ public class GenerationUtils : MonoBehaviour {
 
         if (renderers.Length > 0)
         {
-            renderers[0].material.color = col;
+            foreach(SkinnedMeshRenderer smr in renderers)
+                smr.material.color = col;
         }
     }
 }
