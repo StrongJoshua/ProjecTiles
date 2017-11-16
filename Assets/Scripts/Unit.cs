@@ -10,12 +10,12 @@ public class Unit : MonoBehaviour {
     new public string name;
 
     private int health;
-    public int AP;
+    public float AP;
 	private int x;
 	private int y;
 
     public int maxHealth;
-    public int maxAP;
+    public float maxAP;
 	public int apChargeRate;
     public int defense;
     public int perception;
@@ -108,17 +108,26 @@ public class Unit : MonoBehaviour {
 		currTime = Time.timeSinceLevelLoad;
 		aimRing.SetActive (false);
     }
-	
+
+	void rechargeAP()
+	{
+		if (AP < maxAP && !isMoving && !selected)
+		{
+			//Update UI
+			gameManager.apCallback(this);
+		}
+	}
 	// Update is called once per frame
 	void Update () {
 		if (AP < 0)
 			AP = 0;
-        if (AP < maxAP && Time.timeSinceLevelLoad - currTime > apChargeRate && !isMoving && !selected)
-        {
-			AP++;
-			currTime = Time.timeSinceLevelLoad;
-		}
 
+		//Constant AP recharge every frame
+		AP = Mathf.Min(AP + apChargeRate * Time.deltaTime, maxAP);
+
+		//Check if AP has changed by a whole number, Ex 2.8->3.1
+		if ((int) AP < (int)(AP + apChargeRate * Time.deltaTime))
+			rechargeAP ();
 		
 		if(selected)
 		{
@@ -160,7 +169,7 @@ public class Unit : MonoBehaviour {
             }
         }
         Vector3 scale = APBar.rectTransform.localScale;
-        scale.x = (float) AP / maxAP;
+        scale.x = AP / maxAP;
         APBar.rectTransform.localScale = scale;
 	}
 
