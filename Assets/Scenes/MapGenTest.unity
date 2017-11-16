@@ -2441,6 +2441,7 @@ MonoBehaviour:
   - {fileID: 1023700816672368, guid: 82284d29cd69bf94890a1f6d28d578e8, type: 2}
   - {fileID: 1023700816672368, guid: 6fe0ef1bd10cc0246b28a8452218f173, type: 2}
   - {fileID: 1635177178531116, guid: d30459b9f2ac9e342b455ee8160344ab, type: 2}
+  - {fileID: 1013191381200846, guid: a8644b5676a3e3e428263a59a1eecc6b, type: 2}
   player: {fileID: 1912892307}
   playerColor: {r: 0.3019608, g: 0.3019608, b: 1, a: 1}
   enemyColor: {r: 1, g: 0.3019608, b: 0.3019608, a: 1}
