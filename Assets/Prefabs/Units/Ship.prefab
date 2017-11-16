@@ -669,7 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb0cc1f185ea9641a06a83c568cc1d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Infantry
+  name: Ship
   AP: 10
   maxHealth: 20
   maxAP: 10
