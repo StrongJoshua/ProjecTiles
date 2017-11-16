@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44184443, g: 0.4907779, b: 0.5707437, a: 1}
+  m_IndirectSpecularColor: {r: 0.4418438, g: 0.4907769, b: 0.5707425, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -423,8 +423,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 1.5
-  damage: 10
-  type: 0
+  maxDamage: 0
+  numToFire: 0
+  speed: 0
 --- !u!54 &368708310
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1321,3 +1322,4 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   mapControl: 1
   movementArrow: {fileID: 0}
+  phase: 0
