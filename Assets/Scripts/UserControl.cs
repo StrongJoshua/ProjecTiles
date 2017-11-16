@@ -285,7 +285,7 @@ public class UserControl : MonoBehaviour
             else if (text.name == "HP")
                 text.text = unit.Health + "/" + unit.maxHealth;
             else if (text.name == "AP")
-                text.text = unit.AP + "/" + unit.maxAP;
+                text.text = (int)unit.AP + "/" + unit.maxAP;
             else if (text.name == "APCharge")
                 text.text = unit.apChargeRate + "";
             else if (text.name == "Def")
@@ -409,7 +409,7 @@ public class UserControl : MonoBehaviour
                 }
 
                 last = v;
-                cost += map.Tiles[(int)v.x, (int)v.y].MovementCost;
+                cost += selected.isFlying ? 1 : map.Tiles[(int)v.x, (int)v.y].MovementCost;
             }
             if(!connected || cost > selected.AP)
             {

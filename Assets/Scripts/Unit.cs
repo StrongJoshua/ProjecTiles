@@ -110,24 +110,20 @@ public class Unit : MonoBehaviour {
     }
 
 	void rechargeAP()
-	{
-			//Update UI
-			gameManager.apCallback(this);
+    {
+        if (isMoving || selected || AP == maxAP)
+            return;
+        //Check if AP has changed by a whole number, Ex 2.8->3.1
+        float old = AP;
+        AP = Mathf.Min(AP + apChargeRate * Time.deltaTime, maxAP);
+        if ((int)old < (int)AP) // Update UI if it did
+            gameManager.apCallback(this);
 	}
-	// Update is called once per frame
+    
 	void Update () {
-		if (AP < 0)
-			AP = 0;
+        rechargeAP();
 
-		//Constant AP recharge every frame
-		if (AP < maxAP && !isMoving && !selected)
-			AP = Mathf.Min(AP + apChargeRate * Time.deltaTime, maxAP);
-
-		//Check if AP has changed by a whole number, Ex 2.8->3.1
-		if ((int) AP < (int)(AP + apChargeRate * Time.deltaTime))
-			rechargeAP ();
-		
-		if(selected)
+        if (selected)
 		{
 			float InputAxis = (Input.GetButton("keyAim")) ? Input.GetAxisRaw("keyAim") : Input.GetAxis("Aim");
 

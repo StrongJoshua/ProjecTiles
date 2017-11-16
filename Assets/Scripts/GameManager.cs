@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour {
         unit.X = (int)path[0].x;
         unit.Y = (int)path[0].y;
         characters[unit.X, unit.Y] = unit;
-        unit.costAP(map.Tiles[unit.X, unit.Y].MovementCost);
+        unit.costAP(unit.isFlying ? 1 : map.Tiles[unit.X, unit.Y].MovementCost);
         path.RemoveAt(0);
         hasUpdate = true;
         if (path.Count == 0)
