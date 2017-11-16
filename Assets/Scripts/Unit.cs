@@ -111,11 +111,8 @@ public class Unit : MonoBehaviour {
 
 	void rechargeAP()
 	{
-		if (AP < maxAP && !isMoving && !selected)
-		{
 			//Update UI
 			gameManager.apCallback(this);
-		}
 	}
 	// Update is called once per frame
 	void Update () {
@@ -123,7 +120,8 @@ public class Unit : MonoBehaviour {
 			AP = 0;
 
 		//Constant AP recharge every frame
-		AP = Mathf.Min(AP + apChargeRate * Time.deltaTime, maxAP);
+		if (AP < maxAP && !isMoving && !selected)
+			AP = Mathf.Min(AP + apChargeRate * Time.deltaTime, maxAP);
 
 		//Check if AP has changed by a whole number, Ex 2.8->3.1
 		if ((int) AP < (int)(AP + apChargeRate * Time.deltaTime))
