@@ -102,6 +102,7 @@ public class UserControl : MonoBehaviour
 
             coordinates.text = map.GetTileType(x, y) + "";
             showUnitInfo(unit);
+            updateUnitMenu();
             if(phase == Phase.movement && didMove)
             {
                 updatePath();
@@ -324,8 +325,10 @@ public class UserControl : MonoBehaviour
         {
             unitMenu.SetActive(true);
             mapControl = false;
-            eventSystem.SetSelectedGameObject(unitMenu.GetComponentsInChildren<Button>()[0].gameObject);
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(unitMenu.GetComponentInChildren<Button>().gameObject);
             unitMenu.GetComponentsInChildren<Button>()[1].interactable = unit.canShoot();
+            selected = unit;
         }
     }
 
@@ -337,6 +340,7 @@ public class UserControl : MonoBehaviour
         phase = Phase.free;
         showUnitInfo(gameManager.unitAt(x, y));
         arrow.SetActive(false);
+        selected = null;
     }
 
     public void movementPhase()
@@ -423,5 +427,12 @@ public class UserControl : MonoBehaviour
         updateMovementArrow(false);
         hideMovement();
         phase = Phase.free;
+    }
+
+    private void updateUnitMenu()
+    {
+        if (!unitMenu.activeSelf)
+            return;
+        unitMenu.GetComponentsInChildren<Button>()[1].interactable = selected.canShoot();
     }
 }
