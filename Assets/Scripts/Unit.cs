@@ -51,6 +51,7 @@ public class Unit : MonoBehaviour {
 	public int attackCost = 2;
 	public float currTime;
 	public GameObject aimRing;
+	public bool isFlying;
 
 
     public int X
