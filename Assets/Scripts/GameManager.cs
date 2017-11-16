@@ -29,10 +29,11 @@ public class GameManager : MonoBehaviour {
 
         for (int i = 0; i < enemyCount; i++)
         {
-            enemies[i] = Instantiate(unitTypes[Random.Range(0, unitTypes.Length)], Vector3.zero, Quaternion.identity).GetComponent<Unit>();
+            GameObject newObj = Instantiate(unitTypes[Random.Range(0, unitTypes.Length)], Vector3.zero, Quaternion.identity);
+            enemies[i] = newObj.GetComponent<Unit>();
             enemies[i].team = Unit.Team.enemy;
-            enemies[i].GetComponentsInChildren<SkinnedMeshRenderer>()[0]
-                .material.color = enemyColor;
+            GenerationUtils.setColor(newObj, enemyColor);
+
             addUnit(enemies[i]);
         }
 

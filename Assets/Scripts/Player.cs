@@ -20,9 +20,7 @@ public class Player : MonoBehaviour {
         for (int i = 0; i < unitCount; i++)
         {
             GameObject newUnitObject = Instantiate(manager.unitTypes[Random.Range(0, manager.unitTypes.Length)], Vector3.zero, Quaternion.identity);
-
-            newUnitObject.GetComponentsInChildren<SkinnedMeshRenderer>()[0]
-                .material.color = manager.playerColor;
+            GenerationUtils.setColor(newUnitObject, manager.playerColor);
 
             unitList[i] = newUnitObject.GetComponent<Unit>();
             unitList[i].team = Unit.Team.player;

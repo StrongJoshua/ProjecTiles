@@ -112,7 +112,8 @@ public class Unit : MonoBehaviour {
 	void Update () {
 		if (AP < 0)
 			AP = 0;
-		if (AP < maxAP && Time.timeSinceLevelLoad - currTime > apChargeRate && !anim.GetBool("isMoving") && !selected) {
+        if (AP < maxAP && Time.timeSinceLevelLoad - currTime > apChargeRate && isMoving && !selected)
+        {
 			AP++;
 			currTime = Time.timeSinceLevelLoad;
 		}
@@ -137,7 +138,10 @@ public class Unit : MonoBehaviour {
 				transform.GetChild(1).gameObject.SetActive(false);
 			}
 		}
-        anim.SetBool("isMoving", isMoving);
+        if (anim != null)
+        {
+            anim.SetBool("isMoving", isMoving);
+        }
 		if(target != nullVector)
         {
             Vector3 targetPoint = transform.position - new Vector3(target.x, transform.position.y, target.z);
@@ -158,7 +162,10 @@ public class Unit : MonoBehaviour {
 	}
 
 	public void Die() {
-        anim.SetTrigger("die");
+        if (anim != null)
+        {
+            anim.SetTrigger("die");
+        }
         GameObject toDestroy = this.gameObject;
         animEvent.callback = (gameObject) =>
         {

@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour {
 		Unit hitUnit = col.gameObject.GetComponent<Unit> (); 
 		
 		if (hitUnit != null) {
-			Debug.Log ("DING DING");
+            //Debug.Log ("DING DING");
 			hitUnit.takeDamage (currDamage);
 		}
 
