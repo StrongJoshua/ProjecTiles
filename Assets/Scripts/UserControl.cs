@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using System.Threading;
-using System.ComponentModel;
 
 public class UserControl : MonoBehaviour
 {
@@ -42,6 +41,9 @@ public class UserControl : MonoBehaviour
     private GameObject arrow;
     private List<Vector2> path;
 
+    private Queue<Thread> backgroundTasks;
+    private bool isShowingMovement;
+
     public bool Paused {
         get { return pauseMenu.activeSelf; }
     }
@@ -51,6 +53,11 @@ public class UserControl : MonoBehaviour
         free,
         movement,
         shoot
+    }
+
+    private void Awake()
+    {
+        backgroundTasks = new Queue<Thread>();
     }
 
     void Start()
@@ -85,6 +92,14 @@ public class UserControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(backgroundTasks.Count > 0)
+        {
+            Thread t = backgroundTasks.Peek();
+            if (t.ThreadState == ThreadState.Unstarted)
+                t.Start();
+            else if (t.ThreadState == ThreadState.Stopped)
+                backgroundTasks.Dequeue();
+        }
         if (!Paused) {
             xDel = 0;
             yDel = 0;
@@ -240,7 +255,7 @@ public class UserControl : MonoBehaviour
         {
             unitInfo.SetActive(false);
             if(phase != Phase.movement)
-                hideMovement();
+                backgroundTasks.Enqueue(new Thread(() => hideMovement()));
         }
         else
         {
@@ -250,12 +265,10 @@ public class UserControl : MonoBehaviour
             {
                 if (unit.team == Unit.Team.player)
                 {
-                    Thread t = new Thread(() => showMovement(unit, x, y));
-                    t.IsBackground = true;
-                    t.Start();
+                    backgroundTasks.Enqueue(new Thread(() => showMovement(unit, x, y)));
                 }
                 else
-                    hideMovement();
+                    backgroundTasks.Enqueue(new Thread(() => hideMovement()));
             }
         }
     }
@@ -308,6 +321,7 @@ public class UserControl : MonoBehaviour
 
     private void showMovement(Unit u, int x, int y)
     {
+        isShowingMovement = true;
         GameObject[,] objects = map.highlights;
 		bool[,] movement = AStar.movementMatrix((int)u.AP, map.Tiles, x, y, u.isFlying);
         for(int i = 0; i < movement.GetLength(0); i++)
@@ -325,8 +339,9 @@ public class UserControl : MonoBehaviour
 
     private void hideMovement()
     {
+        isShowingMovement = false;
         foreach (GameObject go in map.highlights)
-            go.SetActive(false);
+            gameManager.CallOnMainThread(() => go.SetActive(false));
     }
 
     private void openUnitMenu(Unit unit)
