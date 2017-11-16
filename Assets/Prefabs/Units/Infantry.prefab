@@ -1665,6 +1665,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4622027089780248}
   - component: {fileID: 95953657671208634}
+  - component: {fileID: 114109264817913744}
   m_Layer: 0
   m_Name: Animated Human
   m_TagString: Untagged
@@ -3309,6 +3310,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114109264817913744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1940660164425504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45e6422f36f9924fb2949a7fbb25a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114134128787619618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3495,6 +3507,7 @@ MonoBehaviour:
   projectile: {fileID: 1010233834427942, guid: 139a4838b872107429af190d34d3bd02, type: 2}
   APBar: {fileID: 114300596039280758}
   healthBar: {fileID: 114599098702221374}
+  animEvent: {fileID: 114109264817913744}
   anim: {fileID: 95953657671208634}
   gunSpread: 100
   selected: 0

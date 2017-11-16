@@ -32,6 +32,7 @@ public class Unit : MonoBehaviour {
     public Team team;
 	public GameObject projectile;
     public Image APBar, healthBar;
+    public AnimationEventHandler animEvent;
     public Animator anim;
 
 	public float gunSpread;
@@ -115,8 +116,7 @@ public class Unit : MonoBehaviour {
 			AP++;
 			currTime = Time.timeSinceLevelLoad;
 		}
-		if (Health < 0)
-			Die ();
+
 		
 		if(selected)
 		{
@@ -158,7 +158,12 @@ public class Unit : MonoBehaviour {
 	}
 
 	public void Die() {
-		Destroy (gameObject);
+        anim.SetTrigger("die");
+        GameObject toDestroy = this.gameObject;
+        animEvent.callback = (gameObject) =>
+        {
+            Destroy(toDestroy);
+        };
 	}
 		
 	public void selectUnit() {
@@ -217,6 +222,10 @@ public class Unit : MonoBehaviour {
         Vector3 scale = healthBar.rectTransform.localScale;
         scale.x = (float)health / maxHealth;
         healthBar.rectTransform.localScale = scale;
+        if (Health <= 0)
+        {
+            Die();
+        }
         //Debug.Log (incomingDamage);
 	}
 
