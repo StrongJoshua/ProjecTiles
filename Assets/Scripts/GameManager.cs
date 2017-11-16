@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour {
     private Unit[] enemies;
     public Unit[] playerUnits;
 
+    public Transform enemiesContainer;
+    public Transform playerContainer;
+
     private Dictionary<Unit, List<Vector2>> pathManager;
 
     private bool update = false;
@@ -24,22 +27,28 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         enemies = new Unit[enemyCount];
         characters = new Unit[map.SizeX, map.SizeY];
-        playerUnits = player.initialize();
         pathManager = new Dictionary<Unit, List<Vector2>>();
 
-        for (int i = 0; i < enemyCount; i++)
+        enemies = generateUnits(enemiesContainer, enemyCount, enemyColor, Unit.Team.enemy);
+        playerUnits = generateUnits(playerContainer, enemyCount, playerColor, Unit.Team.player);
+	}
+
+    Unit[] generateUnits(Transform container, int count, Color color, Unit.Team team)
+    {
+        Unit[] units = new Unit[count];
+        for (int i = 0; i < count; i++)
         {
             GameObject newObj = Instantiate(unitTypes[Random.Range(0, unitTypes.Length)], Vector3.zero, Quaternion.identity);
-            enemies[i] = newObj.GetComponent<Unit>();
-            enemies[i].team = Unit.Team.enemy;
-            GenerationUtils.setColor(newObj, enemyColor);
+            newObj.transform.parent = container;
+            Unit newUnit = newObj.GetComponent<Unit>();
+            newUnit.team = team;
+            GenerationUtils.setColor(newObj, color);
 
-            addUnit(enemies[i]);
+            addUnit(newUnit);
+            units[i] = newUnit;
         }
-
-        foreach (Unit u in playerUnits)
-            addUnit(u);
-	}
+        return units;
+    }
 
     public void addUnit(Unit unit)
     {
