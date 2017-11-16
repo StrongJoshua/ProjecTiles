@@ -9,8 +9,7 @@ public class Projectile : MonoBehaviour {
 	float startTime;
 	public int numToFire;
 	public float speed;
-
-
+	public Unit.Team team;
 
 
 	protected virtual void Awake () {
@@ -28,8 +27,16 @@ public class Projectile : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter()
+	void OnTriggerEnter(Collider col)
 	{
+		Unit hitUnit = col.gameObject.GetComponent<Unit> (); 
+
+		if (hitUnit != null) {
+			//Debug.Log ("DING DING");
+			if(hitUnit.team != team)
+				hitUnit.takeDamage (currDamage);
+			Destroy (gameObject);
+		}
 	}
 
 	protected virtual void OnCollisionEnter(Collision col) {
@@ -37,7 +44,8 @@ public class Projectile : MonoBehaviour {
 		
 		if (hitUnit != null) {
             //Debug.Log ("DING DING");
-			hitUnit.takeDamage (currDamage);
+			if(hitUnit.team != team)
+				hitUnit.takeDamage (currDamage);
 			Destroy (gameObject);
 		}
 	}

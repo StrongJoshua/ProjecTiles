@@ -51,6 +51,7 @@ public class Unit : MonoBehaviour {
 	public int attackCost = 2;
 	public float currTime;
 	public GameObject aimRing;
+	public bool isFlying;
 
 
     public int X
@@ -211,6 +212,7 @@ public class Unit : MonoBehaviour {
 	{
 		if (canShoot()) {
 			Projectile projectileInfo = projectile.GetComponent<Projectile> (); 
+			projectileInfo.team = team;
 			int numToFire = projectileInfo.numToFire;
 			float speed = projectileInfo.speed;
 			for (int i = 0; i < numToFire; i++) {
