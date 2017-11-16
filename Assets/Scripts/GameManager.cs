@@ -21,8 +21,6 @@ public class GameManager : MonoBehaviour {
 
     private Dictionary<Unit, List<Vector2>> pathManager;
 
-    private bool update = false;
-
 	// Use this for initialization
 	void Start () {
         enemies = new Unit[enemyCount];
@@ -107,16 +105,14 @@ public class GameManager : MonoBehaviour {
         if (path.Count == 0)
         {
             pathManager.Remove(unit);
-            update = true;
+            return;
+        }
+        if(characters[(int)path[0].x, (int)path[0].y] != null)
+        {
+            unit.startle();
+            pathManager.Remove(unit);
             return;
         }
         unit.setTarget(path[0]);
-    }
-
-    public bool updateAvailable()
-    {
-        bool b = update;
-        update = false;
-        return b;
     }
 }

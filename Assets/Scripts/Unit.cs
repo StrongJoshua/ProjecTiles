@@ -253,4 +253,8 @@ public class Unit : MonoBehaviour {
         this.AP -= ap;
     }
 
+    public void startle()
+    {
+        // TODO call startle animation
+    }
 }
