@@ -23,7 +23,7 @@ public class DroneControl : MonoBehaviour {
 	{
 		rigidbody.velocity = transform.forward;
 		rigidbody.AddRelativeForce (Vector3.up * velocity);
-		rigidbody.AddRelativeTorque (transform.up * Input.GetAxis ("Horizontal") * rollRate);
+		rigidbody.AddRelativeTorque (transform.forward * -Input.GetAxis ("Horizontal") * rollRate);
 		rigidbody.AddRelativeTorque (transform.right * Input.GetAxis ("Vertical") * rollRate);
 	}
 }
