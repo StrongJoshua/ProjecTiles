@@ -37,12 +37,23 @@ public class Unit : MonoBehaviour {
 
 	public float gunSpread;
 
-	public bool isShooting, highlighted;
+	public bool highlighted;
 
+    private bool isShooting;
+    public bool IsShooting
+    {
+        get { return isShooting;  }
+    }
 
     public float movementSpeed = 1;
 
     private bool isMoving;
+
+    public bool IsMoving
+    {
+        get { return isMoving; }
+    }
+
     private List<Vector2> path;
     private Vector3 target;
     internal GameManager gameManager;

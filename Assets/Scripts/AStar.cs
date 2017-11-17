@@ -24,7 +24,7 @@ public class AStar : MonoBehaviour {
         recurseSearch(ap, tiles, x, y - 1, matrix, isFlying);
     }
 
-    public static List<Vector2> AStarSearch(Tile[,] tiles, Vector2 start, Vector2 end)
+    public static List<Vector2> AStarSearch(Tile[,] tiles, Vector2 start, Vector2 end, bool isFlying)
     {
         Dictionary<Vector2, Vector2> parents = new Dictionary<Vector2, Vector2>();
         Dictionary<Vector2, int> g = new Dictionary<Vector2, int>();
@@ -61,14 +61,14 @@ public class AStar : MonoBehaviour {
                 if (closed.Contains(neighbor)) continue;
                 if(!open.Contains(neighbor))
                 {
-                    g.Add(neighbor, g[current] + tiles[(int)neighbor.x, (int)neighbor.y].MovementCost);
+                    g.Add(neighbor, g[current] + (isFlying ? 1 : tiles[(int)neighbor.x, (int)neighbor.y].MovementCost));
                     parents.Add(neighbor, current);
                     open.Add(neighbor);
                 } else
                 {
-                    if(g[neighbor] > g[current] + tiles[(int)neighbor.x, (int)neighbor.y].MovementCost)
+                    if(g[neighbor] > g[current] + (isFlying ? 1 : tiles[(int)neighbor.x, (int)neighbor.y].MovementCost))
                     {
-                        g[neighbor] = g[current] + tiles[(int)neighbor.x, (int)neighbor.y].MovementCost;
+                        g[neighbor] = g[current] + (isFlying ? 1 : tiles[(int)neighbor.x, (int)neighbor.y].MovementCost);
                         parents[neighbor] = current;
                     }
                 }

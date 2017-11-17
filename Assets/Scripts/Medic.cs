@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Medic : MonoBehaviour
 {
-    public List<Collider> TriggerList;
+    public List<Collider> triggerList;
     float currTime;
     float delay;
     Unit parent;
@@ -21,10 +21,11 @@ public class Medic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        triggerList.RemoveAll((collider) => collider == null);
         if (Time.timeSinceLevelLoad - currTime > delay)
         {
             currTime = Time.timeSinceLevelLoad;
-            foreach (Collider c in TriggerList)
+            foreach (Collider c in triggerList)
             {
                 Unit unit = c.gameObject.GetComponent<Unit>();
                 if (unit != null)
@@ -39,12 +40,12 @@ public class Medic : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (!TriggerList.Contains(col))
-            TriggerList.Add(col);
+        if (!triggerList.Contains(col))
+            triggerList.Add(col);
     }
     void OnTriggerExit(Collider col)
     {
-        if (TriggerList.Contains(col))
-            TriggerList.Remove(col);
+        if (triggerList.Contains(col))
+            triggerList.Remove(col);
     }
 }

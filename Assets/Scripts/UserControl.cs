@@ -116,6 +116,8 @@ public class UserControl : MonoBehaviour
             bool didMove = moveHighlight();
  
             Unit unit = gameManager.unitAt(x, y);
+            if (unit != null && unit.IsMoving)
+                unit = null;
             if (prevHighlight != null)
             {
                 prevHighlight.highlighted = false;
@@ -456,7 +458,7 @@ public class UserControl : MonoBehaviour
             }
             if(!connected || cost > selected.AP)
             {
-                path = AStar.AStarSearch(map.Tiles, new Vector2(selected.X, selected.Y), new Vector2(x, y));
+                path = AStar.AStarSearch(map.Tiles, new Vector2(selected.X, selected.Y), new Vector2(x, y), selected.isFlying);
             }
         }
     }
