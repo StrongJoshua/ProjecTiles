@@ -95,20 +95,6 @@ public class Unit : MonoBehaviour {
         get { return new Vector2(x, y); }
     }
 
-    public int Health
-    {
-        get { return health; }
-		set 
-		{ 
-			if (health - value < 0)
-				health = 0;
-			else if (health < 0)
-				health = 0;
-			else
-				health = value;
-		}
-    }
-
 	public enum Team
 	{
 		player,
@@ -258,7 +244,7 @@ public class Unit : MonoBehaviour {
 
 	public void takeDamage(int incomingDamage) {
 		//For now just deincrement health, we can consider armor and stuff later
-		Health -= incomingDamage;
+		health -= incomingDamage;
         Vector3 scale = healthBar.rectTransform.localScale;
         scale.x = (float)health / maxHealth;
         if (health <= 0)
@@ -304,5 +290,8 @@ public class Unit : MonoBehaviour {
 			health += amount;
 		else
 			health = maxHealth;
+		Vector3 scale = healthBar.rectTransform.localScale;
+		scale.x = (float)health / maxHealth;
+		healthBar.rectTransform.localScale = scale;
 	}
 }

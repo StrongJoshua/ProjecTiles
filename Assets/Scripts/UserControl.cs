@@ -315,7 +315,7 @@ public class UserControl : MonoBehaviour
             if (text.name == "Name")
                 text.text = unit.name;
             else if (text.name == "HP")
-                text.text = unit.Health + "/" + unit.maxHealth;
+                text.text = unit.health + "/" + unit.maxHealth;
             else if (text.name == "AP")
                 text.text = (int)unit.AP + "/" + unit.maxAP;
             else if (text.name == "APCharge")

@@ -8,14 +8,14 @@ public class Medic : MonoBehaviour
     float currTime;
     float delay;
     Unit parent;
-    MeshRenderer meshRenderer;
+    public MeshRenderer ringRenderer;
     // Use this for initialization
     void Start()
     {
         currTime = Time.timeSinceLevelLoad;
         delay = 2f;
         parent = GetComponentInParent<Unit>();
-        meshRenderer = GetComponent<MeshRenderer>();
+       // meshRenderer = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -31,7 +31,7 @@ public class Medic : MonoBehaviour
 			foreach (Collider c in allColliders)
             {
                 Unit unit = c.gameObject.GetComponent<Unit>();
-				if (unit != null && !unit.name.Equals("Medic") && parent.team == unit.team )
+				if (unit != null && unit != parent && parent.team == unit.team )
                 {
                     unit.heal(1);
 					print ("Healing" + unit.name);
@@ -39,7 +39,7 @@ public class Medic : MonoBehaviour
             }
         }
 
-        meshRenderer.enabled = parent.highlighted;
+        ringRenderer.enabled = parent.highlighted;
     }
 
     void OnTriggerEnter(Collider col)

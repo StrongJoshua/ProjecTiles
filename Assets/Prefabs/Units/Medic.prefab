@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 95404009312019882}
   - component: {fileID: 114868030336429770}
   - component: {fileID: 136241001160530944}
+  - component: {fileID: 114481585934797256}
   m_Layer: 0
   m_Name: Medic
   m_TagString: Untagged
@@ -130,7 +131,6 @@ GameObject:
   - component: {fileID: 33286126972903326}
   - component: {fileID: 136399320573469800}
   - component: {fileID: 23273435723289610}
-  - component: {fileID: 114195063964876160}
   m_Layer: 0
   m_Name: Healing Circle
   m_TagString: Untagged
@@ -3544,18 +3544,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114195063964876160
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1054716415757750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60ca6e7902b844d409cbb670252b7f0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerList: []
 --- !u!114 &114316894844398096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3601,6 +3589,19 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114481585934797256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1013191381200846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60ca6e7902b844d409cbb670252b7f0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: []
+  ringRenderer: {fileID: 23273435723289610}
 --- !u!114 &114679677505938252
 MonoBehaviour:
   m_ObjectHideFlags: 1
