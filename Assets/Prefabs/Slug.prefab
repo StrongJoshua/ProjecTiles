@@ -111,10 +111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e97173ff4b0c4f44b376e46d1ccd503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 3
+  range: 4
   maxDamage: 25
   numToFire: 1
   speed: 1000
+  team: 0
 --- !u!135 &135036957773037642
 SphereCollider:
   m_ObjectHideFlags: 1

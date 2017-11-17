@@ -64,7 +64,6 @@ public class Unit : MonoBehaviour {
 	public GameObject aimRing;
 	public bool isFlying;
 
-
     public int X
     {
         get { return x; }
@@ -83,6 +82,11 @@ public class Unit : MonoBehaviour {
             this.y = value;
             this.transform.position = new Vector3(x * MapGenerator.step, this.transform.position.y, y * MapGenerator.step);
         }
+    }
+
+    public Vector2 XY
+    {
+        get { return new Vector2(x, y); }
     }
 
     public int Health
