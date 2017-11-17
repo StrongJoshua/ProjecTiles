@@ -305,4 +305,10 @@ public class Unit : MonoBehaviour {
 		else
 			health = maxHealth;
 	}
+
+    public void lookAt(Vector2 tile)
+    {
+        Vector2 dif = tile - XY;
+        this.gameObject.transform.rotation = Quaternion.LookRotation(new Vector3(dif.x, 0, dif.y) * MapGenerator.step, Vector3.up);
+    }
 }

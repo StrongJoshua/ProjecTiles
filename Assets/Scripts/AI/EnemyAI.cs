@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour {
             {
                 if(inRange(unit, closest))
                 {
-                    print("Fire");
+                    unit.lookAt(closest.XY);
                     unit.fire();
                 }
             }
@@ -48,6 +48,6 @@ public class EnemyAI : MonoBehaviour {
 
     private bool inRange(Unit u, Unit u2)
     {
-        return Vector3.Distance(u.XY, u2.XY) <= u.Projectile.range * MapGenerator.step;
+        return Vector2.Distance(u.XY, u2.XY) <= u.Projectile.range;
     }
 }
