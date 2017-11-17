@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    private EnemyAI ai;
+
 	// Use this for initialization
 	void Start () {
         enemies = new Unit[enemyCount];
@@ -50,6 +52,8 @@ public class GameManager : MonoBehaviour {
         hasUpdate = false;
 
         actions = new Queue<Action>();
+
+        ai = new EnemyAI(enemies);
 	}
 
     Unit[] generateUnits(Transform container, int count, Color color, Unit.Team team)
@@ -157,5 +161,6 @@ public class GameManager : MonoBehaviour {
     {
         while (actions.Count > 0)
             actions.Dequeue().Invoke();
+        ai.think();
     }
 }
