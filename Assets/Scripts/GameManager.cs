@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour {
     public MapGenerator map;
     public int enemyCount, playerUnitCount;
     public GameObject[] unitTypes;
-    public Player player;
 
     public Color playerColor, enemyColor;
 
