@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour {
 
     new public string name;
 
-    private int health;
+    public int health;
     public float AP;
 	private int x;
 	private int y;
@@ -294,6 +294,9 @@ public class Unit : MonoBehaviour {
     }
 	public void heal(int amount)
 	{
-		health += amount;
+		if (health < maxHealth)
+			health += amount;
+		else
+			health = maxHealth;
 	}
 }
