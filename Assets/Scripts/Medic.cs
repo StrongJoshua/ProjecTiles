@@ -8,7 +8,8 @@ public class Medic : MonoBehaviour
     float currTime;
     float delay;
     Unit parent;
-    public MeshRenderer ringRenderer;
+    //public MeshRenderer ringRenderer;
+	public ParticleSystem healingRing;
     // Use this for initialization
     void Start()
     {
@@ -39,7 +40,11 @@ public class Medic : MonoBehaviour
             }
         }
 
-        ringRenderer.enabled = parent.highlighted;
+        //ringRenderer.enabled = parent.highlighted;
+		if (parent.highlighted)
+			healingRing.Play ();
+		else
+			healingRing.Pause ();
     }
 
     void OnTriggerEnter(Collider col)
