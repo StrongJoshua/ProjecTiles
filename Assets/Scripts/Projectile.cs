@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
-	public float lifetime;
+	public float range;
 	public int maxDamage;
 	int currDamage;
 	float startTime;
@@ -11,19 +11,22 @@ public class Projectile : MonoBehaviour {
 	public float speed;
 	public Unit.Team team;
 
+    private Vector3 start;
 
 	protected virtual void Awake () {
 		startTime = Time.timeSinceLevelLoad;
 		currDamage = maxDamage;
-
 	}
-	
-	// Update is called once per frame
-	protected virtual void Update () {
-		if (Time.timeSinceLevelLoad - startTime > lifetime) {
-			
+
+    private void Start()
+    {
+        start = gameObject.transform.position;
+    }
+
+    // Update is called once per frame
+    protected virtual void Update () {
+		if (Vector3.Distance(start, gameObject.transform.position) >= range * MapGenerator.step) {
 				Destroy (gameObject);
-		
 		}
 	}
 

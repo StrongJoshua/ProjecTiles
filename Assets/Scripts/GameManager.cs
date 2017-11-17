@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour {
 
         actions = new Queue<Action>();
 
-        ai = new EnemyAI(enemies);
+        ai = new EnemyAI(enemies, playerUnits);
 	}
 
     Unit[] generateUnits(Transform container, int count, Color color, Unit.Team team)
