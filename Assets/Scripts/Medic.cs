@@ -26,14 +26,15 @@ public class Medic : MonoBehaviour
         triggerList.RemoveAll((collider) => collider == null);
         if (Time.timeSinceLevelLoad - currTime > delay)
 		{
-			Collider[] allColliders = Physics.OverlapSphere (transform.position, 40);
+			Collider[] allColliders = Physics.OverlapSphere (transform.position, 7.5f);
             currTime = Time.timeSinceLevelLoad;
 			foreach (Collider c in allColliders)
             {
                 Unit unit = c.gameObject.GetComponent<Unit>();
-				if (unit != null && parent.team == unit.team)
+				if (unit != null && !unit.name.Equals("Medic") && parent.team == unit.team )
                 {
                     unit.heal(1);
+					print ("Healing" + unit.name);
                 }
             }
         }
