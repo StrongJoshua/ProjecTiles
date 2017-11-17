@@ -8,9 +8,10 @@ public class DroneControl : MonoBehaviour {
 	Rigidbody rigidbody;
 	// Use this for initialization
 	void Start () {
-		rollRate = 1f;	
-		velocity = 2f;
+		rollRate = 4f;	
+		velocity = 10f;
 		rigidbody = GetComponent<Rigidbody> ();
+		rigidbody.velocity = transform.forward;
 	}
 	
 	// Update is called once per frame
@@ -20,7 +21,8 @@ public class DroneControl : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		rigidbody.AddRelativeForce (transform.forward * velocity);
+		rigidbody.velocity = transform.forward;
+		rigidbody.AddRelativeForce (Vector3.up * velocity);
 		rigidbody.AddRelativeTorque (transform.forward * -Input.GetAxis ("Horizontal") * rollRate);
 		rigidbody.AddRelativeTorque (transform.right * Input.GetAxis ("Vertical") * rollRate);
 	}
