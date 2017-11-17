@@ -36,7 +36,7 @@ public class UserControl : MonoBehaviour
     private SelectedHighlight selector;
     public Phase phase;
 
-    private Unit selected;
+    private Unit selected, prevHighlight;
 	private List<Unit> myUnits;
     private GameObject arrow;
     private List<Vector2> path;
@@ -116,6 +116,15 @@ public class UserControl : MonoBehaviour
             bool didMove = moveHighlight();
  
             Unit unit = gameManager.unitAt(x, y);
+            if (prevHighlight != null)
+            {
+                prevHighlight.highlighted = false;
+            }
+            if (unit != null)
+            {
+                unit.highlighted = true;
+            }
+
 
             if (didMove || gameManager.HasUpdate)
             {
@@ -184,9 +193,10 @@ public class UserControl : MonoBehaviour
                     confirmMovement();
                 }
             }
-		}
+            prevHighlight = unit;
+        }
 
-		if(Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Pause"))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Pause"))
 		{
 			if(Paused)
 			{
@@ -203,6 +213,7 @@ public class UserControl : MonoBehaviour
         {
             closeAll();
         }
+
     }
 
     private void moveHighlightAbsolute(int newX, int newY)
@@ -354,8 +365,10 @@ public class UserControl : MonoBehaviour
         {
             unitMenu.SetActive(true);
             mapControl = false;
-            eventSystem.SetSelectedGameObject(null);
-            eventSystem.SetSelectedGameObject(unitMenu.GetComponentInChildren<Button>().gameObject);
+            //eventSystem.SetSelectedGameObject(null);
+            //eventSystem.SetSelectedGameObject(unitMenu.GetComponentInChildren<Button>().gameObject);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(unitMenu.GetComponentInChildren<Button>().gameObject);
             unitMenu.GetComponentsInChildren<Button>()[1].interactable = unit.canShoot();
             selected = unit;
         }
@@ -369,6 +382,10 @@ public class UserControl : MonoBehaviour
         phase = Phase.free;
         showUnitInfo(gameManager.unitAt(x, y));
         arrow.SetActive(false);
+        if (selected != null)
+        {
+            selected.stopAim();
+        }
         selected = null;
     }
 
@@ -386,7 +403,7 @@ public class UserControl : MonoBehaviour
     {
         phase = Phase.shoot;
         unitMenu.SetActive(false);
-		gameManager.unitAt(x, y).selectUnit();
+		gameManager.unitAt(x, y).aim();
     }
 
     private void updatePath()

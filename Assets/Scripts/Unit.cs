@@ -37,7 +37,7 @@ public class Unit : MonoBehaviour {
 
 	public float gunSpread;
 
-	public bool selected;
+	public bool isShooting, highlighted;
 
 
     public float movementSpeed = 1;
@@ -104,14 +104,15 @@ public class Unit : MonoBehaviour {
     void Start()
     {
         isMoving = false;
-		selected = false;
+        highlighted = false;
+        isShooting = false;
 		currTime = Time.timeSinceLevelLoad;
 		aimRing.SetActive (false);
     }
 
 	void rechargeAP()
     {
-        if (isMoving || selected || AP == maxAP)
+        if (isMoving || isShooting || AP == maxAP)
             return;
         //Check if AP has changed by a whole number, Ex 2.8->3.1
         float old = AP;
@@ -123,7 +124,7 @@ public class Unit : MonoBehaviour {
 	void Update () {
         rechargeAP();
 
-        if (selected)
+        if (isShooting)
 		{
 			float InputAxis = (Input.GetButton("keyAim")) ? Input.GetAxisRaw("keyAim") : Input.GetAxis("Aim");
 
@@ -136,12 +137,6 @@ public class Unit : MonoBehaviour {
 			}
 			if (Input.GetKeyDown (KeyCode.F) || Input.GetButtonDown("Fire1")) {
 				fire();
-			}
-			if (Input.GetKeyDown (KeyCode.X) || Input.GetButtonDown("Cancel")) {
-				selected = false;
-				//Aim Ring has to be first child
-				transform.GetChild(0).gameObject.SetActive(false);
-				aimRing.SetActive (false);
 			}
 		}
         if (anim != null)
@@ -179,9 +174,17 @@ public class Unit : MonoBehaviour {
             Destroy(toDestroy);
         };
 	}
-		
-	public void selectUnit() {
-		selected = true;
+
+    public void stopAim()
+    {
+        isShooting = false;
+        //Aim Ring has to be first child
+        //transform.GetChild(0).gameObject.SetActive(false);
+        aimRing.SetActive(false);
+    }
+
+    public void aim() {
+		isShooting = true;
 		transform.GetChild(0).gameObject.SetActive(true);
 		aimRing.SetActive (true);
 	}
@@ -237,13 +240,15 @@ public class Unit : MonoBehaviour {
 		Health -= incomingDamage;
         Vector3 scale = healthBar.rectTransform.localScale;
         scale.x = (float)health / maxHealth;
-        healthBar.rectTransform.localScale = scale;
         if (health <= 0)
         {
+            scale.x = 0;
+            health = 0;
             Die();
         }
+        healthBar.rectTransform.localScale = scale;
         //Debug.Log (incomingDamage);
-	}
+    }
 
 
     public void setTarget(Vector2 mapTarget)

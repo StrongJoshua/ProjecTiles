@@ -470,6 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: 0
+  mat: {fileID: 0}
 --- !u!114 &114262265370350314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -664,6 +665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: -4
+  mat: {fileID: 0}
 --- !u!114 &114955169773901852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -707,11 +709,13 @@ MonoBehaviour:
   animEvent: {fileID: 0}
   anim: {fileID: 95937815968406688}
   gunSpread: 100
-  selected: 0
+  isShooting: 0
+  highlighted: 0
   movementSpeed: 1
   attackCost: 3
   currTime: 0
   aimRing: {fileID: 1110942881734588}
+  isFlying: 0
 --- !u!222 &222172136981951294
 CanvasRenderer:
   m_ObjectHideFlags: 1
