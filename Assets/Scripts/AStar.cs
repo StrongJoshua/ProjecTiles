@@ -6,22 +6,25 @@ public class AStar : MonoBehaviour {
     public static bool[,] movementMatrix(int ap, Tile[,] tiles, int x, int y, bool isFlying)
     {
         bool[,] matrix = new bool[tiles.GetLength(0), tiles.GetLength(1)];
-        recurseSearch(ap + (isFlying ? 1 : tiles[x, y].MovementCost), tiles, x, y, matrix, isFlying);
+        recurseSearch(ap + (isFlying ? 1 : tiles[x, y].MovementCost), tiles, x, y, matrix, isFlying, new int[tiles.GetLength(0), tiles.GetLength(1)]);
         return matrix;
     }
 
-    private static void recurseSearch(int ap, Tile[,] tiles, int x, int y, bool[,] matrix, bool isFlying)
+    private static void recurseSearch(int ap, Tile[,] tiles, int x, int y, bool[,] matrix, bool isFlying, int[,] reached)
     {
         if (x < 0 || y < 0 || x >= tiles.GetLength(0) || y >= tiles.GetLength(1))
             return;
         if (ap - (isFlying ? 1 : tiles[x, y].MovementCost) < 0)
             return;
+        if (reached[x, y] >= ap)
+            return;
+        reached[x, y] = ap;
         matrix[x, y] = true;
         ap -= (isFlying ? 1 : tiles[x, y].MovementCost);
-        recurseSearch(ap, tiles, x + 1, y, matrix, isFlying);
-        recurseSearch(ap, tiles, x - 1, y, matrix, isFlying);
-        recurseSearch(ap, tiles, x, y + 1, matrix, isFlying);
-        recurseSearch(ap, tiles, x, y - 1, matrix, isFlying);
+        recurseSearch(ap, tiles, x + 1, y, matrix, isFlying, reached);
+        recurseSearch(ap, tiles, x - 1, y, matrix, isFlying, reached);
+        recurseSearch(ap, tiles, x, y + 1, matrix, isFlying, reached);
+        recurseSearch(ap, tiles, x, y - 1, matrix, isFlying, reached);
     }
 
     public static List<Vector2> AStarSearch(Tile[,] tiles, Vector2 start, Vector2 end, bool isFlying)
