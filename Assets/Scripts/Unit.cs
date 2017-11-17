@@ -30,7 +30,7 @@ public class Unit : MonoBehaviour {
     
 
     public Team team;
-	public GameObject projectile;
+	public Projectile projectile;
     public Image APBar, healthBar;
     public AnimationEventHandler animEvent;
     public Animator anim;
@@ -238,7 +238,7 @@ public class Unit : MonoBehaviour {
 			int numToFire = projectileInfo.numToFire;
 			float speed = projectileInfo.speed;
 			for (int i = 0; i < numToFire; i++) {
-				GameObject temp = Instantiate (projectile, transform.position + transform.forward + transform.up, transform.rotation);
+				GameObject temp = Instantiate (projectile.gameObject, transform.position + transform.forward + transform.up, transform.rotation);
 				temp.transform.Rotate (new Vector3 (90, 0, 0));
 				Vector3 aim = this.transform.forward * speed;
 				aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
