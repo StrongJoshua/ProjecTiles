@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private EnemyAI ai;
+    public bool AI;
 
 	// Use this for initialization
 	void Start () {
@@ -161,6 +162,7 @@ public class GameManager : MonoBehaviour {
     {
         while (actions.Count > 0)
             actions.Dequeue().Invoke();
-        ai.think();
+        if(AI)
+            ai.think();
     }
 }
