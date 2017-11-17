@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour {
         pathManager.Add(unit, path);
     }
 
-    public void movementCallback(Unit unit)
+    internal void movementCallback(Unit unit)
     {
         List<Vector2> path = pathManager[unit];
         unit.costAP(unit.isFlying ? 1 : map.Tiles[unit.X, unit.Y].MovementCost);
@@ -149,12 +149,12 @@ public class GameManager : MonoBehaviour {
         characters[(int)path[0].x, (int)path[0].y] = unit;
     }
 
-    public void apCallback(Unit unit)
+    internal void apCallback(Unit unit)
     {
         hasUpdate = true;
     }
 
-    public void CallOnMainThread(Action action)
+    internal void CallOnMainThread(Action action)
     {
         actions.Enqueue(action);
     }
@@ -165,5 +165,10 @@ public class GameManager : MonoBehaviour {
             actions.Dequeue().Invoke();
         if(AI)
             ai.think();
+    }
+
+    internal void deathCallback(Unit unit)
+    {
+        characters[unit.X, unit.Y] = null;
     }
 }

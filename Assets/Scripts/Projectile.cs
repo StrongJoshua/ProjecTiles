@@ -47,7 +47,7 @@ public class Projectile : MonoBehaviour {
 		
 		if (hitUnit != null) {
             //Debug.Log ("DING DING");
-			if(hitUnit.team != team)
+			if(!hitUnit.IsDead && hitUnit.team != team)
 				hitUnit.takeDamage (currDamage);
 			Destroy (gameObject);
 		}

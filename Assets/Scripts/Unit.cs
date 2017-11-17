@@ -183,11 +183,18 @@ public class Unit : MonoBehaviour {
         {
             anim.SetTrigger("die");
         }
-        GameObject toDestroy = this.gameObject;
-        animEvent.callback = (gameObject) =>
+        if (animEvent != null)
         {
-            Destroy(toDestroy);
-        };
+            animEvent.callback = (gameObject) =>
+            {
+                Destroy(this.gameObject);
+            };
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        gameManager.deathCallback(this);
 	}
 
     public void stopAim()
@@ -251,6 +258,8 @@ public class Unit : MonoBehaviour {
 	}
 
 	public void takeDamage(int incomingDamage) {
+        if (IsDead)
+            return;
 		//For now just deincrement health, we can consider armor and stuff later
 		health -= incomingDamage;
         Vector3 scale = healthBar.rectTransform.localScale;
