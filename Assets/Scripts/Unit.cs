@@ -157,9 +157,10 @@ public class Unit : MonoBehaviour {
             this.transform.position += (target - this.transform.position).normalized * MapGenerator.step * movementSpeed * Time.deltaTime;
             if((target - this.transform.position).magnitude <= .1f)
             {
+                this.X = (int)(target.x / MapGenerator.step);
+                this.Y = (int)(target.z / MapGenerator.step);
                 target = nullVector;
                 finishMovement();
-                gameManager.movementCallback(this);
             }
         }
         Vector3 scale = APBar.rectTransform.localScale;
@@ -254,6 +255,7 @@ public class Unit : MonoBehaviour {
     public void finishMovement()
     {
         isMoving = false;
+        gameManager.movementCallback(this);
     }
 
     public void costAP(int ap)

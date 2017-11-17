@@ -116,16 +116,14 @@ public class GameManager : MonoBehaviour {
             return;
         }
         unit.setTarget(path[0]);
+        characters[unit.X, unit.Y] = null;
+        characters[(int)path[0].x, (int)path[0].y] = unit;
         pathManager.Add(unit, path);
     }
 
     public void movementCallback(Unit unit)
     {
         List<Vector2> path = pathManager[unit];
-        characters[unit.X, unit.Y] = null;
-        unit.X = (int)path[0].x;
-        unit.Y = (int)path[0].y;
-        characters[unit.X, unit.Y] = unit;
         unit.costAP(unit.isFlying ? 1 : map.Tiles[unit.X, unit.Y].MovementCost);
         path.RemoveAt(0);
         hasUpdate = true;
@@ -141,6 +139,8 @@ public class GameManager : MonoBehaviour {
             return;
         }
         unit.setTarget(path[0]);
+        characters[unit.X, unit.Y] = null;
+        characters[(int)path[0].x, (int)path[0].y] = unit;
     }
 
     public void apCallback(Unit unit)
