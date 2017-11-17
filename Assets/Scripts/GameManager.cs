@@ -50,12 +50,12 @@ public class GameManager : MonoBehaviour {
         pathManager = new Dictionary<Unit, List<Vector2>>();
 
         enemies = generateUnits(enemiesContainer, enemyCount, enemyColor, Unit.Team.enemy);
-        playerUnits = generateUnits(playerContainer, enemyCount, playerColor, Unit.Team.player);
+        playerUnits = generateUnits(playerContainer, playerUnitCount, playerColor, Unit.Team.player);
         hasUpdate = false;
 
         actions = new Queue<Action>();
 
-        ai = new EnemyAI(enemies, playerUnits, AIDelay);
+        ai = new EnemyAI(this, enemies, playerUnits, AIDelay);
 	}
 
     Unit[] generateUnits(Transform container, int count, Color color, Unit.Team team)

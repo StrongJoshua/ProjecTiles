@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour {
+    private GameManager gameManager;
+    private Tile[,] tiles;
     private Unit[] control, target;
     private float delay, lastAction;
 
-	public EnemyAI(Unit[] control, Unit[] target, float delay)
+	public EnemyAI(GameManager gameManager, Unit[] control, Unit[] target, float delay)
     {
+        this.gameManager = gameManager;
+        tiles = gameManager.map.Tiles;
         this.control = control;
         this.target = target;
         this.delay = delay;
@@ -30,6 +34,9 @@ public class EnemyAI : MonoBehaviour {
             {
                 cur.lookAt(closest.XY);
                 cur.fire();
+            } else
+            {
+                setStrategicDestination(cur, closest);
             }
         }
     }
@@ -40,7 +47,7 @@ public class EnemyAI : MonoBehaviour {
         float ap = 0;
         foreach(Unit u in control)
         {
-            if (u.IsDead)
+            if (u.IsDead || u.IsMoving)
                 continue;
             if(u.AP > ap)
             {
@@ -74,5 +81,25 @@ public class EnemyAI : MonoBehaviour {
     private bool inRange(Unit u, Unit u2)
     {
         return Vector2.Distance(u.XY, u2.XY) <= u.Projectile.range;
+    }
+
+    private void setStrategicDestination(Unit unit, Unit dest)
+    {
+        List<Vector2> path = stopAtRange(AStar.ConstrainPath(tiles, AStar.AStarSearch(tiles, unit.XY, dest.XY, unit.isFlying), (int)unit.AP), unit.Projectile.range, dest.XY);
+        path = path.GetRange(1, path.Count - 1);
+        if(path.Count > 0)
+            gameManager.moveUnitOnPath(unit, path);
+    }
+
+    private List<Vector2> stopAtRange(List<Vector2> path, float range, Vector2 dest)
+    {
+        for(int i = 0; i < path.Count; i++)
+        {
+            if(Vector2.Distance(path[i], dest) <= range)
+            {
+                return path.GetRange(0, i + 1);
+            }
+        }
+        return path;
     }
 }

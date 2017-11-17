@@ -109,4 +109,18 @@ public class AStar : MonoBehaviour {
         }
         return r;
     }
+
+    public static List<Vector2> ConstrainPath(Tile[,] tiles, List<Vector2> path, int AP)
+    {
+        int cost = 0;
+        for(int i = 0; i < path.Count; i++)
+        {
+            cost += tiles[(int)path[i].x, (int)path[i].y].MovementCost;
+            if(cost > AP)
+            {
+                return path.GetRange(0, i);
+            }
+        }
+        return path;
+    }
 }

@@ -2508,7 +2508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 2063454713}
   enemyCount: 5
-  playerUnitCount: 0
+  playerUnitCount: 5
   unitTypes:
   - {fileID: 1023700816672368, guid: 82284d29cd69bf94890a1f6d28d578e8, type: 2}
   - {fileID: 1023700816672368, guid: 6fe0ef1bd10cc0246b28a8452218f173, type: 2}
