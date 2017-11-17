@@ -610,6 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: -4
+  mat: {fileID: 0}
 --- !u!114 &114538769324157400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -670,6 +671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Ship
+  health: 0
   AP: 10
   maxHealth: 20
   maxAP: 10
@@ -684,13 +686,14 @@ MonoBehaviour:
   perceptionGrowth: 1
   accuracyGrowth: 1
   team: 0
-  projectile: {fileID: 1010233834427942, guid: 139a4838b872107429af190d34d3bd02, type: 2}
+  projectileFab: {fileID: 1010233834427942, guid: 139a4838b872107429af190d34d3bd02,
+    type: 2}
   APBar: {fileID: 114300596039280758}
   healthBar: {fileID: 114599098702221374}
   animEvent: {fileID: 0}
   anim: {fileID: 0}
   gunSpread: 100
-  selected: 0
+  highlighted: 0
   movementSpeed: 1
   attackCost: 3
   currTime: 0
@@ -719,6 +722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: 0
+  mat: {fileID: 0}
 --- !u!114 &114779549065613208
 MonoBehaviour:
   m_ObjectHideFlags: 1

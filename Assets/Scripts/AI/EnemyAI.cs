@@ -18,7 +18,11 @@ public class EnemyAI : MonoBehaviour {
             Unit closest = getClosestTarget(unit);
             if(closest != null)
             {
-
+                if(inRange(unit, closest))
+                {
+                    print("Fire");
+                    unit.fire();
+                }
             }
         }
     }
@@ -40,5 +44,10 @@ public class EnemyAI : MonoBehaviour {
         }
 
         return closest;
+    }
+
+    private bool inRange(Unit u, Unit u2)
+    {
+        return Vector3.Distance(u.XY, u2.XY) <= u.Projectile.range * MapGenerator.step;
     }
 }

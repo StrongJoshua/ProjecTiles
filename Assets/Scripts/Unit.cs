@@ -30,7 +30,13 @@ public class Unit : MonoBehaviour {
     
 
     public Team team;
-	public Projectile projectile;
+
+    public GameObject projectileFab;
+    public Projectile Projectile
+    {
+        get { return projectileFab.GetComponent<Projectile>(); }
+    }
+
     public Image APBar, healthBar;
     public AnimationEventHandler animEvent;
     public Animator anim;
@@ -233,12 +239,12 @@ public class Unit : MonoBehaviour {
 	public void fire()
 	{
 		if (canShoot()) {
-			Projectile projectileInfo = projectile.GetComponent<Projectile> (); 
+			Projectile projectileInfo = projectileFab.GetComponent<Projectile> (); 
 			projectileInfo.team = team;
 			int numToFire = projectileInfo.numToFire;
 			float speed = projectileInfo.speed;
 			for (int i = 0; i < numToFire; i++) {
-				GameObject temp = Instantiate (projectile.gameObject, transform.position + transform.forward + transform.up, transform.rotation);
+				GameObject temp = Instantiate (projectileFab, transform.position + transform.forward + transform.up, transform.rotation);
 				temp.transform.Rotate (new Vector3 (90, 0, 0));
 				Vector3 aim = this.transform.forward * speed;
 				aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);

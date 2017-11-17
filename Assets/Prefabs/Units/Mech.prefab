@@ -689,6 +689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Mech
+  health: 0
   AP: 10
   maxHealth: 30
   maxAP: 10
@@ -703,13 +704,13 @@ MonoBehaviour:
   perceptionGrowth: 1
   accuracyGrowth: 1
   team: 0
-  projectile: {fileID: 1563048410146538, guid: 4b418d7f02fad054ca70000c6ec36eaa, type: 2}
+  projectileFab: {fileID: 1563048410146538, guid: 4b418d7f02fad054ca70000c6ec36eaa,
+    type: 2}
   APBar: {fileID: 114609208440154902}
   healthBar: {fileID: 114590197930602974}
   animEvent: {fileID: 0}
   anim: {fileID: 95937815968406688}
   gunSpread: 100
-  isShooting: 0
   highlighted: 0
   movementSpeed: 1
   attackCost: 3

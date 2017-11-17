@@ -3491,6 +3491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Infantry
+  health: 0
   AP: 10
   maxHealth: 20
   maxAP: 10
@@ -3505,13 +3506,13 @@ MonoBehaviour:
   perceptionGrowth: 1
   accuracyGrowth: 1
   team: 0
-  projectile: {fileID: 1010233834427942, guid: 139a4838b872107429af190d34d3bd02, type: 2}
+  projectileFab: {fileID: 1010233834427942, guid: 139a4838b872107429af190d34d3bd02,
+    type: 2}
   APBar: {fileID: 114300596039280758}
   healthBar: {fileID: 114599098702221374}
   animEvent: {fileID: 114109264817913744}
   anim: {fileID: 95953657671208634}
   gunSpread: 100
-  isShooting: 0
   highlighted: 0
   movementSpeed: 1
   attackCost: 3
