@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour {
 
     private EnemyAI ai;
     public bool AI;
+    public float AIDelay;
 
 	// Use this for initialization
 	void Start () {
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour {
 
         actions = new Queue<Action>();
 
-        ai = new EnemyAI(enemies, playerUnits);
+        ai = new EnemyAI(enemies, playerUnits, AIDelay);
 	}
 
     Unit[] generateUnits(Transform container, int count, Color color, Unit.Team team)

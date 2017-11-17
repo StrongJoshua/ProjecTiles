@@ -95,6 +95,12 @@ public class Unit : MonoBehaviour {
         get { return new Vector2(x, y); }
     }
 
+    private bool isDead;
+    public bool IsDead
+    {
+        get { return isDead; }
+    }
+
 	public enum Team
 	{
 		player,
@@ -115,6 +121,7 @@ public class Unit : MonoBehaviour {
         isShooting = false;
 		currTime = Time.timeSinceLevelLoad;
 		aimRing.SetActive (false);
+        isDead = false;
     }
 
 	void rechargeAP()
@@ -171,6 +178,7 @@ public class Unit : MonoBehaviour {
 	}
 
 	public void Die() {
+        isDead = true;
         if (anim != null)
         {
             anim.SetTrigger("die");
