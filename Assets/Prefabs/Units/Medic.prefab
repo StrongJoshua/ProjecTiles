@@ -3555,6 +3555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ca6e7902b844d409cbb670252b7f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerList: []
 --- !u!114 &114316894844398096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3567,6 +3568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: -4
+  mat: {fileID: 0}
 --- !u!114 &114378983418979672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3638,6 +3640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: 0
+  mat: {fileID: 0}
 --- !u!114 &114868030336429770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3650,6 +3653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Medic
+  health: 0
   AP: 10
   maxHealth: 20
   maxAP: 10
@@ -3670,7 +3674,7 @@ MonoBehaviour:
   animEvent: {fileID: 114378983418979672}
   anim: {fileID: 95275926850857482}
   gunSpread: 100
-  selected: 0
+  highlighted: 0
   movementSpeed: 1
   attackCost: 3
   currTime: 0
@@ -3751,7 +3755,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1054716415757750}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 40
   m_Direction: 1
