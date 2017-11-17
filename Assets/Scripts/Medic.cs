@@ -21,14 +21,17 @@ public class Medic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		
+
         triggerList.RemoveAll((collider) => collider == null);
         if (Time.timeSinceLevelLoad - currTime > delay)
-        {
+		{
+			Collider[] allColliders = Physics.OverlapSphere (transform.position, 40);
             currTime = Time.timeSinceLevelLoad;
-            foreach (Collider c in triggerList)
+			foreach (Collider c in allColliders)
             {
                 Unit unit = c.gameObject.GetComponent<Unit>();
-                if (unit != null)
+				if (unit != null && parent.team == unit.team)
                 {
                     unit.heal(1);
                 }
