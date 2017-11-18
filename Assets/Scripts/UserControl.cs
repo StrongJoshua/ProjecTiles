@@ -44,6 +44,8 @@ public class UserControl : MonoBehaviour
     private Queue<Thread> backgroundTasks;
     private bool isShowingMovement;
 
+    private bool didJustShoot;
+
     public bool Paused {
         get { return pauseMenu.activeSelf; }
     }
@@ -194,7 +196,14 @@ public class UserControl : MonoBehaviour
                 {
                     // This is slightly broken because when Z is used to confirm the Move option in the unit menu, this if branch actually gets taken
                     confirmMovement();
+                } else if(phase == Phase.shoot && !didJustShoot)
+                {
+                    unit.fire();
+                    didJustShoot = true;
                 }
+            } else
+            {
+                didJustShoot = false;
             }
             prevHighlight = unit;
         }
@@ -405,6 +414,7 @@ public class UserControl : MonoBehaviour
         unitMenu.SetActive(false);
 		gameManager.unitAt(x, y).aim();
         hideMovement();
+        didJustShoot = true;
     }
 
     private void updatePath()

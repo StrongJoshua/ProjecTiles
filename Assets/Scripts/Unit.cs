@@ -149,9 +149,6 @@ public class Unit : MonoBehaviour {
 			if (InputAxis < 0) {
 				transform.Rotate (0, 240f * Time.deltaTime * InputAxis,0);
 			}
-			if (Input.GetKeyDown (KeyCode.F) || Input.GetButtonDown("Fire1")) {
-				fire();
-			}
 		}
         if (anim != null)
         {
