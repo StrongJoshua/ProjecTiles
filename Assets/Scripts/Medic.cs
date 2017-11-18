@@ -41,10 +41,13 @@ public class Medic : MonoBehaviour
         }
 
         //ringRenderer.enabled = parent.highlighted;
-		if (parent.highlighted)
+		if (parent.highlighted) {
 			healingRing.Play ();
-		else
+			healingRing.gameObject.SetActive (true);
+		} else {
 			healingRing.Pause ();
+			healingRing.gameObject.SetActive (false);
+		}
     }
 
     void OnTriggerEnter(Collider col)
@@ -57,4 +60,9 @@ public class Medic : MonoBehaviour
         if (triggerList.Contains(col))
             triggerList.Remove(col);
     }
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere (transform.position, 7.5f);
+	}
 }
