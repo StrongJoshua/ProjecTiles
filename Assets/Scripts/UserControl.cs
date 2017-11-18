@@ -330,8 +330,6 @@ public class UserControl : MonoBehaviour
                 text.text = (int)unit.AP + "/" + unit.maxAP;
             else if (text.name == "APCharge")
                 text.text = unit.apChargeRate + "";
-            else if (text.name == "Def")
-                text.text = unit.defense + "";
             else if (text.name == "Percep")
                 text.text = unit.perception + "";
             else if (text.name == "Acc")

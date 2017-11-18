@@ -17,17 +17,14 @@ public class Unit : MonoBehaviour {
     public int maxHealth;
     public float maxAP;
 	public int apChargeRate;
-    public int defense;
     public int perception;
 	public int accuracy;
 
     public float healthGrowth;
     public float maxAPGrowth;
 	public float apChargeRateGrowth;
-    public float defenseGrowth;
     public float perceptionGrowth;
 	public float accuracyGrowth;
-    
 
     public Team team;
 
@@ -215,8 +212,6 @@ public class Unit : MonoBehaviour {
             maxAP++;
         if (increase(apChargeRateGrowth))
             apChargeRate++;
-        if (increase(defenseGrowth))
-            defense++;
         if (increase(perceptionGrowth))
             perception++;
         if (increase(accuracyGrowth))
