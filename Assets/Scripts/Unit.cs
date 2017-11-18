@@ -179,6 +179,7 @@ public class Unit : MonoBehaviour {
 
 	public void Die() {
         isDead = true;
+        gameManager.deathCallback(this);
         if (anim != null)
         {
             anim.SetTrigger("die");
@@ -194,7 +195,6 @@ public class Unit : MonoBehaviour {
         {
             Destroy(this.gameObject);
         }
-        gameManager.deathCallback(this);
 	}
 
     public void stopAim()

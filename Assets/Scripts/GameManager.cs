@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour {
     public bool AI;
     public float AIDelay;
 
+    internal Action<Unit> controlDeathCallback;
+
 	// Use this for initialization
 	void Start () {
         enemies = new Unit[enemyCount];
@@ -169,5 +171,7 @@ public class GameManager : MonoBehaviour {
     internal void deathCallback(Unit unit)
     {
         characters[unit.X, unit.Y] = null;
+        if(controlDeathCallback != null)
+            controlDeathCallback(unit);
     }
 }

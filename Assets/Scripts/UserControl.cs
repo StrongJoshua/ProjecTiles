@@ -81,6 +81,7 @@ public class UserControl : MonoBehaviour
 
         arrow = Instantiate(movementArrow);
         arrow.SetActive(false);
+        gameManager.controlDeathCallback = deathCallback;
     }
 
     void OnPreRender()
@@ -120,6 +121,8 @@ public class UserControl : MonoBehaviour
                 unit = null;
             if (prevHighlight != null)
             {
+                if (prevHighlight.IsDead)
+                    closeAll();
                 prevHighlight.highlighted = false;
             }
             if (unit != null)
@@ -367,8 +370,6 @@ public class UserControl : MonoBehaviour
         {
             unitMenu.SetActive(true);
             mapControl = false;
-            //eventSystem.SetSelectedGameObject(null);
-            //eventSystem.SetSelectedGameObject(unitMenu.GetComponentInChildren<Button>().gameObject);
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(unitMenu.GetComponentInChildren<Button>().gameObject);
             unitMenu.GetComponentsInChildren<Button>()[1].interactable = unit.canShoot();
@@ -396,7 +397,6 @@ public class UserControl : MonoBehaviour
         mapControl = true;
         phase = Phase.movement;
         unitMenu.SetActive(false);
-        selected = gameManager.unitAt(x, y);
         path = new List<Vector2>();
         path.Add(new Vector2(selected.X, selected.Y));
     }
@@ -406,6 +406,7 @@ public class UserControl : MonoBehaviour
         phase = Phase.shoot;
         unitMenu.SetActive(false);
 		gameManager.unitAt(x, y).aim();
+        hideMovement();
     }
 
     private void updatePath()
@@ -482,5 +483,11 @@ public class UserControl : MonoBehaviour
         if (!unitMenu.activeSelf)
             return;
         unitMenu.GetComponentsInChildren<Button>()[1].interactable = selected.canShoot();
+    }
+
+    internal void deathCallback(Unit unit)
+    {
+        if (selected == unit)
+            closeAll();
     }
 }
