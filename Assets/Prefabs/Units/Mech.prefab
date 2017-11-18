@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: 0
-  mat: {fileID: 0}
+  mat: {fileID: 2100000, guid: 0f7c24c2bc11be849bdb36365e286a13, type: 2}
 --- !u!114 &114262265370350314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -665,7 +665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: -4
-  mat: {fileID: 0}
+  mat: {fileID: 2100000, guid: 0f7c24c2bc11be849bdb36365e286a13, type: 2}
 --- !u!114 &114955169773901852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -694,13 +694,11 @@ MonoBehaviour:
   maxHealth: 30
   maxAP: 10
   apChargeRate: 3
-  defense: 10
   perception: 10
   accuracy: 10
   healthGrowth: 1
   maxAPGrowth: 1
   apChargeRateGrowth: 1
-  defenseGrowth: 1
   perceptionGrowth: 1
   accuracyGrowth: 1
   team: 0
