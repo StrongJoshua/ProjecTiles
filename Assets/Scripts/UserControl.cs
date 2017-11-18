@@ -121,8 +121,6 @@ public class UserControl : MonoBehaviour
                 unit = null;
             if (prevHighlight != null)
             {
-                if (prevHighlight.IsDead)
-                    closeAll();
                 prevHighlight.highlighted = false;
             }
             if (unit != null)
