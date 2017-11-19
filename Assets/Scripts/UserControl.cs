@@ -45,6 +45,7 @@ public class UserControl : MonoBehaviour
     private bool isShowingMovement;
 
     private bool didJustShoot;
+	public AudioClip click, hover, tileThud;
 
     private int cycleIndex = 0;
 
@@ -132,6 +133,11 @@ public class UserControl : MonoBehaviour
                 unit.highlighted = true;
             }
 
+			if(didMove)
+			{
+				//GetComponent<AudioSource>().volume = 0.1f;
+				GetComponent<AudioSource>().PlayOneShot(tileThud);
+			}
 
             if (didMove || gameManager.HasUpdate)
             {
@@ -485,6 +491,7 @@ public class UserControl : MonoBehaviour
 
     private void confirmMovement()
     {
+		GetComponent<AudioSource>().PlayOneShot(click);
         if(path.Count <= 1)
         {
             return;
@@ -509,4 +516,14 @@ public class UserControl : MonoBehaviour
         if (selected == unit)
             closeAll();
     }
+
+	public void playClick()
+	{
+		GetComponent<AudioSource>().PlayOneShot(click);
+	}
+
+	public void playHover()
+	{
+		GetComponent<AudioSource>().PlayOneShot(hover);
+	}
 }
