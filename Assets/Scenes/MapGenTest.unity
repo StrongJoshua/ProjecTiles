@@ -3183,7 +3183,7 @@ MonoBehaviour:
   playerUnits: []
   enemiesContainer: {fileID: 105193290}
   playerContainer: {fileID: 236007439}
-  AI: 1
+  AI: 0
   AIDelay: 1
 --- !u!1 &1921142596
 GameObject:

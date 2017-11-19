@@ -478,6 +478,7 @@ public class UserControl : MonoBehaviour
 
     private void confirmMovement()
     {
+		GetComponent<AudioSource>().PlayOneShot(click);
         if(path.Count <= 1)
         {
             return;

@@ -139,13 +139,18 @@ public class Unit : MonoBehaviour {
 		{
 			float InputAxis = (Input.GetButton("keyAim")) ? Input.GetAxisRaw("keyAim") : Input.GetAxis("Aim");
 
-
 			if (InputAxis > 0) {
 				transform.Rotate (0, 240f * Time.deltaTime * InputAxis,0);
 			}
 			if (InputAxis < 0) {
 				transform.Rotate (0, 240f * Time.deltaTime * InputAxis,0);
 			}
+			float yRot = 0;
+			if(Input.GetAxis("Vertical") < 0)
+				yRot += 180 - Input.GetAxis("Horizontal") * 90;
+			else
+				yRot += Input.GetAxis("Horizontal") * 90;
+			aimRing.transform.rotation = Quaternion.Euler(90,yRot-90,0);
 		}
         if (anim != null)
         {
