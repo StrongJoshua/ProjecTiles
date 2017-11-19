@@ -236,6 +236,10 @@ public class Unit : MonoBehaviour {
 			projectileInfo.team = team;
 			int numToFire = projectileInfo.numToFire;
 			float speed = projectileInfo.speed;
+            if (anim != null)
+            {
+                anim.SetTrigger("shoot");
+            }
 			for (int i = 0; i < numToFire; i++) {
 				GameObject temp = Instantiate (projectileFab, transform.position + transform.forward + transform.up, transform.rotation);
 				temp.transform.Rotate (new Vector3 (90, 0, 0));
