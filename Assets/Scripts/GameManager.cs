@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour {
     public float AIDelay;
 
     internal Action<Unit> controlDeathCallback;
+    private int numPlayerUnitsAlive;
 
 	// Use this for initialization
 	void Start () {
@@ -57,6 +58,8 @@ public class GameManager : MonoBehaviour {
         actions = new Queue<Action>();
 
         ai = new EnemyAI(this, enemies, playerUnits, AIDelay);
+
+        numPlayerUnitsAlive = playerUnitCount;
 	}
 
     Unit[] generateUnits(Transform container, int count, Color color, Unit.Team team)
@@ -173,5 +176,12 @@ public class GameManager : MonoBehaviour {
         characters[unit.X, unit.Y] = null;
         if(controlDeathCallback != null)
             controlDeathCallback(unit);
+        if (unit.team == Unit.Team.player)
+            numPlayerUnitsAlive -= 1;
+    }
+
+    public bool playerUnitsAlive()
+    {
+        return numPlayerUnitsAlive > 0;
     }
 }

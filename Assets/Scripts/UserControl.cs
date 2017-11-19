@@ -46,6 +46,8 @@ public class UserControl : MonoBehaviour
 
     private bool didJustShoot;
 
+    private int cycleIndex = 0;
+
     public bool Paused {
         get { return pauseMenu.activeSelf; }
     }
@@ -204,6 +206,25 @@ public class UserControl : MonoBehaviour
             } else
             {
                 didJustShoot = false;
+                float cycleInput = Input.GetButton("Cycle") ? Input.GetAxisRaw("Cycle") : Input.GetAxisRaw("keyCycle");
+                if (cycleInput != 0 && gameManager.playerUnitsAlive() && Time.timeSinceLevelLoad - lastTime > delay)
+                {
+                    lastTime = Time.timeSinceLevelLoad;
+                    Unit cycleUnit = null;
+                    while (cycleUnit == null)
+                    {
+                        if (cycleInput > 0)
+                            cycleIndex += 1;
+                        else if (cycleInput < 0)
+                            cycleIndex -= 1;
+                        cycleIndex = (cycleIndex + gameManager.playerUnitCount) % gameManager.playerUnitCount;
+                        cycleUnit = gameManager.playerUnits[cycleIndex];
+                        if (cycleUnit != null && cycleUnit.IsDead)
+                            cycleUnit = null;
+                    }
+                    moveHighlightAbsolute(cycleUnit.X, cycleUnit.Y);
+                    showUnitInfo(cycleUnit);
+                }
             }
             prevHighlight = unit;
         }
@@ -230,19 +251,11 @@ public class UserControl : MonoBehaviour
 
     private void moveHighlightAbsolute(int newX, int newY)
     {
-        if (Time.timeSinceLevelLoad - lastTime > delay)
-        {
-            x = newX;
-            y = newY;
-            x = Mathf.Max(Mathf.Min(x, map.SizeX - 1), 0);
-            y = Mathf.Max(Mathf.Min(y, map.SizeY - 1), 0);
-            highlight.transform.position = new Vector3(x * MapGenerator.step, 0, y * MapGenerator.step);
-
-            if (delay > .1f)
-                delay -= .04f;
-            lastTime = Time.timeSinceLevelLoad;
-        }
-        cam.gameObject.transform.position = Vector3.Lerp(cam.transform.position, highlight.transform.position + new Vector3(0, 20f, -45f), lerpSmooth);
+        x = newX;
+        y = newY;
+        x = Mathf.Max(Mathf.Min(x, map.SizeX - 1), 0);
+        y = Mathf.Max(Mathf.Min(y, map.SizeY - 1), 0);
+        highlight.transform.position = new Vector3(x * MapGenerator.step, 0, y * MapGenerator.step);
   
     }
 

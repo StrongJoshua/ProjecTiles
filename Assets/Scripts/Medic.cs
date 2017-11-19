@@ -35,7 +35,7 @@ public class Medic : MonoBehaviour
 				if (unit != null && unit != parent && parent.team == unit.team )
                 {
                     unit.heal(1);
-					print ("Healing" + unit.name);
+					//print ("Healing" + unit.name);
                 }
             }
         }
