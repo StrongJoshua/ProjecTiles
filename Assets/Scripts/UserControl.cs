@@ -212,8 +212,8 @@ public class UserControl : MonoBehaviour
             } else
             {
                 didJustShoot = false;
-                float cycleInput = Input.GetButton("Cycle") ? Input.GetAxisRaw("Cycle") : Input.GetAxisRaw("keyCycle");
-                if (cycleInput != 0 && gameManager.playerUnitsAlive() && Time.timeSinceLevelLoad - lastTime > delay)
+                float cycleInput = Input.GetAxisRaw("Cycle");
+                if (selected == null && cycleInput != 0 && gameManager.playerUnitsAlive() && Time.timeSinceLevelLoad - lastTime > delay)
                 {
                     lastTime = Time.timeSinceLevelLoad;
                     Unit cycleUnit = null;

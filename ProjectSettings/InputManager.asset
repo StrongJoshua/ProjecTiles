@@ -262,7 +262,7 @@ InputManager:
     axis: 3
     joyNum: 0
   - serializedVersion: 3
-    m_Name: keyAim
+    m_Name: Aim
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -281,8 +281,8 @@ InputManager:
     m_Name: Cycle
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
+    negativeButton: a
+    positiveButton: s
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -294,18 +294,18 @@ InputManager:
     axis: 2
     joyNum: 0
   - serializedVersion: 3
-    m_Name: keyCycle
+    m_Name: Cycle
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: a
-    positiveButton: s
+    negativeButton: s
+    positiveButton: a
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
-    dead: 1
-    sensitivity: 1
+    dead: 0.2
+    sensitivity: 1000
     snap: 1
     invert: 0
     type: 0
-    axis: 0
+    axis: 2
     joyNum: 0

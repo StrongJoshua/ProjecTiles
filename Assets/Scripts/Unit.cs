@@ -137,7 +137,7 @@ public class Unit : MonoBehaviour {
 
         if (isShooting)
 		{
-			float InputAxis = (Input.GetButton("keyAim")) ? Input.GetAxisRaw("keyAim") : Input.GetAxis("Aim");
+			float InputAxis = Input.GetAxis("Aim");
 
 			if (InputAxis > 0) {
 				transform.Rotate (0, 240f * Time.deltaTime * InputAxis,0);
