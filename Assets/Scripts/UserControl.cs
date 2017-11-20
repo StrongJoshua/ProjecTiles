@@ -322,6 +322,11 @@ public class UserControl : MonoBehaviour
         Time.timeScale = 1;
 	}
 
+	public void quitGame()
+	{
+		Application.Quit();
+	}
+
     public void pauseGame()
     {
         mapControl = false;

@@ -68,6 +68,10 @@ public class MainMenuButtons : MonoBehaviour {
         SceneManager.LoadScene("MapGenTest");
     }
 
+	public void quitGame(){
+		Application.Quit();
+	}
+
 	void Update()
 	{
 		if (creditsGroup.activeSelf) {
