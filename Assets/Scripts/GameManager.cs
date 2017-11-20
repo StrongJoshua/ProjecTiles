@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+	private XMLParser xmlParser;
     public MapGenerator map;
     public int enemyCount, playerUnitCount;
     public GameObject[] unitTypes;
@@ -44,6 +45,10 @@ public class GameManager : MonoBehaviour {
 
     internal Action<Unit> controlDeathCallback;
     private int numPlayerUnitsAlive;
+
+	void Awake() {
+		xmlParser = new XMLParser ();
+	}
 
 	// Use this for initialization
 	void Start () {

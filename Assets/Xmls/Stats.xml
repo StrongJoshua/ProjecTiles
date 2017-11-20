@@ -1,0 +1,80 @@
+<BaseStats>
+	<Infantry>
+		<maxHP growth = "75">100</maxHP>
+		<maxAP growth = "75">10</maxAP>
+		<apChargeRate growth = "75">1</apChargeRate>
+		<accuracy growth = "75">10</accuracy>
+		<perception growth = "75">15</perception>
+
+		<GrowthChances>
+			<hpGrowthChance>75</hpGrowthChance>
+			<apGrowthChance>75</apGrowthChance>
+			<crGrowthChance>75</crGrowthChance>
+			<accGrowthChance>75</accGrowthChance>
+			<perceptionGrowthChance>75</perceptionGrowthChance>
+
+		</GrowthChances>
+	</Infantry>
+
+	<Medic>
+		<maxHP growth = "90">80</maxHP>
+		<maxAP growth = "75">10</maxAP>
+		<apChargeRate growth = "75">1</apChargeRate>
+		<accuracy growth = "75">10</accuracy>
+		<perception growth = "95">13</perception>
+
+		<GrowthChances>
+			<hpGrowthChance>90</hpGrowthChance>
+			<apGrowthChance>75</apGrowthChance>
+			<crGrowthChance>75</crGrowthChance>
+			<accGrowthChance>75</accGrowthChance>
+			<perceptionGrowthChance>90</perceptionGrowthChance>
+
+		</GrowthChances>
+	</Medic>
+
+	<Mech>
+		<maxHP growth = "90">200</maxHP>
+		<maxAP growth = "70">10</maxAP>
+		<apChargeRate growth = "70">0.5</apChargeRate>
+		<accuracy growth = "90">10</accuracy>
+		<perception growth = "90">10</perception>
+
+		<GrowthChances>
+			<hpGrowthChance>90</hpGrowthChance>
+			<apGrowthChance>70</apGrowthChance>
+			<crGrowthChance>70</crGrowthChance>
+			<accGrowthChance>90</accGrowthChance>
+			<perceptionGrowthChance>90</perceptionGrowthChance>
+
+		</GrowthChances>
+	</Mech>
+
+	<Ship>
+		<maxHP growth = "75">100</maxHP>
+		<maxAP growth = "80">10</maxAP>
+		<apChargeRate growth = "70">0.75</apChargeRate>
+		<accuracy growth = "70">10</accuracy>
+		<perception growth = "70">17</perception>
+
+		<GrowthChances>
+			<hpGrowthChance>75</hpGrowthChance>
+			<apGrowthChance>80</apGrowthChance>
+			<crGrowthChance>70</crGrowthChance>
+			<accGrowthChance>70</accGrowthChance>
+			<perceptionGrowthChance>90</perceptionGrowthChance>
+
+		</GrowthChances>
+	</Ship>
+
+	<GrowthRates>
+		<hpGrowth>0.08</hpGrowth>
+		<apGrowth>0.05</apGrowth>
+		<crGrowth>0.1</crGrowth>
+		<accuracyGrowth>0.075</accuracyGrowth>
+		<perceptionGrowth>0.1</perceptionGrowth>
+	</GrowthRates>
+</BaseStats>
+
+
+
