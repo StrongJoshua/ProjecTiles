@@ -67,6 +67,8 @@ public class Unit : MonoBehaviour
 	public GameObject aimRing;
 	public bool isFlying;
 
+    public SpecialType specialType;
+
 	public int X {
 		get { return x; }
 		set {
@@ -98,6 +100,14 @@ public class Unit : MonoBehaviour
 		player,
 		enemy
 	}
+
+    public enum SpecialType
+    {
+        sniper,
+        bionade,
+        bombs,
+        drone
+    }
 
 	// Use this for initialization
 	void Awake ()
@@ -311,4 +321,9 @@ public class Unit : MonoBehaviour
 		Vector2 dif = tile - XY;
 		this.gameObject.transform.rotation = Quaternion.LookRotation (new Vector3 (dif.x, 0, dif.y) * MapGenerator.step, Vector3.up);
 	}
+
+    public bool canSpecial()
+    {
+        return false;
+    }
 }

@@ -57,7 +57,8 @@ public class UserControl : MonoBehaviour
     {
         free,
         movement,
-        shoot
+        shoot,
+        special
     }
 
     private void Awake()
@@ -404,6 +405,7 @@ public class UserControl : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(unitMenu.GetComponentInChildren<Button>().gameObject);
             unitMenu.GetComponentsInChildren<Button>()[1].interactable = unit.canShoot();
+            unitMenu.GetComponentsInChildren<Button>()[2].interactable = unit.canSpecial();
             selected = unit;
         }
     }
@@ -533,4 +535,9 @@ public class UserControl : MonoBehaviour
 	{
 		GetComponent<AudioSource>().PlayOneShot(hover);
 	}
+
+    public void specialPhase()
+    {
+        phase = Phase.special;
+    }
 }
