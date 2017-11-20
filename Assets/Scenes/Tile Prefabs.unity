@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4418438, g: 0.4907769, b: 0.5707425, a: 1}
+  m_IndirectSpecularColor: {r: 0.44184405, g: 0.49077713, b: 0.5707427, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -524,6 +524,7 @@ GameObject:
   - component: {fileID: 421435903}
   - component: {fileID: 421435902}
   - component: {fileID: 421435901}
+  - component: {fileID: 421435904}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -595,7 +596,7 @@ ParticleSystem:
   lengthInSec: 0.3
   simulationSpeed: 1
   stopAction: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -645,7 +646,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -31759258
+  randomSeed: 1673223942
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3915,6 +3916,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &421435904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 421435900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac038607cb58e04d91781eac36689bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &524631341
 Prefab:
   m_ObjectHideFlags: 0
@@ -4088,7 +4100,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1032260234
+  randomSeed: -276896741
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -7783,6 +7795,10 @@ Prefab:
       propertyPath: turnRate
       value: 150
       objectReference: {fileID: 0}
+    - target: {fileID: 1096361828472138, guid: a0e32ddd53cd70f4482a1a3156c4adc9, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0e32ddd53cd70f4482a1a3156c4adc9, type: 2}
   m_IsPrefabParent: 0
@@ -8198,7 +8214,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1961433862}
   m_LocalRotation: {x: 0.21534891, y: -0, z: -0, w: 0.97653717}
-  m_LocalPosition: {x: -5.51, y: 6.1, z: -19.4}
+  m_LocalPosition: {x: -5.51, y: 5.49, z: -19.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

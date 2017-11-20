@@ -2,26 +2,22 @@
 
  Shader "Custom/Explosion" {
      Properties {
-         _Color ("Text Color", Color) = (1,1,1,1)
+         _Color ("_Color", Color) = (1,1,1,1)
      }
- 
-     SubShader {
-         Tags 
-         {
-             "RenderType"="Opaque"
-         }
-		 CGPROGRAM
-		 #pragma surface surf Lambert
 
-		 struct Input {
-			float2 uv_MainTex;
-		 };
+    SubShader {
+		CGPROGRAM
+		#pragma surface surf Lambert
+		struct Input {
+			fixed4 _Color;
+		};
 
-		 
-		 void surf(Input IN, inout SurfaceOutput o)
-		 {
-			o.Albedo = vert3(_Color, _Color, _Color);
-		 }
-		 ENDCG
-     }
- }
+		fixed4 _Color;
+
+		void surf(Input IN, inout SurfaceOutput o) {
+			o.Albedo = _Color;
+		}
+
+		ENDCG
+    }
+}
