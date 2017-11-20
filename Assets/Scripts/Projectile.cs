@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour {
 	public Unit.Team team;
 	public bool explode;
 	public float explodeRange;
+	public GameObject explodeParticle;
 
     private Vector3 start;
 
@@ -30,6 +31,7 @@ public class Projectile : MonoBehaviour {
 		float distance = Vector3.Distance (start, gameObject.transform.position); 
 		if (distance >= range * MapGenerator.step) {
 			if (explode) {
+				Instantiate (explodeParticle, transform.position, transform.rotation);
 				Collider[] allColliders = Physics.OverlapSphere (transform.position, explodeRange);
 				foreach (Collider c in allColliders) {
 					Unit t = c.gameObject.GetComponent<Unit> ();

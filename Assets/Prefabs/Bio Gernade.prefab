@@ -87,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1343442618637042}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.958, y: 2.71, z: -18.19}
+  m_LocalPosition: {x: -3.958, y: 2.326, z: -16.285}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 4597669036155986}
@@ -291,6 +291,8 @@ MonoBehaviour:
   team: 0
   explode: 1
   explodeRange: 7.5
+  explodeParticle: {fileID: 1189856373747132, guid: d5e23dafa9e2fa94ba6b6f76fa517958,
+    type: 2}
 --- !u!135 &135247419158040426
 SphereCollider:
   m_ObjectHideFlags: 1
