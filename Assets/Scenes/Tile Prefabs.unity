@@ -1102,6 +1102,7 @@ MonoBehaviour:
   team: 0
   explode: 0
   explodeRange: 0
+  explodeParticle: {fileID: 0}
 --- !u!54 &368708310
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15907,6 +15908,7 @@ MonoBehaviour:
   team: 0
   explode: 0
   explodeRange: 0
+  explodeParticle: {fileID: 0}
 --- !u!54 &2122208016
 Rigidbody:
   m_ObjectHideFlags: 0

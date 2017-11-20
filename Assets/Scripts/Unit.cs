@@ -250,7 +250,9 @@ public class Unit : MonoBehaviour
 			for (int i = 0; i < numToFire; i++) {
 				//TODO Animate turn towards aim ring
 				transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
+				aimRing.transform.rotation =  Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
 				GameObject temp = Instantiate (projectileFab, transform.position + transform.forward + transform.up, transform.rotation);
+				temp.GetComponent<Projectile> ().origin = this.gameObject;
 				temp.transform.Rotate (new Vector3 (90, 0, 0));
 				Vector3 aim = this.transform.forward * speed;
 				aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
@@ -344,6 +346,7 @@ public class Unit : MonoBehaviour
 					//TODO Animate turn towards aim ring
 					transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
 					GameObject temp = Instantiate (specialFab, transform.position + transform.forward + transform.up, transform.rotation);
+					temp.GetComponent<Projectile> ().origin = this.gameObject;
 					temp.transform.Rotate (new Vector3 (90, 0, 0));
 					Vector3 aim = this.transform.forward * speed;
 					aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);

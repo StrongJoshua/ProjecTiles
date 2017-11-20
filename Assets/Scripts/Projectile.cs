@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour {
 	public bool explode;
 	public float explodeRange;
 	public GameObject explodeParticle;
+	public GameObject origin;
 
     private Vector3 start;
 
@@ -35,7 +36,7 @@ public class Projectile : MonoBehaviour {
 				Collider[] allColliders = Physics.OverlapSphere (transform.position, explodeRange);
 				foreach (Collider c in allColliders) {
 					Unit t = c.gameObject.GetComponent<Unit> ();
-					if (t != null && t.team != team)
+					if (t != null && !t.team.Equals(team) && c.gameObject != origin)
 						t.takeDamage ((int)(currDamage * (distance/(range * MapGenerator.step))));
 				}
 				Destroy (gameObject);
@@ -50,9 +51,8 @@ public class Projectile : MonoBehaviour {
 		float distance = Vector3.Distance (start, gameObject.transform.position); 
 		Unit hitUnit = col.gameObject.GetComponent<Unit> (); 
 
-		if (hitUnit != null) {
-			//Debug.Log ("DING DING");
-			if(hitUnit.team != team)
+		if(hitUnit != null && col.gameObject != origin) {
+			if(!hitUnit.IsDead && hitUnit.team != team)
 				hitUnit.takeDamage ((int)(currDamage * (distance/(range * MapGenerator.step))));
 			Destroy (gameObject);
 		}
@@ -63,7 +63,7 @@ public class Projectile : MonoBehaviour {
 		
 		if (hitUnit != null) {
             //Debug.Log ("DING DING");
-			if(!hitUnit.IsDead && hitUnit.team != team)
+			if(!hitUnit.IsDead && hitUnit.team != team && col.gameObject != origin)
 				hitUnit.takeDamage (currDamage);
 			Destroy (gameObject);
 		}
