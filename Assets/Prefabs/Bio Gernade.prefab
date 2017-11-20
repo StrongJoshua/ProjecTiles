@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4071155548440962}
   - component: {fileID: 135247419158040426}
   - component: {fileID: 54956179497004064}
+  - component: {fileID: 114105673315945622}
   m_Layer: 0
   m_Name: Bio Gernade
   m_TagString: Untagged
@@ -86,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1343442618637042}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.958, y: 2.71, z: -18.19}
+  m_LocalPosition: {x: -3.958, y: 2.326, z: -16.285}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 4597669036155986}
@@ -272,6 +273,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114105673315945622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1343442618637042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e97173ff4b0c4f44b376e46d1ccd503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 5
+  maxDamage: 100
+  numToFire: 1
+  speed: 1
+  team: 0
+  explode: 1
+  explodeRange: 7.5
+  explodeParticle: {fileID: 1189856373747132, guid: d5e23dafa9e2fa94ba6b6f76fa517958,
+    type: 2}
 --- !u!135 &135247419158040426
 SphereCollider:
   m_ObjectHideFlags: 1

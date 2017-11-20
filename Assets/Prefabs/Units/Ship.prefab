@@ -693,10 +693,12 @@ MonoBehaviour:
   gunSpread: 100
   highlighted: 0
   movementSpeed: 1
-  attackCost: 3
+  attackCost: 2
+  specialCost: 10
   currTime: 0
   aimRing: {fileID: 1885521710621652}
   isFlying: 1
+  specialType: 2
 --- !u!114 &114668176556250098
 MonoBehaviour:
   m_ObjectHideFlags: 1

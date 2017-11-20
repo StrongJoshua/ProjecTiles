@@ -877,7 +877,7 @@ MonoBehaviour:
   perceptionGrowth: 1
   accuracyGrowth: 1
   team: 0
-  projectileFab: {fileID: 1563048410146538, guid: 4b418d7f02fad054ca70000c6ec36eaa,
+  projectileFab: {fileID: 1563048410146538, guid: 8b97493074436cb44890588e39bfcd51,
     type: 2}
   APBar: {fileID: 114609208440154902}
   healthBar: {fileID: 114590197930602974}
@@ -887,9 +887,11 @@ MonoBehaviour:
   highlighted: 0
   movementSpeed: 1
   attackCost: 3
+  specialCost: 10
   currTime: 0
   aimRing: {fileID: 1110942881734588}
   isFlying: 0
+  specialType: 3
 --- !u!137 &137138281924699856
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

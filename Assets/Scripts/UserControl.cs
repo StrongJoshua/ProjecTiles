@@ -210,6 +210,11 @@ public class UserControl : MonoBehaviour
                     unit.fire();
                     didJustShoot = true;
                 }
+				else if(phase == Phase.special && !didJustShoot)
+				{
+					unit.special ();
+					didJustShoot = true;
+				}
             } else
             {
                 didJustShoot = false;
@@ -539,5 +544,9 @@ public class UserControl : MonoBehaviour
     public void specialPhase()
     {
         phase = Phase.special;
+		unitMenu.SetActive(false);
+		gameManager.unitAt(x, y).aim();
+		hideMovement();
+		didJustShoot = true;
     }
 }
