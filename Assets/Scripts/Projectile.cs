@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour {
 	public int numToFire;
 	public float speed;
 	public Unit.Team team;
+	public bool explode;
 
     private Vector3 start;
 
@@ -25,19 +26,30 @@ public class Projectile : MonoBehaviour {
 
     // Update is called once per frame
     protected virtual void Update () {
-		if (Vector3.Distance(start, gameObject.transform.position) >= range * MapGenerator.step) {
+		float distance = Vector3.Distance (start, gameObject.transform.position); 
+		if (distance >= range * MapGenerator.step) {
+			if (explode) {
+				Collider[] allColliders = Physics.OverlapSphere (transform.position, 3f);
+				foreach (Collider c in allColliders) {
+					Unit t = c.gameObject.GetComponent<Unit> ();
+					if (t != null)
+						t.takeDamage (currDamage * (distance/(range * MapGenerator.step)));
+				}
+			}
+			else
 				Destroy (gameObject);
 		}
 	}
 
 	void OnTriggerEnter(Collider col)
 	{
+		float distance = Vector3.Distance (start, gameObject.transform.position); 
 		Unit hitUnit = col.gameObject.GetComponent<Unit> (); 
 
 		if (hitUnit != null) {
 			//Debug.Log ("DING DING");
 			if(hitUnit.team != team)
-				hitUnit.takeDamage (currDamage);
+				hitUnit.takeDamage (currDamage * (distance/(range * MapGenerator.step)));
 			Destroy (gameObject);
 		}
 	}
