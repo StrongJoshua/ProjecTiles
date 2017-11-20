@@ -213,6 +213,8 @@ public class UserControl : MonoBehaviour
             {
                 didJustShoot = false;
                 float cycleInput = Input.GetAxisRaw("Cycle");
+                if(cycleInput != 0)
+                    delay = defaultDelay;
                 if (selected == null && cycleInput != 0 && gameManager.playerUnitsAlive() && Time.timeSinceLevelLoad - lastTime > delay)
                 {
                     lastTime = Time.timeSinceLevelLoad;
