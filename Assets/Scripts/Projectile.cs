@@ -57,7 +57,7 @@ public class Projectile : MonoBehaviour {
     private void explode()
     {
         Instantiate(explodeParticle, transform.position, transform.rotation);
-        Collider[] allColliders = Physics.OverlapSphere(transform.position, explodeRange);
+        Collider[] allColliders = Physics.OverlapSphere(transform.position, explodeRange * MapGenerator.step);
         foreach (Collider c in allColliders)
         {
             Unit t = c.gameObject.GetComponent<Unit>();

@@ -417,7 +417,6 @@ public class UserControl : MonoBehaviour
 
     private void closeAll()
     {
-        print("Close all");
         resumeGame();
         unitMenu.SetActive(false);
         phase = Phase.free;
