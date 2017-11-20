@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 54286695514794918}
   - component: {fileID: 114218577772252898}
   m_Layer: 0
-  m_Name: Slug
+  m_Name: Gernade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,6 +116,7 @@ MonoBehaviour:
   numToFire: 1
   speed: 1000
   team: 0
+  explode: 1
 --- !u!135 &135036957773037642
 SphereCollider:
   m_ObjectHideFlags: 1
