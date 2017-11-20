@@ -289,10 +289,11 @@ MonoBehaviour:
   numToFire: 1
   speed: 1
   team: 0
-  explode: 1
+  explodes: 1
   explodeRange: 7.5
   explodeParticle: {fileID: 1189856373747132, guid: d5e23dafa9e2fa94ba6b6f76fa517958,
     type: 2}
+  origin: {fileID: 0}
 --- !u!135 &135247419158040426
 SphereCollider:
   m_ObjectHideFlags: 1

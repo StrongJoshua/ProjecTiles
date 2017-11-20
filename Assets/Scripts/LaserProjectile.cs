@@ -14,8 +14,4 @@ public class LaserProjectile : Projectile {
 	protected override void Update () {
 		base.Update ();
 	}
-
-	protected override void OnCollisionEnter(Collision col) {
-		base.OnCollisionEnter (col);
-	}
 }

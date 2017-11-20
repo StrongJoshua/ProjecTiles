@@ -5,12 +5,11 @@ using UnityEngine;
 public class Projectile : MonoBehaviour {
 	public float range;
 	public int maxDamage;
-	int currDamage;
 	float startTime;
 	public int numToFire;
 	public float speed;
 	public Unit.Team team;
-	public bool explode;
+	public bool explodes;
 	public float explodeRange;
 	public GameObject explodeParticle;
 	public GameObject origin;
@@ -19,7 +18,6 @@ public class Projectile : MonoBehaviour {
 
 	protected virtual void Awake () {
 		startTime = Time.timeSinceLevelLoad;
-		currDamage = maxDamage;
 	}
 
     private void Start()
@@ -31,15 +29,8 @@ public class Projectile : MonoBehaviour {
     protected virtual void Update () {
 		float distance = Vector3.Distance (start, gameObject.transform.position); 
 		if (distance >= range * MapGenerator.step) {
-			if (explode) {
-				Instantiate (explodeParticle, transform.position, transform.rotation);
-				Collider[] allColliders = Physics.OverlapSphere (transform.position, explodeRange);
-				foreach (Collider c in allColliders) {
-					Unit t = c.gameObject.GetComponent<Unit> ();
-					if (t != null && !t.team.Equals(team) && c.gameObject != origin)
-						t.takeDamage ((int)(currDamage * (distance/(range * MapGenerator.step))));
-				}
-				Destroy (gameObject);
+			if (explodes) {
+                explode();
 			}
 			else
 				Destroy (gameObject);
@@ -51,22 +42,30 @@ public class Projectile : MonoBehaviour {
 		float distance = Vector3.Distance (start, gameObject.transform.position); 
 		Unit hitUnit = col.gameObject.GetComponent<Unit> (); 
 
-		if(hitUnit != null && col.gameObject != origin) {
-			if(!hitUnit.IsDead && hitUnit.team != team)
-				hitUnit.takeDamage ((int)(currDamage * (distance/(range * MapGenerator.step))));
-			Destroy (gameObject);
+		if(hitUnit != null && col.gameObject != origin && !hitUnit.IsDead) {
+            if (explodes)
+                explode();
+            else
+            {
+                if (hitUnit.team != team)
+                    hitUnit.takeDamage((int)(maxDamage * (distance / (2 * range * MapGenerator.step)))); // multiply by 2 to min at half damage
+                Destroy(gameObject);
+            }
 		}
 	}
 
-	protected virtual void OnCollisionEnter(Collision col) {
-		Unit hitUnit = col.gameObject.GetComponent<Unit> (); 
-		
-		if (hitUnit != null) {
-            //Debug.Log ("DING DING");
-			if(!hitUnit.IsDead && hitUnit.team != team && col.gameObject != origin)
-				hitUnit.takeDamage (currDamage);
-			Destroy (gameObject);
-		}
-	}
-		
+    private void explode()
+    {
+        Instantiate(explodeParticle, transform.position, transform.rotation);
+        Collider[] allColliders = Physics.OverlapSphere(transform.position, explodeRange);
+        foreach (Collider c in allColliders)
+        {
+            Unit t = c.gameObject.GetComponent<Unit>();
+            if (t != null && !t.team.Equals(team) && c.gameObject != origin)
+            {
+                t.takeDamage((int)(maxDamage * (1 - Vector3.Distance(t.gameObject.transform.position, this.gameObject.transform.position) / (explodeRange * MapGenerator.step))));
+            }
+        }
+        Destroy(gameObject);
+    }
 }
