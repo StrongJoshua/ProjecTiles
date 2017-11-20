@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour {
 	public float speed;
 	public Unit.Team team;
 	public bool explode;
+	public float explodeRange;
 
     private Vector3 start;
 
@@ -29,12 +30,13 @@ public class Projectile : MonoBehaviour {
 		float distance = Vector3.Distance (start, gameObject.transform.position); 
 		if (distance >= range * MapGenerator.step) {
 			if (explode) {
-				Collider[] allColliders = Physics.OverlapSphere (transform.position, 3f);
+				Collider[] allColliders = Physics.OverlapSphere (transform.position, explodeRange);
 				foreach (Collider c in allColliders) {
 					Unit t = c.gameObject.GetComponent<Unit> ();
-					if (t != null)
+					if (t != null && t.team != team)
 						t.takeDamage ((int)(currDamage * (distance/(range * MapGenerator.step))));
 				}
+				Destroy (gameObject);
 			}
 			else
 				Destroy (gameObject);
