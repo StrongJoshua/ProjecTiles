@@ -30,6 +30,7 @@ public class Unit : MonoBehaviour
 	public Team team;
 
 	public GameObject projectileFab;
+	public GameObject specialFab;
 
 	public Projectile Projectile {
 		get { return projectileFab.GetComponent<Projectile> (); }
@@ -49,7 +50,7 @@ public class Unit : MonoBehaviour
 		get { return isShooting; }
 	}
 
-	public float movementSpeed = 1;
+	public float movementSpeed;
 
 	private bool isMoving;
 
@@ -62,12 +63,13 @@ public class Unit : MonoBehaviour
 	internal GameManager gameManager;
 
 	//Putting this info here for now
-	public int attackCost = 2;
+	public int attackCost;
+	public int specialCost;
 	public float currTime;
 	public GameObject aimRing;
 	public bool isFlying;
 
-    public SpecialType specialType;
+	public SpecialType specialType;
 
 	public int X {
 		get { return x; }
@@ -101,13 +103,13 @@ public class Unit : MonoBehaviour
 		enemy
 	}
 
-    public enum SpecialType
-    {
-        sniper,
-        bionade,
-        bombs,
-        drone
-    }
+	public enum SpecialType
+	{
+		sniper,
+		bionade,
+		bombs,
+		drone
+	}
 
 	// Use this for initialization
 	void Awake ()
@@ -145,10 +147,10 @@ public class Unit : MonoBehaviour
 		if (isShooting) {
 
 			if (Input.GetKey (KeyCode.A)) {
-				aimRing.transform.Rotate ( 0, 0, 240f * Time.deltaTime);
+				aimRing.transform.Rotate (0, 0, 240f * Time.deltaTime);
 			} else if (Input.GetKey (KeyCode.D)) {
-				aimRing.transform.Rotate ( 0, 0, -240f * Time.deltaTime);
-			} else if (Mathf.Abs( Input.GetAxis ("Vertical") ) > 0.1 || Mathf.Abs( Input.GetAxis ("Horizontal") ) > 0.1){
+				aimRing.transform.Rotate (0, 0, -240f * Time.deltaTime);
+			} else if (Mathf.Abs (Input.GetAxis ("Vertical")) > 0.1 || Mathf.Abs (Input.GetAxis ("Horizontal")) > 0.1) {
 				float yRot = 0;
 				if (Input.GetAxis ("Vertical") < 0)
 					yRot += 180 - Input.GetAxis ("Horizontal") * 90;
@@ -322,8 +324,38 @@ public class Unit : MonoBehaviour
 		this.gameObject.transform.rotation = Quaternion.LookRotation (new Vector3 (dif.x, 0, dif.y) * MapGenerator.step, Vector3.up);
 	}
 
-    public bool canSpecial()
-    {
-        return false;
-    }
+	public bool canSpecial ()
+	{
+		return true;
+	}
+
+	public void special ()
+	{
+		if (specialType == SpecialType.bionade) {
+			if (canShoot ()) {
+				Projectile projectileInfo = projectileFab.GetComponent<Projectile> (); 
+				projectileInfo.team = team;
+				int numToFire = projectileInfo.numToFire;
+				float speed = projectileInfo.speed;
+				if (anim != null) {
+					anim.SetTrigger ("shoot");
+				}
+				for (int i = 0; i < numToFire; i++) {
+					//TODO Animate turn towards aim ring
+					transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
+					GameObject temp = Instantiate (specialFab, transform.position + transform.forward + transform.up, transform.rotation);
+					temp.transform.Rotate (new Vector3 (90, 0, 0));
+					Vector3 aim = this.transform.forward * speed;
+					aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
+					//print(aim.ToString());
+					temp.GetComponent<Rigidbody> ().AddForce (aim);
+				}
+
+				costAP (specialCost);
+			}	
+		} else if (specialType == SpecialType.sniper) {
+		} else if (specialType == SpecialType.drone) {
+		} else if (specialType == SpecialType.bombs) {
+		}
+	}
 }

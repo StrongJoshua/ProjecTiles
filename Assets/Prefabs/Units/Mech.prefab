@@ -887,10 +887,11 @@ MonoBehaviour:
   highlighted: 0
   movementSpeed: 1
   attackCost: 3
+  specialCost: 10
   currTime: 0
   aimRing: {fileID: 1110942881734588}
   isFlying: 0
-  specialType: 0
+  specialType: 3
 --- !u!137 &137138281924699856
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

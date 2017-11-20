@@ -3700,6 +3700,7 @@ MonoBehaviour:
   team: 0
   projectileFab: {fileID: 1010233834427942, guid: 139a4838b872107429af190d34d3bd02,
     type: 2}
+  specialFab: {fileID: 1343442618637042, guid: cd93e4f52dde70947b44ad95333a01ef, type: 2}
   APBar: {fileID: 114957716137058646}
   healthBar: {fileID: 114153338364431572}
   animEvent: {fileID: 114378983418979672}
@@ -3707,10 +3708,12 @@ MonoBehaviour:
   gunSpread: 100
   highlighted: 0
   movementSpeed: 1
-  attackCost: 3
+  attackCost: 2
+  specialCost: 10
   currTime: 0
   aimRing: {fileID: 1227421884933966}
   isFlying: 0
+  specialType: 1
 --- !u!114 &114893490919824136
 MonoBehaviour:
   m_ObjectHideFlags: 1
