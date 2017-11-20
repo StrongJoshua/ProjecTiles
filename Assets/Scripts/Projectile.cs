@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour {
 				foreach (Collider c in allColliders) {
 					Unit t = c.gameObject.GetComponent<Unit> ();
 					if (t != null)
-						t.takeDamage (currDamage * (distance/(range * MapGenerator.step)));
+						t.takeDamage ((int)(currDamage * (distance/(range * MapGenerator.step))));
 				}
 			}
 			else
@@ -49,7 +49,7 @@ public class Projectile : MonoBehaviour {
 		if (hitUnit != null) {
 			//Debug.Log ("DING DING");
 			if(hitUnit.team != team)
-				hitUnit.takeDamage (currDamage * (distance/(range * MapGenerator.step)));
+				hitUnit.takeDamage ((int)(currDamage * (distance/(range * MapGenerator.step))));
 			Destroy (gameObject);
 		}
 	}
