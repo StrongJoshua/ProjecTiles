@@ -123,7 +123,6 @@ public class UserControl : MonoBehaviour
             bool didMove = moveHighlight();
  
             Unit unit = gameManager.unitAt(x, y);
-
             if (unit != null && unit.IsMoving)
                 unit = null;
             if (prevHighlight != null)
@@ -355,10 +354,8 @@ public class UserControl : MonoBehaviour
     {
         foreach(Text text in unitInfo.GetComponentsInChildren<Text>())
         {
-			if (text.name == "Name") {
-				Debug.Log (unit.name);
-				text.text = unit.name;
-			}
+            if (text.name == "Name")
+                text.text = unit.name;
             else if (text.name == "HP")
                 text.text = unit.health + "/" + unit.maxHealth;
             else if (text.name == "AP")
