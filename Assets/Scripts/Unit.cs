@@ -241,10 +241,18 @@ public class Unit : MonoBehaviour
 	}
 
 	public void setStats(Dictionary<string, float> newStats) {
+		int oldHealth = this.maxHealth;
+		float oldAP = this.maxAP;
 		
 		this.maxHealth = (int) newStats ["maxHP"];
+
+		if (health == oldHealth)
+			health = this.maxHealth;
 	
 		this.maxAP = newStats ["maxAP"];
+
+		if (AP == oldAP)
+			AP = this.maxAP;
 	
 		this.apChargeRate = (int) newStats ["apChargeRate"];
 	

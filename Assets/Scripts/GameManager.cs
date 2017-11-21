@@ -89,14 +89,16 @@ public class GameManager : MonoBehaviour {
 			Dictionary<string, float> Stats = (Dictionary<string, float>) unitBaseStats[randIndex];
 			Debug.Log (Stats.Count);
 
-			Unit newUnit = unitType.GetComponent<Unit>();
+
+
+            GameObject newObj = Instantiate(unitType, unitType.transform.position + new Vector3(0, .5f, 0), Quaternion.identity);
+            newObj.transform.parent = container;
+
+			Unit newUnit = newObj.GetComponent<Unit>();
 			newUnit.team = team;
 
 			newUnit.setStats (Stats);
 			newUnit.setGrowthRates (xmlParser.growthRates);
-
-            GameObject newObj = Instantiate(unitType, unitType.transform.position + new Vector3(0, .5f, 0), Quaternion.identity);
-            newObj.transform.parent = container;
             
 
 
