@@ -21,11 +21,14 @@ public class Unit : MonoBehaviour
 	public int perception;
 	public int accuracy;
 
-	public float healthGrowth;
-	public float maxAPGrowth;
-	public float apChargeRateGrowth;
-	public float perceptionGrowth;
-	public float accuracyGrowth;
+	public float healthGrowth, healthGrowthRate;
+	public float maxAPGrowth, maxAPGrowthRate;
+	public float apChargeRateGrowth, apChargeRateGrowthRate;
+	public float perceptionGrowth, perceptionGrowthRate;
+	public float accuracyGrowth, accuracyGrowthRate;
+
+	public Dictionary<string, float> initialStats;
+	private Dictionary<string, float> growthRates;
 
 	public Team team;
 
@@ -235,6 +238,43 @@ public class Unit : MonoBehaviour
 		this.X = targetX;
 		this.Y = targetY;
 
+	}
+
+	public void setStats(Dictionary<string, float> newStats) {
+		
+		this.maxHealth = (int) newStats ["maxHP"];
+	
+		this.maxAP = newStats ["maxAP"];
+	
+		this.apChargeRate = (int) newStats ["apChargeRate"];
+	
+		this.perception = (int) newStats ["perception"];
+
+		this.accuracy = (int) newStats ["accuracy"];
+
+		this.healthGrowth = newStats ["maxHPGrowth"];
+
+		this.maxAPGrowth = newStats ["maxAPGrowth"];
+
+		this.apChargeRateGrowth = newStats ["apChargeRateGrowth"];
+
+		this.accuracyGrowth = newStats ["accuracyGrowth"];
+
+		this.perceptionGrowth = newStats ["perceptionGrowth"];
+
+
+	}
+
+	public void setGrowthRates(Dictionary<string, float> growthRates) {
+		this.healthGrowthRate = growthRates ["maxHP"];
+
+		this.maxAPGrowthRate = growthRates ["maxAP"];
+
+		this.apChargeRateGrowthRate = growthRates ["apChargeRate"];
+
+		this.perceptionGrowthRate = growthRates ["perception"];
+
+		this.accuracyGrowthRate = growthRates ["accuracy"];
 	}
 
 	public void fire ()
