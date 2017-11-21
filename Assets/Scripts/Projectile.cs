@@ -48,7 +48,7 @@ public class Projectile : MonoBehaviour {
             else
             {
                 if (hitUnit.team != team)
-                    hitUnit.takeDamage((int)(maxDamage * (1 - (distance / (2 * range * MapGenerator.step))))); // multiply by 2 to min at half damage
+                    hitUnit.takeDamage((int)(maxDamage * (distance / (2 * range * MapGenerator.step)))); // multiply by 2 to min at half damage
                 Destroy(gameObject);
             }
 		}
