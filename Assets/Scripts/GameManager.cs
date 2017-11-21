@@ -87,9 +87,6 @@ public class GameManager : MonoBehaviour {
             GameObject unitType = unitTypes[randIndex];
 
 			Dictionary<string, float> Stats = (Dictionary<string, float>) unitBaseStats[randIndex];
-			Debug.Log (Stats.Count);
-
-
 
             GameObject newObj = Instantiate(unitType, unitType.transform.position + new Vector3(0, .5f, 0), Quaternion.identity);
             newObj.transform.parent = container;

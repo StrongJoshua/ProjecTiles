@@ -356,7 +356,6 @@ public class UserControl : MonoBehaviour
         foreach(Text text in unitInfo.GetComponentsInChildren<Text>())
         {
 			if (text.name == "Name") {
-				Debug.Log (unit.name);
 				text.text = unit.name;
 			}
             else if (text.name == "HP")

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657886, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1947,8 +1947,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 515148901}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 435.5, y: 269.5, z: 0}
-  m_LocalScale: {x: 1.08875, y: 1.08875, z: 1.08875}
+  m_LocalPosition: {x: 496, y: 317, z: 0}
+  m_LocalScale: {x: 1.24, y: 1.24, z: 1.24}
   m_Children:
   - {fileID: 1710139395}
   - {fileID: 1432070195}
@@ -2272,10 +2272,15 @@ MonoBehaviour:
   perception: 10
   accuracy: 10
   healthGrowth: 1
+  healthGrowthRate: 0
   maxAPGrowth: 1
+  maxAPGrowthRate: 0
   apChargeRateGrowth: 1
+  apChargeRateGrowthRate: 0
   perceptionGrowth: 1
+  perceptionGrowthRate: 0
   accuracyGrowth: 1
+  accuracyGrowthRate: 0
   team: 0
   projectileFab: {fileID: 1010233834427942, guid: 139a4838b872107429af190d34d3bd02,
     type: 2}
@@ -3034,6 +3039,48 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: quitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 114949016093774904, guid: 17c4f559e57524b499864a202cb6ea3b,
+        type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114552007987303012, guid: 17c4f559e57524b499864a202cb6ea3b,
+        type: 2}
+      propertyPath: m_Transition
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114896900405188124, guid: 17c4f559e57524b499864a202cb6ea3b,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bca7ebb40d3228345b26ea1f5e51f857,
+        type: 3}
+    - target: {fileID: 114896900405188124, guid: 17c4f559e57524b499864a202cb6ea3b,
+        type: 2}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114552007987303012, guid: 17c4f559e57524b499864a202cb6ea3b,
+        type: 2}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d3bae6bfbe1a28c4a8de734252b41c39,
+        type: 3}
+    - target: {fileID: 114896900405188124, guid: 17c4f559e57524b499864a202cb6ea3b,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.7352941
+      objectReference: {fileID: 0}
+    - target: {fileID: 114896900405188124, guid: 17c4f559e57524b499864a202cb6ea3b,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.7352941
+      objectReference: {fileID: 0}
+    - target: {fileID: 114896900405188124, guid: 17c4f559e57524b499864a202cb6ea3b,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.7352941
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 17c4f559e57524b499864a202cb6ea3b, type: 2}
@@ -4980,7 +5027,7 @@ Prefab:
         type: 2}
       propertyPath: m_Navigation.m_SelectOnUp
       value: 
-      objectReference: {fileID: 839874869}
+      objectReference: {fileID: 734938847}
     - target: {fileID: 114552007987303012, guid: 17c4f559e57524b499864a202cb6ea3b,
         type: 2}
       propertyPath: m_Navigation.m_SelectOnDown
@@ -5685,7 +5732,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1432070194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -176, y: 105.53157, z: 0}
+  m_LocalPosition: {x: -176, y: 113.64516, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1135070}
@@ -7424,10 +7471,15 @@ MonoBehaviour:
   perception: 10
   accuracy: 10
   healthGrowth: 1
+  healthGrowthRate: 0
   maxAPGrowth: 1
+  maxAPGrowthRate: 0
   apChargeRateGrowth: 1
+  apChargeRateGrowthRate: 0
   perceptionGrowth: 1
+  perceptionGrowthRate: 0
   accuracyGrowth: 1
+  accuracyGrowthRate: 0
   team: 0
   projectileFab: {fileID: 1563048410146538, guid: 8b97493074436cb44890588e39bfcd51,
     type: 2}
