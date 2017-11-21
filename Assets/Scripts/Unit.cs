@@ -179,7 +179,8 @@ public class Unit : MonoBehaviour
 			}
 		}
 		Vector3 scale = APBar.rectTransform.localScale;
-		scale.x = AP / maxAP;
+		scale.x = Mathf.Clamp((float)AP / maxAP, 0, 1);
+
 		APBar.rectTransform.localScale = scale;
 	}
 
