@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 114868030336429770}
   - component: {fileID: 136241001160530944}
   - component: {fileID: 114481585934797256}
+  - component: {fileID: 114823813230455326}
   m_Layer: 0
   m_Name: Medic
   m_TagString: Untagged
@@ -3661,6 +3662,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yOffset: 0
   mat: {fileID: 2100000, guid: 0f7c24c2bc11be849bdb36365e286a13, type: 2}
+--- !u!114 &114823813230455326
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1013191381200846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df81702af1c8d0f40a4b12d15cf1d0e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 0}
+  cost: 5
 --- !u!114 &114868030336429770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3681,11 +3695,17 @@ MonoBehaviour:
   perception: 10
   accuracy: 10
   healthGrowth: 1
+  healthGrowthRate: 0
   maxAPGrowth: 1
+  maxAPGrowthRate: 0
   apChargeRateGrowth: 1
+  apChargeRateGrowthRate: 0
   perceptionGrowth: 1
+  perceptionGrowthRate: 0
   accuracyGrowth: 1
+  accuracyGrowthRate: 0
   team: 0
+  specialFire: {fileID: 0}
   projectileFab: {fileID: 1010233834427942, guid: 139a4838b872107429af190d34d3bd02,
     type: 2}
   specialFab: {fileID: 1343442618637042, guid: cd93e4f52dde70947b44ad95333a01ef, type: 2}

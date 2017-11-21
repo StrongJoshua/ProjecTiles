@@ -32,6 +32,7 @@ public class Unit : MonoBehaviour
 
 	public Team team;
 
+    public SpecialFire specialFire;
 	public GameObject projectileFab;
 	public GameObject specialFab;
 
@@ -124,6 +125,11 @@ public class Unit : MonoBehaviour
 
 	void Start ()
 	{
+        specialFire = GetComponent<SpecialFire>();
+        specialFire.unit = this;
+
+
+
 		isMoving = false;
 		highlighted = false;
 		isShooting = false;
@@ -206,6 +212,7 @@ public class Unit : MonoBehaviour
 		//Aim Ring has to be first child
 		//transform.GetChild(0).gameObject.SetActive(false);
 		aimRing.SetActive (false);
+        specialFire.stopAim();
 	}
 
 	public void aim ()
@@ -213,6 +220,7 @@ public class Unit : MonoBehaviour
 		isShooting = true;
 		transform.GetChild (0).gameObject.SetActive (true);
 		aimRing.SetActive (true);
+        specialFire.startAim();
 	}
 
 	private void levelUp ()
@@ -380,34 +388,25 @@ public class Unit : MonoBehaviour
 		return true;
 	}
 
-	public void special ()
+	// Fires special
+    public void special ()
 	{
-		if (specialType == SpecialType.bionade) {
-			if (canShoot ()) {
-				Projectile projectileInfo = projectileFab.GetComponent<Projectile> (); 
-				projectileInfo.team = team;
-				int numToFire = projectileInfo.numToFire;
-				float speed = projectileInfo.speed;
-				if (anim != null) {
-					anim.SetTrigger ("shoot");
-				}
-				for (int i = 0; i < numToFire; i++) {
-					//TODO Animate turn towards aim ring
-					transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
-					GameObject temp = Instantiate (specialFab, transform.position + transform.forward + transform.up, transform.rotation);
-					temp.GetComponent<Projectile> ().origin = this.gameObject;
-					temp.transform.Rotate (new Vector3 (90, 0, 0));
-					Vector3 aim = this.transform.forward * speed;
-					aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
-					//print(aim.ToString());
-					temp.GetComponent<Rigidbody> ().AddForce (aim);
-				}
-
-				costAP (specialCost);
-			}	
-		} else if (specialType == SpecialType.sniper) {
-		} else if (specialType == SpecialType.drone) {
-		} else if (specialType == SpecialType.bombs) {
+        specialFire.fire();
+        return;
+		if (specialType == SpecialType.sniper) {
+            Debug.Log("Sniping");
+            if (canShoot())
+            {
+                Debug.Log("Sniping");
+                LineRenderer line = gameObject.AddComponent(typeof(LineRenderer)) as LineRenderer;
+                Vector3[] positions = new Vector3[2];
+                positions[0] = gameObject.transform.position;
+                positions[1] = new Vector3(0, 0, 0);
+                line.startColor = Color.red;
+                line.endColor = Color.red;
+                line.receiveShadows = false;
+                line.SetPositions(positions);
+            }
 		}
 	}
 }

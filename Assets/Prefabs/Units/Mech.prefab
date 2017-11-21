@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 114970859636718398}
   - component: {fileID: 65860729561491010}
   - component: {fileID: 95937815968406688}
+  - component: {fileID: 114678972701660710}
   m_Layer: 0
   m_Name: Mech
   m_TagString: Untagged
@@ -800,6 +801,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114678972701660710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1635177178531116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2439e18288a1a64d9bf9cf045426016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 0}
 --- !u!114 &114829747430086490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -860,11 +873,17 @@ MonoBehaviour:
   perception: 10
   accuracy: 10
   healthGrowth: 1
+  healthGrowthRate: 0
   maxAPGrowth: 1
+  maxAPGrowthRate: 0
   apChargeRateGrowth: 1
+  apChargeRateGrowthRate: 0
   perceptionGrowth: 1
+  perceptionGrowthRate: 0
   accuracyGrowth: 1
+  accuracyGrowthRate: 0
   team: 0
+  specialFire: {fileID: 0}
   projectileFab: {fileID: 1563048410146538, guid: 8b97493074436cb44890588e39bfcd51,
     type: 2}
   specialFab: {fileID: 0}
