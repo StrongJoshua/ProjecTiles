@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4607719611761884}
-  - component: {fileID: 114955169773901852}
   m_Layer: 0
   m_Name: Aim Ring
   m_TagString: Untagged
@@ -841,17 +840,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yOffset: -4
   mat: {fileID: 2100000, guid: 0f7c24c2bc11be849bdb36365e286a13, type: 2}
---- !u!114 &114955169773901852
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1110942881734588}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15a073296123aa040af90d17744298eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114970859636718398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -879,6 +867,7 @@ MonoBehaviour:
   team: 0
   projectileFab: {fileID: 1563048410146538, guid: 8b97493074436cb44890588e39bfcd51,
     type: 2}
+  specialFab: {fileID: 0}
   APBar: {fileID: 114609208440154902}
   healthBar: {fileID: 114590197930602974}
   animEvent: {fileID: 0}

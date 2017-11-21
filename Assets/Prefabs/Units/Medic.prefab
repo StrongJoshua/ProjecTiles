@@ -481,7 +481,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4259554176684166}
-  - component: {fileID: 114048072058500306}
   m_Layer: 0
   m_Name: Aim Ring
   m_TagString: Untagged
@@ -3505,17 +3504,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114048072058500306
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1227421884933966}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15a073296123aa040af90d17744298eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114102275148178888
 MonoBehaviour:
   m_ObjectHideFlags: 1

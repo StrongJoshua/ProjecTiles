@@ -1528,7 +1528,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4985634532658290}
-  - component: {fileID: 114668176556250098}
   m_Layer: 0
   m_Name: Aim Ring
   m_TagString: Untagged
@@ -3506,6 +3505,7 @@ MonoBehaviour:
   team: 0
   projectileFab: {fileID: 1010233834427942, guid: 139a4838b872107429af190d34d3bd02,
     type: 2}
+  specialFab: {fileID: 0}
   APBar: {fileID: 114300596039280758}
   healthBar: {fileID: 114599098702221374}
   animEvent: {fileID: 114109264817913744}
@@ -3519,17 +3519,6 @@ MonoBehaviour:
   aimRing: {fileID: 1885521710621652}
   isFlying: 0
   specialType: 0
---- !u!114 &114668176556250098
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1885521710621652}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15a073296123aa040af90d17744298eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114745855181456230
 MonoBehaviour:
   m_ObjectHideFlags: 1

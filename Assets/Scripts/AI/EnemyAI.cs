@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour {
+public class EnemyAI {
     private GameManager gameManager;
     private Tile[,] tiles;
     private Unit[] control, target;
