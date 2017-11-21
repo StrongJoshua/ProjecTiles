@@ -392,21 +392,5 @@ public class Unit : MonoBehaviour
     public void special ()
 	{
         specialFire.fire();
-        return;
-		if (specialType == SpecialType.sniper) {
-            Debug.Log("Sniping");
-            if (canShoot())
-            {
-                Debug.Log("Sniping");
-                LineRenderer line = gameObject.AddComponent(typeof(LineRenderer)) as LineRenderer;
-                Vector3[] positions = new Vector3[2];
-                positions[0] = gameObject.transform.position;
-                positions[1] = new Vector3(0, 0, 0);
-                line.startColor = Color.red;
-                line.endColor = Color.red;
-                line.receiveShadows = false;
-                line.SetPositions(positions);
-            }
-		}
 	}
 }

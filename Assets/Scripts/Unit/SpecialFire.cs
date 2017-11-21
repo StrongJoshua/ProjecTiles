@@ -16,6 +16,6 @@ public class SpecialFire : MonoBehaviour {
     }
     public virtual void fire()
     {
-        Debug.Log("parent fire");
+
     }
 }

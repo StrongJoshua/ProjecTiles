@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 95148337524097948}
   - component: {fileID: 114603131709148816}
   - component: {fileID: 136007506557872484}
-  - component: {fileID: 114189847572704698}
+  - component: {fileID: 114668168460281058}
   m_Layer: 0
   m_Name: Infantry
   m_TagString: Untagged
@@ -3348,18 +3348,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114189847572704698
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1023700816672368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2439e18288a1a64d9bf9cf045426016, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unit: {fileID: 0}
 --- !u!114 &114233375522491744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3538,6 +3526,19 @@ MonoBehaviour:
   aimRing: {fileID: 1885521710621652}
   isFlying: 0
   specialType: 0
+--- !u!114 &114668168460281058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1023700816672368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e4d9c584584b6842bbd8d3110a05f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 0}
+  cost: 5
 --- !u!114 &114745855181456230
 MonoBehaviour:
   m_ObjectHideFlags: 1

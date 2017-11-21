@@ -10,7 +10,6 @@ public class Bionade : SpecialFire
 
     public override void fire()
     {
-        Debug.Log("Firing bionade");
         if (unit.canShoot())
         {
             Projectile projectileInfo = unit.projectileFab.GetComponent<Projectile>();
