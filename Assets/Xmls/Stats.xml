@@ -6,14 +6,6 @@
 		<accuracy growth = "75">10</accuracy>
 		<perception growth = "75">15</perception>
 
-		<GrowthChances>
-			<hpGrowthChance>75</hpGrowthChance>
-			<apGrowthChance>75</apGrowthChance>
-			<crGrowthChance>75</crGrowthChance>
-			<accGrowthChance>75</accGrowthChance>
-			<perceptionGrowthChance>75</perceptionGrowthChance>
-
-		</GrowthChances>
 	</Infantry>
 
 	<Medic>
@@ -23,14 +15,6 @@
 		<accuracy growth = "75">10</accuracy>
 		<perception growth = "95">13</perception>
 
-		<GrowthChances>
-			<hpGrowthChance>90</hpGrowthChance>
-			<apGrowthChance>75</apGrowthChance>
-			<crGrowthChance>75</crGrowthChance>
-			<accGrowthChance>75</accGrowthChance>
-			<perceptionGrowthChance>90</perceptionGrowthChance>
-
-		</GrowthChances>
 	</Medic>
 
 	<Mech>
@@ -40,14 +24,6 @@
 		<accuracy growth = "90">10</accuracy>
 		<perception growth = "90">10</perception>
 
-		<GrowthChances>
-			<hpGrowthChance>90</hpGrowthChance>
-			<apGrowthChance>70</apGrowthChance>
-			<crGrowthChance>70</crGrowthChance>
-			<accGrowthChance>90</accGrowthChance>
-			<perceptionGrowthChance>90</perceptionGrowthChance>
-
-		</GrowthChances>
 	</Mech>
 
 	<Ship>
@@ -57,22 +33,14 @@
 		<accuracy growth = "70">10</accuracy>
 		<perception growth = "70">17</perception>
 
-		<GrowthChances>
-			<hpGrowthChance>75</hpGrowthChance>
-			<apGrowthChance>80</apGrowthChance>
-			<crGrowthChance>70</crGrowthChance>
-			<accGrowthChance>70</accGrowthChance>
-			<perceptionGrowthChance>90</perceptionGrowthChance>
-
-		</GrowthChances>
 	</Ship>
 
 	<GrowthRates>
-		<hpGrowth>0.08</hpGrowth>
-		<apGrowth>0.05</apGrowth>
-		<crGrowth>0.1</crGrowth>
-		<accuracyGrowth>0.075</accuracyGrowth>
-		<perceptionGrowth>0.1</perceptionGrowth>
+		<maxHP>0.08</maxHP>
+		<maxAP>0.05</maxAP>
+		<apChargeRate>0.1</apChargeRate>
+		<accuracy>0.075</accuracy>
+		<perception>0.1</perception>
 	</GrowthRates>
 </BaseStats>
 

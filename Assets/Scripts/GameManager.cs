@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
 
     private Queue<Action> actions;
 
+	private ArrayList unitBaseStats;
+
     private bool hasUpdate;
     public bool HasUpdate
     {
@@ -48,6 +50,14 @@ public class GameManager : MonoBehaviour {
 
 	void Awake() {
 		xmlParser = new XMLParser ();
+		unitBaseStats = new ArrayList ();
+
+		foreach (GameObject unitType in unitTypes) {
+			unitBaseStats.Add (xmlParser.getBaseStats (unitType.name));
+		}
+			
+
+
 	}
 
 	// Use this for initialization
@@ -55,6 +65,7 @@ public class GameManager : MonoBehaviour {
         enemies = new Unit[enemyCount];
         characters = new Unit[map.SizeX, map.SizeY];
         pathManager = new Dictionary<Unit, List<Vector2>>();
+
 
         enemies = generateUnits(enemiesContainer, enemyCount, enemyColor, Unit.Team.enemy);
         playerUnits = generateUnits(playerContainer, playerUnitCount, playerColor, Unit.Team.player);
@@ -72,11 +83,23 @@ public class GameManager : MonoBehaviour {
         Unit[] units = new Unit[count];
         for (int i = 0; i < count; i++)
         {
-            GameObject unitType = unitTypes[UnityEngine.Random.Range(0, unitTypes.Length)];
+			int randIndex = UnityEngine.Random.Range (0, unitTypes.Length);
+            GameObject unitType = unitTypes[randIndex];
+
+			Dictionary<string, float> Stats = (Dictionary<string, float>) unitBaseStats[randIndex];
+			Debug.Log (Stats.Count);
+
+			Unit newUnit = unitType.GetComponent<Unit>();
+			newUnit.team = team;
+
+			newUnit.setStats (Stats);
+			newUnit.setGrowthRates (xmlParser.growthRates);
+
             GameObject newObj = Instantiate(unitType, unitType.transform.position + new Vector3(0, .5f, 0), Quaternion.identity);
             newObj.transform.parent = container;
-            Unit newUnit = newObj.GetComponent<Unit>();
-            newUnit.team = team;
+            
+
+
             GenerationUtils.setColor(newObj, color);
 
             addUnit(newUnit);
