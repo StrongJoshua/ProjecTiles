@@ -233,7 +233,7 @@ public class UserControl : MonoBehaviour
                         else if (cycleInput < 0)
                             cycleIndex -= 1;
                         cycleIndex = (cycleIndex + gameManager.playerUnitCount) % gameManager.playerUnitCount;
-                        cycleUnit = gameManager.playerUnits[cycleIndex];
+                        cycleUnit = gameManager.player.units[cycleIndex];
                         if (cycleUnit != null && cycleUnit.IsDead)
                             cycleUnit = null;
                     }

@@ -32,6 +32,8 @@ public class Unit : MonoBehaviour
 
 	public Team team;
 
+    public Player player;
+
     public SpecialFire specialFire;
 	public GameObject projectileFab;
 	public GameObject specialFab;
@@ -194,6 +196,12 @@ public class Unit : MonoBehaviour
 	{
 		isDead = true;
 		gameManager.deathCallback (this);
+
+        if (player != null)
+        {
+            player.killUnit(this);
+        }
+
 		if (anim != null) {
 			anim.SetTrigger ("die");
 		}

@@ -15,9 +15,11 @@ public class GameManager : MonoBehaviour {
     public Unit[,] characters;
 
     private Unit[] enemies;
-    public Unit[] playerUnits;
+
+    public Player player;
 
     public Transform enemiesContainer;
+    public HUDManager hud;
     public Transform playerContainer;
 
     private Dictionary<Unit, List<Vector2>> pathManager;
@@ -68,7 +70,16 @@ public class GameManager : MonoBehaviour {
 
 
         enemies = generateUnits(enemiesContainer, enemyCount, enemyColor, Unit.Team.enemy);
-        playerUnits = generateUnits(playerContainer, playerUnitCount, playerColor, Unit.Team.player);
+
+        // Setup player
+        Unit[] playerUnits = generateUnits(playerContainer, playerUnitCount, playerColor, Unit.Team.player);
+        player = new Player(playerUnits);
+        player.hud = hud;
+        foreach (Unit u in playerUnits)
+        {
+            u.player = player;
+        }
+
         hasUpdate = false;
 
         actions = new Queue<Action>();
@@ -76,6 +87,8 @@ public class GameManager : MonoBehaviour {
         ai = new EnemyAI(this, enemies, playerUnits, AIDelay);
 
         numPlayerUnitsAlive = playerUnitCount;
+
+        hud.initialize(player);
 	}
 
     Unit[] generateUnits(Transform container, int count, Color color, Unit.Team team)
