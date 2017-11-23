@@ -101,24 +101,32 @@ public class GameManager : MonoBehaviour {
 
 			Dictionary<string, float> Stats = (Dictionary<string, float>) unitBaseStats[randIndex];
 
-            GameObject newObj = Instantiate(unitType, unitType.transform.position + new Vector3(0, .5f, 0), Quaternion.identity);
-            newObj.transform.parent = container;
-
-			Unit newUnit = newObj.GetComponent<Unit>();
-			newUnit.team = team;
-
-			newUnit.setStats (Stats);
-			newUnit.setGrowthRates (xmlParser.growthRates);
             
-
-
-            GenerationUtils.setColor(newObj, color);
-
+			Unit newUnit = createUnit (unitType, Stats, container, color, team);
             addUnit(newUnit);
             units[i] = newUnit;
         }
         return units;
     }
+
+	public Unit createUnit(GameObject unitType, Dictionary<string, float> Stats, Transform container, Color color, Unit.Team team) {
+		GameObject newObj = Instantiate(unitType, unitType.transform.position + new Vector3(0, .5f, 0), Quaternion.identity);
+		newObj.transform.parent = container;
+
+		Unit newUnit = newObj.GetComponent<Unit>();
+		newUnit.team = team;
+
+		newUnit.setStats (Stats);
+		newUnit.setGrowthRates (xmlParser.growthRates);
+		newUnit.setHealthAP ();
+
+
+		GenerationUtils.setColor(newObj, color);
+
+		return newUnit;
+	}
+
+
 
     public void addUnit(Unit unit)
     {

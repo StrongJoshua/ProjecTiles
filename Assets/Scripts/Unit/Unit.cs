@@ -120,9 +120,9 @@ public class Unit : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
 	{
-		health = maxHealth;
+		setHealthAP ();
 		target = nullVector;
-		AP = maxAP;
+
 	}
 
 	void Start ()
@@ -138,6 +138,11 @@ public class Unit : MonoBehaviour
 		currTime = Time.timeSinceLevelLoad;
 		aimRing.SetActive (false);
 		isDead = false;
+	}
+
+	public void setHealthAP() {
+		health = maxHealth;
+		AP = maxAP;
 	}
 
 	void rechargeAP ()
@@ -258,18 +263,9 @@ public class Unit : MonoBehaviour
 	}
 
 	public void setStats(Dictionary<string, float> newStats) {
-		int oldHealth = this.maxHealth;
-		float oldAP = this.maxAP;
-		
 		this.maxHealth = (int) newStats ["maxHP"];
-
-		if (health == oldHealth)
-			health = this.maxHealth;
 	
 		this.maxAP = newStats ["maxAP"];
-
-		if (AP == oldAP)
-			AP = this.maxAP;
 	
 		this.apChargeRate = (int) newStats ["apChargeRate"];
 	
