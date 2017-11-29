@@ -16,7 +16,7 @@ public class Unit : MonoBehaviour
 	private int y;
 
 	public int maxHealth;
-	public float maxAP;
+	public int maxAP;
 	public float apChargeRate;
 	public int perception;
 	public int accuracy;
@@ -165,7 +165,7 @@ public class Unit : MonoBehaviour
 		float old = AP;
 		AP = Mathf.Min (AP + apChargeRate * Time.deltaTime, maxAP);
 		if ((int)old < (int)AP) // Update UI if it did
-            gameManager.apCallback (this);
+            gameManager.uiCallback (this);
 	}
 
 	void Update ()
@@ -203,10 +203,7 @@ public class Unit : MonoBehaviour
 				finishMovement ();
 			}
 		}
-		Vector3 scale = APBar.rectTransform.localScale;
-		scale.x = Mathf.Clamp((float)AP / maxAP, 0, 1);
-
-		APBar.rectTransform.localScale = scale;
+        updateAPBar();
 	}
 
 	public void Die ()
@@ -267,6 +264,7 @@ public class Unit : MonoBehaviour
         apChargeRate = Mathf.Floor(hiddenAPChargeRate * 100) / 100f;
         perception = (int)hiddenPerception;
         accuracy = (int)hiddenAccuracy;
+        updateHealthBar();
 	}
 
 	private bool increase (float growth)
@@ -285,15 +283,15 @@ public class Unit : MonoBehaviour
         level = 1;
 
 		this.maxHealth = (int) newStats ["maxHP"];
-	
-		this.maxAP = newStats ["maxAP"];
-	
+        hiddenMaxHealth = maxHealth;
+		this.maxAP = (int) newStats ["maxAP"];
+        hiddenMaxAP = maxAP;
 		this.apChargeRate = newStats ["apChargeRate"];
-	
+        hiddenAPChargeRate = apChargeRate;
 		this.perception = (int) newStats ["perception"];
-
+        hiddenPerception = perception;
 		this.accuracy = (int) newStats ["accuracy"];
-
+        hiddenAccuracy = accuracy;
 		this.healthGrowth = newStats ["maxHPGrowth"];
 
 		this.maxAPGrowth = newStats ["maxAPGrowth"];
@@ -352,17 +350,27 @@ public class Unit : MonoBehaviour
 			return;
 		//For now just deincrement health, we can consider armor and stuff later
 		health -= incomingDamage;
-		Vector3 scale = healthBar.rectTransform.localScale;
-		scale.x = (float)health / maxHealth;
 		if (health <= 0) {
-			scale.x = 0;
 			health = 0;
 			Die ();
 		}
-		healthBar.rectTransform.localScale = scale;
-		//Debug.Log (incomingDamage);
+        //Debug.Log (incomingDamage);
+        updateHealthBar();
 	}
 
+    public void updateHealthBar()
+    {
+        Vector3 scale = healthBar.rectTransform.localScale;
+        scale.x = (float)health / maxHealth;
+        healthBar.rectTransform.localScale = scale;
+    }
+
+    public void updateAPBar()
+    {
+        Vector3 scale = APBar.rectTransform.localScale;
+        scale.x = AP / (float)maxAP;
+        APBar.rectTransform.localScale = scale;
+    }
 
 	public void setTarget (Vector2 mapTarget)
 	{
@@ -379,6 +387,7 @@ public class Unit : MonoBehaviour
 	public void costAP (int ap)
 	{
 		this.AP -= ap;
+        gameManager.uiCallback(this);
 	}
 
 	public void startle ()
@@ -393,13 +402,9 @@ public class Unit : MonoBehaviour
 
 	public void heal (int amount)
 	{
-		if (health < maxHealth)
-			health += amount;
-		else
-			health = maxHealth;
-		Vector3 scale = healthBar.rectTransform.localScale;
-		scale.x = (float)health / maxHealth;
-		healthBar.rectTransform.localScale = scale;
+        health = Mathf.Min(health + amount, maxHealth);
+        updateHealthBar();
+        gameManager.uiCallback(this);
 	}
 
 	public void lookAt (Vector2 tile)
@@ -435,6 +440,7 @@ public class Unit : MonoBehaviour
             xp -= level * 100;
             levelUp();
         }
+        gameManager.uiCallback(this);
     }
 
     public void gainKillXP(Unit killed)
@@ -445,5 +451,6 @@ public class Unit : MonoBehaviour
             xp -= level * 100;
             levelUp();
         }
+        gameManager.uiCallback(this);
     }
 }

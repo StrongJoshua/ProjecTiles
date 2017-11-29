@@ -201,7 +201,7 @@ public class GameManager : MonoBehaviour {
         characters[(int)path[0].x, (int)path[0].y] = unit;
     }
 
-    internal void apCallback(Unit unit)
+    internal void uiCallback(Unit unit)
     {
         hasUpdate = true;
     }
