@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroneControl : MonoBehaviour {
+public class DroneControl : MonoBehaviour
+{
 	public float velocity;
 	public float turnRate;
 	public float lifetime;
@@ -13,18 +14,23 @@ public class DroneControl : MonoBehaviour {
 	public int maxDamage;
 	public UserControl userControl;
 	Vector3 offset;
+	bool exploded;
+	public GameObject droneModel;
 
 	float startTime;
 	Rigidbody rigidbody;
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		rigidbody = GetComponent<Rigidbody> ();
 		rigidbody.velocity = transform.forward;
 		userControl.mapControl = false;
 		startTime = Time.timeSinceLevelLoad;
-		offset = new Vector3 (0, Camera.main.gameObject.transform.position.y - transform.position.y, Camera.main.gameObject.transform.position.z - transform.position.z );
+		offset = new Vector3 (0, Camera.main.gameObject.transform.position.y - transform.position.y, Camera.main.gameObject.transform.position.z - transform.position.z);
+		exploded = false;
 	}
-	void OnTriggerEnter(Collider col)
+
+	void OnTriggerEnter (Collider col)
 	{
 		Unit hitUnit = col.gameObject.GetComponent<Unit> (); 
 		if (hitUnit != null && col.gameObject != origin && !hitUnit.IsDead) {
@@ -33,31 +39,70 @@ public class DroneControl : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (Time.timeSinceLevelLoad - startTime > lifetime)
-			explode ();
-			
-		rigidbody.velocity = transform.forward * velocity;
-		transform.Rotate(0, Input.GetAxis("Horizontal") * Time.deltaTime * turnRate,  0);
-	}
-
-	private void explode()
+	void Update ()
 	{
-		Instantiate(explodeParticle, transform.position, transform.rotation);
-		Collider[] allColliders = Physics.OverlapSphere(transform.position, explodeRange * MapGenerator.step);
-		foreach (Collider c in allColliders)
-		{
-			Unit t = c.gameObject.GetComponent<Unit>();
-			if (t != null && !t.team.Equals(team) && c.gameObject != origin)
-			{
-				t.takeDamage((int)(maxDamage * (1 - Vector3.Distance(t.gameObject.transform.position, this.gameObject.transform.position) / (explodeRange * MapGenerator.step))));
+		if (!exploded) {
+			DoRenderer ();
+			if (Time.timeSinceLevelLoad - startTime > lifetime) {
+				explode ();
+				startTime = Time.timeSinceLevelLoad;
+			}
+			rigidbody.velocity = transform.forward * velocity;
+			transform.Rotate (0, Input.GetAxis ("Horizontal") * Time.deltaTime * turnRate, 0);
+		} else {
+			if (Time.timeSinceLevelLoad - startTime > 2f) {
+				userControl.mapControl = true;
+				Destroy (gameObject);
 			}
 		}
-		userControl.mapControl = true;
-		Destroy(gameObject);
+
 	}
-	void LateUpdate()
+
+	private void explode ()
+	{
+		Instantiate (explodeParticle, transform.position, transform.rotation);
+		Collider[] allColliders = Physics.OverlapSphere (transform.position, explodeRange * MapGenerator.step);
+		foreach (Collider c in allColliders) {
+			Unit t = c.gameObject.GetComponent<Unit> ();
+			if (t != null && !t.team.Equals (team) && c.gameObject != origin) {
+				t.takeDamage ((int)(maxDamage * (1 - Vector3.Distance (t.gameObject.transform.position, this.gameObject.transform.position) / (2 * explodeRange * MapGenerator.step))));
+			}
+		}
+		//gameObject.SetActive (false);
+		exploded = true;
+		droneModel.SetActive (false);
+		explodeParticle.SetActive (false);
+		gameObject.GetComponent<LineRenderer> ().enabled = false;
+
+	}
+
+	void LateUpdate ()
 	{
 		Camera.main.gameObject.transform.position = transform.position + offset;
+	}
+
+
+	public void DoRenderer ()
+	{
+		float radius = explodeRange * MapGenerator.step;
+		int numSegments = 128;
+		LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer> ();
+		Color c1 = new Color (0.5f, 0.5f, 0.5f, 1);
+		lineRenderer.material = new Material (Shader.Find ("Particles/Additive"));
+		lineRenderer.SetColors (c1, c1);
+		lineRenderer.SetWidth (0.2f, 0.2f);
+		lineRenderer.SetVertexCount (numSegments + 1);
+		lineRenderer.useWorldSpace = false;
+
+		float deltaTheta = (float)(2.0 * Mathf.PI) / numSegments;
+		float theta = 0f;
+
+		for (int i = 0; i < numSegments + 1; i++) {
+			float x = radius * Mathf.Cos (theta);
+			float z = radius * Mathf.Sin (theta);
+			Vector3 pos = new Vector3 (x, -1.5f, z);
+			lineRenderer.SetPosition (i, pos);
+			theta += deltaTheta;
+		}
 	}
 }
