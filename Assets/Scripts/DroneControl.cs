@@ -71,7 +71,7 @@ public class DroneControl : MonoBehaviour
 		//gameObject.SetActive (false);
 		exploded = true;
 		droneModel.SetActive (false);
-		explodeParticle.SetActive (false);
+		GetComponent<ParticleSystem> ().Stop ();
 		gameObject.GetComponent<LineRenderer> ().enabled = false;
 
 	}
