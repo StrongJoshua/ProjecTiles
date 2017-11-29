@@ -393,8 +393,16 @@ public class Unit : MonoBehaviour
 	}
 
 	// Fires special
-    public void special ()
+	public void special (UserControl userControl)
 	{
         specialFire.fire();
+		if (specialType == SpecialType.drone) {
+			transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
+			aimRing.transform.rotation =  Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
+			GameObject special = Instantiate (specialFab, transform.position, transform.rotation);
+			special.GetComponent<DroneControl> ().origin = this.gameObject;
+			special.GetComponent<DroneControl> ().userControl = userControl;
+			userControl.phase = UserControl.Phase.free;
+		}
 	}
 }
