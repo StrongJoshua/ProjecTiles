@@ -2959,7 +2959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileStartX: 0
   tileStartZ: 0
-  map: {fileID: 0}
+  map: {fileID: 2063454713}
   color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!45 &1647810242
 Skybox:
