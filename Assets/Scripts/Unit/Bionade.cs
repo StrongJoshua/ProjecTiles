@@ -25,7 +25,7 @@ public class Bionade : SpecialFire
                 //TODO Animate turn towards aim ring
                 transform.rotation = Quaternion.Euler(0, unit.aimRing.transform.rotation.eulerAngles.y + 90, 0);
                 GameObject temp = Instantiate(unit.specialFab, transform.position + transform.forward + transform.up, transform.rotation);
-                temp.GetComponent<Projectile>().origin = this.gameObject;
+                temp.GetComponent<Projectile>().origin = unit;
                 temp.transform.Rotate(new Vector3(90, 0, 0));
                 Vector3 aim = this.transform.forward * speed;
                 aim.x = aim.x + Random.Range(-unit.gunSpread * (200 - 2.5f * unit.accuracy) / 100f, unit.gunSpread * (200 - 2.5f * unit.accuracy) / 100f);
