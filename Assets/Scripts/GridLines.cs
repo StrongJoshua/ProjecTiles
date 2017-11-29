@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class GridLines : MonoBehaviour {
     public int tileStartX, tileStartZ;
-    public int stepSize;
-    public int mapSizeX, mapSizeZ;
+    private int stepSize, mapSizeX, mapSizeZ;
+    public MapGenerator map;
     public Color color = new Color(158f/255f, 158f/255f, 158f/255f, 158f/255f);
 
     private float startX, startZ;
 
     void Start ()
     {
-        startX = (float)tileStartX - (float)stepSize / 2;
-        startZ = (float)tileStartZ - (float)stepSize / 2;
+        startX = (float)tileStartX - (float)MapGenerator.step / 2;
+        startZ = (float)tileStartZ - (float)MapGenerator.step / 2;
+
+        stepSize = MapGenerator.step;
+        mapSizeX = map.SizeX;
+        mapSizeZ = map.SizeY;
     }
 
     static Material lineMaterial;
