@@ -136,7 +136,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 85657515}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -400, y: 230.56769, z: 0}
+  m_LocalPosition: {x: -400, y: 166.90648, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 399082664}
@@ -379,7 +379,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 194165814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 290.2, y: 190.86774, z: 0}
+  m_LocalPosition: {x: 290.2, y: 127.20653, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2008007718}
@@ -960,7 +960,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 396746545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 458, y: 264, z: 0}
+  m_LocalPosition: {x: 764.5, y: 319, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1530924182}
@@ -1160,7 +1160,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 523752797}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -408, y: -214, z: 0}
+  m_LocalPosition: {x: -714.5, y: -269, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1681278554}
@@ -2280,7 +2280,7 @@ Prefab:
         type: 2}
       propertyPath: map
       value: 
-      objectReference: {fileID: 4900000, guid: 3404e3eb37169cd4891d488a24e1af56, type: 3}
+      objectReference: {fileID: 4900000, guid: 7b84e980cb8b33a42a73df7509a3a8cf, type: 3}
     - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
         type: 2}
       propertyPath: step
@@ -2756,7 +2756,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1530924181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 458, y: -264, z: 0}
+  m_LocalPosition: {x: 764.5, y: -319, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1294438900}
@@ -2959,9 +2959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileStartX: 0
   tileStartZ: 0
-  stepSize: 3
-  mapSizeX: 15
-  mapSizeZ: 15
+  map: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!45 &1647810242
 Skybox:
@@ -3331,7 +3329,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1837063601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 212, y: -16.432312, z: 0}
+  m_LocalPosition: {x: 212, y: -80.09352, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 1202006890}
@@ -3441,7 +3439,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1890409402}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -19.432312, z: 0}
+  m_LocalPosition: {x: 0, y: -83.09352, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 700810132}
@@ -3605,6 +3603,8 @@ MonoBehaviour:
   eventSystem: {fileID: 113123972}
   pauseMenu: {fileID: 1837063601}
   mapControl: 1
+  droneControl: 0
+  drone: {fileID: 0}
   movementArrow: {fileID: 1025770016786372, guid: b821284db92d49e469eb692c50ac6a67,
     type: 2}
   phase: 0
@@ -3909,8 +3909,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2008007714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 458, y: 264, z: 0}
-  m_LocalScale: {x: 1.145, y: 1.145, z: 1.145}
+  m_LocalPosition: {x: 764.5, y: 319, z: 0}
+  m_LocalScale: {x: 1.91125, y: 1.91125, z: 1.91125}
   m_Children:
   - {fileID: 194165815}
   - {fileID: 1837063602}
