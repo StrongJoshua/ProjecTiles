@@ -366,9 +366,10 @@ public class UserControl : MonoBehaviour
     {
         foreach(Text text in unitInfo.GetComponentsInChildren<Text>())
         {
-			if (text.name == "Name") {
-				text.text = unit.name;
-			}
+            if (text.name == "Name")
+            {
+                text.text = unit.name;
+            }
             else if (text.name == "HP")
                 text.text = unit.health + "/" + unit.maxHealth;
             else if (text.name == "AP")
@@ -379,6 +380,8 @@ public class UserControl : MonoBehaviour
                 text.text = unit.perception + "";
             else if (text.name == "Acc")
                 text.text = unit.accuracy + "";
+            else if (text.name == "XP")
+                text.text = unit.XP + "/" + (100 * unit.Level);
         }
         Color color = unit.team == Unit.Team.enemy ? gameManager.enemyColor : gameManager.playerColor;
         color.a = unitInfo.GetComponent<Image>().color.a;
