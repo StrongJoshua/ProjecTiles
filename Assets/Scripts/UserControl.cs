@@ -25,6 +25,8 @@ public class UserControl : MonoBehaviour
     public EventSystem eventSystem;
     public GameObject pauseMenu;
     public bool mapControl = true;
+	public bool droneControl = false;
+	public GameObject drone;
 
     public GameObject movementArrow;
 
@@ -213,7 +215,7 @@ public class UserControl : MonoBehaviour
                 }
 				else if(phase == Phase.special && !didJustShoot)
 				{
-					unit.special ();
+					unit.special (this);
 					didJustShoot = true;
 				}
             } else
@@ -263,6 +265,15 @@ public class UserControl : MonoBehaviour
         }
 
     }
+
+	void LateUpdate()
+	{
+		if(droneControl)
+		{
+			Vector3 offset = new Vector3(0f, 3f, -4f);
+			transform.position = drone.transform.position + offset;
+		}
+	}
 
     private void moveHighlightAbsolute(int newX, int newY)
     {

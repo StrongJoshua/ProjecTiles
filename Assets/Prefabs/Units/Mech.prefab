@@ -886,7 +886,7 @@ MonoBehaviour:
   specialFire: {fileID: 0}
   projectileFab: {fileID: 1563048410146538, guid: 8b97493074436cb44890588e39bfcd51,
     type: 2}
-  specialFab: {fileID: 0}
+  specialFab: {fileID: 1096361828472138, guid: a0e32ddd53cd70f4482a1a3156c4adc9, type: 2}
   APBar: {fileID: 114609208440154902}
   healthBar: {fileID: 114590197930602974}
   animEvent: {fileID: 0}
