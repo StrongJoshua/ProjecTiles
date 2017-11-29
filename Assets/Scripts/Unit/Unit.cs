@@ -17,15 +17,29 @@ public class Unit : MonoBehaviour
 
 	public int maxHealth;
 	public float maxAP;
-	public int apChargeRate;
+	public float apChargeRate;
 	public int perception;
 	public int accuracy;
+
+    private float hiddenMaxHealth, hiddenMaxAP, hiddenAPChargeRate, hiddenPerception, hiddenAccuracy;
 
 	public float healthGrowth, healthGrowthRate;
 	public float maxAPGrowth, maxAPGrowthRate;
 	public float apChargeRateGrowth, apChargeRateGrowthRate;
 	public float perceptionGrowth, perceptionGrowthRate;
 	public float accuracyGrowth, accuracyGrowthRate;
+
+    private int xp;
+    public int XP
+    {
+        get { return xp; }
+    }
+
+    private int level;
+    public int Level
+    {
+        get { return level; }
+    }
 
 	public Dictionary<string, float> initialStats;
 	private Dictionary<string, float> growthRates;
@@ -120,7 +134,7 @@ public class Unit : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
 	{
-		setHealthAP ();
+		resetHealthAP ();
 		target = nullVector;
 
 	}
@@ -130,8 +144,6 @@ public class Unit : MonoBehaviour
         specialFire = GetComponent<SpecialFire>();
         specialFire.unit = this;
 
-
-
 		isMoving = false;
 		highlighted = false;
 		isShooting = false;
@@ -140,7 +152,7 @@ public class Unit : MonoBehaviour
 		isDead = false;
 	}
 
-	public void setHealthAP() {
+	public void resetHealthAP() {
 		health = maxHealth;
 		AP = maxAP;
 	}
@@ -238,21 +250,28 @@ public class Unit : MonoBehaviour
 
 	private void levelUp ()
 	{
+        level++;
 		if (increase (healthGrowth))
-			maxHealth++;
+			hiddenMaxHealth *= 1 + healthGrowthRate;
 		if (increase (maxAPGrowth))
-			maxAP++;
+			hiddenMaxAP *= 1 + maxAPGrowthRate;
 		if (increase (apChargeRateGrowth))
-			apChargeRate++;
+			hiddenAPChargeRate *= 1 + apChargeRateGrowthRate;
 		if (increase (perceptionGrowth))
-			perception++;
+			hiddenPerception *= 1 + perceptionGrowthRate;
 		if (increase (accuracyGrowth))
-			accuracy++;
+			hiddenAccuracy *= 1 + accuracyGrowthRate;
+
+        maxHealth = (int)hiddenMaxHealth;
+        maxAP = (int)hiddenMaxAP;
+        apChargeRate = Mathf.Floor(hiddenAPChargeRate * 100) / 100f;
+        perception = (int)hiddenPerception;
+        accuracy = (int)hiddenAccuracy;
 	}
 
 	private bool increase (float growth)
 	{
-		return Random.Range (0, 1f) <= growth;
+		return Random.Range (0, 100) < growth;
 	}
 
 	public void moveTo (int targetX, int targetY)
@@ -263,11 +282,13 @@ public class Unit : MonoBehaviour
 	}
 
 	public void setStats(Dictionary<string, float> newStats) {
+        level = 1;
+
 		this.maxHealth = (int) newStats ["maxHP"];
 	
 		this.maxAP = newStats ["maxAP"];
 	
-		this.apChargeRate = (int) newStats ["apChargeRate"];
+		this.apChargeRate = newStats ["apChargeRate"];
 	
 		this.perception = (int) newStats ["perception"];
 
@@ -313,7 +334,7 @@ public class Unit : MonoBehaviour
 				transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
 				aimRing.transform.rotation =  Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
 				GameObject temp = Instantiate (projectileFab, transform.position + transform.forward + transform.up, transform.rotation);
-				temp.GetComponent<Projectile> ().origin = this.gameObject;
+				temp.GetComponent<Projectile> ().origin = this;
 				temp.transform.Rotate (new Vector3 (90, 0, 0));
 				Vector3 aim = this.transform.forward * speed;
 				aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
@@ -405,4 +426,24 @@ public class Unit : MonoBehaviour
 			userControl.phase = UserControl.Phase.free;
 		}
 	}
+
+    public void gainDamageXP(Unit damaged)
+    {
+        xp += Mathf.Min(50 * damaged.Level, level * 100);
+        if(xp >= level * 100)
+        {
+            xp -= level * 100;
+            levelUp();
+        }
+    }
+
+    public void gainKillXP(Unit killed)
+    {
+        xp += Mathf.Min(100 * killed.Level, level * 100);
+        if (xp >= level * 100)
+        {
+            xp -= level * 100;
+            levelUp();
+        }
+    }
 }

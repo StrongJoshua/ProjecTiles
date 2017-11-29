@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour {
 	public bool explodes;
 	public float explodeRange;
 	public GameObject explodeParticle;
-	public GameObject origin;
+	public Unit origin;
 
     private Vector3 start;
 
@@ -42,13 +42,19 @@ public class Projectile : MonoBehaviour {
 		float distance = Vector3.Distance (start, gameObject.transform.position); 
 		Unit hitUnit = col.gameObject.GetComponent<Unit> (); 
 
-		if(hitUnit != null && col.gameObject != origin && !hitUnit.IsDead) {
+		if(hitUnit != null && col.gameObject != origin.gameObject && !hitUnit.IsDead) {
             if (explodes)
                 explode();
             else
             {
                 if (hitUnit.team != team)
+                {
                     hitUnit.takeDamage((int)(maxDamage * (1 - (distance / (2 * range * MapGenerator.step))))); // multiply by 2 to min at half damage
+                    if (hitUnit.IsDead)
+                        origin.gainKillXP(hitUnit);
+                    else
+                        origin.gainDamageXP(hitUnit);
+                }
                 Destroy(gameObject);
             }
 		}
@@ -61,9 +67,18 @@ public class Projectile : MonoBehaviour {
         foreach (Collider c in allColliders)
         {
             Unit t = c.gameObject.GetComponent<Unit>();
-            if (t != null && !t.team.Equals(team) && c.gameObject != origin)
+            if (t != null && !t.team.Equals(team) && c.gameObject != origin.gameObject)
             {
-                t.takeDamage((int)(maxDamage * (1 - Vector3.Distance(t.gameObject.transform.position, this.gameObject.transform.position) / (explodeRange * MapGenerator.step))));
+                if (t.IsDead)
+                    continue;
+                t.takeDamage((int)(maxDamage * (1 - Vector3.Distance(t.gameObject.transform.position, this.gameObject.transform.position) / (2 * explodeRange * MapGenerator.step))));
+                if(t.IsDead)
+                {
+                    origin.gainKillXP(t);
+                } else
+                {
+                    origin.gainDamageXP(t);
+                }
             }
         }
         Destroy(gameObject);
