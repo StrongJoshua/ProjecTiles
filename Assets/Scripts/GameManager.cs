@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour {
 
 		newUnit.setStats (Stats);
 		newUnit.setGrowthRates (xmlParser.growthRates);
-		newUnit.setHealthAP ();
+		newUnit.resetHealthAP ();
 
 
 		GenerationUtils.setColor(newObj, color);
