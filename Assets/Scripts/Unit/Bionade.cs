@@ -44,6 +44,5 @@ public class Bionade : SpecialFire
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 }
