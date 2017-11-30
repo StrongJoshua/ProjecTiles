@@ -5,12 +5,14 @@ using UnityEngine;
 public class FireProjectile : MonoBehaviour
 {
 	public GameObject projectile;
+	public Projectile projectileInfo;
 	public float projectileSpeed;
+	public 
 	/*
 	 * How accurate the projectile is, higher value decreases accuracy as
 	 * it increases the possible spread of values of the projectiles initial vector path 
 	*/
-	public float gunSpread;
+	//public float gunSpread;
 	// Use this for initialization
 	void Start ()
 	{
@@ -20,7 +22,7 @@ public class FireProjectile : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.F) || Input.GetButtonDown("Fire1")) {
+		/*if (Input.GetKeyDown (KeyCode.F) || Input.GetButtonDown("Fire1")) {
 			int numToFire = projectile.GetComponent<Projectile> ().numToFire;
 			for (int i = 0; i < numToFire; i++) {
 				GameObject temp = Instantiate (projectile);
@@ -31,7 +33,8 @@ public class FireProjectile : MonoBehaviour
 				aim.x = aim.x + Random.Range (-gunSpread, gunSpread);
 				temp.GetComponent<Rigidbody> ().AddForce (aim);
 			}
-		}
+		}*/
 			
 	}
+		
 }

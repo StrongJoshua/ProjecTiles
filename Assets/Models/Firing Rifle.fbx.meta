@@ -1,130 +1,247 @@
 fileFormatVersion: 2
-guid: 35b68817c019cb049803ec1eef8ba0fc
-timeCreated: 1510727830
+guid: b3613c0b4d38073418ee4dfbad71458d
+timeCreated: 1512007023
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Head
-    100004: HeadTop_End
-    100006: HeadTop_End_end
-    100008: Hips
-    100010: Human Armature
-    100012: Human_Mesh
-    100014: LeftArm
-    100016: LeftFoot
-    100018: LeftForeArm
-    100020: LeftHand
-    100022: LeftHandIndex1
-    100024: LeftHandIndex2
-    100026: LeftHandIndex3
-    100028: LeftHandIndex4
-    100030: LeftHandIndex4_end
-    100032: LeftHandThumb1
-    100034: LeftHandThumb2
-    100036: LeftHandThumb3
-    100038: LeftHandThumb4
-    100040: LeftHandThumb4_end
-    100042: LeftLeg
-    100044: LeftShoulder
-    100046: LeftToe_End
-    100048: LeftToe_End_end
-    100050: LeftToeBase
-    100052: LeftUpLeg
-    100054: Neck
-    100056: RightArm
-    100058: RightFoot
-    100060: RightForeArm
-    100062: RightHand
-    100064: RightHandIndex1
-    100066: RightHandIndex2
-    100068: RightHandIndex3
-    100070: RightHandIndex4
-    100072: RightHandIndex4_end
-    100074: RightHandThumb1
-    100076: RightHandThumb2
-    100078: RightHandThumb3
-    100080: RightHandThumb4
-    100082: RightHandThumb4_end
-    100084: RightLeg
-    100086: RightShoulder
-    100088: RightToe_End
-    100090: RightToe_End_end
-    100092: RightToeBase
-    100094: RightUpLeg
-    100096: Spine
-    100098: Spine1
-    100100: Spine2
+    100002: mixamorig:Head
+    100004: mixamorig:HeadTop_End
+    100006: mixamorig:Hips
+    100008: mixamorig:LeftArm
+    100010: mixamorig:LeftEye
+    100012: mixamorig:LeftFoot
+    100014: mixamorig:LeftForeArm
+    100016: mixamorig:LeftHand
+    100018: mixamorig:LeftHandIndex1
+    100020: mixamorig:LeftHandIndex2
+    100022: mixamorig:LeftHandIndex3
+    100024: mixamorig:LeftHandIndex4
+    100026: mixamorig:LeftHandMiddle1
+    100028: mixamorig:LeftHandMiddle2
+    100030: mixamorig:LeftHandMiddle3
+    100032: mixamorig:LeftHandMiddle4
+    100034: mixamorig:LeftHandPinky1
+    100036: mixamorig:LeftHandPinky2
+    100038: mixamorig:LeftHandPinky3
+    100040: mixamorig:LeftHandPinky4
+    100042: mixamorig:LeftHandRing1
+    100044: mixamorig:LeftHandRing2
+    100046: mixamorig:LeftHandRing3
+    100048: mixamorig:LeftHandRing4
+    100050: mixamorig:LeftHandThumb1
+    100052: mixamorig:LeftHandThumb2
+    100054: mixamorig:LeftHandThumb3
+    100056: mixamorig:LeftHandThumb4
+    100058: mixamorig:LeftLeg
+    100060: mixamorig:LeftShoulder
+    100062: mixamorig:LeftToe_End
+    100064: mixamorig:LeftToeBase
+    100066: mixamorig:LeftUpLeg
+    100068: mixamorig:Neck
+    100070: mixamorig:RightArm
+    100072: mixamorig:RightEye
+    100074: mixamorig:RightFoot
+    100076: mixamorig:RightForeArm
+    100078: mixamorig:RightHand
+    100080: mixamorig:RightHandIndex1
+    100082: mixamorig:RightHandIndex2
+    100084: mixamorig:RightHandIndex3
+    100086: mixamorig:RightHandIndex4
+    100088: mixamorig:RightHandMiddle1
+    100090: mixamorig:RightHandMiddle2
+    100092: mixamorig:RightHandMiddle3
+    100094: mixamorig:RightHandMiddle4
+    100096: mixamorig:RightHandPinky1
+    100098: mixamorig:RightHandPinky2
+    100100: mixamorig:RightHandPinky3
+    100102: mixamorig:RightHandPinky4
+    100104: mixamorig:RightHandRing1
+    100106: mixamorig:RightHandRing2
+    100108: mixamorig:RightHandRing3
+    100110: mixamorig:RightHandRing4
+    100112: mixamorig:RightHandThumb1
+    100114: mixamorig:RightHandThumb2
+    100116: mixamorig:RightHandThumb3
+    100118: mixamorig:RightHandThumb4
+    100120: mixamorig:RightLeg
+    100122: mixamorig:RightShoulder
+    100124: mixamorig:RightToe_End
+    100126: mixamorig:RightToeBase
+    100128: mixamorig:RightUpLeg
+    100130: mixamorig:Spine
+    100132: mixamorig:Spine1
+    100134: mixamorig:Spine2
+    100136: Head
+    100138: HeadTop_End
+    100140: HeadTop_End_end
+    100142: Hips
+    100144: LeftArm
+    100146: LeftFoot
+    100148: LeftForeArm
+    100150: LeftHand
+    100152: LeftHandIndex1
+    100154: LeftHandIndex2
+    100156: LeftHandIndex3
+    100158: LeftHandIndex4
+    100160: LeftHandIndex4_end
+    100162: LeftHandThumb1
+    100164: LeftHandThumb2
+    100166: LeftHandThumb3
+    100168: LeftHandThumb4
+    100170: LeftHandThumb4_end
+    100172: LeftLeg
+    100174: LeftShoulder
+    100176: LeftToe_End
+    100178: LeftToe_End_end
+    100180: LeftToeBase
+    100182: LeftUpLeg
+    100184: Neck
+    100186: RightArm
+    100188: RightFoot
+    100190: RightForeArm
+    100192: RightHand
+    100194: RightHandIndex1
+    100196: RightHandIndex2
+    100198: RightHandIndex3
+    100200: RightHandIndex4
+    100202: RightHandIndex4_end
+    100204: RightHandThumb1
+    100206: RightHandThumb2
+    100208: RightHandThumb3
+    100210: RightHandThumb4
+    100212: RightHandThumb4_end
+    100214: RightLeg
+    100216: RightShoulder
+    100218: RightToe_End
+    100220: RightToe_End_end
+    100222: RightToeBase
+    100224: RightUpLeg
+    100226: Spine
+    100228: Spine1
+    100230: Spine2
+    100232: Human Armature
     400000: //RootNode
-    400002: Head
-    400004: HeadTop_End
-    400006: HeadTop_End_end
-    400008: Hips
-    400010: Human Armature
-    400012: Human_Mesh
-    400014: LeftArm
-    400016: LeftFoot
-    400018: LeftForeArm
-    400020: LeftHand
-    400022: LeftHandIndex1
-    400024: LeftHandIndex2
-    400026: LeftHandIndex3
-    400028: LeftHandIndex4
-    400030: LeftHandIndex4_end
-    400032: LeftHandThumb1
-    400034: LeftHandThumb2
-    400036: LeftHandThumb3
-    400038: LeftHandThumb4
-    400040: LeftHandThumb4_end
-    400042: LeftLeg
-    400044: LeftShoulder
-    400046: LeftToe_End
-    400048: LeftToe_End_end
-    400050: LeftToeBase
-    400052: LeftUpLeg
-    400054: Neck
-    400056: RightArm
-    400058: RightFoot
-    400060: RightForeArm
-    400062: RightHand
-    400064: RightHandIndex1
-    400066: RightHandIndex2
-    400068: RightHandIndex3
-    400070: RightHandIndex4
-    400072: RightHandIndex4_end
-    400074: RightHandThumb1
-    400076: RightHandThumb2
-    400078: RightHandThumb3
-    400080: RightHandThumb4
-    400082: RightHandThumb4_end
-    400084: RightLeg
-    400086: RightShoulder
-    400088: RightToe_End
-    400090: RightToe_End_end
-    400092: RightToeBase
-    400094: RightUpLeg
-    400096: Spine
-    400098: Spine1
-    400100: Spine2
-    4300000: Human_Mesh
-    7400000: Human Armature|ArmatureAction.001
-    7400002: Human Armature|ArmatureAction.002
-    7400004: Human Armature|Death
-    7400006: Human Armature|Idle
-    7400008: Human Armature|Jump
-    7400010: Human Armature|Punch
-    7400012: Human Armature|Run
-    7400014: Human Armature|Walk
-    7400016: Human Armature|Working
+    400002: mixamorig:Head
+    400004: mixamorig:HeadTop_End
+    400006: mixamorig:Hips
+    400008: mixamorig:LeftArm
+    400010: mixamorig:LeftEye
+    400012: mixamorig:LeftFoot
+    400014: mixamorig:LeftForeArm
+    400016: mixamorig:LeftHand
+    400018: mixamorig:LeftHandIndex1
+    400020: mixamorig:LeftHandIndex2
+    400022: mixamorig:LeftHandIndex3
+    400024: mixamorig:LeftHandIndex4
+    400026: mixamorig:LeftHandMiddle1
+    400028: mixamorig:LeftHandMiddle2
+    400030: mixamorig:LeftHandMiddle3
+    400032: mixamorig:LeftHandMiddle4
+    400034: mixamorig:LeftHandPinky1
+    400036: mixamorig:LeftHandPinky2
+    400038: mixamorig:LeftHandPinky3
+    400040: mixamorig:LeftHandPinky4
+    400042: mixamorig:LeftHandRing1
+    400044: mixamorig:LeftHandRing2
+    400046: mixamorig:LeftHandRing3
+    400048: mixamorig:LeftHandRing4
+    400050: mixamorig:LeftHandThumb1
+    400052: mixamorig:LeftHandThumb2
+    400054: mixamorig:LeftHandThumb3
+    400056: mixamorig:LeftHandThumb4
+    400058: mixamorig:LeftLeg
+    400060: mixamorig:LeftShoulder
+    400062: mixamorig:LeftToe_End
+    400064: mixamorig:LeftToeBase
+    400066: mixamorig:LeftUpLeg
+    400068: mixamorig:Neck
+    400070: mixamorig:RightArm
+    400072: mixamorig:RightEye
+    400074: mixamorig:RightFoot
+    400076: mixamorig:RightForeArm
+    400078: mixamorig:RightHand
+    400080: mixamorig:RightHandIndex1
+    400082: mixamorig:RightHandIndex2
+    400084: mixamorig:RightHandIndex3
+    400086: mixamorig:RightHandIndex4
+    400088: mixamorig:RightHandMiddle1
+    400090: mixamorig:RightHandMiddle2
+    400092: mixamorig:RightHandMiddle3
+    400094: mixamorig:RightHandMiddle4
+    400096: mixamorig:RightHandPinky1
+    400098: mixamorig:RightHandPinky2
+    400100: mixamorig:RightHandPinky3
+    400102: mixamorig:RightHandPinky4
+    400104: mixamorig:RightHandRing1
+    400106: mixamorig:RightHandRing2
+    400108: mixamorig:RightHandRing3
+    400110: mixamorig:RightHandRing4
+    400112: mixamorig:RightHandThumb1
+    400114: mixamorig:RightHandThumb2
+    400116: mixamorig:RightHandThumb3
+    400118: mixamorig:RightHandThumb4
+    400120: mixamorig:RightLeg
+    400122: mixamorig:RightShoulder
+    400124: mixamorig:RightToe_End
+    400126: mixamorig:RightToeBase
+    400128: mixamorig:RightUpLeg
+    400130: mixamorig:Spine
+    400132: mixamorig:Spine1
+    400134: mixamorig:Spine2
+    400136: Head
+    400138: HeadTop_End
+    400140: HeadTop_End_end
+    400142: Hips
+    400144: LeftArm
+    400146: LeftFoot
+    400148: LeftForeArm
+    400150: LeftHand
+    400152: LeftHandIndex1
+    400154: LeftHandIndex2
+    400156: LeftHandIndex3
+    400158: LeftHandIndex4
+    400160: LeftHandIndex4_end
+    400162: LeftHandThumb1
+    400164: LeftHandThumb2
+    400166: LeftHandThumb3
+    400168: LeftHandThumb4
+    400170: LeftHandThumb4_end
+    400172: LeftLeg
+    400174: LeftShoulder
+    400176: LeftToe_End
+    400178: LeftToe_End_end
+    400180: LeftToeBase
+    400182: LeftUpLeg
+    400184: Neck
+    400186: RightArm
+    400188: RightFoot
+    400190: RightForeArm
+    400192: RightHand
+    400194: RightHandIndex1
+    400196: RightHandIndex2
+    400198: RightHandIndex3
+    400200: RightHandIndex4
+    400202: RightHandIndex4_end
+    400204: RightHandThumb1
+    400206: RightHandThumb2
+    400208: RightHandThumb3
+    400210: RightHandThumb4
+    400212: RightHandThumb4_end
+    400214: RightLeg
+    400216: RightShoulder
+    400218: RightToe_End
+    400220: RightToe_End_end
+    400222: RightToeBase
+    400224: RightUpLeg
+    400226: Spine
+    400228: Spine1
+    400230: Spine2
+    400232: Human Armature
+    7400000: rifleFire
     9500000: //RootNode
-    13700000: Human_Mesh
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Texture
-    second: {fileID: 2100000, guid: a477b11a09baba844bb4a623cfcc4ae5, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -139,8 +256,7 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: Event DoDestroy has a time (3.507393) outside the clip's
-      valid range (0.000000..3.500000). It will never be fired
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -153,68 +269,12 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Human Armature|ArmatureAction.001
-      takeName: Human Armature|ArmatureAction.001
+      name: rifleFire
+      takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 1
+      lastFrame: 28
       wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Human Armature|ArmatureAction.002
-      takeName: Human Armature|ArmatureAction.002
-      firstFrame: 0
-      lastFrame: 15
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Human Armature|Death
-      takeName: Human Armature|Death
-      firstFrame: 0
-      lastFrame: 85
-      wrapMode: 0
-      orientationOffsetY: 0
+      orientationOffsetY: -79.16
       level: 0
       cycleOffset: 0
       loop: 0
@@ -232,181 +292,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.9903226
-        functionName: DoDestroy
+      - time: 0.3826955
+        functionName: DoFire
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Human Armature|Idle
-      takeName: Human Armature|Idle
-      firstFrame: 0
-      lastFrame: 240
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Human Armature|Jump
-      takeName: Human Armature|Jump
-      firstFrame: 0
-      lastFrame: 24
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Human Armature|Punch
-      takeName: Human Armature|Punch
-      firstFrame: 0
-      lastFrame: 25
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Human Armature|Run
-      takeName: Human Armature|Run
-      firstFrame: 0
-      lastFrame: 15
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Human Armature|Walk
-      takeName: Human Armature|Walk
-      firstFrame: 0
-      lastFrame: 25
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Human Armature|Working
-      takeName: Human Armature|Working
-      firstFrame: 0
-      lastFrame: 154
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -438,7 +330,7 @@ ModelImporter:
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
-  copyAvatar: 0
+  copyAvatar: 1
   humanDescription:
     serializedVersion: 2
     human:
@@ -985,7 +877,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 35b68817c019cb049803ec1eef8ba0fc,
+    type: 3}
   animationType: 3
   humanoidOversampling: 1
   additionalBone: 0

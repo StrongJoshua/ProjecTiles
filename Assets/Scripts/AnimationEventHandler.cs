@@ -18,4 +18,11 @@ public class AnimationEventHandler : MonoBehaviour {
             callback(transform.gameObject);
         }
     }
+
+	void DoFire() {
+		if (callback != null)
+		{
+			callback(transform.gameObject);
+		}
+	}
 }

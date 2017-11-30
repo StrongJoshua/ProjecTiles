@@ -51,6 +51,7 @@ public class Unit : MonoBehaviour
     public SpecialFire specialFire;
 	public GameObject projectileFab;
 	public GameObject specialFab;
+	public GameObject equippedGun;
 
 	public Projectile Projectile {
 		get { return projectileFab.GetComponent<Projectile> (); }
@@ -178,20 +179,24 @@ public class Unit : MonoBehaviour
 		if (isShooting) {
 
 			if (Input.GetKey (KeyCode.A)) {
-				aimRing.transform.Rotate (0, 0, 240f * Time.deltaTime);
+				//aimRing.transform.Rotate (0, 0, 240f * Time.deltaTime);
+				transform.Rotate (0, -240f * Time.deltaTime,0);
 			} else if (Input.GetKey (KeyCode.D)) {
-				aimRing.transform.Rotate (0, 0, -240f * Time.deltaTime);
+				//aimRing.transform.Rotate (0, 0, -240f * Time.deltaTime);
+				transform.Rotate (0, 240f * Time.deltaTime,0);
 			} else if (Mathf.Abs (Input.GetAxis ("Vertical")) > 0.1 || Mathf.Abs (Input.GetAxis ("Horizontal")) > 0.1) {
 				float yRot = 0;
 				if (Input.GetAxis ("Vertical") < 0)
 					yRot += 180 - Input.GetAxis ("Horizontal") * 90;
 				else
 					yRot += Input.GetAxis ("Horizontal") * 90;
-				aimRing.transform.rotation = Quaternion.Euler (90, yRot - 90, 0);
+				//aimRing.transform.rotation = Quaternion.Euler (90, yRot - 90, 0);
+				transform.rotation  =  Quaternion.Euler (0, yRot - 90, 0);
 			}
 		}
 		if (anim != null) {
 			anim.SetBool ("isMoving", isMoving);
+			anim.SetBool("isShooting", isShooting);
 		}
 		if (target != nullVector) {
 			Vector3 targetPoint = transform.position - new Vector3 (target.x, transform.position.y, target.z);
@@ -324,29 +329,51 @@ public class Unit : MonoBehaviour
 	public void fire (bool fromAuto)
 	{
 		if (fromAuto || canShoot()) {
-			Projectile projectileInfo = projectileFab.GetComponent<Projectile> (); 
-			projectileInfo.team = team;
-			int numToFire = projectileInfo.numToFire;
-			float speed = projectileInfo.speed;
 			if (anim != null) {
 				anim.SetTrigger ("shoot");
 			}
-			for (int i = 0; i < numToFire; i++) {
-				//TODO Animate turn towards aim ring
-				transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
-				aimRing.transform.rotation =  Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
-				GameObject temp = Instantiate (projectileFab, transform.position + transform.forward + transform.up, transform.rotation);
-				temp.GetComponent<Projectile> ().origin = this;
-				temp.transform.Rotate (new Vector3 (90, 0, 0));
-				Vector3 aim = this.transform.forward * speed;
-				aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
-				//print(aim.ToString());
-				temp.GetComponent<Rigidbody> ().AddForce (aim);
+
+			if (animEvent != null) {
+				animEvent.callback = (gameObject) => {
+					shoot();
+				};
+			} else {
+				shoot ();
 			}
+
             if(!fromAuto)
 			    costAP(attackCost);
 		}
 	}
+
+	private void shoot() {
+		Vector3 gunOrigin = transform.position + transform.forward + transform.up;
+		if (equippedGun != null) {
+			Transform gunOriginObject = equippedGun.transform.Find ("gunOrigin");
+			if (gunOriginObject != null)
+				gunOrigin = gunOriginObject.position;
+		}
+		Projectile projectileInfo = projectileFab.GetComponent<Projectile> (); 
+		projectileInfo.team = team;
+		int numToFire = projectileInfo.numToFire;
+		float speed = projectileInfo.speed;
+
+		for (int i = 0; i < numToFire; i++) {
+			//TODO Animate turn towards aim ring
+			transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
+			aimRing.transform.rotation =  Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
+			GameObject temp = Instantiate (projectileFab, gunOrigin, transform.rotation);
+			temp.GetComponent<Projectile> ().origin = this;
+			temp.transform.Rotate (new Vector3 (90, 0, 0));
+			Vector3 aim = this.transform.forward * speed;
+			aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
+			//print(aim.ToString());
+			temp.GetComponent<Rigidbody> ().AddForce (aim);
+		}
+
+	}
+
+
 
 	public void takeDamage (int incomingDamage)
 	{
@@ -361,6 +388,7 @@ public class Unit : MonoBehaviour
         //Debug.Log (incomingDamage);
         updateHealthBar();
 	}
+
 
     public void updateHealthBar()
     {
