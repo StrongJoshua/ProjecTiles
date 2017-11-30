@@ -210,7 +210,7 @@ public class UserControl : MonoBehaviour
                     confirmMovement();
                 } else if(phase == Phase.shoot && !didJustShoot)
                 {
-                    unit.fire();
+                    unit.fire(false);
                     didJustShoot = true;
                 }
 				else if(phase == Phase.special && !didJustShoot)

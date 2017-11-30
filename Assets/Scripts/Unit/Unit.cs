@@ -91,6 +91,9 @@ public class Unit : MonoBehaviour
 
 	public SpecialType specialType;
 
+    private float autoAttackLast;
+    private readonly float AutoAttackDelay = 2f;
+
 	public int X {
 		get { return x; }
 		set {
@@ -203,6 +206,7 @@ public class Unit : MonoBehaviour
 				finishMovement ();
 			}
 		}
+        autoAttack();
         updateAPBar();
 	}
 
@@ -317,9 +321,9 @@ public class Unit : MonoBehaviour
 		this.accuracyGrowthRate = growthRates ["accuracy"];
 	}
 
-	public void fire ()
+	public void fire (bool fromAuto)
 	{
-		if (canShoot ()) {
+		if (fromAuto || canShoot()) {
 			Projectile projectileInfo = projectileFab.GetComponent<Projectile> (); 
 			projectileInfo.team = team;
 			int numToFire = projectileInfo.numToFire;
@@ -339,8 +343,8 @@ public class Unit : MonoBehaviour
 				//print(aim.ToString());
 				temp.GetComponent<Rigidbody> ().AddForce (aim);
 			}
-
-			costAP (attackCost);
+            if(!fromAuto)
+			    costAP(attackCost);
 		}
 	}
 
@@ -452,5 +456,45 @@ public class Unit : MonoBehaviour
             levelUp();
         }
         gameManager.uiCallback(this);
+    }
+
+    private void autoAttack()
+    {
+        if (isDead || isMoving || isShooting)
+            return;
+        if(Time.timeSinceLevelLoad - autoAttackLast > AutoAttackDelay)
+        {
+            Unit[] enemies = gameManager.getOpponents(team);
+            Unit target = null;
+            float projRange = this.Projectile.range;
+            bool onHill = gameManager.getTileTypeFor(this) == Tile.TileType.hill; 
+            foreach(Unit u in enemies)
+            {
+                if (u.IsDead)
+                    continue;
+                float distance = Vector2.Distance(this.XY, u.XY);
+
+                float percepRange = (projRange-1) * perception / 100f;
+                Tile.TileType t = gameManager.getTileTypeFor(u);
+                if ((t == Tile.TileType.forest || t == Tile.TileType.swamp) && !onHill)
+                    percepRange *= .8f;
+
+                percepRange += 1;
+
+                if(distance <= percepRange)
+                {
+                    if (target == null)
+                        target = u;
+                    else if (distance < Vector2.Distance(this.XY, target.XY))
+                        target = u;
+                }
+            }
+            if (target != null)
+            {
+                this.lookAt(target.XY);
+                this.fire(true);
+            }
+            autoAttackLast = Time.timeSinceLevelLoad;
+        }
     }
 }

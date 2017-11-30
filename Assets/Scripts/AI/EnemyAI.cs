@@ -33,7 +33,7 @@ public class EnemyAI {
             if(inRange(cur, closest))
             {
                 cur.lookAt(closest.XY);
-                cur.fire();
+                cur.fire(false);
             } else
             {
                 setStrategicDestination(cur, closest);

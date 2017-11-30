@@ -232,4 +232,17 @@ public class GameManager : MonoBehaviour {
     {
         return numPlayerUnitsAlive > 0;
     }
+
+    internal Unit[] getOpponents(Unit.Team team)
+    {
+        if (team == Unit.Team.player)
+            return enemies;
+        else
+            return player.units.ToArray();
+    }
+
+    internal Tile.TileType getTileTypeFor(Unit unit)
+    {
+        return map.GetTileType(unit.X, unit.Y);
+    }
 }
