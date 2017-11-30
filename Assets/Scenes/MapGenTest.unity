@@ -2396,31 +2396,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: hillTilePrefabs.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: plainTilePrefabs.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: waterTilePrefabs.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: swampTilePrefabs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: forestTilePrefabs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4098335390778252, guid: 30dcd68047600cd4eb4161fc792ec374, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2455,87 +2430,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
         type: 2}
-      propertyPath: map
-      value: 
-      objectReference: {fileID: 4900000, guid: 7b84e980cb8b33a42a73df7509a3a8cf, type: 3}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: step
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
       propertyPath: parent
       value: 
       objectReference: {fileID: 2061618496}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: highlightPlane
-      value: 
-      objectReference: {fileID: 1117509993441026, guid: 3759411bb0a839f44ba600260b963948,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: highlightColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: highlightColor.a
-      value: 0.21568628
-      objectReference: {fileID: 0}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: highlightColor.r
-      value: 0.3019608
-      objectReference: {fileID: 0}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: highlightColor.g
-      value: 0.3019608
-      objectReference: {fileID: 0}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: plainTilePrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: waterTilePrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 1050143185150086, guid: 56a3031e0d5324f4f9daad2d0d79b413,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: hillTilePrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 1529209515441392, guid: 8cb12754adabec048bbc3c02882c3fca,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: swampTilePrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 1763689811583484, guid: c67054a22ce82194d8112a83f6774e0c,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: swampTilePrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 1937716204289846, guid: d8e157c24308cdc4699daf6f27882dbe,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: forestTilePrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 1462355144702012, guid: 582ab29153ca2ca47905b56a999e937c,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: forestTilePrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 1708775984971098, guid: b43307b0c000d1f469f1c2939f576b9f,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30dcd68047600cd4eb4161fc792ec374, type: 2}
   m_IsPrefabParent: 0
