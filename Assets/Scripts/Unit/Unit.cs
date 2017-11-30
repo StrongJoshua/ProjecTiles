@@ -92,7 +92,7 @@ public class Unit : MonoBehaviour
 	public SpecialType specialType;
 
     private float autoAttackLast;
-    private readonly float AutoAttackDelay = 2f;
+    private readonly float AutoAttackDelay = 5f;
 
 	public int X {
 		get { return x; }
