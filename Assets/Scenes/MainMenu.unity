@@ -1947,8 +1947,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 515148901}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 496, y: 317, z: 0}
-  m_LocalScale: {x: 1.24, y: 1.24, z: 1.24}
+  m_LocalPosition: {x: 764.5, y: 319, z: 0}
+  m_LocalScale: {x: 1.91125, y: 1.91125, z: 1.91125}
   m_Children:
   - {fileID: 1710139395}
   - {fileID: 1432070195}
@@ -2258,7 +2258,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 617110485}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afb0cc1f185ea9641a06a83c568cc1d5, type: 3}
   m_Name: 
@@ -2282,6 +2282,7 @@ MonoBehaviour:
   accuracyGrowth: 1
   accuracyGrowthRate: 0
   team: 0
+  specialFire: {fileID: 0}
   projectileFab: {fileID: 1010233834427942, guid: 139a4838b872107429af190d34d3bd02,
     type: 2}
   specialFab: {fileID: 0}
@@ -5275,9 +5276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileStartX: 0
   tileStartZ: 0
-  stepSize: 3
-  mapSizeX: 15
-  mapSizeZ: 15
+  map: {fileID: 1931388048}
   color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1222146010
 GameObject:
@@ -5732,7 +5731,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1432070194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -176, y: 113.64516, z: 0}
+  m_LocalPosition: {x: -176, y: 24.906479, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1135070}
@@ -7277,6 +7276,12 @@ Transform:
   m_Father: {fileID: 1251337836}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: -8, z: 0}
+--- !u!114 &1931388048 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
+    type: 2}
+  m_PrefabInternal: {fileID: 1543787133}
+  m_Script: {fileID: 11500000, guid: 12cfc9da74275f940a246e7334d1535b, type: 3}
 --- !u!1 &1933772148
 GameObject:
   m_ObjectHideFlags: 0
@@ -7457,7 +7462,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2025480127}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afb0cc1f185ea9641a06a83c568cc1d5, type: 3}
   m_Name: 
@@ -7481,6 +7486,7 @@ MonoBehaviour:
   accuracyGrowth: 1
   accuracyGrowthRate: 0
   team: 0
+  specialFire: {fileID: 0}
   projectileFab: {fileID: 1563048410146538, guid: 8b97493074436cb44890588e39bfcd51,
     type: 2}
   specialFab: {fileID: 0}
