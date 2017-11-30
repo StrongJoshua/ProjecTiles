@@ -438,6 +438,8 @@ public class Unit : MonoBehaviour
 
     public void gainDamageXP(Unit damaged)
     {
+        if (this.team != Team.player)
+            return;
         xp += Mathf.Min(50 * damaged.Level, level * 100);
         if(xp >= level * 100)
         {
@@ -449,6 +451,8 @@ public class Unit : MonoBehaviour
 
     public void gainKillXP(Unit killed)
     {
+        if (this.team != Team.player)
+            return;
         xp += Mathf.Min(100 * killed.Level, level * 100);
         if (xp >= level * 100)
         {
