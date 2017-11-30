@@ -415,7 +415,7 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 2100000, guid: ad83a017f1e49cd42b98f2d7ebc0bab7, type: 2}
   m_StaticBatchInfo:

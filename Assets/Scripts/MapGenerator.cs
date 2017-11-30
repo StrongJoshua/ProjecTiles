@@ -7,7 +7,11 @@ using UnityEngine.AI;
 
 public class MapGenerator : MonoBehaviour {
     public TextAsset map;
-    public GameObject[] tilePrefabs;
+    public GameObject[] plainTilePrefabs;
+    public GameObject[] waterTilePrefabs;
+    public GameObject[] hillTilePrefabs;
+    public GameObject[] swampTilePrefabs;
+    public GameObject[] forestTilePrefabs;
     public Transform parent;
     public static readonly int step = 3;
     private Tile[,] tiles;
@@ -47,7 +51,21 @@ public class MapGenerator : MonoBehaviour {
             foreach(int k in arr)
             {
                 tiles[x, height - 1 - y] = Tile.GetTile(k);
-                GameObject tile = Instantiate(tilePrefabs[k], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity, parent);
+
+                Tile.TileType tileType = (Tile.TileType)k;
+                GameObject[] choices;
+                if (tileType == Tile.TileType.plain)
+                    choices = plainTilePrefabs;
+                else if (tileType == Tile.TileType.water)
+                    choices = waterTilePrefabs;
+                else if (tileType == Tile.TileType.hill)
+                    choices = hillTilePrefabs;
+                else if (tileType == Tile.TileType.swamp)
+                    choices = swampTilePrefabs;
+                else
+                    choices = forestTilePrefabs;
+
+                GameObject tile = Instantiate(choices[UnityEngine.Random.Range(0, choices.Length)], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity, parent);
                 GameObject highlight = Instantiate(highlightPlane, tile.transform.position + new Vector3(0, .6f, 0), Quaternion.identity, tile.transform);
                 highlight.SetActive(false);
                 highlight.GetComponent<MeshRenderer>().material.color = highlightColor;
