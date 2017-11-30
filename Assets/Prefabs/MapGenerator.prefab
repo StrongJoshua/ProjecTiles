@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1503212681847268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.68, y: 4.68, z: -14.31}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,12 +51,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12cfc9da74275f940a246e7334d1535b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
-  tilePrefabs:
+  map: {fileID: 4900000, guid: 7b84e980cb8b33a42a73df7509a3a8cf, type: 3}
+  plainTilePrefabs:
   - {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+  waterTilePrefabs:
   - {fileID: 1050143185150086, guid: 56a3031e0d5324f4f9daad2d0d79b413, type: 2}
+  hillTilePrefabs:
   - {fileID: 1529209515441392, guid: 8cb12754adabec048bbc3c02882c3fca, type: 2}
+  swampTilePrefabs:
   - {fileID: 1763689811583484, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
+  - {fileID: 1937716204289846, guid: d8e157c24308cdc4699daf6f27882dbe, type: 2}
+  forestTilePrefabs:
+  - {fileID: 1462355144702012, guid: 582ab29153ca2ca47905b56a999e937c, type: 2}
   - {fileID: 1708775984971098, guid: b43307b0c000d1f469f1c2939f576b9f, type: 2}
   parent: {fileID: 0}
   highlightPlane: {fileID: 1117509993441026, guid: 3759411bb0a839f44ba600260b963948,
