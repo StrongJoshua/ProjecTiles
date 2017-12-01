@@ -11,6 +11,8 @@ public class Player {
     public Player(Unit[] units)
     {
         this.units = new List<Unit>(units);
+        foreach (Unit u in this.units)
+            u.player = this;
     }
 
     public void killUnit(Unit unit)
