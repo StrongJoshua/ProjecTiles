@@ -104,7 +104,11 @@ MonoBehaviour:
   maxDamage: 11
   numToFire: 1
   speed: 1000
-  team: 0
+  team: 1
+  explodes: 0
+  explodeRange: 0
+  explodeParticle: {fileID: 0}
+  origin: {fileID: 0}
 --- !u!136 &136015171842617880
 CapsuleCollider:
   m_ObjectHideFlags: 1

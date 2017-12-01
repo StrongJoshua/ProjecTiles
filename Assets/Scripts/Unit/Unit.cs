@@ -178,10 +178,10 @@ public class Unit : MonoBehaviour
 
 		if (isShooting) {
 
-			if (Input.GetKey (KeyCode.A)) {
+			if (Input.GetKey (KeyCode.LeftArrow)) {
 				//aimRing.transform.Rotate (0, 0, 240f * Time.deltaTime);
 				transform.Rotate (0, -240f * Time.deltaTime,0);
-			} else if (Input.GetKey (KeyCode.D)) {
+			} else if (Input.GetKey (KeyCode.RightArrow)) {
 				//aimRing.transform.Rotate (0, 0, -240f * Time.deltaTime);
 				transform.Rotate (0, 240f * Time.deltaTime,0);
 			} else if (Mathf.Abs (Input.GetAxis ("Vertical")) > 0.1 || Mathf.Abs (Input.GetAxis ("Horizontal")) > 0.1) {
@@ -453,7 +453,7 @@ public class Unit : MonoBehaviour
 	// Fires special
 	public void special (UserControl userControl)
 	{
-        specialFire.fire();
+        //specialFire.fire();
 		if (specialType == SpecialType.drone) {
 			transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
 			aimRing.transform.rotation =  Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
