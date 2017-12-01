@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour {
         pathManager = new Dictionary<Unit, List<Vector2>>();
         
         player = new Player(generateUnits(playerContainer, levelData[currentLevel].playerSpawns.Length, playerColor, Unit.Team.player));
-        player.placeUnits(levelData[currentLevel].playerSpawns);
+        player.placeUnits(levelData[currentLevel].playerSpawns, characters);
         player.hud = hud;
 
         enemies = generateUnits(enemiesContainer, levelData[currentLevel].enemyCount, enemyColor, Unit.Team.enemy);

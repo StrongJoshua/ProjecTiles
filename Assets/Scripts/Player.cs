@@ -31,12 +31,13 @@ public class Player {
 		
 	}
 
-    internal void placeUnits(Vector2[] playerSpawns)
+    internal void placeUnits(Vector2[] playerSpawns, Unit[,] characters)
     {
         for(int i = 0; i < units.Count; i++)
         {
             units[i].X = (int) playerSpawns[i].x;
             units[i].Y = (int) playerSpawns[i].y;
+            characters[units[i].X, units[i].Y] = units[i];
         }
     }
 

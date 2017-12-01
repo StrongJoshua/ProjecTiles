@@ -3667,6 +3667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - {fileID: 1831618373140612, guid: 44424849b9e02f7479269140d59cdfea, type: 2}
+  - {fileID: 1831618373140612, guid: 44424849b9e02f7479269140d59cdfea, type: 2}
   currentLevel: 0
   mapGenerator: {fileID: 2063454713}
   unitTypes:
