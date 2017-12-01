@@ -21,7 +21,7 @@ public class Unit : MonoBehaviour
 	public int perception;
 	public int accuracy;
 
-    private float hiddenMaxHealth, hiddenMaxAP, hiddenAPChargeRate, hiddenPerception, hiddenAccuracy;
+	private float hiddenMaxHealth, hiddenMaxAP, hiddenAPChargeRate, hiddenPerception, hiddenAccuracy;
 
 	public float healthGrowth, healthGrowthRate;
 	public float maxAPGrowth, maxAPGrowthRate;
@@ -29,26 +29,26 @@ public class Unit : MonoBehaviour
 	public float perceptionGrowth, perceptionGrowthRate;
 	public float accuracyGrowth, accuracyGrowthRate;
 
-    private int xp;
-    public int XP
-    {
-        get { return xp; }
-    }
+	private int xp;
 
-    private int level;
-    public int Level
-    {
-        get { return level; }
-    }
+	public int XP {
+		get { return xp; }
+	}
+
+	private int level;
+
+	public int Level {
+		get { return level; }
+	}
 
 	public Dictionary<string, float> initialStats;
 	private Dictionary<string, float> growthRates;
 
 	public Team team;
 
-    public Player player;
+	public Player player;
 
-    public SpecialFire specialFire;
+	public SpecialFire specialFire;
 	public GameObject projectileFab;
 	public GameObject specialFab;
 	public GameObject equippedGun;
@@ -92,8 +92,8 @@ public class Unit : MonoBehaviour
 
 	public SpecialType specialType;
 
-    private float autoAttackLast;
-    private readonly float AutoAttackDelay = 5f;
+	private float autoAttackLast;
+	private readonly float AutoAttackDelay = 5f;
 
 	public int X {
 		get { return x; }
@@ -145,8 +145,8 @@ public class Unit : MonoBehaviour
 
 	void Start ()
 	{
-        specialFire = GetComponent<SpecialFire>();
-        specialFire.unit = this;
+		specialFire = GetComponent<SpecialFire> ();
+		specialFire.unit = this;
 
 		isMoving = false;
 		highlighted = false;
@@ -156,7 +156,8 @@ public class Unit : MonoBehaviour
 		isDead = false;
 	}
 
-	public void resetHealthAP() {
+	public void resetHealthAP ()
+	{
 		health = maxHealth;
 		AP = maxAP;
 	}
@@ -180,10 +181,10 @@ public class Unit : MonoBehaviour
 
 			if (Input.GetKey (KeyCode.LeftArrow)) {
 				//aimRing.transform.Rotate (0, 0, 240f * Time.deltaTime);
-				transform.Rotate (0, -240f * Time.deltaTime,0);
+				transform.Rotate (0, -240f * Time.deltaTime, 0);
 			} else if (Input.GetKey (KeyCode.RightArrow)) {
 				//aimRing.transform.Rotate (0, 0, -240f * Time.deltaTime);
-				transform.Rotate (0, 240f * Time.deltaTime,0);
+				transform.Rotate (0, 240f * Time.deltaTime, 0);
 			} else if (Mathf.Abs (Input.GetAxis ("Vertical")) > 0.1 || Mathf.Abs (Input.GetAxis ("Horizontal")) > 0.1) {
 				float yRot = 0;
 				if (Input.GetAxis ("Vertical") < 0)
@@ -191,12 +192,12 @@ public class Unit : MonoBehaviour
 				else
 					yRot += Input.GetAxis ("Horizontal") * 90;
 				//aimRing.transform.rotation = Quaternion.Euler (90, yRot - 90, 0);
-				transform.rotation  =  Quaternion.Euler (0, yRot - 90, 0);
+				transform.rotation = Quaternion.Euler (0, yRot - 90, 0);
 			}
 		}
 		if (anim != null) {
 			anim.SetBool ("isMoving", isMoving);
-			anim.SetBool("isShooting", isShooting);
+			anim.SetBool ("isShooting", isShooting);
 		}
 		if (target != nullVector) {
 			Vector3 targetPoint = transform.position - new Vector3 (target.x, transform.position.y, target.z);
@@ -211,8 +212,8 @@ public class Unit : MonoBehaviour
 				finishMovement ();
 			}
 		}
-        autoAttack();
-        updateAPBar();
+		autoAttack ();
+		updateAPBar ();
 	}
 
 	public void Die ()
@@ -220,10 +221,9 @@ public class Unit : MonoBehaviour
 		isDead = true;
 		gameManager.deathCallback (this);
 
-        if (player != null)
-        {
-            player.killUnit(this);
-        }
+		if (player != null) {
+			player.killUnit (this);
+		}
 
 		if (anim != null) {
 			anim.SetTrigger ("die");
@@ -243,7 +243,7 @@ public class Unit : MonoBehaviour
 		//Aim Ring has to be first child
 		//transform.GetChild(0).gameObject.SetActive(false);
 		aimRing.SetActive (false);
-        specialFire.stopAim();
+		specialFire.stopAim ();
 	}
 
 	public void aim ()
@@ -251,12 +251,12 @@ public class Unit : MonoBehaviour
 		isShooting = true;
 		transform.GetChild (0).gameObject.SetActive (true);
 		aimRing.SetActive (true);
-        specialFire.startAim();
+		specialFire.startAim ();
 	}
 
 	private void levelUp ()
 	{
-        level++;
+		level++;
 		if (increase (healthGrowth))
 			hiddenMaxHealth *= 1 + healthGrowthRate;
 		if (increase (maxAPGrowth))
@@ -268,12 +268,12 @@ public class Unit : MonoBehaviour
 		if (increase (accuracyGrowth))
 			hiddenAccuracy *= 1 + accuracyGrowthRate;
 
-        maxHealth = (int)hiddenMaxHealth;
-        maxAP = (int)hiddenMaxAP;
-        apChargeRate = Mathf.Floor(hiddenAPChargeRate * 100) / 100f;
-        perception = (int)hiddenPerception;
-        accuracy = (int)hiddenAccuracy;
-        updateHealthBar();
+		maxHealth = (int)hiddenMaxHealth;
+		maxAP = (int)hiddenMaxAP;
+		apChargeRate = Mathf.Floor (hiddenAPChargeRate * 100) / 100f;
+		perception = (int)hiddenPerception;
+		accuracy = (int)hiddenAccuracy;
+		updateHealthBar ();
 	}
 
 	private bool increase (float growth)
@@ -288,19 +288,20 @@ public class Unit : MonoBehaviour
 
 	}
 
-	public void setStats(Dictionary<string, float> newStats) {
-        level = 1;
+	public void setStats (Dictionary<string, float> newStats)
+	{
+		level = 1;
 
-		this.maxHealth = (int) newStats ["maxHP"];
-        hiddenMaxHealth = maxHealth;
-		this.maxAP = (int) newStats ["maxAP"];
-        hiddenMaxAP = maxAP;
+		this.maxHealth = (int)newStats ["maxHP"];
+		hiddenMaxHealth = maxHealth;
+		this.maxAP = (int)newStats ["maxAP"];
+		hiddenMaxAP = maxAP;
 		this.apChargeRate = newStats ["apChargeRate"];
-        hiddenAPChargeRate = apChargeRate;
-		this.perception = (int) newStats ["perception"];
-        hiddenPerception = perception;
-		this.accuracy = (int) newStats ["accuracy"];
-        hiddenAccuracy = accuracy;
+		hiddenAPChargeRate = apChargeRate;
+		this.perception = (int)newStats ["perception"];
+		hiddenPerception = perception;
+		this.accuracy = (int)newStats ["accuracy"];
+		hiddenAccuracy = accuracy;
 		this.healthGrowth = newStats ["maxHPGrowth"];
 
 		this.maxAPGrowth = newStats ["maxAPGrowth"];
@@ -314,7 +315,8 @@ public class Unit : MonoBehaviour
 
 	}
 
-	public void setGrowthRates(Dictionary<string, float> growthRates) {
+	public void setGrowthRates (Dictionary<string, float> growthRates)
+	{
 		this.healthGrowthRate = growthRates ["maxHP"];
 
 		this.maxAPGrowthRate = growthRates ["maxAP"];
@@ -328,25 +330,26 @@ public class Unit : MonoBehaviour
 
 	public void fire (bool fromAuto)
 	{
-		if (fromAuto || canShoot()) {
+		if (fromAuto || canShoot ()) {
 			if (anim != null) {
 				anim.SetTrigger ("shoot");
 			}
 
 			if (animEvent != null) {
 				animEvent.callback = (gameObject) => {
-					shoot();
+					shoot ();
 				};
 			} else {
 				shoot ();
 			}
 
-            if(!fromAuto)
-			    costAP(attackCost);
+			if (!fromAuto)
+				costAP (attackCost);
 		}
 	}
 
-	private void shoot() {
+	private void shoot ()
+	{
 		Vector3 gunOrigin = transform.position + transform.forward + transform.up;
 		if (equippedGun != null) {
 			Transform gunOriginObject = equippedGun.transform.Find ("gunOrigin");
@@ -361,7 +364,7 @@ public class Unit : MonoBehaviour
 		for (int i = 0; i < numToFire; i++) {
 			//TODO Animate turn towards aim ring
 			transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
-			aimRing.transform.rotation =  Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
+			aimRing.transform.rotation = Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
 			GameObject temp = Instantiate (projectileFab, gunOrigin, transform.rotation);
 			temp.GetComponent<Projectile> ().origin = this;
 			temp.transform.Rotate (new Vector3 (90, 0, 0));
@@ -385,24 +388,24 @@ public class Unit : MonoBehaviour
 			health = 0;
 			Die ();
 		}
-        //Debug.Log (incomingDamage);
-        updateHealthBar();
+		//Debug.Log (incomingDamage);
+		updateHealthBar ();
 	}
 
 
-    public void updateHealthBar()
-    {
-        Vector3 scale = healthBar.rectTransform.localScale;
-        scale.x = (float)health / maxHealth;
-        healthBar.rectTransform.localScale = scale;
-    }
+	public void updateHealthBar ()
+	{
+		Vector3 scale = healthBar.rectTransform.localScale;
+		scale.x = (float)health / maxHealth;
+		healthBar.rectTransform.localScale = scale;
+	}
 
-    public void updateAPBar()
-    {
-        Vector3 scale = APBar.rectTransform.localScale;
-        scale.x = AP / (float)maxAP;
-        APBar.rectTransform.localScale = scale;
-    }
+	public void updateAPBar ()
+	{
+		Vector3 scale = APBar.rectTransform.localScale;
+		scale.x = AP / (float)maxAP;
+		APBar.rectTransform.localScale = scale;
+	}
 
 	public void setTarget (Vector2 mapTarget)
 	{
@@ -419,7 +422,7 @@ public class Unit : MonoBehaviour
 	public void costAP (int ap)
 	{
 		this.AP -= ap;
-        gameManager.uiCallback(this);
+		gameManager.uiCallback (this);
 	}
 
 	public void startle ()
@@ -429,14 +432,14 @@ public class Unit : MonoBehaviour
 
 	public bool canShoot ()
 	{
-		return AP >= attackCost;
+		return AP >= attackCost && !name.Equals("Medic");
 	}
 
 	public void heal (int amount)
 	{
-        health = Mathf.Min(health + amount, maxHealth);
-        updateHealthBar();
-        gameManager.uiCallback(this);
+		health = Mathf.Min (health + amount, maxHealth);
+		updateHealthBar ();
+		gameManager.uiCallback (this);
 	}
 
 	public void lookAt (Vector2 tile)
@@ -453,77 +456,92 @@ public class Unit : MonoBehaviour
 	// Fires special
 	public void special (UserControl userControl)
 	{
-        //specialFire.fire();
+		//specialFire.fire();
 		if (specialType == SpecialType.drone) {
 			transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
-			aimRing.transform.rotation =  Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
+			aimRing.transform.rotation = Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
 			GameObject special = Instantiate (specialFab, transform.position, transform.rotation);
 			special.GetComponent<DroneControl> ().origin = this.gameObject;
+			special.GetComponent<Projectile> ().team = team;
 			special.GetComponent<DroneControl> ().userControl = userControl;
 			userControl.phase = UserControl.Phase.free;
+		} else if (specialType == SpecialType.bionade) {
+			Projectile projectileInfo = specialFab.GetComponent<Projectile> ();
+			projectileInfo.team = team;
+			int numToFire = projectileInfo.numToFire;
+			float speed = projectileInfo.speed;
+			if (anim != null) {
+				anim.SetTrigger ("shoot");
+			}
+			//TODO Animate turn towards aim ring
+			transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
+			GameObject temp = Instantiate (specialFab, transform.position + transform.forward + transform.up, transform.rotation);
+			temp.GetComponent<Projectile> ().origin = this;
+			temp.GetComponent<Projectile> ().team = team;
+			temp.transform.Rotate (new Vector3 (90, 0, 0));
+			Vector3 aim = this.transform.forward * speed;
+			aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
+			//print(aim.ToString());
+			temp.GetComponent<Rigidbody> ().AddForce (aim);
 		}
+		costAP (specialCost);
 	}
 
-    public void gainDamageXP(Unit damaged)
-    {
-        gainXP(50 * damaged.Level);
-    }
+	public void gainDamageXP (Unit damaged)
+	{
+		gainXP (50 * damaged.Level);
+	}
 
-    public void gainKillXP(Unit killed)
-    {
-        gainXP(100 * killed.Level);
-    }
+	public void gainKillXP (Unit killed)
+	{
+		gainXP (100 * killed.Level);
+	}
 
-    private void gainXP(int gained)
-    {
-        if (this.team != Team.player)
-            return;
-        xp += Mathf.Min(gained, level * 100);
-        if (xp >= level * 100)
-        {
-            xp -= level * 100;
-            levelUp();
-        }
-        gameManager.uiCallback(this);
-    }
+	private void gainXP (int gained)
+	{
+		if (this.team != Team.player)
+			return;
+		xp += Mathf.Min (gained, level * 100);
+		if (xp >= level * 100) {
+			xp -= level * 100;
+			levelUp ();
+		}
+		gameManager.uiCallback (this);
+	}
 
-    private void autoAttack()
-    {
-        if (isDead || isMoving || isShooting)
-            return;
-        if(Time.timeSinceLevelLoad - autoAttackLast > AutoAttackDelay)
-        {
-            Unit[] enemies = gameManager.getOpponents(team);
-            Unit target = null;
-            float projRange = this.Projectile.range;
-            bool onHill = gameManager.getTileTypeFor(this) == Tile.TileType.hill; 
-            foreach(Unit u in enemies)
-            {
-                if (u.IsDead)
-                    continue;
-                float distance = Vector2.Distance(this.XY, u.XY);
+	private void autoAttack ()
+	{
+		if (isDead || isMoving || isShooting)
+			return;
+		if (Time.timeSinceLevelLoad - autoAttackLast > AutoAttackDelay) {
+			Unit[] enemies = gameManager.getOpponents (team);
+			Unit target = null;
+			float projRange = this.Projectile.range;
+			bool onHill = gameManager.getTileTypeFor (this) == Tile.TileType.hill; 
+			foreach (Unit u in enemies) {
+				if (u.IsDead)
+					continue;
+				float distance = Vector2.Distance (this.XY, u.XY);
 
-                float percepRange = (projRange-1) * perception / 100f;
-                Tile.TileType t = gameManager.getTileTypeFor(u);
-                if ((t == Tile.TileType.forest || t == Tile.TileType.swamp) && !onHill)
-                    percepRange *= .8f;
+				float percepRange = (projRange - 1) * perception / 100f;
+				Tile.TileType t = gameManager.getTileTypeFor (u);
+				if ((t == Tile.TileType.forest || t == Tile.TileType.swamp) && !onHill)
+					percepRange *= .8f;
 
-                percepRange += 1;
+				percepRange += 1;
 
-                if(distance <= percepRange)
-                {
-                    if (target == null)
-                        target = u;
-                    else if (distance < Vector2.Distance(this.XY, target.XY))
-                        target = u;
-                }
-            }
-            if (target != null)
-            {
-                this.lookAt(target.XY);
-                this.fire(true);
-            }
-            autoAttackLast = Time.timeSinceLevelLoad;
-        }
-    }
+				if (distance <= percepRange) {
+					if (target == null)
+						target = u;
+					else if (distance < Vector2.Distance (this.XY, target.XY))
+						target = u;
+				}
+			}
+			if (target != null) {
+				this.lookAt (target.XY);
+				this.fire (true);
+			}
+			autoAttackLast = Time.timeSinceLevelLoad;
+		}
+	}
 }
