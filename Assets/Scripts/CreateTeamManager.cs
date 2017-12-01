@@ -10,6 +10,7 @@ public class CreateTeamManager : MonoBehaviour {
     public int unitCount;
 
 	void Start () {
+        team.verticalScrollbar.value = 1;
 		for(int i = 0; i < unitCount; i++)
         {
         }

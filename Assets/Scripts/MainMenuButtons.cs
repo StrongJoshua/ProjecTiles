@@ -18,6 +18,10 @@ public class MainMenuButtons : MonoBehaviour {
     {
         EventSystem.current.SetSelectedGameObject(mainMenuGroup.GetComponentInChildren<Button>().gameObject);
 
+        creditsGroup.SetActive(false);
+        backButton.SetActive(false);
+        createTeamGroup.SetActive(false);
+
         RectTransform rt = createTeamGroup.GetComponent<RectTransform>();
         rt.position = new Vector3(Screen.width / 2f, Screen.height / 2f);
     }
