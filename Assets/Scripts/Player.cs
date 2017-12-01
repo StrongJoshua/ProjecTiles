@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +15,6 @@ public class Player {
 
     public void killUnit(Unit unit)
     {
-        Debug.Log("Killing unit");
         units.Remove(unit);
         hud.removeUnit(unit);
     }
@@ -28,4 +28,18 @@ public class Player {
 	void Update () {
 		
 	}
+
+    internal void placeUnits(Vector2[] playerSpawns)
+    {
+        for(int i = 0; i < units.Count; i++)
+        {
+            units[i].X = (int) playerSpawns[i].x;
+            units[i].Y = (int) playerSpawns[i].y;
+        }
+    }
+
+    internal int unitCount()
+    {
+        return units.Count;
+    }
 }

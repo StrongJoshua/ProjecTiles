@@ -1,9 +1,6 @@
 ﻿using System.IO;
-using System;
-using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MapGenerator : MonoBehaviour {
     public TextAsset map;
@@ -20,7 +17,13 @@ public class MapGenerator : MonoBehaviour {
     public GameObject highlightPlane;
     public Color highlightColor;
 
-    void Awake () {
+    private void Awake()
+    {
+        if (map != null)
+            generateMap();
+    }
+
+    internal void generateMap () {
         StringReader sr = new StringReader(map.text);
         string line;
         ArrayList rows = new ArrayList();
@@ -115,5 +118,10 @@ public class MapGenerator : MonoBehaviour {
     public Tile[,] Tiles
     {
         get { return tiles; }
+    }
+
+    public bool hasGeneratedMap()
+    {
+        return tiles != null;
     }
 }

@@ -3,14 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Level : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public TextAsset map;
+    public Vector2[] playerSpawns = new Vector2[5];
+    public int enemyCount;
 }

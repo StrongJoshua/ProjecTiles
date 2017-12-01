@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 	private XMLParser xmlParser;
-    public MapGenerator map;
-    public int enemyCount, playerUnitCount;
+    public GameObject[] levels;
+    private Level[] levelData;
+    public int currentLevel;
+    public MapGenerator mapGenerator;
     public GameObject[] unitTypes;
 
     public Color playerColor, enemyColor;
@@ -48,7 +50,6 @@ public class GameManager : MonoBehaviour {
     public float AIDelay;
 
     internal Action<Unit> controlDeathCallback;
-    private int numPlayerUnitsAlive;
 
 	void Awake() {
 		xmlParser = new XMLParser ();
@@ -57,36 +58,33 @@ public class GameManager : MonoBehaviour {
 		foreach (GameObject unitType in unitTypes) {
 			unitBaseStats.Add (xmlParser.getBaseStats (unitType.name));
 		}
-			
-
-
 	}
 
 	// Use this for initialization
 	void Start () {
-        enemies = new Unit[enemyCount];
-        characters = new Unit[map.SizeX, map.SizeY];
+        currentLevel = 0;
+        levelData = new Level[levels.Length];
+        for (int i = 0; i < levels.Length; i++)
+            levelData[i] = levels[i].GetComponent<Level>();
+
+        mapGenerator.map = levelData[currentLevel].map;
+        mapGenerator.generateMap();
+
+        enemies = new Unit[levelData[currentLevel].enemyCount];
+        characters = new Unit[mapGenerator.SizeX, mapGenerator.SizeY];
         pathManager = new Dictionary<Unit, List<Vector2>>();
-
-
-        enemies = generateUnits(enemiesContainer, enemyCount, enemyColor, Unit.Team.enemy);
-
-        // Setup player
-        Unit[] playerUnits = generateUnits(playerContainer, playerUnitCount, playerColor, Unit.Team.player);
-        player = new Player(playerUnits);
+        
+        player = new Player(generateUnits(playerContainer, levelData[currentLevel].playerSpawns.Length, playerColor, Unit.Team.player));
+        player.placeUnits(levelData[currentLevel].playerSpawns);
         player.hud = hud;
-        foreach (Unit u in playerUnits)
-        {
-            u.player = player;
-        }
+
+        enemies = generateUnits(enemiesContainer, levelData[currentLevel].enemyCount, enemyColor, Unit.Team.enemy);
 
         hasUpdate = false;
 
         actions = new Queue<Action>();
 
-        ai = new EnemyAI(this, enemies, playerUnits, AIDelay);
-
-        numPlayerUnitsAlive = playerUnitCount;
+        ai = new EnemyAI(this, enemies, player.units.ToArray(), AIDelay);
 
         hud.initialize(player);
 	}
@@ -100,7 +98,6 @@ public class GameManager : MonoBehaviour {
             GameObject unitType = unitTypes[randIndex];
 
 			Dictionary<string, float> Stats = (Dictionary<string, float>) unitBaseStats[randIndex];
-
             
 			Unit newUnit = createUnit (unitType, Stats, container, color, team);
             addUnit(newUnit);
@@ -120,7 +117,6 @@ public class GameManager : MonoBehaviour {
 		newUnit.setGrowthRates (xmlParser.growthRates);
 		newUnit.resetHealthAP ();
 
-
 		GenerationUtils.setColor(newObj, color);
 
 		return newUnit;
@@ -130,14 +126,14 @@ public class GameManager : MonoBehaviour {
 
     public void addUnit(Unit unit)
     {
-        int tileX = UnityEngine.Random.Range(0, map.SizeX);
-        int tileY = UnityEngine.Random.Range(0, map.SizeY);
+        int tileX = UnityEngine.Random.Range(0, mapGenerator.SizeX);
+        int tileY = UnityEngine.Random.Range(0, mapGenerator.SizeY);
 
 
-        while (!map.GetTile(tileX, tileY).AllowsSpawn || characters[tileX, tileY] != null)
+        while (!mapGenerator.GetTile(tileX, tileY).AllowsSpawn || characters[tileX, tileY] != null)
         {
-            tileX = UnityEngine.Random.Range(0, map.SizeX);
-            tileY = UnityEngine.Random.Range(0, map.SizeY);
+            tileX = UnityEngine.Random.Range(0, mapGenerator.SizeX);
+            tileY = UnityEngine.Random.Range(0, mapGenerator.SizeY);
         }
 
         unit.X = tileX;
@@ -182,7 +178,7 @@ public class GameManager : MonoBehaviour {
     internal void movementCallback(Unit unit)
     {
         List<Vector2> path = pathManager[unit];
-        unit.costAP(unit.isFlying ? 1 : map.Tiles[unit.X, unit.Y].MovementCost);
+        unit.costAP(unit.isFlying ? 1 : mapGenerator.Tiles[unit.X, unit.Y].MovementCost);
         path.RemoveAt(0);
         hasUpdate = true;
         if (path.Count == 0)
@@ -224,13 +220,11 @@ public class GameManager : MonoBehaviour {
         characters[unit.X, unit.Y] = null;
         if(controlDeathCallback != null)
             controlDeathCallback(unit);
-        if (unit.team == Unit.Team.player)
-            numPlayerUnitsAlive -= 1;
     }
 
     public bool playerUnitsAlive()
     {
-        return numPlayerUnitsAlive > 0;
+        return player.units.Count > 0;
     }
 
     internal Unit[] getOpponents(Unit.Team team)
@@ -243,6 +237,6 @@ public class GameManager : MonoBehaviour {
 
     internal Tile.TileType getTileTypeFor(Unit unit)
     {
-        return map.GetTileType(unit.X, unit.Y);
+        return mapGenerator.GetTileType(unit.X, unit.Y);
     }
 }

@@ -11,7 +11,7 @@ public class EnemyAI {
 	public EnemyAI(GameManager gameManager, Unit[] control, Unit[] target, float delay)
     {
         this.gameManager = gameManager;
-        tiles = gameManager.map.Tiles;
+        tiles = gameManager.mapGenerator.Tiles;
         this.control = control;
         this.target = target;
         this.delay = delay;
