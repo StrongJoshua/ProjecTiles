@@ -75,13 +75,13 @@ public class GameManager : MonoBehaviour {
 
         GameObject createTeamMenu = GameObject.Find("CreateTeamMenu");
         if(createTeamMenu == null)
-            player = new Player(generateUnits(playerContainer, levelData[currentLevel].playerSpawns.Length, playerColor, Unit.Team.player));
+            player = new Player(generateUnits(playerContainer, levelData[currentLevel], playerColor, Unit.Team.player));
         else
             player = createTeamMenu.GetComponent<CreateTeamManager>().generatePlayer(playerColor);
         player.placeUnits(levelData[currentLevel].playerSpawns, characters, playerContainer, this);
         player.hud = hud;
 
-        enemies = generateUnits(enemiesContainer, levelData[currentLevel].enemyCount, enemyColor, Unit.Team.enemy);
+        enemies = generateUnits(enemiesContainer, levelData[currentLevel], enemyColor, Unit.Team.enemy);
 
         hasUpdate = false;
 
@@ -92,10 +92,10 @@ public class GameManager : MonoBehaviour {
         hud.initialize(player);
 	}
 
-    Unit[] generateUnits(Transform container, int count, Color color, Unit.Team team)
+    Unit[] generateUnits(Transform container, Level level, Color color, Unit.Team team)
     {
-        Unit[] units = new Unit[count];
-        for (int i = 0; i < count; i++)
+        Unit[] units = new Unit[team == Unit.Team.player ? level.playerSpawns.Length : level.enemyCount];
+        for (int i = 0; i < units.Length; i++)
         {
 			int randIndex = UnityEngine.Random.Range (0, unitTypes.Length);
             GameObject unitType = unitTypes[randIndex];
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour {
 			Dictionary<string, float> Stats = (Dictionary<string, float>) unitBaseStats[randIndex];
             
 			Unit newUnit = createUnit (unitType, Stats, container, color, team, xmlParser);
-            addUnit(newUnit);
+            addUnit(newUnit, level.enemySpawnAreas);
             units[i] = newUnit;
         }
         return units;
@@ -127,16 +127,16 @@ public class GameManager : MonoBehaviour {
 
 
 
-    public void addUnit(Unit unit)
+    public void addUnit(Unit unit, Rect[] spawnAreas)
     {
-        int tileX = UnityEngine.Random.Range(0, mapGenerator.SizeX);
-        int tileY = UnityEngine.Random.Range(0, mapGenerator.SizeY);
-
+        Rect area = spawnAreas[UnityEngine.Random.Range(0, spawnAreas.Length)];
+        int tileX = UnityEngine.Random.Range((int) area.x, (int) (area.x + area.width));
+        int tileY = UnityEngine.Random.Range((int) area.y, (int) (area.y + area.height));
 
         while (!mapGenerator.GetTile(tileX, tileY).AllowsSpawn || characters[tileX, tileY] != null)
         {
-            tileX = UnityEngine.Random.Range(0, mapGenerator.SizeX);
-            tileY = UnityEngine.Random.Range(0, mapGenerator.SizeY);
+            tileX = UnityEngine.Random.Range((int)area.x, (int)(area.x + area.width));
+            tileY = UnityEngine.Random.Range((int)area.y, (int)(area.y + area.height));
         }
 
         unit.X = tileX;

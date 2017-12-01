@@ -46,6 +46,17 @@ MonoBehaviour:
   - {x: 23, y: 4}
   - {x: 21, y: 2}
   enemyCount: 10
+  enemySpawnAreas:
+  - serializedVersion: 2
+    x: 0
+    y: 2
+    width: 13
+    height: 9
+  - serializedVersion: 2
+    x: 0
+    y: 16
+    width: 23
+    height: 9
 --- !u!224 &224217903573317204
 RectTransform:
   m_ObjectHideFlags: 1
