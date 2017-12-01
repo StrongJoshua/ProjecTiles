@@ -68,7 +68,7 @@ public class MainMenuButtons : MonoBehaviour {
         mainAnim.SetTrigger("RemoveMenu");
 
         createTeamGroup.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(createTeamGroup.GetComponentInChildren<Button>().gameObject);
+        createTeamGroup.GetComponent<CreateTeamManager>().switchTo();
     }
 
     public void startGame()
@@ -89,7 +89,7 @@ public class MainMenuButtons : MonoBehaviour {
 
 	void Update()
 	{
-        if(Input.GetAxis("Cancel") > 0)
+        if(Input.GetAxis("Cancel") > 0 && createTeamGroup.GetComponent<CreateTeamManager>().allowBack())
         {
             showMainMenu();
             return;

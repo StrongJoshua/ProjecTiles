@@ -72,9 +72,13 @@ public class GameManager : MonoBehaviour {
         enemies = new Unit[levelData[currentLevel].enemyCount];
         characters = new Unit[mapGenerator.SizeX, mapGenerator.SizeY];
         pathManager = new Dictionary<Unit, List<Vector2>>();
-        
-        player = new Player(generateUnits(playerContainer, levelData[currentLevel].playerSpawns.Length, playerColor, Unit.Team.player));
-        player.placeUnits(levelData[currentLevel].playerSpawns, characters);
+
+        GameObject createTeamMenu = GameObject.Find("CreateTeamMenu");
+        if(createTeamMenu == null)
+            player = new Player(generateUnits(playerContainer, levelData[currentLevel].playerSpawns.Length, playerColor, Unit.Team.player));
+        else
+            player = createTeamMenu.GetComponent<CreateTeamManager>().generatePlayer(playerColor);
+        player.placeUnits(levelData[currentLevel].playerSpawns, characters, playerContainer, this);
         player.hud = hud;
 
         enemies = generateUnits(enemiesContainer, levelData[currentLevel].enemyCount, enemyColor, Unit.Team.enemy);
@@ -98,14 +102,14 @@ public class GameManager : MonoBehaviour {
 
 			Dictionary<string, float> Stats = (Dictionary<string, float>) unitBaseStats[randIndex];
             
-			Unit newUnit = createUnit (unitType, Stats, container, color, team);
+			Unit newUnit = createUnit (unitType, Stats, container, color, team, xmlParser);
             addUnit(newUnit);
             units[i] = newUnit;
         }
         return units;
     }
 
-	public Unit createUnit(GameObject unitType, Dictionary<string, float> Stats, Transform container, Color color, Unit.Team team) {
+	public static Unit createUnit(GameObject unitType, Dictionary<string, float> Stats, Transform container, Color color, Unit.Team team, XMLParser xmlParser) {
 		GameObject newObj = Instantiate(unitType, unitType.transform.position + new Vector3(0, .5f, 0), Quaternion.identity);
 		newObj.transform.parent = container;
 

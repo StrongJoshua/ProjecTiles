@@ -31,7 +31,7 @@ public class Player {
 		
 	}
 
-    internal void placeUnits(Vector2[] playerSpawns, Unit[,] characters)
+    internal void placeUnits(Vector2[] playerSpawns, Unit[,] characters, Transform parent, GameManager gm)
     {
         for(int i = 0; i < units.Count; i++)
         {
@@ -40,6 +40,8 @@ public class Player {
             unit.X = (int) playerSpawns[i].x;
             unit.Y = (int) playerSpawns[i].y;
             characters[unit.X, unit.Y] = unit;
+            unit.transform.parent = parent;
+            unit.gameManager = gm;
         }
     }
 
