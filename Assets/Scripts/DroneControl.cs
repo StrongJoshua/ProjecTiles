@@ -87,11 +87,17 @@ public class DroneControl : MonoBehaviour
 		float radius = explodeRange * MapGenerator.step;
 		int numSegments = 128;
 		LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer> ();
-		Color c1 = new Color (0.5f, 0.5f, 0.5f, 1);
+		Color c1 = new Color (1, 0f, 0f, 1);
+        Color c2 = new Color(1, .8f, 0, 1);
+
+        Gradient gradient = new Gradient();
+        gradient.colorKeys = new GradientColorKey[] { new GradientColorKey(c1, 0), new GradientColorKey(c2, .5f), new GradientColorKey(c1, 1) };
+
 		lineRenderer.material = new Material (Shader.Find ("Particles/Additive"));
-		lineRenderer.SetColors (c1, c1);
-		lineRenderer.SetWidth (0.2f, 0.2f);
-		lineRenderer.SetVertexCount (numSegments + 1);
+        lineRenderer.colorGradient = gradient;
+		lineRenderer.startWidth = 0.2f;
+        lineRenderer.endWidth = .2f;
+		lineRenderer.positionCount = numSegments + 1;
 		lineRenderer.useWorldSpace = false;
 
 		float deltaTheta = (float)(2.0 * Mathf.PI) / numSegments;
