@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuButtons : MonoBehaviour {
-    public GameObject mainMenuGroup, creditsGroup, backButton;
+    public Canvas canvas;
+    public GameObject mainMenuGroup, creditsGroup, backButton, createTeamGroup;
     public AudioClip click, hover;
-    public EventSystem eventSystem;
-    public Animator anim;
-    public AnimationEventHandler remover;
+    public Animator mainAnim, createAnim;
+    public AnimationEventHandler mainRemover, createRemover;
 
 	Rect ScreenRect = new Rect(0,0,Screen.width,Screen.height);
 
@@ -21,28 +21,25 @@ public class MainMenuButtons : MonoBehaviour {
 
     public void showCredits ()
     {
-        remover.callback = (GameObject gameObject) =>
+        mainRemover.callback = (GameObject gameObject) =>
         {
             mainMenuGroup.SetActive(false);
         };
-        anim.SetTrigger("RemoveMenu");
+        mainAnim.SetTrigger("RemoveMenu");
         creditsGroup.SetActive(true);
 		backButton.SetActive (true);
 		//negative of half the canvas size (800x600) times the Screen width divided by the canvas width. Screen width/canvas width is the scale factor of the canvas.
-        EventSystem.current.SetSelectedGameObject(backButton);
         creditsGroup.GetComponent<RectTransform>().position = new Vector3(Screen.width / 2f, -300 * (Screen.width / 800f), 0);
-
-		eventSystem.SetSelectedGameObject(backButton);
+        EventSystem.current.SetSelectedGameObject(backButton);
     }
 
     public void showMainMenu ()
     {
         creditsGroup.SetActive(false);
-		backButton.SetActive (false);
+		backButton.SetActive(false);
+        createTeamGroup.SetActive(false);
         mainMenuGroup.SetActive(true);
-		creditsGroup.GetComponent<RectTransform> ().position = new Vector3 (Screen.width/2f, -300 * (Screen.width/800f), 0);
         EventSystem.current.SetSelectedGameObject(mainMenuGroup.GetComponentInChildren<Button>().gameObject);
-        eventSystem.SetSelectedGameObject(mainMenuGroup.GetComponentInChildren<Button>().gameObject);
     }
 
     public void playClick()
@@ -55,16 +52,29 @@ public class MainMenuButtons : MonoBehaviour {
         GetComponent<AudioSource>().PlayOneShot(hover);
     }
 
+    public void createTeam()
+    {
+        mainRemover.callback = (GameObject gameObject) =>
+        {
+            mainMenuGroup.SetActive(false);
+        };
+        mainAnim.SetTrigger("RemoveMenu");
+
+        RectTransform rt = createTeamGroup.GetComponent<RectTransform>();
+        rt.position = new Vector3(0, Screen.height / 2f);
+        createTeamGroup.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(createTeamGroup.GetComponentInChildren<Button>().gameObject);
+    }
+
     public void startGame()
     {
         // Start animating buttons to fly off
         // Calls an animation event once done to remove elements
-        remover.callback = (GameObject gameObject) =>
+        createRemover.callback = (GameObject gameObject) =>
         {
             Destroy(gameObject);
         };
-        anim.SetTrigger("RemoveMenu");
-
+        createAnim.SetTrigger("RemoveMenu");
         SceneManager.LoadScene("MapGenTest");
     }
 
@@ -74,6 +84,12 @@ public class MainMenuButtons : MonoBehaviour {
 
 	void Update()
 	{
+        if(Input.GetAxis("Cancel") > 0)
+        {
+            showMainMenu();
+            return;
+        }
+
 		if (creditsGroup.activeSelf) {
 			creditsGroup.GetComponent<RectTransform>().position += new Vector3 (0,Screen.height/10f*Time.deltaTime,0);
 		}
