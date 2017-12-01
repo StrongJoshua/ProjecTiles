@@ -432,7 +432,7 @@ public class Unit : MonoBehaviour
 
 	public bool canShoot ()
 	{
-		return AP >= attackCost;
+		return AP >= attackCost && !name.Equals("Medic");
 	}
 
 	public void heal (int amount)
