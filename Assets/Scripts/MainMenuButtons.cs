@@ -68,6 +68,7 @@ public class MainMenuButtons : MonoBehaviour {
         mainAnim.SetTrigger("RemoveMenu");
 
         createTeamGroup.SetActive(true);
+        createAnim.SetTrigger("enter");
         createTeamGroup.GetComponent<CreateTeamManager>().switchTo();
     }
 
@@ -79,7 +80,7 @@ public class MainMenuButtons : MonoBehaviour {
         {
             Destroy(gameObject);
         };
-        createAnim.SetTrigger("RemoveMenu");
+        createAnim.SetTrigger("exit");
         SceneManager.LoadScene("MapGenTest");
     }
 
