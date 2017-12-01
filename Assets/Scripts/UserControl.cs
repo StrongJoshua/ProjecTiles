@@ -72,8 +72,9 @@ public class UserControl : MonoBehaviour
     {
         delay = defaultDelay;
         lastTime = 0;
-        x = 0;
-        y = 0;
+        x = gameManager.player.units[0].X;
+        y = gameManager.player.units[0].Y;
+        moveHighlightAbsolute(x, y);
         xDel = 0;
         yDel = 0;
 		selector = cam.gameObject.GetComponent<SelectedHighlight>();
