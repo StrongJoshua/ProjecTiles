@@ -17,6 +17,9 @@ public class MainMenuButtons : MonoBehaviour {
     void Start()
     {
         EventSystem.current.SetSelectedGameObject(mainMenuGroup.GetComponentInChildren<Button>().gameObject);
+
+        RectTransform rt = createTeamGroup.GetComponent<RectTransform>();
+        rt.position = new Vector3(Screen.width / 2f, Screen.height / 2f);
     }
 
     public void showCredits ()
@@ -29,7 +32,7 @@ public class MainMenuButtons : MonoBehaviour {
         creditsGroup.SetActive(true);
 		backButton.SetActive (true);
 		//negative of half the canvas size (800x600) times the Screen width divided by the canvas width. Screen width/canvas width is the scale factor of the canvas.
-        creditsGroup.GetComponent<RectTransform>().position = new Vector3(Screen.width / 2f, -300 * (Screen.width / 800f), 0);
+        creditsGroup.GetComponent<RectTransform>().position = new Vector3(Screen.width / 2f, -300 * canvas.scaleFactor, 0);
         EventSystem.current.SetSelectedGameObject(backButton);
     }
 
@@ -60,8 +63,6 @@ public class MainMenuButtons : MonoBehaviour {
         };
         mainAnim.SetTrigger("RemoveMenu");
 
-        RectTransform rt = createTeamGroup.GetComponent<RectTransform>();
-        rt.position = new Vector3(0, Screen.height / 2f);
         createTeamGroup.SetActive(true);
         EventSystem.current.SetSelectedGameObject(createTeamGroup.GetComponentInChildren<Button>().gameObject);
     }
