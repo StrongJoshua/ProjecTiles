@@ -62,7 +62,6 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        currentLevel = 0;
         levelData = new Level[levels.Length];
         for (int i = 0; i < levels.Length; i++)
             levelData[i] = levels[i].GetComponent<Level>();

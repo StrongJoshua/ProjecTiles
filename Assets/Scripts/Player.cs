@@ -35,9 +35,11 @@ public class Player {
     {
         for(int i = 0; i < units.Count; i++)
         {
-            units[i].X = (int) playerSpawns[i].x;
-            units[i].Y = (int) playerSpawns[i].y;
-            characters[units[i].X, units[i].Y] = units[i];
+            Unit unit = units[i];
+            characters[unit.X, unit.Y] = null;
+            unit.X = (int) playerSpawns[i].x;
+            unit.Y = (int) playerSpawns[i].y;
+            characters[unit.X, unit.Y] = unit;
         }
     }
 
