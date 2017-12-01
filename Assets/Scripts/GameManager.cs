@@ -66,30 +66,36 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < levels.Length; i++)
             levelData[i] = levels[i].GetComponent<Level>();
 
-        mapGenerator.map = levelData[currentLevel].map;
-        mapGenerator.generateMap();
+		initializeLevel (currentLevel);
 
-        enemies = new Unit[levelData[currentLevel].enemyCount];
-        characters = new Unit[mapGenerator.SizeX, mapGenerator.SizeY];
-        pathManager = new Dictionary<Unit, List<Vector2>>();
+       
+	}
 
-        GameObject createTeamMenu = GameObject.Find("CreateTeamMenu");
-        if(createTeamMenu == null)
-            player = new Player(generateUnits(playerContainer, levelData[currentLevel], playerColor, Unit.Team.player));
-        else
-            player = createTeamMenu.GetComponent<CreateTeamManager>().generatePlayer(playerColor);
-        player.placeUnits(levelData[currentLevel].playerSpawns, characters, playerContainer, this);
-        player.hud = hud;
+	void initializeLevel(int currentLevel) {
+		mapGenerator.map = levelData[currentLevel].map;
+		mapGenerator.generateMap();
 
-        enemies = generateUnits(enemiesContainer, levelData[currentLevel], enemyColor, Unit.Team.enemy);
+		enemies = new Unit[levelData[currentLevel].enemyCount];
+		characters = new Unit[mapGenerator.SizeX, mapGenerator.SizeY];
+		pathManager = new Dictionary<Unit, List<Vector2>>();
 
-        hasUpdate = false;
+		GameObject createTeamMenu = GameObject.Find("CreateTeamMenu");
+		if(createTeamMenu == null)
+			player = new Player(generateUnits(playerContainer, levelData[currentLevel], playerColor, Unit.Team.player));
+		else
+			player = createTeamMenu.GetComponent<CreateTeamManager>().generatePlayer(playerColor);
+		player.placeUnits(levelData[currentLevel].playerSpawns, characters, playerContainer, this);
+		player.hud = hud;
 
-        actions = new Queue<Action>();
+		enemies = generateUnits(enemiesContainer, levelData[currentLevel], enemyColor, Unit.Team.enemy);
 
-        ai = new EnemyAI(this, enemies, player.units.ToArray(), AIDelay);
+		hasUpdate = false;
 
-        hud.initialize(player);
+		actions = new Queue<Action>();
+
+		ai = new EnemyAI(this, enemies, player.units.ToArray(), AIDelay);
+
+		hud.initialize(player);
 	}
 
     Unit[] generateUnits(Transform container, Level level, Color color, Unit.Team team)

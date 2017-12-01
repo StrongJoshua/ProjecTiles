@@ -450,41 +450,44 @@ public class Unit : MonoBehaviour
 
 	public bool canSpecial ()
 	{
-		return true;
+		return AP >= specialCost;
 	}
 
 	// Fires special
 	public void special (UserControl userControl)
 	{
 		//specialFire.fire();
-		if (specialType == SpecialType.drone) {
-			transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
-			aimRing.transform.rotation = Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
-			GameObject special = Instantiate (specialFab, transform.position, transform.rotation);
-			special.GetComponent<DroneControl> ().origin = this.gameObject;
-			special.GetComponent<Projectile> ().team = team;
-			special.GetComponent<DroneControl> ().userControl = userControl;
-			userControl.phase = UserControl.Phase.free;
-		} else if (specialType == SpecialType.bionade) {
-			Projectile projectileInfo = specialFab.GetComponent<Projectile> ();
-			projectileInfo.team = team;
-			int numToFire = projectileInfo.numToFire;
-			float speed = projectileInfo.speed;
-			if (anim != null) {
-				anim.SetTrigger ("shoot");
+
+		if (canSpecial ()) {
+			if (specialType == SpecialType.drone) {
+				transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
+				aimRing.transform.rotation = Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
+				GameObject special = Instantiate (specialFab, transform.position, transform.rotation);
+				special.GetComponent<DroneControl> ().origin = this.gameObject;
+				special.GetComponent<Projectile> ().team = team;
+				special.GetComponent<DroneControl> ().userControl = userControl;
+				userControl.phase = UserControl.Phase.free;
+			} else if (specialType == SpecialType.bionade) {
+				Projectile projectileInfo = specialFab.GetComponent<Projectile> ();
+				projectileInfo.team = team;
+				int numToFire = projectileInfo.numToFire;
+				float speed = projectileInfo.speed;
+				if (anim != null) {
+					anim.SetTrigger ("shoot");
+				}
+				//TODO Animate turn towards aim ring
+				transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
+				GameObject temp = Instantiate (specialFab, transform.position + transform.forward + transform.up, transform.rotation);
+				temp.GetComponent<Projectile> ().origin = this;
+				temp.GetComponent<Projectile> ().team = team;
+				temp.transform.Rotate (new Vector3 (90, 0, 0));
+				Vector3 aim = this.transform.forward * speed;
+				aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
+				//print(aim.ToString());
+				temp.GetComponent<Rigidbody> ().AddForce (aim);
 			}
-			//TODO Animate turn towards aim ring
-			transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
-			GameObject temp = Instantiate (specialFab, transform.position + transform.forward + transform.up, transform.rotation);
-			temp.GetComponent<Projectile> ().origin = this;
-			temp.GetComponent<Projectile> ().team = team;
-			temp.transform.Rotate (new Vector3 (90, 0, 0));
-			Vector3 aim = this.transform.forward * speed;
-			aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
-			//print(aim.ToString());
-			temp.GetComponent<Rigidbody> ().AddForce (aim);
+			costAP (specialCost);
 		}
-		costAP (specialCost);
 	}
 
 	public void gainDamageXP (Unit damaged)
