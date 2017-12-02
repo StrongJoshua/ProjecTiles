@@ -70,4 +70,4 @@ MonoBehaviour:
   highlightPlane: {fileID: 1117509993441026, guid: 3759411bb0a839f44ba600260b963948,
     type: 2}
   highlightColor: {r: 0.3019608, g: 0.3019608, b: 1, a: 0.21568628}
-  rateOfDesctructibleTiles: 0.1
+  rateOfDesctructibleTiles: 0.05

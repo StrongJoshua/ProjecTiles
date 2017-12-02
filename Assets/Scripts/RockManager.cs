@@ -66,7 +66,8 @@ public class RockManager : MonoBehaviour {
     {
         if (lastHitBy != null && lastHitBy == projectile) return;
 
-        Debug.Log("Hit");
+        lastHitBy = projectile;
+
         currHealth -= damage;
         if (currHealth <= 0)
         {
