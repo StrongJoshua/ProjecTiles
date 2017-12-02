@@ -99,4 +99,10 @@ public class CreateTeamManager : MonoBehaviour {
 
         return new Player(playerUnits);
     }
+
+    private void Update()
+    {
+        if (Input.GetAxis("SubmitInput") > 0)
+            nameInput.DeactivateInputField();
+    }
 }
