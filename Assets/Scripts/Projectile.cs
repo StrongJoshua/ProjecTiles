@@ -40,7 +40,10 @@ public class Projectile : MonoBehaviour {
 	void OnTriggerEnter(Collider col)
 	{
 		float distance = Vector3.Distance (start, gameObject.transform.position); 
-		Unit hitUnit = col.gameObject.GetComponent<Unit> (); 
+		Unit hitUnit = col.gameObject.GetComponent<Unit> ();
+
+        RockManager rock = col.gameObject.GetComponent<RockManager>();
+        int damage = (int)(maxDamage * (1 - (distance / (2 * range * MapGenerator.step))));
 
 		if(hitUnit != null && col.gameObject != origin.gameObject && !hitUnit.IsDead) {
             if (explodes)
@@ -49,7 +52,7 @@ public class Projectile : MonoBehaviour {
             {
                 if (hitUnit.team != team)
                 {
-                    hitUnit.takeDamage((int)(maxDamage * (1 - (distance / (2 * range * MapGenerator.step))))); // multiply by 2 to min at half damage
+                    hitUnit.takeDamage(damage); // multiply by 2 to min at half damage
                     if (hitUnit.IsDead)
                         origin.gainKillXP(hitUnit);
                     else
@@ -57,7 +60,12 @@ public class Projectile : MonoBehaviour {
                 }
                 Destroy(gameObject);
             }
-		}
+        }
+        else if (rock != null)
+        {
+            // environment stuff
+            rock.hit(damage);
+        }
 	}
 
     private void explode()
