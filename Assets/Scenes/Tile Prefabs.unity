@@ -723,89 +723,41 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4709176961404064, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+    - target: {fileID: 4265610228491710, guid: 4b6fccdb298063d498eab5b676d7a9b2, type: 2}
       propertyPath: m_LocalPosition.x
       value: -1.0099998
       objectReference: {fileID: 0}
-    - target: {fileID: 4709176961404064, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+    - target: {fileID: 4265610228491710, guid: 4b6fccdb298063d498eab5b676d7a9b2, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4709176961404064, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+    - target: {fileID: 4265610228491710, guid: 4b6fccdb298063d498eab5b676d7a9b2, type: 2}
       propertyPath: m_LocalPosition.z
       value: -22.67
       objectReference: {fileID: 0}
-    - target: {fileID: 4709176961404064, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+    - target: {fileID: 4265610228491710, guid: 4b6fccdb298063d498eab5b676d7a9b2, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4709176961404064, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+    - target: {fileID: 4265610228491710, guid: 4b6fccdb298063d498eab5b676d7a9b2, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4709176961404064, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+    - target: {fileID: 4265610228491710, guid: 4b6fccdb298063d498eab5b676d7a9b2, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4709176961404064, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+    - target: {fileID: 4265610228491710, guid: 4b6fccdb298063d498eab5b676d7a9b2, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4709176961404064, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+    - target: {fileID: 4265610228491710, guid: 4b6fccdb298063d498eab5b676d7a9b2, type: 2}
       propertyPath: m_RootOrder
       value: 22
       objectReference: {fileID: 0}
-    - target: {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
-      propertyPath: m_Name
-      value: Plain Tile (with rock)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 4b6fccdb298063d498eab5b676d7a9b2, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &235917654 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859,
-    type: 2}
-  m_PrefabInternal: {fileID: 235917653}
---- !u!114 &235917655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 235917654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 228086e773473164a849c7b3868bd135, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  smallRocks:
-  - {fileID: 100000, guid: bec7b0c0a9837ba49a11c88f26ce8841, type: 3}
-  - {fileID: 100000, guid: 28642c7f20a1598488cefd7f00b94865, type: 3}
-  - {fileID: 100000, guid: 9182df85a73960c4d87b889f3639ba9b, type: 3}
-  - {fileID: 100000, guid: bd9b79329ba9dda488da003696edc754, type: 3}
-  - {fileID: 100000, guid: 7f3f9dd74e3766a4dbf5bdbbc9ee54ff, type: 3}
-  - {fileID: 100000, guid: 18825f1b116444645925daec351e81ba, type: 3}
-  - {fileID: 100000, guid: e4b66841754e4ed438f2b3bc5e615425, type: 3}
-  - {fileID: 100000, guid: 826cbc77d62dbc4418e186b44dc66935, type: 3}
-  medRocks:
-  - {fileID: 100000, guid: 6ad2835734317d446b4fdcf875dbd656, type: 3}
-  - {fileID: 100000, guid: 93726671bc06c184ba6a85739484322a, type: 3}
-  - {fileID: 100000, guid: a03f69509415d8147aebaf0f50552c7d, type: 3}
-  - {fileID: 100000, guid: 1e64ea19b4d014c4ab33b8345425c9e3, type: 3}
-  bigRocks:
-  - {fileID: 100000, guid: 644255a0198675a44828611a93cd87d9, type: 3}
-  - {fileID: 100000, guid: be97290b187d1824fb4b2d06b9505f81, type: 3}
-  - {fileID: 100000, guid: 8047fe64bb2ad034db828801e87a3a02, type: 3}
-  - {fileID: 100000, guid: 02b8195cc92dcfe4da1770d5c860a657, type: 3}
-  currRock: {fileID: 0}
 --- !u!1001 &240565661
 Prefab:
   m_ObjectHideFlags: 0

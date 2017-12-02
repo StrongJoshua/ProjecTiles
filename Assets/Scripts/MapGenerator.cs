@@ -6,6 +6,7 @@ public class MapGenerator : MonoBehaviour {
     public TextAsset map;
     public GameObject[] plainTilePrefabs;
     public GameObject[] waterTilePrefabs;
+    public GameObject[] destructibleTilePrefabs;
     public GameObject[] hillTilePrefabs;
     public GameObject[] swampTilePrefabs;
     public GameObject[] forestTilePrefabs;
@@ -16,6 +17,7 @@ public class MapGenerator : MonoBehaviour {
     public GameObject[,] highlights;
     public GameObject highlightPlane;
     public Color highlightColor;
+    public float rateOfDesctructibleTiles;
 
     private void Awake()
     {
@@ -58,7 +60,16 @@ public class MapGenerator : MonoBehaviour {
                 Tile.TileType tileType = (Tile.TileType)k;
                 GameObject[] choices;
                 if (tileType == Tile.TileType.plain)
-                    choices = plainTilePrefabs;
+                {
+                    if (Random.Range(0f, 1f) < rateOfDesctructibleTiles)
+                    {
+                        choices = destructibleTilePrefabs;
+                    }
+                    else
+                    {
+                        choices = plainTilePrefabs;
+                    }
+                }
                 else if (tileType == Tile.TileType.water)
                     choices = waterTilePrefabs;
                 else if (tileType == Tile.TileType.hill)

@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour {
 		float distance = Vector3.Distance (start, gameObject.transform.position); 
 		Unit hitUnit = col.gameObject.GetComponent<Unit> ();
 
-        RockManager rock = col.gameObject.GetComponent<RockManager>();
+        RockManager rock = col.gameObject.GetComponentInParent<RockManager>();
         int damage = (int)(maxDamage * (1 - (distance / (2 * range * MapGenerator.step))));
 
 		if(hitUnit != null && col.gameObject != origin.gameObject && !hitUnit.IsDead) {
@@ -63,8 +63,10 @@ public class Projectile : MonoBehaviour {
         }
         else if (rock != null)
         {
+            if (explodes)
+                explode();
             // environment stuff
-            rock.hit(damage);
+            rock.hit(damage, this.gameObject);
         }
 	}
 
