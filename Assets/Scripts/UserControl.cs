@@ -24,6 +24,8 @@ public class UserControl : MonoBehaviour
 
     public EventSystem eventSystem;
     public GameObject pauseMenu;
+	public GameObject gameOverMenu;
+	public GameObject victoryMenu;
     public bool mapControl = true;
 	public bool droneControl = false;
 	public GameObject drone;
@@ -249,20 +251,20 @@ public class UserControl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Pause"))
 		{
-			if(Paused)
-			{
-                resumeGame();
-			}
-			else
-			{
-                pauseGame();
+			if (Paused) {
+				resumeGame ();
+			}  else {
+				pauseGame ();
 			}
 
 		}
 
 		if (Input.GetKeyDown(KeyCode.X) || Input.GetButtonDown("Cancel"))
         {
-            closeAll();
+			if (!gameOverMenu.activeSelf && !victoryMenu.activeSelf) {
+				
+				closeAll ();
+			}
         }
 
     }
@@ -340,7 +342,19 @@ public class UserControl : MonoBehaviour
 	{
 		mapControl = true;
 		pauseMenu.SetActive(false);
+		gameOverMenu.SetActive (false);
+		victoryMenu.SetActive (false);
         Time.timeScale = 1;
+	}
+
+	public void retryGame() {
+		resumeGame ();
+		gameManager.retry ();
+	}
+
+	public void nextLevel() {
+		resumeGame ();
+		gameManager.nextLevel ();
 	}
 
 	public void quitGame()
@@ -350,12 +364,27 @@ public class UserControl : MonoBehaviour
 
     public void pauseGame()
     {
-        mapControl = false;
-        unitMenu.SetActive(false);
+        
         pauseMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(pauseMenu.GetComponentInChildren<Button>().gameObject);
-        Time.timeScale = 0;
+		pause (pauseMenu);
     }
+
+	private void pause(GameObject menu) {
+		mapControl = false;
+		unitMenu.SetActive(false);
+		EventSystem.current.SetSelectedGameObject(menu.GetComponentInChildren<Button>().gameObject);
+		Time.timeScale = 0;
+	}
+
+	public void gameOver() {
+		gameOverMenu.SetActive (true);
+		pause (gameOverMenu);
+	}
+
+	public void victory() {
+		victoryMenu.SetActive (true);
+		pause (victoryMenu);
+	}
 
 	public void loadMainMenu()
 	{

@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 	private XMLParser xmlParser;
     public GameObject[] levels;
     private Level[] levelData;
     public int currentLevel;
+	private GameObject persistentInfoInstance;
+	private PersistentInfo persistentInfo;
     public MapGenerator mapGenerator;
     public GameObject[] unitTypes;
 
@@ -54,10 +57,13 @@ public class GameManager : MonoBehaviour {
 	void Awake() {
 		xmlParser = new XMLParser ();
 		unitBaseStats = new ArrayList ();
+		persistentInfoInstance = GameObject.Find ("Persistent Info");
+		persistentInfo = persistentInfoInstance.GetComponent<PersistentInfo> ();
 
 		foreach (GameObject unitType in unitTypes) {
 			unitBaseStats.Add (xmlParser.getBaseStats (unitType.name));
 		}
+		currentLevel = persistentInfo.currentLevel;
 	}
 
 	// Use this for initialization
@@ -71,6 +77,29 @@ public class GameManager : MonoBehaviour {
        
 	}
 
+	public void retry() {
+		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+	}
+
+	public void nextLevel() {
+		int nextLevel = currentLevel + 1;
+		if (nextLevel < levels.Length) {
+			persistentInfo.currentLevel = nextLevel;
+			//persistentInfo.currentPlayer = new Player (player.units);
+			retry ();
+		}
+	}
+
+	public void gameOver() {
+		UserControl uC = GameObject.Find ("UserControl").GetComponent<UserControl> ();
+		uC.gameOver ();
+	}
+
+	public void victory() {
+		UserControl uC = GameObject.Find ("UserControl").GetComponent<UserControl> ();
+		uC.victory ();
+	}
+
 	void initializeLevel(int currentLevel) {
 		mapGenerator.map = levelData[currentLevel].map;
 		mapGenerator.generateMap();
@@ -80,10 +109,13 @@ public class GameManager : MonoBehaviour {
 		pathManager = new Dictionary<Unit, List<Vector2>>();
 
 		GameObject createTeamMenu = GameObject.Find("CreateTeamMenu");
-		if(createTeamMenu == null)
-			player = new Player(generateUnits(playerContainer, levelData[currentLevel], playerColor, Unit.Team.player));
-		else
-			player = createTeamMenu.GetComponent<CreateTeamManager>().generatePlayer(playerColor);
+		if (createTeamMenu == null) {
+			player = new Player (generateUnits (playerContainer, levelData [currentLevel], playerColor, Unit.Team.player));
+			//persistentInfo.currentPlayer = new Player (player.units);
+		} else {
+			player = createTeamMenu.GetComponent<CreateTeamManager> ().generatePlayer (playerColor);
+			//persistentInfo.currentPlayer = new Player (player.units);
+		}
 		player.placeUnits(levelData[currentLevel].playerSpawns, characters, playerContainer, this);
 		player.hud = hud;
 
@@ -218,6 +250,10 @@ public class GameManager : MonoBehaviour {
 
     private void Update()
     {
+		if (!playerUnitsAlive ())
+			gameOver ();
+		if (!enemiesAlive ())
+			victory ();
         while (actions.Count > 0)
             actions.Dequeue().Invoke();
         if(AI)
@@ -235,6 +271,10 @@ public class GameManager : MonoBehaviour {
     {
         return player.units.Count > 0;
     }
+
+	public bool enemiesAlive() {
+		return enemiesContainer.childCount > 0;
+	}
 
     internal Unit[] getOpponents(Unit.Team team)
     {

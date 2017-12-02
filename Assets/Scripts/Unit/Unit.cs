@@ -312,8 +312,8 @@ public class Unit : MonoBehaviour
 
 		this.perceptionGrowth = newStats ["perceptionGrowth"];
 
-
 	}
+		
 
 	public void setGrowthRates (Dictionary<string, float> growthRates)
 	{

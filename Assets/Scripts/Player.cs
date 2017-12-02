@@ -15,6 +15,15 @@ public class Player {
             u.player = this;
     }
 
+	public Player(List<Unit> otherUnits) {
+		this.units = new List<Unit> ();
+		foreach (Unit unit in otherUnits) {
+			Unit newUnit = unit;
+			newUnit.player = this;
+			this.units.Add (newUnit);
+		}
+	}
+
     public void killUnit(Unit unit)
     {
         units.Remove(unit);
