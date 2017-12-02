@@ -464,7 +464,6 @@ public class Unit : MonoBehaviour
 				aimRing.transform.rotation = Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
 				GameObject special = Instantiate (specialFab, transform.position, transform.rotation);
 				special.GetComponent<DroneControl> ().origin = this.gameObject;
-				special.GetComponent<Projectile> ().team = team;
 				special.GetComponent<DroneControl> ().userControl = userControl;
 				userControl.phase = UserControl.Phase.free;
 			} else if (specialType == SpecialType.bionade) {
