@@ -298,16 +298,20 @@ public class UserControl : MonoBehaviour
                 lastTime = 0;
                 delay = defaultDelay;
             } else {
+                int oldX = x, oldY = y;
                 x += xDel;
                 y += yDel;
                 x = Mathf.Max(Mathf.Min(x, map.SizeX - 1), 0);
                 y = Mathf.Max(Mathf.Min(y, map.SizeY - 1), 0);
-                highlight.transform.position = new Vector3(x * MapGenerator.step, 0, y * MapGenerator.step);
+                if(x != oldX || y != oldY)
+                {
+                    highlight.transform.position = new Vector3(x * MapGenerator.step, 0, y * MapGenerator.step);
 
-                if (delay > .1f)
-                    delay -= .04f;
-                lastTime = Time.timeSinceLevelLoad;
-                didMove = true;
+                    if (delay > .1f)
+                        delay -= .04f;
+                    lastTime = Time.timeSinceLevelLoad;
+                    didMove = true;
+                }
             }
         }
         cam.gameObject.transform.position = Vector3.Lerp(cam.transform.position, highlight.transform.position + new Vector3(0, 20f, -45f), lerpSmooth);
