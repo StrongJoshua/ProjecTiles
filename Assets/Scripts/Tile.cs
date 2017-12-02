@@ -55,6 +55,7 @@ public class Tile {
             case TileType.hill: return Hill;
             case TileType.swamp: return Swamp;
             case TileType.forest: return Forest;
+            case TileType.destructiblePlain: return PlainDestructible;
             default: return null;
         }
     }
