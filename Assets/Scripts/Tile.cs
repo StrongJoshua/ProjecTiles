@@ -15,7 +15,7 @@ public class Tile {
     }
 
     public static readonly Tile Plain = new Tile(TileType.plain, 2, true);
-    public static readonly Tile PlainDestructible = new Tile(TileType.plain, -1, false);
+    public static readonly Tile PlainDestructible = new Tile(TileType.plain, 2048, false);
     public static readonly Tile Water = new Tile(TileType.water, 8, false);
     public static readonly Tile Hill = new Tile(TileType.hill, 6, false);
     public static readonly Tile Swamp = new Tile(TileType.swamp, 4, true);
@@ -30,6 +30,7 @@ public class Tile {
     private int movementCost;
     public int MovementCost
     {
+        set { movementCost = value;  }
         get { return movementCost; }
     }
 

@@ -528,7 +528,7 @@ public class UserControl : MonoBehaviour
         {
             path.Add(pos);
             int cost = 0;
-            bool connected = true;
+            bool connected = false;
             Vector2 last = new Vector2(selected.X, selected.Y);
             foreach(Vector2 v in path.GetRange(1, path.Count - 1))
             {
@@ -541,6 +541,7 @@ public class UserControl : MonoBehaviour
                 last = v;
                 cost += selected.isFlying ? 1 : map.Tiles[(int)v.x, (int)v.y].MovementCost;
             }
+            Debug.Log("Cost is " + cost);
             if(!connected || cost > selected.AP)
             {
                 path = AStar.AStarSearch(map.Tiles, new Vector2(selected.X, selected.Y), new Vector2(x, y), selected.isFlying);

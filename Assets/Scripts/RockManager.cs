@@ -15,6 +15,8 @@ public class RockManager : MonoBehaviour {
     public int medRockHealth;
     public int smallRockHealth;
 
+    private int tileX, tileY;
+
     GameObject lastHitBy;
 
     GameObject choose(GameObject[] objects)
@@ -31,6 +33,9 @@ public class RockManager : MonoBehaviour {
         currHealth = bigRockHealth;
         lastHitBy = null;
         //currRock.transform.position = new Vector3(0.002f, 0.75f, -0.002f);
+
+        tileX = gameObject.GetComponentInParent<TileInfo>().x;
+        tileY = gameObject.GetComponentInParent<TileInfo>().y;
     }
 	
 	// Update is called once per frame
@@ -56,13 +61,16 @@ public class RockManager : MonoBehaviour {
         }
         else if (currType == RockType.SMALL)
         {
+            // reset movement cost
+            Tile tile = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>().GetTile(tileX, tileY);
+            tile.MovementCost = Tile.Plain.MovementCost;
             return;
         }
 
         currRock = Instantiate(nextRock, this.transform);
     }
 
-    internal void hit(int damage, GameObject projectile)
+    public void hit(int damage, GameObject projectile)
     {
         if (lastHitBy != null && lastHitBy == projectile) return;
 
