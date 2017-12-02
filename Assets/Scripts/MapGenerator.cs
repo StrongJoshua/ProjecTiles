@@ -61,14 +61,11 @@ public class MapGenerator : MonoBehaviour {
                 GameObject[] choices;
                 if (tileType == Tile.TileType.plain)
                 {
-                    if (Random.Range(0f, 1f) < rateOfDesctructibleTiles)
-                    {
-                        choices = destructibleTilePrefabs;
-                    }
-                    else
-                    {
-                        choices = plainTilePrefabs;
-                    }
+                    choices = plainTilePrefabs;
+                }
+                else if (tileType == Tile.TileType.destructiblePlain)
+                {
+                    choices = destructibleTilePrefabs;
                 }
                 else if (tileType == Tile.TileType.water)
                     choices = waterTilePrefabs;
