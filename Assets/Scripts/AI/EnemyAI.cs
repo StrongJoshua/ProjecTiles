@@ -1,19 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAI {
     private GameManager gameManager;
     private Tile[,] tiles;
-    private Unit[] control, target;
+    private List<Unit> control, target;
     private float delay, lastAction;
 
 	public EnemyAI(GameManager gameManager, Unit[] control, Unit[] target, float delay)
     {
         this.gameManager = gameManager;
         tiles = gameManager.mapGenerator.Tiles;
-        this.control = control;
-        this.target = target;
+        this.control = new List<Unit>(control);
+        this.target = new List<Unit>(target);
         this.delay = delay;
     }
 
@@ -21,6 +22,8 @@ public class EnemyAI {
     {
 		if (Time.timeSinceLevelLoad - lastAction < delay )
             return;
+        control.RemoveAll((unit) => unit.IsDead);
+        target.RemoveAll((unit) => unit.IsDead);
         lastAction = Time.timeSinceLevelLoad;
 
         Unit cur = getNextControl();
@@ -85,10 +88,8 @@ public class EnemyAI {
 
     private void setStrategicDestination(Unit unit, Unit dest)
     {
-        List<Vector2> path = stopAtRange(AStar.ConstrainPath(tiles, AStar.AStarSearch(tiles, unit.XY, dest.XY, unit.isFlying), (int)unit.AP), unit.Projectile.range * .8F, dest.XY);
-        if (path.Count == 0)
-            return;
-        path = path.GetRange(1, path.Count - 1);
+        List<Vector2> path = AStar.AStarSearch(tiles, unit.XY, dest.XY, unit.isFlying, (Unit[,])gameManager.characters.Clone());
+        path = stopAtRange(AStar.ConstrainPath(tiles, path.GetRange(1, path.Count - 1), (int)unit.AP, unit.isFlying), unit.Projectile.range * .8F, dest.XY);
         if(path.Count > 0)
             gameManager.moveUnitOnPath(unit, path);
     }

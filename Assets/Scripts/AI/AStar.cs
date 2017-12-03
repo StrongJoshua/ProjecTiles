@@ -29,6 +29,11 @@ public class AStar : MonoBehaviour {
 
     public static List<Vector2> AStarSearch(Tile[,] tiles, Vector2 start, Vector2 end, bool isFlying)
     {
+        return AStarSearch(tiles, start, end, isFlying, new Unit[tiles.GetLength(0), tiles.GetLength(1)]);
+    }
+
+    public static List<Vector2> AStarSearch(Tile[,] tiles, Vector2 start, Vector2 end, bool isFlying, Unit[,] units)
+    {
         Dictionary<Vector2, Vector2> parents = new Dictionary<Vector2, Vector2>();
         Dictionary<Vector2, int> g = new Dictionary<Vector2, int>();
         List<Vector2> open = new List<Vector2>();
@@ -59,6 +64,10 @@ public class AStar : MonoBehaviour {
 
             open.Remove(current);
             closed.Add(current);
+
+            if (current != start && units[(int)current.x, (int)current.y] != null)
+                continue;
+
             foreach(Vector2 neighbor in getNeighbors(current, tiles))
             {
                 if (closed.Contains(neighbor)) continue;
@@ -110,12 +119,12 @@ public class AStar : MonoBehaviour {
         return r;
     }
 
-    public static List<Vector2> ConstrainPath(Tile[,] tiles, List<Vector2> path, int AP)
+    public static List<Vector2> ConstrainPath(Tile[,] tiles, List<Vector2> path, int AP, bool isFlying)
     {
         int cost = 0;
         for(int i = 0; i < path.Count; i++)
         {
-            cost += tiles[(int)path[i].x, (int)path[i].y].MovementCost;
+            cost += isFlying ? 1 : tiles[(int)path[i].x, (int)path[i].y].MovementCost;
             if(cost > AP)
             {
                 return path.GetRange(0, i);
