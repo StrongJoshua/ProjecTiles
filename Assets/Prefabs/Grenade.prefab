@@ -118,12 +118,13 @@ MonoBehaviour:
   maxDamage: 25
   numToFire: 1
   speed: 1000
-  team: 0
+  team: 1
   explodes: 1
   explodeRange: 3
   explodeParticle: {fileID: 1532705254353270, guid: ecb70069459ef8344bae8a3a0f1c929c,
     type: 2}
   origin: {fileID: 0}
+  explosion: {fileID: 8300000, guid: 5c8b23b6e607d704e928919a293098d5, type: 3}
 --- !u!135 &135036957773037642
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -14,6 +14,7 @@ public class Projectile : MonoBehaviour {
 	public float explodeRange;
 	public GameObject explodeParticle;
 	public Unit origin;
+	public AudioClip explosion;
 
     private ProjectileEffect projectileEffect;
 
@@ -85,6 +86,7 @@ public class Projectile : MonoBehaviour {
     private void explode()
     {
         Instantiate(explodeParticle, transform.position, transform.rotation);
+		AudioSource.PlayClipAtPoint(explosion, transform.position);
         Collider[] allColliders = Physics.OverlapSphere(transform.position, explodeRange * MapGenerator.step);
         foreach (Collider c in allColliders)
         {

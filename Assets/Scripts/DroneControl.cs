@@ -16,6 +16,7 @@ public class DroneControl : MonoBehaviour
 	Vector3 offset;
 	bool exploded;
 	public GameObject droneModel;
+	public AudioClip explosion;
 
 	float startTime;
 	Rigidbody rigidbody;
@@ -61,6 +62,7 @@ public class DroneControl : MonoBehaviour
 	private void explode ()
 	{
 		Instantiate (explodeParticle, transform.position, transform.rotation);
+		AudioSource.PlayClipAtPoint(explosion, transform.position);
 		Collider[] allColliders = Physics.OverlapSphere (transform.position, explodeRange * MapGenerator.step);
 		foreach (Collider c in allColliders) {
 			Unit t = c.gameObject.GetComponent<Unit> ();
