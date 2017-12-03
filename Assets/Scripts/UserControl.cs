@@ -116,13 +116,13 @@ public class UserControl : MonoBehaviour
             xDel = 0;
             yDel = 0;
 
-			if (Input.GetAxis("Vertical") > 0)
+			if (Input.GetAxis("Vertical") > 0.3f)
                 yDel += 1;
-			if (Input.GetAxis("Vertical") < 0)
+			if (Input.GetAxis("Vertical") < -0.3f)
                 yDel -= 1;
-			if (Input.GetAxis("Horizontal") > 0)
+			if (Input.GetAxis("Horizontal") > 0.3f)
                 xDel += 1;
-			if (Input.GetAxis("Horizontal") < 0)
+			if (Input.GetAxis("Horizontal") < -0.3f)
                 xDel -= 1;
 
             bool didMove = moveHighlight();

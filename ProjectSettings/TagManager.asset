@@ -10,6 +10,7 @@ TagManager:
   - MapGenerator
   - HealthBar
   - HUD
+  - Sniper
   layers:
   - Default
   - TransparentFX

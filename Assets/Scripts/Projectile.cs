@@ -50,7 +50,7 @@ public class Projectile : MonoBehaviour {
 		Unit hitUnit = col.gameObject.GetComponent<Unit> ();
 
         RockManager rock = col.gameObject.GetComponentInParent<RockManager>();
-        int damage = (int)(maxDamage * (1 - (distance / (2 * range * MapGenerator.step))));
+		int damage = gameObject.tag == "Sniper" ? (int)(maxDamage * (1 + (distance / (2 * range * MapGenerator.step)))) : (int)(maxDamage * (1 - (distance / (2 * range * MapGenerator.step))));
 
 		if(hitUnit != null && col.gameObject != origin.gameObject && !hitUnit.IsDead) {
             if (explodes)
