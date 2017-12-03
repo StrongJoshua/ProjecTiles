@@ -884,9 +884,10 @@ MonoBehaviour:
   accuracyGrowthRate: 0
   team: 0
   specialFire: {fileID: 0}
-  projectileFab: {fileID: 1563048410146538, guid: 8b97493074436cb44890588e39bfcd51,
+  projectileFab: {fileID: 1563048410146538, guid: 395d5b94d217ddd4486e731cf06e453b,
     type: 2}
   specialFab: {fileID: 1096361828472138, guid: a0e32ddd53cd70f4482a1a3156c4adc9, type: 2}
+  equippedGun: {fileID: 0}
   APBar: {fileID: 114609208440154902}
   healthBar: {fileID: 114590197930602974}
   animEvent: {fileID: 0}

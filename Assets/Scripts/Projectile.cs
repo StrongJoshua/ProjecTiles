@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 	public float range;
+    public bool timed;
 	public int maxDamage;
 	float startTime;
 	public int numToFire;
@@ -14,7 +15,8 @@ public class Projectile : MonoBehaviour {
 	public GameObject explodeParticle;
 	public Unit origin;
 
-    private Vector3 start;
+    private Vector3 last;
+    private float distanceTraveled;
 
 	protected virtual void Awake () {
 		startTime = Time.timeSinceLevelLoad;
@@ -22,24 +24,26 @@ public class Projectile : MonoBehaviour {
 
     private void Start()
     {
-        start = gameObject.transform.position;
+        last = gameObject.transform.position;
+        distanceTraveled = 0;
     }
 
     // Update is called once per frame
     protected virtual void Update () {
-		float distance = Vector3.Distance (start, gameObject.transform.position); 
-		if (distance >= range * MapGenerator.step) {
+		distanceTraveled += Vector3.Distance (last, gameObject.transform.position);
+		if (timed ? Time.timeSinceLevelLoad - startTime > range : distanceTraveled >= range * MapGenerator.step) {
 			if (explodes) {
                 explode();
 			}
 			else
 				Destroy (gameObject);
 		}
+        last = gameObject.transform.position;
 	}
 
 	void OnTriggerEnter(Collider col)
 	{
-		float distance = Vector3.Distance (start, gameObject.transform.position); 
+		float distance = Vector3.Distance (last, gameObject.transform.position); 
 		Unit hitUnit = col.gameObject.GetComponent<Unit> ();
 
         RockManager rock = col.gameObject.GetComponentInParent<RockManager>();

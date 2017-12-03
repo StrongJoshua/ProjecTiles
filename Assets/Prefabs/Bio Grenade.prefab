@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 54956179497004064}
   - component: {fileID: 114105673315945622}
   m_Layer: 0
-  m_Name: Bio Gernade
+  m_Name: Bio Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,7 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e97173ff4b0c4f44b376e46d1ccd503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 4
+  range: 1
+  timed: 1
   maxDamage: 100
   numToFire: 1
   speed: 1000
