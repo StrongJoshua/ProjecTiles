@@ -19,7 +19,7 @@ public class EnemyAI {
 
     public void think()
     {
-		if (Time.timeSinceLevelLoad - lastAction > delay )
+		if (Time.timeSinceLevelLoad - lastAction < delay )
             return;
         lastAction = Time.timeSinceLevelLoad;
 
@@ -86,6 +86,8 @@ public class EnemyAI {
     private void setStrategicDestination(Unit unit, Unit dest)
     {
         List<Vector2> path = stopAtRange(AStar.ConstrainPath(tiles, AStar.AStarSearch(tiles, unit.XY, dest.XY, unit.isFlying), (int)unit.AP), unit.Projectile.range * .8F, dest.XY);
+        if (path.Count == 0)
+            return;
         path = path.GetRange(1, path.Count - 1);
         if(path.Count > 0)
             gameManager.moveUnitOnPath(unit, path);
