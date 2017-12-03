@@ -188,9 +188,9 @@ public class Unit : MonoBehaviour
 			} else if (Mathf.Abs (Input.GetAxis ("Vertical")) > 0.1 || Mathf.Abs (Input.GetAxis ("Horizontal")) > 0.1) {
 				float yRot = 0;
 				if (Input.GetAxis ("Vertical") < 0)
-					yRot += 180 - Input.GetAxis ("Horizontal") * 90;
+					yRot += 270 - Input.GetAxis ("Horizontal") * 90;
 				else
-					yRot += Input.GetAxis ("Horizontal") * 90;
+					yRot += 90 + Input.GetAxis ("Horizontal") * 90;
 				//aimRing.transform.rotation = Quaternion.Euler (90, yRot - 90, 0);
 				transform.rotation = Quaternion.Euler (0, yRot - 90, 0);
 			}

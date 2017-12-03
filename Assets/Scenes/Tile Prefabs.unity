@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44184425, g: 0.4907775, b: 0.5707432, a: 1}
+  m_IndirectSpecularColor: {r: 0.44184443, g: 0.4907779, b: 0.5707437, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3591,7 +3591,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4277801766355936, guid: 82284d29cd69bf94890a1f6d28d578e8, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1023700816672368, guid: 82284d29cd69bf94890a1f6d28d578e8, type: 2}
       propertyPath: m_IsActive
@@ -7702,6 +7702,48 @@ Transform:
   m_Father: {fileID: 588113900}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1692110400
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 8.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.288
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -16.866
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.50000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.50000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1692264591
 GameObject:
   m_ObjectHideFlags: 0
@@ -8051,7 +8093,7 @@ Transform:
   - {fileID: 1703991548}
   - {fileID: 1512505537}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1770753427
 GameObject:
@@ -8158,72 +8200,6 @@ Transform:
   m_Father: {fileID: 1980384244}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1790255106
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0.812
-      objectReference: {fileID: 0}
-    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -17.802
-      objectReference: {fileID: 0}
-    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0.50000006
-      objectReference: {fileID: 0}
-    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0.50000006
-      objectReference: {fileID: 0}
-    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4172454563527446, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113359203273572, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 2df7d337dda623540a21acd680bc3444, type: 2}
-  m_IsPrefabParent: 0
---- !u!1 &1790255107 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1113359203273572, guid: 2df7d337dda623540a21acd680bc3444,
-    type: 2}
-  m_PrefabInternal: {fileID: 1790255106}
---- !u!114 &1790255108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1790255107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15a073296123aa040af90d17744298eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1791999987
 GameObject:
   m_ObjectHideFlags: 0
@@ -8336,7 +8312,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4951804539903544, guid: 96cd0545f457ebb4daf4a30035387667, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1642912757888518, guid: 96cd0545f457ebb4daf4a30035387667, type: 2}
       propertyPath: m_IsActive
@@ -9121,6 +9097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 4
+  timed: 0
   maxDamage: 25
   numToFire: 1
   speed: 1000
