@@ -221,6 +221,11 @@ public class Unit : MonoBehaviour
 		isDead = true;
 		gameManager.deathCallback (this);
 
+        if (team == Team.enemy)
+        {
+            GameObject.FindGameObjectWithTag("HUD").GetComponent<HUDManager>().decrementEnemyCount();
+        }
+
 		if (player != null) {
 			player.killUnit (this);
 		}

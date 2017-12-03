@@ -9,6 +9,7 @@ TagManager:
   - EquippedGun
   - MapGenerator
   - HealthBar
+  - HUD
   layers:
   - Default
   - TransparentFX

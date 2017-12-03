@@ -121,6 +121,8 @@ public class GameManager : MonoBehaviour {
 
 		enemies = generateUnits(enemiesContainer, levelData[currentLevel], enemyColor, Unit.Team.enemy);
 
+        GameObject.FindGameObjectWithTag("HUD").GetComponent<HUDManager>().setEnemyCount(enemies.Length);
+
 		hasUpdate = false;
 
 		actions = new Queue<Action>();

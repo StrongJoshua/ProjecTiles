@@ -9,6 +9,9 @@ public class HUDManager : MonoBehaviour {
     private Player player;
     public GameObject unitImagesContainer;
     public Image unitImagePrefab;
+    public Text enemyCountText;
+
+    int enemyCount;
 
     private List<Image> unitImages;
 
@@ -36,6 +39,17 @@ public class HUDManager : MonoBehaviour {
             pos.y = 10;
             image.rectTransform.anchoredPosition = pos;
         }
+    }
+
+    public void setEnemyCount(int count)
+    {
+        enemyCount = count;
+        enemyCountText.text = "" + enemyCount;
+    }
+
+    public void decrementEnemyCount()
+    {
+        enemyCountText.text = "" + --enemyCount;
     }
 
     public void removeUnit(Unit unit)
