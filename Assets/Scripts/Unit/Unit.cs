@@ -484,7 +484,11 @@ public class Unit : MonoBehaviour
 				aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
 				//print(aim.ToString());
 				temp.GetComponent<Rigidbody> ().AddForce (aim);
-			}
+			} else if (specialType == SpecialType.bombs) {
+
+            } else if (specialType == SpecialType.sniper) {
+
+            }
 			costAP (specialCost);
 		}
 	}

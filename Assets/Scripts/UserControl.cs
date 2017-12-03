@@ -138,6 +138,7 @@ public class UserControl : MonoBehaviour
             if (unit != null)
             {
                 unit.highlighted = true;
+                cycleIndex = gameManager.player.units.IndexOf(unit);
             }
 
 			if(didMove)
@@ -573,6 +574,7 @@ public class UserControl : MonoBehaviour
         if (!unitMenu.activeSelf)
             return;
         unitMenu.GetComponentsInChildren<Button>()[1].interactable = selected.canShoot();
+        unitMenu.GetComponentsInChildren<Button>()[2].interactable = selected.canSpecial();
     }
 
     internal void deathCallback(Unit unit)
