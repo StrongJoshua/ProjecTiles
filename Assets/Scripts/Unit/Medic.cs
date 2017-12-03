@@ -22,8 +22,6 @@ public class Medic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		
-
         triggerList.RemoveAll((collider) => collider == null);
         if (Time.timeSinceLevelLoad - currTime > delay)
 		{
@@ -34,7 +32,7 @@ public class Medic : MonoBehaviour
                 Unit unit = c.gameObject.GetComponent<Unit>();
 				if (unit != null && unit != parent && parent.team == unit.team )
                 {
-                    unit.heal(1);
+                    unit.heal(this.GetComponent<Unit>().Level);
 					//print ("Healing" + unit.name);
                 }
             }
