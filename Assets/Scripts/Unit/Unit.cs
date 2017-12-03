@@ -471,6 +471,8 @@ public class Unit : MonoBehaviour
 				special.GetComponent<DroneControl> ().origin = this.gameObject;
 				special.GetComponent<DroneControl> ().userControl = userControl;
 				userControl.phase = UserControl.Phase.free;
+				isShooting = false;
+				aimRing.SetActive (false);
 			} else if (specialType == SpecialType.bionade) {
 				Projectile projectileInfo = specialFab.GetComponent<Projectile> ();
 				projectileInfo.team = team;
