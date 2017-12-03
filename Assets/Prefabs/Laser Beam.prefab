@@ -205,11 +205,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e97173ff4b0c4f44b376e46d1ccd503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
+  range: 6
+  timed: 0
   maxDamage: 20
   numToFire: 1
   speed: 1000
-  team: 0
+  team: 1
   explodes: 0
   explodeRange: 0
   explodeParticle: {fileID: 0}

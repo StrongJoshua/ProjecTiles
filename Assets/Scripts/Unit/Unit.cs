@@ -154,6 +154,10 @@ public class Unit : MonoBehaviour
 		currTime = Time.timeSinceLevelLoad;
 		aimRing.SetActive (false);
 		isDead = false;
+        ParticleSystem.MainModule m = aimRing.GetComponent<ParticleSystem>().main;
+        ParticleSystem.MinMaxCurve mmc = m.startLifetime;
+        mmc.constant *= Projectile.range;
+        m.startLifetime = mmc;
 	}
 
 	public void resetHealthAP ()
