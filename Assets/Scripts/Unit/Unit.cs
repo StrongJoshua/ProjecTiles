@@ -492,6 +492,27 @@ public class Unit : MonoBehaviour
 			} else if (specialType == SpecialType.bombs) {
 
             } else if (specialType == SpecialType.sniper) {
+				Vector3 gunOrigin = transform.position + transform.forward + transform.up;
+				if (equippedGun != null) {
+					Transform gunOriginObject = equippedGun.transform.Find ("gunOrigin");
+					if (gunOriginObject != null)
+						gunOrigin = gunOriginObject.position;
+				}
+				Projectile projectileInfo = projectileFab.GetComponent<Projectile> (); 
+				projectileInfo.team = team;
+				float speed = projectileInfo.speed;
+				//TODO Animate turn towards aim ring
+				transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
+				aimRing.transform.rotation = Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
+				GameObject temp = Instantiate (projectileFab, gunOrigin, transform.rotation);
+				temp.GetComponent<Projectile> ().origin = this;
+				temp.GetComponent<Projectile> ().maxDamage = 200;
+				temp.transform.Rotate (new Vector3 (90, 0, 0));
+				temp.transform.localScale = new Vector3(0.2f,1,0.2f);
+				Vector3 aim = this.transform.forward * speed;
+				aim.x = aim.x + Random.Range ((200 - 2.5f * accuracy) / 100f, (200 - 2.5f * accuracy) / 100f);
+				//print(aim.ToString());
+				temp.GetComponent<Rigidbody> ().AddForce (aim);
 
             }
 			costAP (specialCost);

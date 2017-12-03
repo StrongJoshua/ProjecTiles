@@ -3575,6 +3575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit: {fileID: 114603131709148816}
   cost: 5
+  laserMat: {fileID: 2100000, guid: e4c019d1aeee92b4da9936d04db2d405, type: 2}
 --- !u!114 &114745855181456230
 MonoBehaviour:
   m_ObjectHideFlags: 1

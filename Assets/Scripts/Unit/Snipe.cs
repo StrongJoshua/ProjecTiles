@@ -9,13 +9,15 @@ public class Snipe : SpecialFire {
 
     private LineRenderer line;
     private Vector3[] linePositions;
+	public Material laserMat;
 
     public override void startAim()
     {
         LineRenderer line = unit.gameObject.AddComponent(typeof(LineRenderer)) as LineRenderer;
+		line.material = laserMat;
         Vector3[] positions = new Vector3[2];
         positions[0] = gameObject.transform.position;
-        positions[1] = unit.aimRing.transform.forward * 10;
+		positions[1] = unit.aimRing.transform.forward * 10 + new Vector3(0,1,0);
         linePositions = positions;
         line.startColor = Color.red;
         line.endColor = Color.red;
@@ -29,7 +31,7 @@ public class Snipe : SpecialFire {
     {
         if (line != null)
         {
-            linePositions[1] = unit.aimRing.transform.forward * 10;
+			linePositions[1] = unit.aimRing.transform.forward * 10 + new Vector3(0,1,0);
             line.SetPositions(linePositions);
         }
     }
