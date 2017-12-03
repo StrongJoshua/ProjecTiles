@@ -32,7 +32,6 @@ public class CreateTeamManager : MonoBehaviour {
             buttonNav.mode = Navigation.Mode.Explicit;
             if (i > 0)
                 buttonNav.selectOnUp = buttons[i - 1].GetComponent<Button>();
-            buttonNav.selectOnRight = nameInput;
             b.navigation = buttonNav;
 
             buttons[i] = buttonGO;
@@ -53,7 +52,7 @@ public class CreateTeamManager : MonoBehaviour {
 
     public void switchTo()
     {
-        EventSystem.current.SetSelectedGameObject(buttons[0]);
+        EventSystem.current.SetSelectedGameObject(buttons[selected]);
     }
 
     public void confirmName()
@@ -66,19 +65,13 @@ public class CreateTeamManager : MonoBehaviour {
         selected = index;
         nameInput.text = buttons[selected].GetComponentInChildren<Text>().text;
         unitTypeDropdown.value = unitTypes[selected];
-
-        Navigation nav = nameInput.navigation;
-        nav.selectOnLeft = buttons[selected].GetComponent<Button>();
-        nameInput.navigation = nav;
-
-        nav = unitTypeDropdown.navigation;
-        nav.selectOnLeft = buttons[selected].GetComponent<Button>();
-        unitTypeDropdown.navigation = nav;
+        EventSystem.current.SetSelectedGameObject(nameInput.gameObject);
+        nameInput.DeactivateInputField();
     }
 
     public bool allowBack()
     {
-        return EventSystem.current.currentSelectedGameObject != nameInput.gameObject || !nameInput.isFocused;
+        return EventSystem.current.currentSelectedGameObject != nameInput.gameObject && EventSystem.current.currentSelectedGameObject != unitTypeDropdown;
     }
 
     public void unitTypeChanged()
@@ -104,5 +97,7 @@ public class CreateTeamManager : MonoBehaviour {
     {
         if (Input.GetAxis("SubmitInput") > 0)
             nameInput.DeactivateInputField();
+        if (Input.GetAxis("Cancel") > 0 && !allowBack())
+            EventSystem.current.SetSelectedGameObject(buttons[selected]);
     }
 }
