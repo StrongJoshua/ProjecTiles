@@ -35,6 +35,8 @@ public class EnemyAI {
         {
             if(inRange(cur, closest))
             {
+                if (!cur.canShoot())
+                    return;
                 cur.lookAt(closest.XY);
                 cur.fire(false);
             } else
