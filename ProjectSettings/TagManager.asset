@@ -8,6 +8,7 @@ TagManager:
   - Unit
   - EquippedGun
   - MapGenerator
+  - HealthBar
   layers:
   - Default
   - TransparentFX
