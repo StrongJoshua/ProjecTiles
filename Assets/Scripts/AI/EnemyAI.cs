@@ -19,7 +19,7 @@ public class EnemyAI {
 
     public void think()
     {
-        if (lastAction + delay > Time.timeSinceLevelLoad)
+		if (Time.timeSinceLevelLoad - lastAction > delay )
             return;
         lastAction = Time.timeSinceLevelLoad;
 
