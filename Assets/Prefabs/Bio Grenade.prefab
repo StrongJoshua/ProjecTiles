@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 135247419158040426}
   - component: {fileID: 54956179497004064}
   - component: {fileID: 114105673315945622}
+  - component: {fileID: 114095285017718338}
   m_Layer: 0
   m_Name: Bio Grenade
   m_TagString: Untagged
@@ -273,6 +274,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114095285017718338
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1343442618637042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1bca4efb1d6b3741907d0e67606c085, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healAmount: 100
 --- !u!114 &114105673315945622
 MonoBehaviour:
   m_ObjectHideFlags: 1

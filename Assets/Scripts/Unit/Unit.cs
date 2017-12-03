@@ -481,7 +481,7 @@ public class Unit : MonoBehaviour
 				temp.GetComponent<Projectile> ().team = team;
 				temp.transform.Rotate (new Vector3 (90, 0, 0));
 				Vector3 aim = this.transform.forward * speed;
-				aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
+				//aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
 				//print(aim.ToString());
 				temp.GetComponent<Rigidbody> ().AddForce (aim);
 			} else if (specialType == SpecialType.bombs) {

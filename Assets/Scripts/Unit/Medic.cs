@@ -30,7 +30,7 @@ public class Medic : MonoBehaviour
 			foreach (Collider c in allColliders)
             {
                 Unit unit = c.gameObject.GetComponent<Unit>();
-				if (unit != null && unit != parent && parent.team == unit.team )
+				if (unit != null && parent.team == unit.team )
                 {
                     unit.heal(this.GetComponent<Unit>().Level);
 					//print ("Healing" + unit.name);

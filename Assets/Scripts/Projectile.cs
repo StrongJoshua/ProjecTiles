@@ -15,10 +15,13 @@ public class Projectile : MonoBehaviour {
 	public GameObject explodeParticle;
 	public Unit origin;
 
+    private ProjectileEffect projectileEffect;
+
     private Vector3 last;
     private float distanceTraveled;
 
 	protected virtual void Awake () {
+        projectileEffect = GetComponent<ProjectileEffect>();
 		startTime = Time.timeSinceLevelLoad;
 	}
 
@@ -56,6 +59,8 @@ public class Projectile : MonoBehaviour {
             {
                 if (hitUnit.team != team)
                 {
+                    if(projectileEffect != null)
+                        projectileEffect.affect(origin, hitUnit);
                     hitUnit.takeDamage(damage); // multiply by 2 to min at half damage
                     if (hitUnit.IsDead)
                         origin.gainKillXP(hitUnit);
@@ -85,20 +90,26 @@ public class Projectile : MonoBehaviour {
         {
             int damage = (int)(maxDamage * (1 - Vector3.Distance(c.gameObject.transform.position, this.gameObject.transform.position) / (2 * explodeRange * MapGenerator.step)));
             Unit t = c.gameObject.GetComponent<Unit>();
-            if (t != null && !t.team.Equals(team) && c.gameObject != origin.gameObject)
+            if(t != null && c.gameObject != origin.gameObject)
             {
-                if (t.IsDead)
-                    continue;
-                t.takeDamage(damage);
-                if(t.IsDead)
+                if(projectileEffect != null)
+                    projectileEffect.affect(origin, t);
+                if (!t.team.Equals(team))
                 {
-                    origin.gainKillXP(t);
-                } else
-                {
-                    origin.gainDamageXP(t);
+                    if (t.IsDead)
+                        continue;
+                    t.takeDamage(damage);
+                    if (t.IsDead)
+                    {
+                        origin.gainKillXP(t);
+                    }
+                    else
+                    {
+                        origin.gainDamageXP(t);
+                    }
                 }
             }
-
+            
             RockManager rm = c.gameObject.GetComponent<RockManager>();
             if(rm != null)
             {
