@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class MainMenuButtons : MonoBehaviour {
     public Canvas canvas;
-    public GameObject mainMenuGroup, creditsGroup, backButton, createTeamGroup;
+    public GameObject mainMenuGroup, creditsGroup, backButton, createTeamGroup, settingsGroup, controlsDisplay;
     public AudioClip click, hover;
     public Animator mainAnim, createAnim;
     public AnimationEventHandler mainRemover, createRemover;
@@ -43,6 +43,8 @@ public class MainMenuButtons : MonoBehaviour {
     public void showMainMenu ()
     {
         creditsGroup.SetActive(false);
+		settingsGroup.SetActive(false);
+		controlsDisplay.SetActive(false);
 		backButton.SetActive(false);
         createTeamGroup.SetActive(false);
         mainMenuGroup.SetActive(true);
@@ -86,6 +88,32 @@ public class MainMenuButtons : MonoBehaviour {
 
 	public void quitGame(){
 		Application.Quit();
+	}
+
+	public void settings()
+	{
+		mainRemover.callback = (GameObject gameObject) =>
+		{
+			mainMenuGroup.SetActive(false);
+		};
+		mainAnim.SetTrigger("RemoveMenu");
+		settingsGroup.SetActive(true);
+		backButton.SetActive (true);
+		EventSystem.current.SetSelectedGameObject(backButton);
+	}
+
+	public void controls()
+	{
+		controlsDisplay.SetActive(true);
+	}
+
+	public void controlsEnter()
+	{
+		controlsDisplay.SetActive(true);
+	}
+	public void controlsExit()
+	{
+		controlsDisplay.SetActive(false);
 	}
 
 	void Update()
