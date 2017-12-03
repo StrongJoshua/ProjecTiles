@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class CreateTeamManager : MonoBehaviour {
     public InputField nameInput;
     public Dropdown unitTypeDropdown;
+    public Button beginButton;
     public ScrollRect team;
     public GameObject buttonPrefab;
     public int unitCount;
@@ -38,14 +39,24 @@ public class CreateTeamManager : MonoBehaviour {
         }
 
         Navigation nav = buttons[0].GetComponent<Button>().navigation;
-        nav.selectOnUp = buttons[buttons.Length - 1].GetComponent<Button>();
+        nav.selectOnUp = beginButton;
+        buttons[0].GetComponent<Button>().navigation = nav;
 
-        for(int i = 0; i < buttons.Length; i++)
+        for(int i = 0; i < buttons.Length - 1; i++)
         {
             nav = buttons[i].GetComponent<Button>().navigation;
-            nav.selectOnDown = buttons[(i + 1) % buttons.Length].GetComponent<Button>();
+            nav.selectOnDown = buttons[i + 1].GetComponent<Button>();
             buttons[i].GetComponent<Button>().navigation = nav;
         }
+
+        nav = buttons[buttons.Length - 1].GetComponent<Button>().navigation;
+        nav.selectOnDown = beginButton;
+        buttons[buttons.Length - 1].GetComponent<Button>().navigation = nav;
+
+        nav = beginButton.navigation;
+        nav.selectOnDown = buttons[0].GetComponent<Button>();
+        nav.selectOnUp = buttons[buttons.Length - 1].GetComponent<Button>();
+        beginButton.navigation = nav;
 
         setInfo(0);
 	}

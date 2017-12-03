@@ -66,12 +66,12 @@ public class MainMenuButtons : MonoBehaviour {
         mainRemover.callback = (GameObject gameObject) =>
         {
             mainMenuGroup.SetActive(false);
+            createTeamGroup.GetComponent<CreateTeamManager>().switchTo();
         };
         mainAnim.SetTrigger("RemoveMenu");
 
         createTeamGroup.SetActive(true);
         createAnim.SetTrigger("enter");
-        createTeamGroup.GetComponent<CreateTeamManager>().switchTo();
     }
 
     public void startGame()
