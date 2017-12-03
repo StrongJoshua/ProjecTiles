@@ -1233,7 +1233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1718873956731108
 GameObject:
   m_ObjectHideFlags: 1
@@ -3660,7 +3660,7 @@ MonoBehaviour:
   attackCost: 2
   specialCost: 10
   currTime: 0
-  aimRing: {fileID: 0}
+  aimRing: {fileID: 1713044926559194}
   isFlying: 0
   specialType: 0
 --- !u!114 &114668168460281058
@@ -4319,7 +4319,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 150, y: 0, z: 0}
+    m_Position: {x: 50, y: 0, z: 0}
     m_Rotation: {x: 0, y: 90, z: 0}
     m_Scale: {x: 15, y: 7.6, z: 1}
     placementMode: 0
