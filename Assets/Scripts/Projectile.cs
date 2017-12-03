@@ -69,8 +69,11 @@ public class Projectile : MonoBehaviour {
         {
             if (explodes)
                 explode();
-            // environment stuff
-            rock.hit(damage, this.gameObject);
+            else
+            {
+                rock.hit(damage, gameObject);
+                Destroy(gameObject);
+            }
         }
 	}
 
@@ -80,12 +83,13 @@ public class Projectile : MonoBehaviour {
         Collider[] allColliders = Physics.OverlapSphere(transform.position, explodeRange * MapGenerator.step);
         foreach (Collider c in allColliders)
         {
+            int damage = (int)(maxDamage * (1 - Vector3.Distance(c.gameObject.transform.position, this.gameObject.transform.position) / (2 * explodeRange * MapGenerator.step)));
             Unit t = c.gameObject.GetComponent<Unit>();
             if (t != null && !t.team.Equals(team) && c.gameObject != origin.gameObject)
             {
                 if (t.IsDead)
                     continue;
-                t.takeDamage((int)(maxDamage * (1 - Vector3.Distance(t.gameObject.transform.position, this.gameObject.transform.position) / (2 * explodeRange * MapGenerator.step))));
+                t.takeDamage(damage);
                 if(t.IsDead)
                 {
                     origin.gainKillXP(t);
@@ -93,6 +97,12 @@ public class Projectile : MonoBehaviour {
                 {
                     origin.gainDamageXP(t);
                 }
+            }
+
+            RockManager rm = c.gameObject.GetComponent<RockManager>();
+            if(rm != null)
+            {
+                rm.hit(damage, this.gameObject);
             }
         }
         Destroy(gameObject);

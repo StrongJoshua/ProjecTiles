@@ -60,13 +60,9 @@ public class MapGenerator : MonoBehaviour {
                 Tile.TileType tileType = (Tile.TileType)k;
                 GameObject[] choices;
                 if (tileType == Tile.TileType.plain)
-                {
                     choices = plainTilePrefabs;
-                }
                 else if (tileType == Tile.TileType.destructiblePlain)
-                {
                     choices = destructibleTilePrefabs;
-                }
                 else if (tileType == Tile.TileType.water)
                     choices = waterTilePrefabs;
                 else if (tileType == Tile.TileType.hill)
@@ -76,7 +72,7 @@ public class MapGenerator : MonoBehaviour {
                 else
                     choices = forestTilePrefabs;
 
-                GameObject tile = Instantiate(choices[UnityEngine.Random.Range(0, choices.Length)], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity, parent);
+                GameObject tile = Instantiate(choices[Random.Range(0, choices.Length)], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity, parent);
                 GameObject highlight = Instantiate(highlightPlane, tile.transform.position + new Vector3(0, .6f, 0), Quaternion.identity, tile.transform);
                 highlight.SetActive(false);
                 highlight.GetComponent<MeshRenderer>().material.color = highlightColor;
