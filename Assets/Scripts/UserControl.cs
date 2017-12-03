@@ -469,6 +469,7 @@ public class UserControl : MonoBehaviour
     private void closeAll()
     {
         resumeGame();
+        highlight.SetActive(true);
         unitMenu.SetActive(false);
         phase = Phase.free;
         showUnitInfo(gameManager.unitAt(x, y));
@@ -496,6 +497,7 @@ public class UserControl : MonoBehaviour
 		gameManager.unitAt(x, y).aim();
         hideMovement();
         didJustShoot = true;
+        highlight.SetActive(false);
     }
 
     private void updatePath()
@@ -600,5 +602,6 @@ public class UserControl : MonoBehaviour
 		gameManager.unitAt(x, y).aim();
 		hideMovement();
 		didJustShoot = true;
+        highlight.SetActive(false);
     }
 }

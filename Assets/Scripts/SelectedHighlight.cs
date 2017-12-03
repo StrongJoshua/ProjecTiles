@@ -45,6 +45,8 @@ public class SelectedHighlight : MonoBehaviour {
 	}
     void OnPostRender()
     {
+        if (control.phase == UserControl.Phase.shoot || control.phase == UserControl.Phase.special)
+            return;
         CreateSelectMaterial();
         selectMaterial.SetPass(0);
 
