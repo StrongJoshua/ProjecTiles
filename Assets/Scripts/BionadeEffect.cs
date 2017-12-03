@@ -8,6 +8,6 @@ public class BionadeEffect : ProjectileEffect {
     public override void affect(Unit from, Unit to)
     {
         if (from.team == to.team)
-            to.heal(healAmount);
+			to.heal(healAmount);
     }
 }

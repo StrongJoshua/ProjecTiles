@@ -3528,10 +3528,10 @@ MonoBehaviour:
   name: Infantry
   health: 20
   AP: 10
-  maxHealth: 20
+  maxHealth: 100
   maxAP: 10
-  apChargeRate: 2
-  perception: 10
+  apChargeRate: 1
+  perception: 15
   accuracy: 10
   healthGrowth: 1
   healthGrowthRate: 0

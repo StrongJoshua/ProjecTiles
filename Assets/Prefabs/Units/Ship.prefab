@@ -655,10 +655,10 @@ MonoBehaviour:
   name: Ship
   health: 0
   AP: 10
-  maxHealth: 20
+  maxHealth: 150
   maxAP: 10
-  apChargeRate: 2
-  perception: 10
+  apChargeRate: 0.75
+  perception: 17
   accuracy: 10
   healthGrowth: 1
   healthGrowthRate: 0

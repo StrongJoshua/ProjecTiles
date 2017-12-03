@@ -3722,12 +3722,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Medic
-  health: 0
+  health: 20
   AP: 10
-  maxHealth: 20
+  maxHealth: 80
   maxAP: 10
   apChargeRate: 2
-  perception: 10
+  perception: 13
   accuracy: 10
   healthGrowth: 1
   healthGrowthRate: 0

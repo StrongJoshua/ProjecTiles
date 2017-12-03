@@ -299,7 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 1
   timed: 1
-  maxDamage: 100
+  maxDamage: 75
   numToFire: 1
   speed: 1000
   team: 0

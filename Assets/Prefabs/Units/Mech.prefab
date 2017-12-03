@@ -766,11 +766,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Mech
-  health: 30
+  health: 200
   AP: 10
   maxHealth: 30
   maxAP: 10
-  apChargeRate: 3
+  apChargeRate: 0.5
   perception: 10
   accuracy: 10
   healthGrowth: 1
