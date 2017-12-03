@@ -80,12 +80,12 @@ public class EnemyAI {
 
     private bool inRange(Unit u, Unit u2)
     {
-        return Vector2.Distance(u.XY, u2.XY) <= u.Projectile.range;
+        return Vector2.Distance(u.XY, u2.XY) <= u.Projectile.range * .8F;
     }
 
     private void setStrategicDestination(Unit unit, Unit dest)
     {
-        List<Vector2> path = stopAtRange(AStar.ConstrainPath(tiles, AStar.AStarSearch(tiles, unit.XY, dest.XY, unit.isFlying), (int)unit.AP), unit.Projectile.range, dest.XY);
+        List<Vector2> path = stopAtRange(AStar.ConstrainPath(tiles, AStar.AStarSearch(tiles, unit.XY, dest.XY, unit.isFlying), (int)unit.AP), unit.Projectile.range * .8F, dest.XY);
         path = path.GetRange(1, path.Count - 1);
         if(path.Count > 0)
             gameManager.moveUnitOnPath(unit, path);
