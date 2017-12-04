@@ -50,7 +50,7 @@ public class BarrelManager : MonoBehaviour {
 	{
 		explode ();
 		Tile tile = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>().GetTile(tileX, tileY);
-		tile.MovementCost = Tile.Plain.MovementCost;
+		tile.Impassable = false;
 		healthBarContainer.SetActive(false);
 		return;
 
