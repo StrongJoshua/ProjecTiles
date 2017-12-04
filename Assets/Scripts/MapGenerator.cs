@@ -27,8 +27,6 @@ public class MapGenerator : MonoBehaviour {
 
     private void Awake()
     {
-        if (map != null)
-            generateMap();
     }
 
     internal void generateMap () {
