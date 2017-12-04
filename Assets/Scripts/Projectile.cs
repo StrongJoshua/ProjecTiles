@@ -9,7 +9,6 @@ public class Projectile : MonoBehaviour {
 	float startTime;
 	public int numToFire;
 	public float speed;
-	public Unit.Team team;
 	public bool damageFalloff, explodes;
 	public float explodeRange;
 	public GameObject explodeParticle;
@@ -64,7 +63,7 @@ public class Projectile : MonoBehaviour {
 			if (explodes)
 				explode ();
 			else {
-				if (hitUnit.team != team) {
+				if (hitUnit.team != origin.team) {
 					if (projectileEffect != null)
 						projectileEffect.affect (origin, hitUnit);
 					hitUnit.takeDamage (damage); // multiply by 2 to min at half damage
@@ -110,7 +109,7 @@ public class Projectile : MonoBehaviour {
             {
                 if(projectileEffect != null)
                     projectileEffect.affect(origin, t);
-                if (!t.team.Equals(team))
+                if (!t.team.Equals(origin.team))
                 {
                     if (t.IsDead)
                         continue;

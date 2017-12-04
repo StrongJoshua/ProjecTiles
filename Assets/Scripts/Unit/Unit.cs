@@ -361,8 +361,7 @@ public class Unit : MonoBehaviour
 			if (gunOriginObject != null)
 				gunOrigin = gunOriginObject.position;
 		}
-		Projectile projectileInfo = projectileFab.GetComponent<Projectile> (); 
-		projectileInfo.team = team;
+		Projectile projectileInfo = projectileFab.GetComponent<Projectile> ();
 		int numToFire = projectileInfo.numToFire;
 		float speed = projectileInfo.speed;
 
@@ -473,10 +472,6 @@ public class Unit : MonoBehaviour
 				isShooting = false;
 				aimRing.SetActive (false);
 			} else if (specialType == SpecialType.bionade) {
-				Projectile projectileInfo = specialFab.GetComponent<Projectile> ();
-				projectileInfo.team = team;
-				int numToFire = projectileInfo.numToFire;
-				float speed = projectileInfo.speed;
 				if (anim != null) {
 					anim.SetTrigger ("shoot");
 				}
@@ -484,9 +479,8 @@ public class Unit : MonoBehaviour
 				transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
 				GameObject temp = Instantiate (specialFab, transform.position + transform.forward + transform.up, transform.rotation);
 				temp.GetComponent<Projectile> ().origin = this;
-				temp.GetComponent<Projectile> ().team = team;
 				temp.transform.Rotate (new Vector3 (90, 0, 0));
-				Vector3 aim = this.transform.forward * speed;
+				Vector3 aim = this.transform.forward * temp.GetComponent<Projectile>().speed;
 				//aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
 				//print(aim.ToString());
 				temp.GetComponent<Rigidbody> ().AddForce (aim);
@@ -499,16 +493,13 @@ public class Unit : MonoBehaviour
 					if (gunOriginObject != null)
 						gunOrigin = gunOriginObject.position;
 				}
-				Projectile projectileInfo = specialFab.GetComponent<Projectile> (); 
-				projectileInfo.team = team;
-				float speed = projectileInfo.speed;
 				//TODO Animate turn towards aim ring
 				transform.rotation = Quaternion.Euler (0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
 				aimRing.transform.rotation = Quaternion.Euler (90, transform.rotation.eulerAngles.y - 90, 0);
 				GameObject temp = Instantiate (specialFab, gunOrigin, transform.rotation);
 				temp.GetComponent<Projectile> ().origin = this;
 				temp.transform.Rotate (new Vector3 (90, 0, 0));
-				Vector3 aim = this.transform.forward * speed;
+				Vector3 aim = this.transform.forward * temp.GetComponent<Projectile>().speed;
 				aim.x = aim.x + Random.Range ((200 - 2.5f * accuracy) / 100f, (200 - 2.5f * accuracy) / 100f);
 				//print(aim.ToString());
 				temp.GetComponent<Rigidbody> ().AddForce (aim);
