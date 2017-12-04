@@ -490,10 +490,8 @@ public class Unit : MonoBehaviour
 				//aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
 				//print(aim.ToString());
 				temp.GetComponent<Rigidbody> ().AddForce (aim);
-                userControl.closeAll();
 			} else if (specialType == SpecialType.bombs) {
                 StartCoroutine(bombSpecial(userControl));
-                userControl.closeAll();
             } else if (specialType == SpecialType.sniper) {
 				Vector3 gunOrigin = transform.position + transform.forward + transform.up;
 				if (equippedGun != null) {
@@ -514,10 +512,9 @@ public class Unit : MonoBehaviour
 				aim.x = aim.x + Random.Range ((200 - 2.5f * accuracy) / 100f, (200 - 2.5f * accuracy) / 100f);
 				//print(aim.ToString());
 				temp.GetComponent<Rigidbody> ().AddForce (aim);
-                userControl.closeAll();
             }
-            stopAim();
-			costAP (specialCost);
+            userControl.closeAll();
+            costAP (specialCost);
 		}
 	}
 
@@ -590,7 +587,7 @@ public class Unit : MonoBehaviour
         }
         Vector3 cur = transform.position;
         int bombsDropped = 0;
-        while(Vector3.Distance(cur, transform.position) < 5 * MapGenerator.step)
+        while(Vector3.Distance(cur, transform.position) < 5.2 * MapGenerator.step)
         {
             transform.position = transform.position + transform.forward * Time.deltaTime * 3;
             if(Vector3.Distance(cur, transform.position) > (1 + bombsDropped) * MapGenerator.step)
@@ -601,5 +598,16 @@ public class Unit : MonoBehaviour
             }
             yield return null;
         }
+        transform.LookAt(start);
+        while(Vector3.Distance(transform.position, start) > .05)
+        {
+            Vector3 diff = transform.forward * 3f;
+            if (Vector3.Distance(transform.position, start) < diff.magnitude * Time.deltaTime)
+                transform.position = start;
+            else
+                transform.position = transform.position + diff * Time.deltaTime;
+            yield return null;
+        }
+        this.lookAt(XY);
     }
 }
