@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 	private XMLParser xmlParser;
     public GameObject[] levels;
     private Level[] levelData;
-    public int currentLevel;
+    private int currentLevel;
 	private GameObject persistentInfoInstance;
 	private PersistentInfo persistentInfo;
     public MapGenerator mapGenerator;
