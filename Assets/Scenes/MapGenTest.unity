@@ -5202,6 +5202,7 @@ MonoBehaviour:
   AI: 0
   AIDelay: 2
   debug: 0
+  statsXML: {fileID: 4900000, guid: 408ecaf91847ce040b56194e868e83dd, type: 3}
 --- !u!1 &1921142596
 GameObject:
   m_ObjectHideFlags: 0
