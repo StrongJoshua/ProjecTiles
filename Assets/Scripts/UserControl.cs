@@ -203,7 +203,7 @@ public class UserControl : MonoBehaviour
                     }
                 }
             }
-			if(Input.GetKeyDown(KeyCode.Z) || Input.GetButtonDown("Fire1"))
+			if(Input.GetAxis("Submit") > 0)
             {
                 if (phase == Phase.free)
                 {
@@ -456,9 +456,9 @@ public class UserControl : MonoBehaviour
             return;
         if (unit.team == Unit.Team.player)
         {
+            playClick();
             unitMenu.SetActive(true);
             mapControl = false;
-            EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(unitMenu.GetComponentInChildren<Button>().gameObject);
             unitMenu.GetComponentsInChildren<Button>()[1].interactable = unit.canShoot();
             unitMenu.GetComponentsInChildren<Button>()[2].interactable = unit.canSpecial();
@@ -479,6 +479,7 @@ public class UserControl : MonoBehaviour
             selected.stopAim();
         }
         selected = null;
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void movementPhase()
@@ -486,6 +487,7 @@ public class UserControl : MonoBehaviour
         mapControl = true;
         phase = Phase.movement;
         unitMenu.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
         path = new List<Vector2>();
         path.Add(new Vector2(selected.X, selected.Y));
     }
@@ -558,11 +560,11 @@ public class UserControl : MonoBehaviour
 
     private void confirmMovement()
     {
-		GetComponent<AudioSource>().PlayOneShot(click);
         if(path.Count <= 1)
         {
             return;
         }
+        playClick();
         gameManager.moveUnitOnPath(selected, path.GetRange(1, path.Count - 1));
         selected = null;
         path = null;
