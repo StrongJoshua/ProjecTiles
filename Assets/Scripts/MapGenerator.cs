@@ -23,6 +23,7 @@ public class MapGenerator : MonoBehaviour {
     public GameObject highlightPlane;
     public Color highlightColor;
     public float rateOfDesctructibleTiles;
+	public GameObject water;
 
     private void Awake()
     {
@@ -105,7 +106,9 @@ public class MapGenerator : MonoBehaviour {
             y++;
             x = 0;
         }
-
+		GameObject waterInt =  Instantiate (water);
+		waterInt.transform.localScale = new Vector3 (SizeX * step / 10f, 0,SizeY * step / 10f);
+		waterInt.transform.position = new Vector3 (SizeX * step / 2f - step / 2f, 0.4f, SizeY * step / 2f - 0.6f -step / 2f);
 	}
 
     public Tile GetTile(int x, int y)

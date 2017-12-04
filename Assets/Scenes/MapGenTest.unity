@@ -3496,6 +3496,12 @@ Prefab:
       propertyPath: map
       value: 
       objectReference: {fileID: 4900000, guid: 706230df69399204bb1b4999bba1b357, type: 3}
+    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
+        type: 2}
+      propertyPath: water
+      value: 
+      objectReference: {fileID: 1340700715422658, guid: 6269ac886162ca64ab6cb045f54650a0,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30dcd68047600cd4eb4161fc792ec374, type: 2}
   m_IsPrefabParent: 0
