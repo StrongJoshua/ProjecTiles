@@ -42,6 +42,7 @@ public class DroneControl : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+        userControl.mapControl = false;
 		if (!exploded) {
 			DoRenderer ();
 			if (Time.timeSinceLevelLoad - startTime > lifetime) {
@@ -52,7 +53,7 @@ public class DroneControl : MonoBehaviour
 			transform.Rotate (0, Input.GetAxis ("Horizontal") * Time.deltaTime * turnRate, 0);
 		} else {
 			if (Time.timeSinceLevelLoad - startTime > 2f) {
-				userControl.mapControl = true;
+                userControl.closeAll();
 				Destroy (gameObject);
 			}
 		}

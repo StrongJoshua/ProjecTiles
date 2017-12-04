@@ -674,7 +674,7 @@ MonoBehaviour:
   specialFire: {fileID: 0}
   projectileFab: {fileID: 1293650728090910, guid: 445992a121c91654a975085fe9b84215,
     type: 2}
-  specialFab: {fileID: 0}
+  specialFab: {fileID: 1642912757888518, guid: 96cd0545f457ebb4daf4a30035387667, type: 2}
   equippedGun: {fileID: 0}
   APBar: {fileID: 114300596039280758}
   healthBar: {fileID: 114599098702221374}
