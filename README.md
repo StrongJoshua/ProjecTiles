@@ -1,10 +1,10 @@
 # ProjecTiles
-### Tiles
+### Original Tiles
 ![Tiles](Screenshots/TilesScreenshot.PNG)
-### Sample Map
+### Pre-Alpha
 ![Map](Screenshots/MapGenTest.PNG)
-### Game View
+### Alpha
 ![Game](Screenshots/GameView.PNG)
-### Beta View
+### Beta
 ![Beta](Screenshots/Beta-View.PNG)
 
