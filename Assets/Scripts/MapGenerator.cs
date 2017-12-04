@@ -6,10 +6,15 @@ public class MapGenerator : MonoBehaviour {
     public TextAsset map;
     public GameObject[] plainTilePrefabs;
     public GameObject[] waterTilePrefabs;
-    public GameObject[] destructibleTilePrefabs;
     public GameObject[] hillTilePrefabs;
     public GameObject[] swampTilePrefabs;
     public GameObject[] forestTilePrefabs;
+    public GameObject[] sandTilePrefabs;
+    public GameObject[] boulderTilePrefabs;
+    public GameObject[] explosiveTilePrefabs;
+
+    public GameObject unknownTilePrefab;
+
     public Transform parent;
     public static readonly int step = 3;
     private Tile[,] tiles;
@@ -61,18 +66,25 @@ public class MapGenerator : MonoBehaviour {
                 GameObject[] choices;
                 if (tileType == Tile.TileType.plain)
                     choices = plainTilePrefabs;
-                else if (tileType == Tile.TileType.destructiblePlain)
-                    choices = destructibleTilePrefabs;
                 else if (tileType == Tile.TileType.water)
                     choices = waterTilePrefabs;
                 else if (tileType == Tile.TileType.hill)
                     choices = hillTilePrefabs;
                 else if (tileType == Tile.TileType.swamp)
                     choices = swampTilePrefabs;
-                else
+                else if (tileType == Tile.TileType.forest)
                     choices = forestTilePrefabs;
+                else if (tileType == Tile.TileType.sand)
+                    choices = sandTilePrefabs;
+                else if (tileType == Tile.TileType.boulder)
+                    choices = boulderTilePrefabs;
+                else if (tileType == Tile.TileType.explosive)
+                    choices = explosiveTilePrefabs;
+                else
+                    choices = null;
 
-                GameObject tile = Instantiate(choices[Random.Range(0, choices.Length)], new Vector3(x * step, 0, (height - 1 - y) * step), Quaternion.identity, parent);
+                GameObject tile = Instantiate(choices == null? unknownTilePrefab : choices[Random.Range(0, choices.Length)], new Vector3(x * step, 0, (height - 1 - y) * step),
+                    Quaternion.identity, parent);
                 GameObject highlight = Instantiate(highlightPlane, tile.transform.position + new Vector3(0, .6f, 0), Quaternion.identity, tile.transform);
                 highlight.SetActive(false);
                 highlight.GetComponent<MeshRenderer>().material.color = highlightColor;

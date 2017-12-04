@@ -3443,16 +3443,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: plainTilePrefabs.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: destructibleTilePrefabs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4098335390778252, guid: 30dcd68047600cd4eb4161fc792ec374, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3490,54 +3480,6 @@ Prefab:
       propertyPath: parent
       value: 
       objectReference: {fileID: 2061618496}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: destructibleTilePrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 1153396052980584, guid: 013b5cf1fcb6e1f43b9731565c3535ea,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: plainTilePrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 1102569581382680, guid: 862abb04ebe72bf4f9b13fe2d53a5b28,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: plainTilePrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: plainTilePrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: plainTilePrefabs.Array.data[4]
-      value: 
-      objectReference: {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: plainTilePrefabs.Array.data[5]
-      value: 
-      objectReference: {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: plainTilePrefabs.Array.data[6]
-      value: 
-      objectReference: {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859,
-        type: 2}
-    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
-        type: 2}
-      propertyPath: plainTilePrefabs.Array.data[7]
-      value: 
-      objectReference: {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30dcd68047600cd4eb4161fc792ec374, type: 2}
   m_IsPrefabParent: 0
@@ -4136,7 +4078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa2324de8dd84f41ba867a34c6afd83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 2
+  currentLevel: 0
 --- !u!4 &1476736578
 Transform:
   m_ObjectHideFlags: 0
@@ -5257,7 +5199,7 @@ MonoBehaviour:
   enemiesContainer: {fileID: 105193290}
   hud: {fileID: 396746550}
   playerContainer: {fileID: 236007439}
-  AI: 1
+  AI: 0
   AIDelay: 2
   debug: 0
 --- !u!1 &1921142596

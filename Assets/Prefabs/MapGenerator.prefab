@@ -56,8 +56,6 @@ MonoBehaviour:
   - {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
   waterTilePrefabs:
   - {fileID: 1050143185150086, guid: 56a3031e0d5324f4f9daad2d0d79b413, type: 2}
-  destructibleTilePrefabs:
-  - {fileID: 1255355883882430, guid: 4b6fccdb298063d498eab5b676d7a9b2, type: 2}
   hillTilePrefabs:
   - {fileID: 1529209515441392, guid: 8cb12754adabec048bbc3c02882c3fca, type: 2}
   swampTilePrefabs:
@@ -66,6 +64,13 @@ MonoBehaviour:
   forestTilePrefabs:
   - {fileID: 1462355144702012, guid: 582ab29153ca2ca47905b56a999e937c, type: 2}
   - {fileID: 1708775984971098, guid: b43307b0c000d1f469f1c2939f576b9f, type: 2}
+  sandTilePrefabs:
+  - {fileID: 1692496857986734, guid: 2d12d72b6ed4ead4d9e397ca2277851e, type: 2}
+  boulderTilePrefabs:
+  - {fileID: 1255355883882430, guid: 4b6fccdb298063d498eab5b676d7a9b2, type: 2}
+  explosiveTilePrefabs:
+  - {fileID: 1153396052980584, guid: 013b5cf1fcb6e1f43b9731565c3535ea, type: 2}
+  unknownTilePrefab: {fileID: 0}
   parent: {fileID: 0}
   highlightPlane: {fileID: 1117509993441026, guid: 3759411bb0a839f44ba600260b963948,
     type: 2}
