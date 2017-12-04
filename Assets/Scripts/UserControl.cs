@@ -158,14 +158,14 @@ public class UserControl : MonoBehaviour
                 updatePath();
             }
 	        
-	        if (Input.GetAxis("Mouse ScrollWheel") > 0)
-	        {
-	            iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.forward) * 6, 0.3f);
-	        }
-	        else if (Input.GetAxis("Mouse ScrollWheel") < 0)
-	        {
-	            iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.back) * 6, 0.3f);
-	        }
+	        //if (Input.GetAxis("Mouse ScrollWheel") > 0)
+	        //{
+	        //    iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.forward) * 6, 0.3f);
+	        //}
+	        //else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+	        //{
+	        //    iTween.MoveTo(cam.gameObject, cam.gameObject.transform.position + transform.TransformDirection(Vector3.back) * 6, 0.3f);
+	        //}
 
 			if(Input.GetMouseButtonDown(0) && mapControl)
             {
