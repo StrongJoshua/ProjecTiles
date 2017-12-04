@@ -54,6 +54,13 @@ MonoBehaviour:
   map: {fileID: 0}
   plainTilePrefabs:
   - {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+  - {fileID: 1815657505550804, guid: 862abb04ebe72bf4f9b13fe2d53a5b28, type: 2}
+  - {fileID: 1002052097766516, guid: 79789e7ca21a77f48a914df46a538610, type: 2}
+  - {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+  - {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+  - {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+  - {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
+  - {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
   waterTilePrefabs:
   - {fileID: 1050143185150086, guid: 56a3031e0d5324f4f9daad2d0d79b413, type: 2}
   hillTilePrefabs:
