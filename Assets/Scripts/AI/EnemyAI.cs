@@ -62,7 +62,7 @@ public class EnemyAI {
         {
             if (u.IsDead || u.IsMoving || (u.IsMedic && damaged == null))
                 continue;
-            if (inRange(u, getDamagedTarget(u)))
+            if (u.IsMedic && inRange(u, getDamagedTarget(u)))
                 continue;
             if(u.AP > ap)
             {
