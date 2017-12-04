@@ -250,7 +250,7 @@ public class UserControl : MonoBehaviour
             prevHighlight = unit;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Pause"))
+        if (Input.GetButtonDown("Pause"))
 		{
 			if (Paused) {
 				resumeGame ();
@@ -260,7 +260,7 @@ public class UserControl : MonoBehaviour
 
 		}
 
-		if (Input.GetKeyDown(KeyCode.X) || Input.GetButtonDown("Cancel"))
+		if (Input.GetButtonDown("Cancel"))
         {
 			if (!gameOverMenu.activeSelf && !victoryMenu.activeSelf) {
 				
@@ -466,7 +466,7 @@ public class UserControl : MonoBehaviour
         }
     }
 
-    private void closeAll()
+    public void closeAll()
     {
         resumeGame();
         highlight.SetActive(true);

@@ -47,8 +47,7 @@ public class Unit : MonoBehaviour
 	public Team team;
 
 	public Player player;
-
-	public SpecialFire specialFire;
+    
 	public GameObject projectileFab;
 	public GameObject specialFab;
 	public GameObject equippedGun;
@@ -147,9 +146,6 @@ public class Unit : MonoBehaviour
 
 	void Start ()
 	{
-		specialFire = GetComponent<SpecialFire> ();
-		specialFire.unit = this;
-
 		isMoving = false;
 		highlighted = false;
 		isShooting = false;
@@ -254,7 +250,6 @@ public class Unit : MonoBehaviour
 		//Aim Ring has to be first child
 		//transform.GetChild(0).gameObject.SetActive(false);
 		aimRing.SetActive (false);
-		specialFire.stopAim ();
 	}
 
 	public void aim ()
@@ -262,7 +257,6 @@ public class Unit : MonoBehaviour
 		isShooting = true;
 		transform.GetChild (0).gameObject.SetActive (true);
 		aimRing.SetActive (true);
-		specialFire.startAim ();
 	}
 
 	private void levelUp ()
@@ -467,7 +461,6 @@ public class Unit : MonoBehaviour
 	// Fires special
 	public void special (UserControl userControl)
 	{
-		//specialFire.fire();
 
 		if (canSpecial ()) {
 			if (specialType == SpecialType.drone) {
@@ -498,7 +491,7 @@ public class Unit : MonoBehaviour
 				//print(aim.ToString());
 				temp.GetComponent<Rigidbody> ().AddForce (aim);
 			} else if (specialType == SpecialType.bombs) {
-
+                StartCoroutine(bombSpecial(userControl));
             } else if (specialType == SpecialType.sniper) {
 				Vector3 gunOrigin = transform.position + transform.forward + transform.up;
 				if (equippedGun != null) {
@@ -519,9 +512,9 @@ public class Unit : MonoBehaviour
 				aim.x = aim.x + Random.Range ((200 - 2.5f * accuracy) / 100f, (200 - 2.5f * accuracy) / 100f);
 				//print(aim.ToString());
 				temp.GetComponent<Rigidbody> ().AddForce (aim);
-
             }
-			costAP (specialCost);
+            userControl.closeAll();
+            costAP (specialCost);
 		}
 	}
 
@@ -582,4 +575,45 @@ public class Unit : MonoBehaviour
 			autoAttackLast = Time.timeSinceLevelLoad;
 		}
 	}
+
+    IEnumerator bombSpecial(UserControl uc)
+    {
+        stopAim();
+        Vector3 start = transform.position;
+        uc.gameManager.characters[this.x, this.y] = null;
+        int originalMovementCost = uc.gameManager.mapGenerator.Tiles[x, y].MovementCost;
+        uc.gameManager.mapGenerator.Tiles[x, y].MovementCost = 1000;
+        while(transform.position.y < start.y + 3)
+        {
+            transform.position = transform.position + new Vector3(0, Time.deltaTime * 2);
+            yield return null;
+        }
+        Vector3 cur = transform.position;
+        int bombsDropped = 0;
+        while(Vector3.Distance(cur, transform.position) < 5.2 * MapGenerator.step)
+        {
+            transform.position = transform.position + transform.forward * Time.deltaTime * 3;
+            if(Vector3.Distance(cur, transform.position) > (1 + bombsDropped) * MapGenerator.step)
+            {
+                bombsDropped++;
+                GameObject bomb = Instantiate(specialFab, gameObject.transform.position, Quaternion.identity);
+                bomb.GetComponent<Rigidbody>().AddForce(new Vector3(0, -1));
+            }
+            yield return null;
+        }
+        transform.LookAt(start);
+        while(Vector3.Distance(transform.position, start) > .05)
+        {
+            Vector3 diff = transform.forward * 4f;
+            if (Vector3.Distance(transform.position, start) < diff.magnitude * Time.deltaTime)
+                break;
+            else
+                transform.position = transform.position + diff * Time.deltaTime;
+            yield return null;
+        }
+        transform.position = start;
+        this.lookAt(XY);
+        uc.gameManager.characters[this.x, this.y] = this;
+        uc.gameManager.mapGenerator.Tiles[x, y].MovementCost = originalMovementCost;
+    }
 }

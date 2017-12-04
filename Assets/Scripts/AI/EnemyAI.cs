@@ -88,7 +88,7 @@ public class EnemyAI {
         float dist = float.PositiveInfinity;
         foreach(Unit t in targets)
         {
-            if (t.IsDead)
+            if (t.IsDead || gameManager.characters[t.X, t.Y] != t)
                 continue;
             float d = Vector2.Distance(unit.XY, t.XY);
             if (d < dist)
