@@ -193,14 +193,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 3
+  timed: 0
   maxDamage: 2
   numToFire: 10
   speed: 1000
   team: 0
+  damageFalloff: 1
   explodes: 0
   explodeRange: 0
   explodeParticle: {fileID: 0}
   origin: {fileID: 0}
+  explosion: {fileID: 0}
 --- !u!135 &135730621300235036
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -435,12 +435,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 1.5
   timed: 1
-  maxDamage: 50
+  maxDamage: 75
   numToFire: 0
   speed: 0
   team: 0
+  damageFalloff: 0
   explodes: 1
-  explodeRange: 0.6
+  explodeRange: 0.7
   explodeParticle: {fileID: 1532705254353270, guid: ecb70069459ef8344bae8a3a0f1c929c,
     type: 2}
   origin: {fileID: 0}

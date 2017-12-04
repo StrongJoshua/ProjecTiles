@@ -119,6 +119,7 @@ MonoBehaviour:
   numToFire: 1
   speed: 1000
   team: 1
+  damageFalloff: 1
   explodes: 1
   explodeRange: 3
   explodeParticle: {fileID: 1532705254353270, guid: ecb70069459ef8344bae8a3a0f1c929c,

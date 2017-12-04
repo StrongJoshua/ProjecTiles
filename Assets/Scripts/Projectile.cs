@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour {
 	public int numToFire;
 	public float speed;
 	public Unit.Team team;
-	public bool explodes;
+	public bool damageFalloff, explodes;
 	public float explodeRange;
 	public GameObject explodeParticle;
 	public Unit origin;
@@ -53,7 +53,12 @@ public class Projectile : MonoBehaviour {
         RockManager rock = col.gameObject.GetComponentInParent<RockManager>();
 		BarrelManager barrel = col.gameObject.GetComponentInParent<BarrelManager> ();
 
-		int damage = gameObject.tag == "Sniper" ? (int)(maxDamage * (1 + (distance / (range * MapGenerator.step)))) : (int)(maxDamage * (1 - (distance / (2 * range * MapGenerator.step))));
+        int damage;
+        if (damageFalloff)
+            damage = gameObject.tag == "Sniper" ? (int)(maxDamage * (1 + (distance / (range * MapGenerator.step)))) : (int)(maxDamage * (1 - (distance / (2 * range * MapGenerator.step))));
+        else
+            damage = maxDamage;
+        
 
 		if (hitUnit != null && col.gameObject != origin.gameObject && !hitUnit.IsDead) {
 			if (explodes)
@@ -94,7 +99,12 @@ public class Projectile : MonoBehaviour {
         Collider[] allColliders = Physics.OverlapSphere(transform.position, explodeRange * MapGenerator.step);
         foreach (Collider c in allColliders)
         {
-            int damage = (int)(maxDamage * (1 - Vector3.Distance(c.gameObject.transform.position, this.gameObject.transform.position) / (2 * explodeRange * MapGenerator.step)));
+            int damage;
+            if (damageFalloff)
+                damage = (int)(maxDamage * (1 - Vector3.Distance(c.gameObject.transform.position, this.gameObject.transform.position) / (2 * explodeRange * MapGenerator.step)));
+            else
+                damage = maxDamage;
+
             Unit t = c.gameObject.GetComponent<Unit>();
             if(t != null && c.gameObject != origin.gameObject)
             {
