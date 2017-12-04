@@ -68,6 +68,7 @@ public class RockManager : MonoBehaviour {
             Tile tile = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>().GetTile(tileX, tileY);
             tile.Impassable = false;
             healthBarContainer.SetActive(false);
+            Destroy(this);
             return;
         }
 
@@ -78,7 +79,7 @@ public class RockManager : MonoBehaviour {
 
     public void hit(int damage, GameObject projectile)
     {
-        if (lastHitBy != null && lastHitBy == projectile) return;
+        if (lastHitBy == projectile) return;
 
         lastHitBy = projectile;
 

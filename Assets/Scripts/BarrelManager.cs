@@ -52,6 +52,7 @@ public class BarrelManager : MonoBehaviour {
 		Tile tile = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>().GetTile(tileX, tileY);
 		tile.Impassable = false;
 		healthBarContainer.SetActive(false);
+        Destroy(this);
 		return;
 
 	}
@@ -87,12 +88,14 @@ public class BarrelManager : MonoBehaviour {
 
 	public void hit(int damage, GameObject projectile)
 	{
+        if (currHealth <= 0) return;
 		if (lastHitBy != null && lastHitBy == projectile) return;
 
 		lastHitBy = projectile;
 
 		currHealth -= damage;
-		float scale = (float)currHealth / maxHealth;
+        print("Hit. Health at " + currHealth);
+		float scale = currHealth / (float)maxHealth;
 		if (scale <= 0) scale = 0;
 		healthBar.rectTransform.localScale = new Vector3(scale, 1f, 1f);
 		if (currHealth <= 0)
