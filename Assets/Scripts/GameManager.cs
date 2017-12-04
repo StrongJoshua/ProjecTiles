@@ -138,6 +138,7 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < units.Length; i++)
         {
 			int randIndex = UnityEngine.Random.Range (0, unitTypes.Length);
+            randIndex = 1;
             GameObject unitType = unitTypes[randIndex];
 
 			Dictionary<string, float> Stats = (Dictionary<string, float>) unitBaseStats[randIndex];

@@ -3655,6 +3655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ca6e7902b844d409cbb670252b7f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healRadius: 2.5
   triggerList: []
   healingRing: {fileID: 198324603618181648}
 --- !u!114 &114679677505938252

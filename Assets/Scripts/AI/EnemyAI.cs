@@ -23,7 +23,7 @@ public class EnemyAI {
 		if (Time.timeSinceLevelLoad - lastAction < delay )
             return;
         control.RemoveAll((unit) => unit.IsDead);
-        target.RemoveAll((unit) => unit.IsDead);
+        this.target.RemoveAll((unit) => unit.IsDead);
         lastAction = Time.timeSinceLevelLoad;
 
         Unit cur = getNextControl();
@@ -33,18 +33,22 @@ public class EnemyAI {
 
         Debug.Log("AI currently controlling " + cur.name + " at " + cur.XY);
 
-        Unit closest = getClosestTarget(cur);
-        if(closest != null)
+        Unit target = getTarget(cur);
+        if(target != null)
         {
-            if(inRange(cur, closest))
+            Debug.Log("Found target " + target.name + " at " + target.XY);
+            if(inRange(cur, target))
             {
+                Debug.Log("In range of target");
                 if (!cur.canShoot())
                     return;
-                cur.lookAt(closest.XY);
+                Debug.Log("Shot at target");
+                cur.lookAt(target.XY);
                 cur.fire(false);
             } else
             {
-                setStrategicDestination(cur, closest);
+                Debug.Log("Moving to target");
+                setStrategicDestination(cur, target);
             }
         }
     }
@@ -53,9 +57,12 @@ public class EnemyAI {
     {
         Unit maxAPUnit = null;
         float ap = 0;
+        Unit damaged = getDamagedTarget(control[0]);
         foreach(Unit u in control)
         {
-            if (u.IsDead || u.IsMoving)
+            if (u.IsDead || u.IsMoving || (u.IsMedic && damaged == null))
+                continue;
+            if (inRange(u, getDamagedTarget(u)))
                 continue;
             if(u.AP > ap)
             {
@@ -65,6 +72,14 @@ public class EnemyAI {
         }
 
         return maxAPUnit;
+    }
+
+    private Unit getTarget(Unit unit)
+    {
+        if (unit.IsMedic)
+            return getDamagedTarget(unit);
+        else
+            return getClosestTarget(unit);
     }
 
     private Unit getClosestTarget(Unit unit)
@@ -86,15 +101,35 @@ public class EnemyAI {
         return closest;
     }
 
+    private Unit getDamagedTarget(Unit unit)
+    {
+        Unit closest = null;
+        float dist = float.PositiveInfinity;
+        foreach(Unit u in control)
+        {
+            if (u.IsDead || u.health == u.maxHealth)
+                continue;
+            float d = Vector2.Distance(unit.XY, u.XY);
+            if (d < dist)
+            {
+                closest = u;
+                dist = d;
+            }
+        }
+        return closest;
+    }
+
     private bool inRange(Unit u, Unit u2)
     {
-        return Vector2.Distance(u.XY, u2.XY) <= u.Projectile.range * .8F;
+        return Vector2.Distance(u.XY, u2.XY) <= (u.IsMedic ? u.GetComponent<Medic>().healRadius : u.Projectile.range * .8F);
     }
 
     private void setStrategicDestination(Unit unit, Unit dest)
     {
+        float range = unit.IsMedic ? unit.GetComponent<Medic>().healRadius : unit.Projectile.range * .8F;
+
         List<Vector2> path = AStar.AStarSearch(tiles, unit.XY, dest.XY, unit.isFlying, (Unit[,])gameManager.characters.Clone());
-        path = stopAtRange(AStar.ConstrainPath(tiles, path.GetRange(1, path.Count - 1), (int)unit.AP, unit.isFlying), unit.Projectile.range * .8F, dest.XY);
+        path = stopAtRange(AStar.ConstrainPath(tiles, path.GetRange(1, path.Count - 1), (int)unit.AP, unit.isFlying), range, dest.XY);
         if(path.Count > 0)
             gameManager.moveUnitOnPath(unit, path);
     }

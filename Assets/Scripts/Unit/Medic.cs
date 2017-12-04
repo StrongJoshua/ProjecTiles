@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Medic : MonoBehaviour
 {
+    public float healRadius;
 	public List<Collider> triggerList;
 	float currTime;
 	float delay;
@@ -24,7 +25,7 @@ public class Medic : MonoBehaviour
 	{
 		triggerList.RemoveAll ((collider) => collider == null);
 		if (Time.timeSinceLevelLoad - currTime > delay) {
-			Collider[] allColliders = Physics.OverlapSphere (transform.position, 7.5f);
+			Collider[] allColliders = Physics.OverlapSphere (transform.position, healRadius * MapGenerator.step);
 			currTime = Time.timeSinceLevelLoad;
 			foreach (Collider c in allColliders) {
 				Unit unit = c.gameObject.GetComponent<Unit> ();
@@ -60,6 +61,6 @@ public class Medic : MonoBehaviour
 	void OnDrawGizmos ()
 	{
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere (transform.position, 7.5f);
+		Gizmos.DrawWireSphere (transform.position, healRadius * MapGenerator.step);
 	}
 }

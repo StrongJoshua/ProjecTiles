@@ -121,7 +121,9 @@ public class Unit : MonoBehaviour
 		get { return isDead; }
 	}
 
-	public enum Team
+    public bool IsMedic { get { return GetComponent<Medic>() != null; } }
+
+    public enum Team
 	{
 		player,
 		enemy
