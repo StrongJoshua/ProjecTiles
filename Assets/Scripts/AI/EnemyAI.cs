@@ -5,7 +5,8 @@ public class EnemyAI {
     private GameManager gameManager;
     private Tile[,] tiles;
     private List<Unit> controls, targets;
-    private float delay, lastAction;
+    private float lastAction;
+    public float delay;
     public bool debug;
 
 	public EnemyAI(GameManager gameManager, Unit[] control, Unit[] target, float delay)

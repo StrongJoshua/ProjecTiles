@@ -78,8 +78,11 @@ public class GameManager : MonoBehaviour {
 
     private void OnValidate()
     {
-        if(ai != null)
+        if (ai != null)
+        {
             ai.debug = debug;
+            ai.delay = AIDelay;
+        }
     }
 
     public void retry() {
