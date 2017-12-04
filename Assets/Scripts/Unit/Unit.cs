@@ -580,6 +580,9 @@ public class Unit : MonoBehaviour
     {
         stopAim();
         Vector3 start = transform.position;
+        uc.gameManager.characters[this.x, this.y] = null;
+        int originalMovementCost = uc.gameManager.mapGenerator.Tiles[x, y].MovementCost;
+        uc.gameManager.mapGenerator.Tiles[x, y].MovementCost = 1000;
         while(transform.position.y < start.y + 3)
         {
             transform.position = transform.position + new Vector3(0, Time.deltaTime * 2);
@@ -601,13 +604,16 @@ public class Unit : MonoBehaviour
         transform.LookAt(start);
         while(Vector3.Distance(transform.position, start) > .05)
         {
-            Vector3 diff = transform.forward * 3f;
+            Vector3 diff = transform.forward * 4f;
             if (Vector3.Distance(transform.position, start) < diff.magnitude * Time.deltaTime)
-                transform.position = start;
+                break;
             else
                 transform.position = transform.position + diff * Time.deltaTime;
             yield return null;
         }
+        transform.position = start;
         this.lookAt(XY);
+        uc.gameManager.characters[this.x, this.y] = this;
+        uc.gameManager.mapGenerator.Tiles[x, y].MovementCost = originalMovementCost;
     }
 }
