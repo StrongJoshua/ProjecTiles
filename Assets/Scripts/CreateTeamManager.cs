@@ -11,6 +11,7 @@ public class CreateTeamManager : MonoBehaviour {
     public int unitCount;
     private GameObject[] buttons;
     public GameObject[] unitPrefabs;
+    public TextAsset statsXML;
     private int[] unitTypes;
     private int selected;
 
@@ -97,7 +98,7 @@ public class CreateTeamManager : MonoBehaviour {
 
     public Player generatePlayer(Color playerColor)
     {
-        XMLParser xml = new XMLParser();
+        XMLParser xml = new XMLParser(statsXML);
         Unit[] playerUnits = new Unit[unitCount];
         for(int i = 0; i < unitCount; i++)
         {

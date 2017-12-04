@@ -4078,7 +4078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa2324de8dd84f41ba867a34c6afd83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 0
+  currentLevel: 2
 --- !u!4 &1476736578
 Transform:
   m_ObjectHideFlags: 0
@@ -5202,6 +5202,7 @@ MonoBehaviour:
   AI: 0
   AIDelay: 2
   debug: 0
+  statsXML: {fileID: 4900000, guid: 408ecaf91847ce040b56194e868e83dd, type: 3}
 --- !u!1 &1921142596
 GameObject:
   m_ObjectHideFlags: 0

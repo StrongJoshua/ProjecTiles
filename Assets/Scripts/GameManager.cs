@@ -53,10 +53,12 @@ public class GameManager : MonoBehaviour {
     public float AIDelay;
     public bool debug;
 
+    public TextAsset statsXML;
+
     internal Action<Unit> controlDeathCallback;
 
 	void Awake() {
-		xmlParser = new XMLParser ();
+		xmlParser = new XMLParser (statsXML);
 		unitBaseStats = new ArrayList ();
 		persistentInfoInstance = GameObject.Find ("Persistent Info");
 		persistentInfo = persistentInfoInstance.GetComponent<PersistentInfo> ();

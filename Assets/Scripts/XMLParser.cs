@@ -9,11 +9,9 @@ public class XMLParser  {
 	private XmlDocument xmlDoc;
 	public Dictionary<string, float> growthRates;
 
-
-	public XMLParser() {
+	public XMLParser(TextAsset statsXML) {
 		xmlDoc = new XmlDocument ();
-		string filePath = Application.dataPath + "/Xmls/Stats.xml";
-		xmlDoc.Load (filePath);
+        xmlDoc.LoadXml(statsXML.text);
 
 		growthRates = getBaseStats ("GrowthRates");
 	}
