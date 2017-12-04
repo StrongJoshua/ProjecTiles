@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 4951804539903544}
   - component: {fileID: 54431068251640944}
   - component: {fileID: 136168953138039046}
+  - component: {fileID: 114644484015949884}
   m_Layer: 0
   m_Name: Air Bomb
   m_TagString: Untagged
@@ -421,6 +422,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114644484015949884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1642912757888518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e97173ff4b0c4f44b376e46d1ccd503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 1.5
+  timed: 1
+  maxDamage: 50
+  numToFire: 0
+  speed: 0
+  team: 0
+  explodes: 1
+  explodeRange: 0.6
+  explodeParticle: {fileID: 1532705254353270, guid: ecb70069459ef8344bae8a3a0f1c929c,
+    type: 2}
+  origin: {fileID: 0}
+  explosion: {fileID: 8300000, guid: 5c8b23b6e607d704e928919a293098d5, type: 3}
 --- !u!136 &136168953138039046
 CapsuleCollider:
   m_ObjectHideFlags: 1

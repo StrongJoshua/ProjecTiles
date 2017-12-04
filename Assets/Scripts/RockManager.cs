@@ -72,7 +72,7 @@ public class RockManager : MonoBehaviour {
         {
             // reset movement cost
             Tile tile = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>().GetTile(tileX, tileY);
-            tile.MovementCost = Tile.Plain.MovementCost;
+            tile.Impassable = false;
             healthBarContainer.SetActive(false);
             return;
         }

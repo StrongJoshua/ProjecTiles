@@ -578,11 +578,9 @@ public class Unit : MonoBehaviour
 
     IEnumerator bombSpecial(UserControl uc)
     {
-        stopAim();
         Vector3 start = transform.position;
+        uc.gameManager.mapGenerator.Tiles[x, y].Impassable = true;
         uc.gameManager.characters[this.x, this.y] = null;
-        int originalMovementCost = uc.gameManager.mapGenerator.Tiles[x, y].MovementCost;
-        uc.gameManager.mapGenerator.Tiles[x, y].MovementCost = 1000;
         while(transform.position.y < start.y + 3)
         {
             transform.position = transform.position + new Vector3(0, Time.deltaTime * 2);
@@ -598,6 +596,7 @@ public class Unit : MonoBehaviour
                 bombsDropped++;
                 GameObject bomb = Instantiate(specialFab, gameObject.transform.position, Quaternion.identity);
                 bomb.GetComponent<Rigidbody>().AddForce(new Vector3(0, -1));
+                bomb.GetComponent<Projectile>().origin = this;
             }
             yield return null;
         }
@@ -613,7 +612,7 @@ public class Unit : MonoBehaviour
         }
         transform.position = start;
         this.lookAt(XY);
-        uc.gameManager.characters[this.x, this.y] = this;
-        uc.gameManager.mapGenerator.Tiles[x, y].MovementCost = originalMovementCost;
+        uc.gameManager.mapGenerator.Tiles[x, y].Impassable = false;
+        uc.gameManager.characters[x, y] = this;
     }
 }

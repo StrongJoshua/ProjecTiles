@@ -14,6 +14,8 @@ public class AStar : MonoBehaviour {
     {
         if (x < 0 || y < 0 || x >= tiles.GetLength(0) || y >= tiles.GetLength(1))
             return;
+        if (tiles[x, y].Impassable)
+            return;
         if (ap - (isFlying ? 1 : tiles[x, y].MovementCost) < 0)
             return;
         if (reached[x, y] >= ap)
@@ -66,6 +68,9 @@ public class AStar : MonoBehaviour {
             closed.Add(current);
 
             if (current != start && units[(int)current.x, (int)current.y] != null)
+                continue;
+
+            if (tiles[(int)current.x, (int)current.y].Impassable)
                 continue;
 
             foreach(Vector2 neighbor in getNeighbors(current, tiles))
