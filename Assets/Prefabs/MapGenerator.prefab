@@ -73,6 +73,7 @@ MonoBehaviour:
   - {fileID: 1708775984971098, guid: b43307b0c000d1f469f1c2939f576b9f, type: 2}
   sandTilePrefabs:
   - {fileID: 1692496857986734, guid: 2d12d72b6ed4ead4d9e397ca2277851e, type: 2}
+  - {fileID: 1655582551323544, guid: 2dec62dfb74fea6429a8aee892c3b80e, type: 2}
   boulderTilePrefabs:
   - {fileID: 1255355883882430, guid: 4b6fccdb298063d498eab5b676d7a9b2, type: 2}
   explosiveTilePrefabs:
