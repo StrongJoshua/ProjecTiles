@@ -569,6 +569,7 @@ public class Unit : MonoBehaviour
 
     IEnumerator bombSpecial(UserControl uc)
     {
+        isMoving = true;
         Vector3 start = transform.position;
         uc.gameManager.mapGenerator.Tiles[x, y].Impassable = true;
         uc.gameManager.characters[this.x, this.y] = null;
@@ -605,5 +606,6 @@ public class Unit : MonoBehaviour
         this.lookAt(XY);
         uc.gameManager.mapGenerator.Tiles[x, y].Impassable = false;
         uc.gameManager.characters[x, y] = this;
+        isMoving = false;
     }
 }
