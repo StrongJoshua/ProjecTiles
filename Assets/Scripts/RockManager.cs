@@ -34,8 +34,8 @@ public class RockManager : MonoBehaviour {
         currRock = Instantiate(bigRock, this.transform);
         currRock.transform.localScale = new Vector3(0.5f, 1.575f, 0.499f);
         currType = RockType.BIG;
-        currHealth = bigRockHealth;
-        maxHealth = bigRockHealth;
+        maxHealth = bigRockHealth + medRockHealth + smallRockHealth;
+        currHealth = maxHealth;
         lastHitBy = null;
         //currRock.transform.position = new Vector3(0.002f, 0.75f, -0.002f);
 
@@ -55,17 +55,11 @@ public class RockManager : MonoBehaviour {
         if (currType == RockType.BIG)
         {
             nextRock = choose(medRocks);
-            currHealth = medRockHealth;
-            maxHealth = medRockHealth;
             currType = RockType.MED;
-            healthBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
         }
         else if (currType == RockType.MED)
         {
             nextRock = choose(smallRocks);
-            currHealth = smallRockHealth;
-            healthBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
-            maxHealth = smallRockHealth;
             currType = RockType.SMALL;
         }
         else if (currType == RockType.SMALL)
@@ -77,6 +71,8 @@ public class RockManager : MonoBehaviour {
             return;
         }
 
+        currHealth = healthForType(currType);
+        healthBar.rectTransform.localScale = new Vector3(currHealth/(float)maxHealth, 1, 1);
         currRock = Instantiate(nextRock, this.transform);
     }
 
@@ -87,12 +83,22 @@ public class RockManager : MonoBehaviour {
         lastHitBy = projectile;
 
         currHealth -= damage;
-        float scale = (float)currHealth / maxHealth;
+        float scale = currHealth / (float)maxHealth;
         if (scale <= 0) scale = 0;
         healthBar.rectTransform.localScale = new Vector3(scale, 1f, 1f);
-        if (currHealth <= 0)
+        if (currHealth <= healthForType(currType))
         {
             remove();
+        }
+    }
+
+    private int healthForType(RockType rt)
+    {
+        switch (rt)
+        {
+            case RockType.BIG: return bigRockHealth;
+            case RockType.MED: return medRockHealth;
+            default: return smallRockHealth;
         }
     }
 }
