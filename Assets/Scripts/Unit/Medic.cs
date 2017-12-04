@@ -28,7 +28,7 @@ public class Medic : MonoBehaviour
 			currTime = Time.timeSinceLevelLoad;
 			foreach (Collider c in allColliders) {
 				Unit unit = c.gameObject.GetComponent<Unit> ();
-				if (unit != null && parent.team == unit.team && c.gameObject.GetComponent<Medic>() == null && c.gameObject.GetComponent<Medic>() == this) {
+				if (unit != null && parent.team == unit.team && (c.gameObject.GetComponent<Medic>() == null || c.gameObject.GetComponent<Medic>() == this)) {
 					unit.heal (this.GetComponent<Unit> ().Level);
 					//print ("Healing" + unit.name);
 				}

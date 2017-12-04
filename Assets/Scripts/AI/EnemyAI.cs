@@ -30,6 +30,9 @@ public class EnemyAI {
 
         if (cur == null)
             return;
+
+        Debug.Log("AI currently controlling " + cur.name + " at " + cur.XY);
+
         Unit closest = getClosestTarget(cur);
         if(closest != null)
         {
