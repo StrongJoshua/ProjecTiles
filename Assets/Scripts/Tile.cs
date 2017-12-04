@@ -15,7 +15,7 @@ public class Tile {
     }
 
     public static readonly Tile Plain = new Tile(TileType.plain, 2, true);
-    public static readonly Tile PlainDestructible = new Tile(TileType.plain, 2048, false);
+    public static readonly Tile PlainDestructible = new Tile(TileType.plain, 2, false);
     public static readonly Tile Water = new Tile(TileType.water, 8, false);
     public static readonly Tile Hill = new Tile(TileType.hill, 6, false);
     public static readonly Tile Swamp = new Tile(TileType.swamp, 4, true);
@@ -40,11 +40,24 @@ public class Tile {
         get { return allowsSpawn; }
     }
 
+    private bool passable;
+    public bool Passable
+    {
+        get { return passable; }
+        set { passable = value; }
+    }
+
     Tile(TileType type, int movementCost, bool allowsSpawn)
     {
         this.type = type;
         this.movementCost = movementCost;
         this.allowsSpawn = allowsSpawn;
+    }
+
+    Tile(TileType type, int movementCost, bool allowsSpawn, bool passable)
+        : this (type, movementCost, allowsSpawn)
+    {
+        this.passable = passable;
     }
 
     public static Tile GetTile(int type)
