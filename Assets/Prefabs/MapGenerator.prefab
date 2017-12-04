@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12cfc9da74275f940a246e7334d1535b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
+  map: {fileID: 4900000, guid: 706230df69399204bb1b4999bba1b357, type: 3}
   plainTilePrefabs:
   - {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
   - {fileID: 1815657505550804, guid: 862abb04ebe72bf4f9b13fe2d53a5b28, type: 2}
@@ -84,3 +84,4 @@ MonoBehaviour:
     type: 2}
   highlightColor: {r: 0.3019608, g: 0.3019608, b: 1, a: 0.21568628}
   rateOfDesctructibleTiles: 0.05
+  water: {fileID: 1340700715422658, guid: 6269ac886162ca64ab6cb045f54650a0, type: 2}
