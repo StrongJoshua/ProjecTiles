@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour {
     private EnemyAI ai;
     public bool AI;
     public float AIDelay;
+    public bool debug;
 
     internal Action<Unit> controlDeathCallback;
 
@@ -72,12 +73,16 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < levels.Length; i++)
             levelData[i] = levels[i].GetComponent<Level>();
 
-		initializeLevel (currentLevel);
-
-       
+        initializeLevel(currentLevel);
 	}
 
-	public void retry() {
+    private void OnValidate()
+    {
+        if(ai != null)
+            ai.debug = debug;
+    }
+
+    public void retry() {
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 	}
 
@@ -128,6 +133,7 @@ public class GameManager : MonoBehaviour {
 		actions = new Queue<Action>();
 
 		ai = new EnemyAI(this, enemies, player.units.ToArray(), AIDelay);
+        ai.debug = debug;
 
 		hud.initialize(player);
 	}
@@ -138,7 +144,6 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < units.Length; i++)
         {
 			int randIndex = UnityEngine.Random.Range (0, unitTypes.Length);
-            randIndex = 1;
             GameObject unitType = unitTypes[randIndex];
 
 			Dictionary<string, float> Stats = (Dictionary<string, float>) unitBaseStats[randIndex];

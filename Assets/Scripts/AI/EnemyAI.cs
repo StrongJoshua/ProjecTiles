@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAI {
     private GameManager gameManager;
     private Tile[,] tiles;
-    private List<Unit> control, target;
+    private List<Unit> controls, targets;
     private float delay, lastAction;
+    public bool debug;
 
 	public EnemyAI(GameManager gameManager, Unit[] control, Unit[] target, float delay)
     {
         this.gameManager = gameManager;
         tiles = gameManager.mapGenerator.Tiles;
-        this.control = new List<Unit>(control);
-        this.target = new List<Unit>(target);
+        this.controls = new List<Unit>(control);
+        this.targets = new List<Unit>(target);
         this.delay = delay;
     }
 
@@ -22,8 +21,8 @@ public class EnemyAI {
     {
 		if (Time.timeSinceLevelLoad - lastAction < delay )
             return;
-        control.RemoveAll((unit) => unit.IsDead);
-        this.target.RemoveAll((unit) => unit.IsDead);
+        controls.RemoveAll((unit) => unit.IsDead);
+        targets.RemoveAll((unit) => unit.IsDead);
         lastAction = Time.timeSinceLevelLoad;
 
         Unit cur = getNextControl();
@@ -31,23 +30,23 @@ public class EnemyAI {
         if (cur == null)
             return;
 
-        Debug.Log("AI currently controlling " + cur.name + " at " + cur.XY);
+        print("AI currently controlling " + cur.name + " at " + cur.XY);
 
         Unit target = getTarget(cur);
         if(target != null)
         {
-            Debug.Log("Found target " + target.name + " at " + target.XY);
+            print("Found target " + target.name + " at " + target.XY);
             if(inRange(cur, target))
             {
-                Debug.Log("In range of target");
+                print("In range of target");
                 if (!cur.canShoot())
                     return;
-                Debug.Log("Shot at target");
+                print("Shot at target");
                 cur.lookAt(target.XY);
                 cur.fire(false);
             } else
             {
-                Debug.Log("Moving to target");
+                print("Moving to target");
                 setStrategicDestination(cur, target);
             }
         }
@@ -57,8 +56,8 @@ public class EnemyAI {
     {
         Unit maxAPUnit = null;
         float ap = 0;
-        Unit damaged = getDamagedTarget(control[0]);
-        foreach(Unit u in control)
+        Unit damaged = getDamagedTarget(controls[0]);
+        foreach(Unit u in controls)
         {
             if (u.IsDead || u.IsMoving || (u.IsMedic && damaged == null))
                 continue;
@@ -86,7 +85,7 @@ public class EnemyAI {
     {
         Unit closest = null;
         float dist = float.PositiveInfinity;
-        foreach(Unit t in target)
+        foreach(Unit t in targets)
         {
             if (t.IsDead)
                 continue;
@@ -105,7 +104,7 @@ public class EnemyAI {
     {
         Unit closest = null;
         float dist = float.PositiveInfinity;
-        foreach(Unit u in control)
+        foreach(Unit u in controls)
         {
             if (u.IsDead || u.health == u.maxHealth)
                 continue;
@@ -144,5 +143,11 @@ public class EnemyAI {
             }
         }
         return path;
+    }
+
+    private void print(string s)
+    {
+        if (debug)
+            Debug.Log(s);
     }
 }
