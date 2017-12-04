@@ -15,6 +15,8 @@ public class CreateTeamManager : MonoBehaviour {
     private int selected;
 
     private float backDelay;
+    private GameObject lastGameObject;
+    private bool switchToInput;
 
 	void Start () {
         team.verticalScrollbar.value = 1;
@@ -79,7 +81,6 @@ public class CreateTeamManager : MonoBehaviour {
         nameInput.text = buttons[selected].GetComponentInChildren<Text>().text;
         unitTypeDropdown.value = unitTypes[selected];
         EventSystem.current.SetSelectedGameObject(nameInput.gameObject);
-        nameInput.DeactivateInputField();
     }
 
     public bool allowBack()
@@ -110,6 +111,16 @@ public class CreateTeamManager : MonoBehaviour {
 
     private void Update()
     {
+        GameObject current = EventSystem.current.currentSelectedGameObject;
+        if (current != lastGameObject && current == nameInput.gameObject)
+            switchToInput = true;
+
+        if(switchToInput && nameInput.isFocused)
+        {
+            switchToInput = false;
+            nameInput.DeactivateInputField();
+        }
+
         if (Input.GetAxis("SubmitInput") > 0)
             nameInput.DeactivateInputField();
         if (Input.GetAxis("Cancel") > 0 && !allowBack())
@@ -127,5 +138,7 @@ public class CreateTeamManager : MonoBehaviour {
             }
         } else if (Input.GetAxis("Cancel") == 0)
             backDelay = 0;
+
+        lastGameObject = current;
     }
 }
