@@ -11,8 +11,8 @@ public class Tile {
         swamp,
         forest,
         sand,
-        boulder,
         explosive,
+        boulder,
 		unknown
     }
 
@@ -22,8 +22,8 @@ public class Tile {
     public static readonly Tile Swamp = new Tile(TileType.swamp, 4, true);
     public static readonly Tile Forest = new Tile(TileType.forest, 4, true);
     public static readonly Tile Sand = new Tile(TileType.sand, 3, true);
-    public static readonly Tile Boulder = new Tile(TileType.boulder, 2, false, true);
     public static readonly Tile Explosive = new Tile(TileType.explosive, 2, false, true);
+    public static readonly Tile Boulder = new Tile(TileType.boulder, 2, false, true);
 
     private TileType type;
     public TileType Type
@@ -74,8 +74,8 @@ public class Tile {
             case TileType.swamp: return (Tile) Swamp.MemberwiseClone();
             case TileType.forest: return (Tile) Forest.MemberwiseClone();
             case TileType.sand: return (Tile) Sand.MemberwiseClone();
+            case TileType.explosive: return (Tile)Explosive.MemberwiseClone();
             case TileType.boulder: return (Tile) Boulder.MemberwiseClone();
-            case TileType.explosive: return (Tile) Explosive.MemberwiseClone();
             default: return null;
         }
     }
