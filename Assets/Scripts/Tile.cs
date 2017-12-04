@@ -68,14 +68,14 @@ public class Tile {
     {
         switch((TileType)type)
         {
-            case TileType.plain: return Plain;
-            case TileType.water: return Water;
-            case TileType.hill: return Hill;
-            case TileType.swamp: return Swamp;
-            case TileType.forest: return Forest;
-            case TileType.sand: return Sand;
-            case TileType.boulder: return Boulder;
-            case TileType.explosive: return Explosive;
+            case TileType.plain: return (Tile) Plain.MemberwiseClone();
+            case TileType.water: return (Tile) Water.MemberwiseClone();
+            case TileType.hill: return (Tile) Hill.MemberwiseClone();
+            case TileType.swamp: return (Tile) Swamp.MemberwiseClone();
+            case TileType.forest: return (Tile) Forest.MemberwiseClone();
+            case TileType.sand: return (Tile) Sand.MemberwiseClone();
+            case TileType.boulder: return (Tile) Boulder.MemberwiseClone();
+            case TileType.explosive: return (Tile) Explosive.MemberwiseClone();
             default: return null;
         }
     }
