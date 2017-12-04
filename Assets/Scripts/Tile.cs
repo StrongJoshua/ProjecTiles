@@ -10,16 +10,20 @@ public class Tile {
         hill,
         swamp,
         forest,
-        destructiblePlain,
+        sand,
+        boulder,
+        explosive,
 		unknown
     }
 
     public static readonly Tile Plain = new Tile(TileType.plain, 2, true);
-    public static readonly Tile PlainDestructible = new Tile(TileType.plain, 2, false, true);
     public static readonly Tile Water = new Tile(TileType.water, 8, false);
     public static readonly Tile Hill = new Tile(TileType.hill, 6, false);
     public static readonly Tile Swamp = new Tile(TileType.swamp, 4, true);
     public static readonly Tile Forest = new Tile(TileType.forest, 4, true);
+    public static readonly Tile Sand = new Tile(TileType.sand, 3, true);
+    public static readonly Tile Boulder = new Tile(TileType.boulder, 2, false, true);
+    public static readonly Tile Explosive = new Tile(TileType.explosive, 2, false, true);
 
     private TileType type;
     public TileType Type
@@ -69,7 +73,9 @@ public class Tile {
             case TileType.hill: return Hill;
             case TileType.swamp: return Swamp;
             case TileType.forest: return Forest;
-            case TileType.destructiblePlain: return PlainDestructible;
+            case TileType.sand: return Sand;
+            case TileType.boulder: return Boulder;
+            case TileType.explosive: return Explosive;
             default: return null;
         }
     }
