@@ -474,8 +474,12 @@ public class Unit : MonoBehaviour
                 //aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
                 //print(aim.ToString());
                 temp.GetComponent<Rigidbody>().AddForce(aim);
+
+                userControl.returnMapControl();
             } else if (specialType == SpecialType.bombs) {
                 StartCoroutine(bombSpecial(userControl));
+
+                userControl.returnMapControl();
             } else if (specialType == SpecialType.sniper) {
                 Vector3 gunOrigin = transform.position + transform.forward + transform.up;
                 if (equippedGun != null) {
@@ -493,8 +497,9 @@ public class Unit : MonoBehaviour
                 aim.x = aim.x + Random.Range((200 - 2.5f * accuracy) / 100f, (200 - 2.5f * accuracy) / 100f);
                 //print(aim.ToString());
                 temp.GetComponent<Rigidbody>().AddForce(aim);
+
+                userControl.returnMapControl();
             }
-            userControl.closeAll();
             costAP(specialCost);
         }
     }

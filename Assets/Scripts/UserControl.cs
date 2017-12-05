@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using System.Threading;
+using System;
 
 public class UserControl : MonoBehaviour
 {
@@ -205,7 +206,7 @@ public class UserControl : MonoBehaviour
             }
 			if(Input.GetAxis("Submit") > 0)
             {
-                if (phase == Phase.free)
+                if (phase == Phase.free && mapControl)
                 {
                     openUnitMenu(unit);
                 } else if(phase == Phase.movement)
@@ -216,6 +217,11 @@ public class UserControl : MonoBehaviour
                 {
                     unit.fire(false);
                     didJustShoot = true;
+                    if (!unit.canShoot())
+                    {
+                        unit.stopAim();
+                        returnMapControl();
+                    }
                 }
 				else if(phase == Phase.special && !didJustShoot)
 				{
@@ -263,7 +269,6 @@ public class UserControl : MonoBehaviour
 		if (Input.GetButtonDown("Cancel"))
         {
 			if (!gameOverMenu.activeSelf && !victoryMenu.activeSelf) {
-				
 				closeAll ();
 			}
         }
@@ -604,5 +609,23 @@ public class UserControl : MonoBehaviour
 		hideMovement();
 		didJustShoot = true;
         highlight.SetActive(false);
+    }
+
+    public void returnMapControl()
+    {
+        closeAll();
+        mapControl = false;
+        StartCoroutine(wait(() => mapControl = true));
+    }
+
+    IEnumerator wait(Action action)
+    {
+        float time = .2f;
+        while(time > 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+        action();
     }
 }
