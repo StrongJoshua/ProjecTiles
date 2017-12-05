@@ -2453,14 +2453,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1655205706640374}
-  m_LocalRotation: {x: -0.5118387, y: 0.48787415, z: -0.4878742, w: -0.51183873}
+  m_LocalRotation: {x: -0.5010721, y: 0.49892557, z: -0.49892557, w: -0.5010721}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.023823136, y: 0.023823135, z: 0.023823135}
   m_Children:
   - {fileID: 4596168886329074}
   m_Father: {fileID: 4277801766355936}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90.00001, y: 180, z: -90}
+  m_LocalEulerAnglesHint: {x: 90, y: 177.5, z: -92.746}
 --- !u!4 &4548392435232242
 Transform:
   m_ObjectHideFlags: 1
@@ -3544,7 +3544,6 @@ MonoBehaviour:
   accuracyGrowth: 1
   accuracyGrowthRate: 0
   team: 0
-  specialFire: {fileID: 114668168460281058}
   projectileFab: {fileID: 1293650728090910, guid: 445992a121c91654a975085fe9b84215,
     type: 2}
   specialFab: {fileID: 1939446259614660, guid: b450f106dac903f4180766fbf0093b6f, type: 2}
