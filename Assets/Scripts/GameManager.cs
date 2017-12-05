@@ -250,6 +250,8 @@ public class GameManager : MonoBehaviour {
         unit.setTarget(path[0]);
         characters[unit.X, unit.Y] = null;
         characters[(int)path[0].x, (int)path[0].y] = unit;
+
+	//TODO add call to minimap
     }
 
     internal void uiCallback(Unit unit)

@@ -1,38 +1,61 @@
 ﻿using System.IO;
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class MapGenerator : MonoBehaviour {
-    public TextAsset map;
-    public GameObject[] plainTilePrefabs;
-    public GameObject[] waterTilePrefabs;
-    public GameObject[] hillTilePrefabs;
-    public GameObject[] swampTilePrefabs;
-    public GameObject[] forestTilePrefabs;
-    public GameObject[] sandTilePrefabs;
-    public GameObject[] boulderTilePrefabs;
-    public GameObject[] explosiveTilePrefabs;
+public class MapGenerator : MonoBehaviour
+{
+	public TextAsset map;
+	public GameObject[] plainTilePrefabs;
+	public GameObject[] waterTilePrefabs;
+	public GameObject[] hillTilePrefabs;
+	public GameObject[] swampTilePrefabs;
+	public GameObject[] forestTilePrefabs;
+	public GameObject[] sandTilePrefabs;
+	public GameObject[] boulderTilePrefabs;
+	public GameObject[] explosiveTilePrefabs;
 
-    public GameObject unknownTilePrefab;
+	public GameObject unknownTilePrefab;
 
-    public Transform parent;
-    public static readonly int step = 3;
-    private Tile[,] tiles;
-    public GameObject[,] tileObjects;
-    public GameObject[,] highlights;
-    public GameObject highlightPlane;
-    public Color highlightColor;
-    public float rateOfDesctructibleTiles;
+	public Transform parent;
+	public static readonly int step = 3;
+	private Tile[,] tiles;
+	public GameObject[,] tileObjects;
+	public GameObject[,] highlights;
+	public GameObject highlightPlane;
+	public Color highlightColor;
+	public float rateOfDesctructibleTiles;
 	public GameObject water;
 	public Camera minimap;
 
-    private void Awake()
-    {
-        if (FindObjectOfType<GameManager>() == null)
-            generateMap();
-    }
+	private void Awake ()
+	{
+		if (FindObjectOfType<GameManager> () == null)
+			generateMap ();
+	}
 
-    internal void generateMap () {
+	public ArrayList readText ()
+	{
+		StringReader sr = new StringReader (map.text);
+		string line;
+		ArrayList rows = new ArrayList ();
+		int width = 0;
+		while ((line = sr.ReadLine ()) != null) {
+			ArrayList row = new ArrayList ();
+			foreach (char c in line) {
+				if (c == ',')
+					continue;
+				int tileInt = (int)char.GetNumericValue (c);
+				row.Add (tileInt);
+			}
+			width = row.Count;
+			rows.Add (row);
+		}
+		return rows;
+	}
+
+	internal void generateMap ()
+	{
         StringReader sr = new StringReader(map.text);
         string line;
         ArrayList rows = new ArrayList();
@@ -50,103 +73,99 @@ public class MapGenerator : MonoBehaviour {
             width = row.Count;
             rows.Add(row);
         }
-        int height = rows.Count;
-        tiles = new Tile[width, height];
-        int x = 0;
-        int y = 0;
 
-        tileObjects = new GameObject[width, height];
-        highlights = new GameObject[width, height];
+		int height = rows.Count;
+		tiles = new Tile[width, height];
+		int x = 0;
+		int y = 0;
 
-        foreach (ArrayList arr in rows)
-        {
-            foreach(int k in arr)
-            {
-                tiles[x, height - 1 - y] = Tile.GetTile(k);
+		tileObjects = new GameObject[width, height];
+		highlights = new GameObject[width, height];
 
-                Tile.TileType tileType = (Tile.TileType)k;
-                GameObject[] choices;
-                if (tileType == Tile.TileType.plain)
-                    choices = plainTilePrefabs;
-                else if (tileType == Tile.TileType.water)
-                    choices = waterTilePrefabs;
-                else if (tileType == Tile.TileType.hill)
-                    choices = hillTilePrefabs;
-                else if (tileType == Tile.TileType.swamp)
-                    choices = swampTilePrefabs;
-                else if (tileType == Tile.TileType.forest)
-                    choices = forestTilePrefabs;
-                else if (tileType == Tile.TileType.sand)
-                    choices = sandTilePrefabs;
-                else if (tileType == Tile.TileType.boulder)
-                    choices = boulderTilePrefabs;
-                else if (tileType == Tile.TileType.explosive)
-                    choices = explosiveTilePrefabs;
-                else
-                    choices = null;
+		foreach (ArrayList arr in rows) {
+			foreach (int k in arr) {
+				tiles [x, height - 1 - y] = Tile.GetTile (k);
 
-                GameObject tile = Instantiate(choices == null? unknownTilePrefab : choices[Random.Range(0, choices.Length)], new Vector3(x * step, 0, (height - 1 - y) * step),
-                    Quaternion.identity, parent);
-                GameObject highlight = Instantiate(highlightPlane, tile.transform.position + new Vector3(0, .6f, 0), Quaternion.identity, tile.transform);
-                highlight.SetActive(false);
-                highlight.GetComponent<MeshRenderer>().material.color = highlightColor;
+				Tile.TileType tileType = (Tile.TileType)k;
+				GameObject[] choices;
+				if (tileType == Tile.TileType.plain)
+					choices = plainTilePrefabs;
+				else if (tileType == Tile.TileType.water)
+					choices = waterTilePrefabs;
+				else if (tileType == Tile.TileType.hill)
+					choices = hillTilePrefabs;
+				else if (tileType == Tile.TileType.swamp)
+					choices = swampTilePrefabs;
+				else if (tileType == Tile.TileType.forest)
+					choices = forestTilePrefabs;
+				else if (tileType == Tile.TileType.sand)
+					choices = sandTilePrefabs;
+				else if (tileType == Tile.TileType.boulder)
+					choices = boulderTilePrefabs;
+				else if (tileType == Tile.TileType.explosive)
+					choices = explosiveTilePrefabs;
+				else
+					choices = null;
 
-                // Set up individual tile info
-                TileInfo info = tile.GetComponent<TileInfo>();
-                if (info == null) {
-                    info = tile.AddComponent<TileInfo>();
-                }
-                info.x = x;
-                info.y = height - y - 1;
+				GameObject tile = Instantiate (choices == null ? unknownTilePrefab : choices [Random.Range (0, choices.Length)], new Vector3 (x * step, 0, (height - 1 - y) * step),
+					                              Quaternion.identity, parent);
+				GameObject highlight = Instantiate (highlightPlane, tile.transform.position + new Vector3 (0, .6f, 0), Quaternion.identity, tile.transform);
+				highlight.SetActive (false);
+				highlight.GetComponent<MeshRenderer> ().material.color = highlightColor;
 
-                tileObjects[x, height - y - 1] = tile;
-                highlights[x, height - y - 1] = highlight;
+				// Set up individual tile info
+				TileInfo info = tile.GetComponent<TileInfo> ();
+				if (info == null) {
+					info = tile.AddComponent<TileInfo> ();
+				}
+				info.x = x;
+				info.y = height - y - 1;
 
-                x++;
-            }
-            y++;
-            x = 0;
-        }
-		GameObject waterInt =  Instantiate (water);
-		waterInt.transform.localScale = new Vector3 (SizeX * step / 10f, 0,SizeY * step / 10f);
+				tileObjects [x, height - y - 1] = tile;
+				highlights [x, height - y - 1] = highlight;
+
+				x++;
+			}
+			y++;
+			x = 0;
+		}
+		GameObject waterInt = Instantiate (water);
+		waterInt.transform.localScale = new Vector3 (SizeX * step / 10f, 0, SizeY * step / 10f);
 		waterInt.transform.position = new Vector3 (SizeX * step / 2f - step / 2f, 0.4f, SizeY * step / 2f - step / 2f);
-        if (minimap != null)
-        {
-            minimap.orthographicSize = SizeX * step / 2f;
-            minimap.transform.position = new Vector3(SizeX * step / 2f, 120, SizeY * step / 2.1f);
-        }
+		if (minimap != null) {
+			minimap.orthographicSize = SizeX * step / 2f;
+			minimap.transform.position = new Vector3 (SizeX * step / 2f, 120, SizeY * step / 2.1f);
+		}
 	}
 
-    public Tile GetTile(int x, int y)
-    {
-        if (x < 0 || y < 0 || x >= tiles.GetLength(0) || y >= tiles.GetLength(1))
-            return null;
-        return tiles[x, y];
-    }
-	public Tile.TileType GetTileType(int x, int y)
+	public Tile GetTile (int x, int y)
+	{
+		if (x < 0 || y < 0 || x >= tiles.GetLength (0) || y >= tiles.GetLength (1))
+			return null;
+		return tiles [x, y];
+	}
+
+	public Tile.TileType GetTileType (int x, int y)
 	{
 		if (x < 0 || y < 0 || x >= tiles.GetLength (0) || y >= tiles.GetLength (1))
 			return Tile.TileType.unknown;
-		return tiles[x, y].Type;
+		return tiles [x, y].Type;
 	}
 
-    public int SizeX
-    {
-        get { return tiles.GetLength(0); }
-    }
+	public int SizeX {
+		get { return tiles.GetLength (0); }
+	}
 
-    public int SizeY
-    {
-        get { return tiles.GetLength(1); }
-    }
+	public int SizeY {
+		get { return tiles.GetLength (1); }
+	}
 
-    public Tile[,] Tiles
-    {
-        get { return tiles; }
-    }
+	public Tile[,] Tiles {
+		get { return tiles; }
+	}
 
-    public bool hasGeneratedMap()
-    {
-        return tiles != null;
-    }
+	public bool hasGeneratedMap ()
+	{
+		return tiles != null;
+	}
 }
