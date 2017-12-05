@@ -30,6 +30,8 @@ public class HUDManager : MonoBehaviour {
         int count = 0;
         foreach (Unit u in player.units)
         {
+            if (u.IsDead)
+                continue;
             Image image = Instantiate(unitImagePrefab);
             image.rectTransform.SetParent(unitImagesContainer.transform);
             unitImages.Add(image);
@@ -61,14 +63,4 @@ public class HUDManager : MonoBehaviour {
         // redraw units
         drawUnits();
     }
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

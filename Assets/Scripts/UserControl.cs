@@ -238,7 +238,7 @@ public class UserControl : MonoBehaviour
                             cycleIndex += 1;
                         else if (cycleInput < 0)
                             cycleIndex -= 1;
-                        cycleIndex = (cycleIndex + gameManager.player.unitCount()) % gameManager.player.unitCount();
+                        cycleIndex = (cycleIndex + gameManager.player.unitsAliveCount()) % gameManager.player.unitsAliveCount();
                         cycleUnit = gameManager.player.units[cycleIndex];
                         if (cycleUnit != null && cycleUnit.IsDead)
                             cycleUnit = null;
@@ -286,7 +286,6 @@ public class UserControl : MonoBehaviour
         x = Mathf.Max(Mathf.Min(x, map.SizeX - 1), 0);
         y = Mathf.Max(Mathf.Min(y, map.SizeY - 1), 0);
         highlight.transform.position = new Vector3(x * MapGenerator.step, 0, y * MapGenerator.step);
-  
     }
 
     private bool moveHighlight()
