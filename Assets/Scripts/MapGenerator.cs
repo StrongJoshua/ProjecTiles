@@ -24,6 +24,7 @@ public class MapGenerator : MonoBehaviour {
     public Color highlightColor;
     public float rateOfDesctructibleTiles;
 	public GameObject water;
+	public Camera minimap;
 
     private void Awake()
     {
@@ -109,6 +110,8 @@ public class MapGenerator : MonoBehaviour {
 		GameObject waterInt =  Instantiate (water);
 		waterInt.transform.localScale = new Vector3 (SizeX * step / 10f, 0,SizeY * step / 10f);
 		waterInt.transform.position = new Vector3 (SizeX * step / 2f - step / 2f, 0.4f, SizeY * step / 2f - step / 2f);
+		minimap.orthographicSize = SizeX * step / 2f;
+		minimap.transform.position = new Vector3(SizeX * step / 2f, 120, SizeY * step / 2.1f);
 	}
 
     public Tile GetTile(int x, int y)

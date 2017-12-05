@@ -3527,7 +3527,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1264076282}
   - component: {fileID: 1264076281}
-  - component: {fileID: 1264076283}
   m_Layer: 0
   m_Name: Minimap Camera
   m_TagString: Untagged
@@ -3543,7 +3542,7 @@ Camera:
   m_GameObject: {fileID: 1264076278}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -3583,18 +3582,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1264076283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1264076278}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d2dabc145f7384d89e62a47e13e4b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 1264076281}
 --- !u!1001 &1268970739
 Prefab:
   m_ObjectHideFlags: 0
@@ -3639,6 +3626,11 @@ Prefab:
       propertyPath: parent
       value: 
       objectReference: {fileID: 2061618496}
+    - target: {fileID: 114816416306603896, guid: 30dcd68047600cd4eb4161fc792ec374,
+        type: 2}
+      propertyPath: minimap
+      value: 
+      objectReference: {fileID: 1264076281}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30dcd68047600cd4eb4161fc792ec374, type: 2}
   m_IsPrefabParent: 0
