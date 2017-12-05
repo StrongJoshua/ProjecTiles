@@ -8,10 +8,10 @@ public class Minimap : MonoBehaviour {
 	public Texture2D minimap;
 	public GameManager game;
 	public MapGenerator map;
-	private bool created = false;
+	private bool created;
 	// Use this for initialization
 	void Start () {
-		minimap = GetComponent<RawImage> ().texture as Texture2D;
+		created = false;
 	}
 	
 	// Update is called once per frame
@@ -22,15 +22,16 @@ public class Minimap : MonoBehaviour {
 			ArrayList tiles = map.readText ();
 			foreach (ArrayList arr in tiles) {
 				foreach (int k in arr) {
-					minimap.SetPixel (x, y, new Color (tileset.GetPixel (k, 1).r, tileset.GetPixel (k, 1).g, tileset.GetPixel (k, 1).b));
-					//print (tileset.GetPixel (k, 1).ToString() + "");
+					minimap.SetPixel (x, y, tileset.GetPixel(k,1));
+					print (minimap.GetPixel (x,y).ToString() + "");
 					x++;
 				}
 				y++;
 			}
 			created = true;
+			gameObject.AddComponent<RawImage> ();
+			GetComponent<RawImage> ().texture = minimap;
+
 		}
-		minimap.SetPixel (5,5,Color.red);
-		
 	}
 }
