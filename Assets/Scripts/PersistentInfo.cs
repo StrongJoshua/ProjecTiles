@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PersistentInfo {
+﻿public class PersistentInfo {
 
 	static PersistentInfo instance;
 	public int currentLevel;
@@ -10,6 +6,7 @@ public class PersistentInfo {
 
     private PersistentInfo()
     {
+        // this is 0 indexed
         currentLevel = 0;
     }
 
