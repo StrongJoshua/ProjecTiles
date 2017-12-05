@@ -52,8 +52,8 @@ public class DroneControl : MonoBehaviour
 			rigidbody.velocity = transform.forward * velocity;
 			transform.Rotate (0, Input.GetAxis ("Horizontal") * Time.deltaTime * turnRate, 0);
 		} else {
-			if (Time.timeSinceLevelLoad - startTime > 2f) {
-                userControl.closeAll();
+			if (Time.timeSinceLevelLoad - startTime > 1f) {
+                userControl.returnMapControl();
 				Destroy (gameObject);
 			}
 		}
@@ -76,7 +76,7 @@ public class DroneControl : MonoBehaviour
 		droneModel.SetActive (false);
 		GetComponent<ParticleSystem> ().Stop ();
 		gameObject.GetComponent<LineRenderer> ().enabled = false;
-
+        startTime = Time.timeSinceLevelLoad;
 	}
 
 	void LateUpdate ()
