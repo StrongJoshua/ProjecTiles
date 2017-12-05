@@ -8,9 +8,7 @@ public class GameManager : MonoBehaviour {
 	private XMLParser xmlParser;
     public GameObject[] levels;
     private Level[] levelData;
-    private int currentLevel;
 	private GameObject persistentInfoInstance;
-	private PersistentInfo persistentInfo;
     public MapGenerator mapGenerator;
     public GameObject[] unitTypes;
 
@@ -61,12 +59,10 @@ public class GameManager : MonoBehaviour {
 		xmlParser = new XMLParser (statsXML);
 		unitBaseStats = new ArrayList ();
 		persistentInfoInstance = GameObject.Find ("Persistent Info");
-		persistentInfo = persistentInfoInstance.GetComponent<PersistentInfo> ();
 
 		foreach (GameObject unitType in unitTypes) {
 			unitBaseStats.Add (xmlParser.getBaseStats (unitType.name));
 		}
-		currentLevel = persistentInfo.currentLevel;
 	}
 
 	// Use this for initialization
@@ -75,7 +71,7 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < levels.Length; i++)
             levelData[i] = levels[i].GetComponent<Level>();
 
-        initializeLevel(currentLevel);
+        initializeLevel(PersistentInfo.Instance().currentLevel);
 	}
 
     private void OnValidate()
@@ -88,14 +84,16 @@ public class GameManager : MonoBehaviour {
     }
 
     public void retry() {
+        player.resetStats();
+        foreach (Unit u in player.units)
+            DontDestroyOnLoad(u);
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 	}
 
 	public void nextLevel() {
-		int nextLevel = currentLevel + 1;
-		if (nextLevel < levels.Length) {
-			persistentInfo.currentLevel = nextLevel;
-			//persistentInfo.currentPlayer = new Player (player.units);
+        PersistentInfo.Instance().currentLevel++;
+		if (PersistentInfo.Instance().currentLevel < levels.Length) {
+            player.confirmStats();
 			retry ();
 		}
 	}
@@ -103,11 +101,13 @@ public class GameManager : MonoBehaviour {
 	public void gameOver() {
 		UserControl uC = GameObject.Find ("UserControl").GetComponent<UserControl> ();
 		uC.gameOver ();
+        player.removeParent();
 	}
 
 	public void victory() {
 		UserControl uC = GameObject.Find ("UserControl").GetComponent<UserControl> ();
 		uC.victory ();
+        player.removeParent();
 	}
 
 	void initializeLevel(int currentLevel) {
@@ -120,11 +120,19 @@ public class GameManager : MonoBehaviour {
 
 		GameObject createTeamMenu = GameObject.Find("CreateTeamMenu");
 		if (createTeamMenu == null) {
-			player = new Player (generateUnits (playerContainer, levelData [currentLevel], playerColor, Unit.Team.player));
-			//persistentInfo.currentPlayer = new Player (player.units);
+            if (PersistentInfo.Instance().currentPlayer == null)
+            {
+                player = new Player(generateUnits(playerContainer, levelData[currentLevel], playerColor, Unit.Team.player));
+                PersistentInfo.Instance().currentPlayer = player;
+            }
+            else
+                player = PersistentInfo.Instance().currentPlayer;
+			
 		} else {
 			player = createTeamMenu.GetComponent<CreateTeamManager> ().generatePlayer (playerColor);
-			//persistentInfo.currentPlayer = new Player (player.units);
+            PersistentInfo.Instance().currentPlayer = player;
+            // so that this branch is never taken again
+            Destroy(createTeamMenu);
 		}
 		player.placeUnits(levelData[currentLevel].playerSpawns, characters, playerContainer, this);
 		player.hud = hud;
@@ -267,9 +275,9 @@ public class GameManager : MonoBehaviour {
     private void Update()
     {
 		if (!playerUnitsAlive ())
-			gameOver ();
+			StartCoroutine(endWait(gameOver));
 		if (!enemiesAlive ())
-			victory ();
+			StartCoroutine(endWait(victory));
         while (actions.Count > 0)
             actions.Dequeue().Invoke();
         if(AI)
@@ -285,7 +293,7 @@ public class GameManager : MonoBehaviour {
 
     public bool playerUnitsAlive()
     {
-        return player.units.Count > 0;
+        return player.hasUnitsAlive();
     }
 
 	public bool enemiesAlive() {
@@ -303,5 +311,17 @@ public class GameManager : MonoBehaviour {
     internal Tile.TileType getTileTypeFor(Unit unit)
     {
         return mapGenerator.GetTileType(unit.X, unit.Y);
+    }
+
+    IEnumerator endWait(Action callAfterWait)
+    {
+        GameObject.FindObjectOfType<UserControl>().mapControl = false;
+        float time = 2;
+        while(time > 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+        callAfterWait();
     }
 }

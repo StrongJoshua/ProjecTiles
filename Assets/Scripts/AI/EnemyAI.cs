@@ -55,6 +55,9 @@ public class EnemyAI {
 
     private Unit getNextControl()
     {
+        if (controls.Count == 0)
+            return null;
+
         Unit maxAPUnit = null;
         float ap = 0;
         Unit damaged = getDamagedTarget(controls[0]);

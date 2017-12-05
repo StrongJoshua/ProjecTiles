@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,38 +6,22 @@ public class Player {
 
     public List<Unit> units;
     public HUDManager hud;
+    private List<Dictionary<String, float>> confirmedStats;
 
     public Player(Unit[] units)
     {
         this.units = new List<Unit>(units);
         foreach (Unit u in this.units)
+        {
             u.player = this;
+        }
+        confirmStats();
     }
-
-	public Player(List<Unit> otherUnits) {
-		this.units = new List<Unit> ();
-		foreach (Unit unit in otherUnits) {
-			Unit newUnit = unit;
-			newUnit.player = this;
-			this.units.Add (newUnit);
-		}
-	}
 
     public void killUnit(Unit unit)
     {
-        units.Remove(unit);
         hud.removeUnit(unit);
     }
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     internal void placeUnits(Vector2[] playerSpawns, Unit[,] characters, Transform parent, GameManager gm)
     {
@@ -54,8 +37,41 @@ public class Player {
         }
     }
 
-    internal int unitCount()
+    internal int unitsAliveCount()
     {
-        return units.Count;
+        return units.FindAll((unit) => !unit.IsDead).Count;
+    }
+
+    internal bool hasUnitsAlive()
+    {
+        return unitsAliveCount() > 0;
+    }
+
+    internal void confirmStats()
+    {
+        confirmedStats = new List<Dictionary<string, float>>();
+        units.RemoveAll((unit) => unit.IsDead);
+        foreach(Unit u in units)
+        {
+            Dictionary<string, float> stats = u.getHiddenStats();
+            stats["level"] = u.Level;
+            confirmedStats.Add(stats);
+        }
+    }
+
+    internal void resetStats()
+    {
+        for(int i = 0; i < units.Count; i++)
+        {
+            units[i].setHiddenStats((int) confirmedStats[i]["level"], confirmedStats[i]);
+            units[i].resetHealthAP();
+            units[i].gameObject.SetActive(true);
+        }
+    }
+
+    internal void removeParent()
+    {
+        foreach (Unit u in units)
+            u.transform.parent = null;
     }
 }

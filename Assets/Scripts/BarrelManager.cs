@@ -94,7 +94,6 @@ public class BarrelManager : MonoBehaviour {
 		lastHitBy = projectile;
 
 		currHealth -= damage;
-        print("Hit. Health at " + currHealth);
 		float scale = currHealth / (float)maxHealth;
 		if (scale <= 0) scale = 0;
 		healthBar.rectTransform.localScale = new Vector3(scale, 1f, 1f);
