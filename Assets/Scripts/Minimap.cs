@@ -19,25 +19,28 @@ public class Minimap : MonoBehaviour {
         minimap = new Texture2D(map.SizeX * scale, map.SizeY * scale, TextureFormat.ARGB4444, false);
         minimap.filterMode = FilterMode.Point;
 
-        int x = 0;
-        int y = 0;
-        List<List<int>> tiles = map.readText();
-        foreach (List<int> arr in tiles)
+        Tile[,] tiles = map.Tiles;
+        for(int y = 0; y < map.SizeY; y++)
         {
-            foreach (int k in arr)
+            for(int x = 0; x < map.SizeX; x++)
             {
-                Color c = tileset.GetPixel(k % tileset.width, tileset.height - 1 - k / tileset.width);
-                for(int i = 0; i < scale; i++)
+                Tile t = tiles[x, y];
+                int k = (int)t.Type;
+                if (t.Type == Tile.TileType.boulder || t.Type == Tile.TileType.explosive)
                 {
-                    for(int j = 0; j < scale; j++)
+                    if (map.tileObjects[x, y].GetComponent<TileManager>().Destroyed)
+                        k = (int)Tile.TileType.plain;
+                }
+                Color c = tileset.GetPixel(k % tileset.width, tileset.height - 1 - k / tileset.width);
+
+                for (int i = 0; i < scale; i++)
+                {
+                    for (int j = 0; j < scale; j++)
                     {
-                        minimap.SetPixel(x * scale + i, map.SizeY * scale - scale - y * scale + j, c);
+                        minimap.SetPixel(x * scale + i, y * scale + j, c);
                     }
                 }
-                x++;
             }
-            y++;
-            x = 0;
         }
     }
 

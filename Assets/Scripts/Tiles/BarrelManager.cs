@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BarrelManager : MonoBehaviour {
-
+public class BarrelManager : TileManager {
 	public GameObject[] barrels;
 
 	public Image healthBar;
@@ -52,7 +51,7 @@ public class BarrelManager : MonoBehaviour {
 		Tile tile = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>().GetTile(tileX, tileY);
 		tile.Impassable = false;
 		healthBarContainer.SetActive(false);
-        Destroy(this);
+        Destroyed = true;
 		return;
 
 	}

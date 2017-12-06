@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour {
 
 	void initializeLevel(int currentLevel) {
 		mapGenerator.map = levelData[currentLevel].map;
-		mapGenerator.generateMap();
+		mapGenerator.generateMap(tileChangedCallback);
 
 		enemies = new Unit[levelData[currentLevel].enemyCount];
 		characters = new Unit[mapGenerator.SizeX, mapGenerator.SizeY];
@@ -328,5 +328,10 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
         callAfterWait();
+    }
+
+    internal void tileChangedCallback()
+    {
+        minimap.refresh(this);
     }
 }

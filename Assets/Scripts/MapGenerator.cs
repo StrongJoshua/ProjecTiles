@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -30,8 +30,8 @@ public class MapGenerator : MonoBehaviour
 
 	private void Awake ()
 	{
-		if (FindObjectOfType<GameManager> () == null)
-			generateMap ();
+		if (FindObjectOfType<GameManager>() == null)
+			generateMap (null);
 	}
 
 	public List<List<int>> readText ()
@@ -54,7 +54,7 @@ public class MapGenerator : MonoBehaviour
 		return rows;
 	}
 
-	internal void generateMap ()
+	internal void generateMap (Action tileChangedCallback)
 	{
         List<List<int>> rows = readText();
         int width = rows[0].Count;
@@ -92,8 +92,13 @@ public class MapGenerator : MonoBehaviour
 				else
 					choices = null;
 
-				GameObject tile = Instantiate (choices == null ? unknownTilePrefab : choices [Random.Range (0, choices.Length)], new Vector3 (x * step, 0, (height - 1 - y) * step),
+				GameObject tile = Instantiate (choices == null ? unknownTilePrefab : choices [UnityEngine.Random.Range (0, choices.Length)], new Vector3 (x * step, 0, (height - 1 - y) * step),
 					                              Quaternion.identity, parent);
+
+                TileManager tm = tile.GetComponent<TileManager>();
+                if (tm != null)
+                    tm.tileChangedCallback = tileChangedCallback;
+
 				GameObject highlight = Instantiate (highlightPlane, tile.transform.position + new Vector3 (0, .6f, 0), Quaternion.identity, tile.transform);
 				highlight.SetActive (false);
 				highlight.GetComponent<MeshRenderer> ().material.color = highlightColor;
