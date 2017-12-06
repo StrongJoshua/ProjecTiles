@@ -52,8 +52,6 @@ public class BarrelManager : TileManager {
 		tile.Impassable = false;
 		healthBarContainer.SetActive(false);
         Destroyed = true;
-		return;
-
 	}
 
 	private void explode()

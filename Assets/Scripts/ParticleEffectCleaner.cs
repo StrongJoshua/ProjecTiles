@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ParticleEffectCleaner : MonoBehaviour {
     private ParticleSystem ps;
+    private bool started = false;
+
 	void Start () {
         ps = GetComponent<ParticleSystem>();
         if (ps == null)
@@ -11,7 +13,9 @@ public class ParticleEffectCleaner : MonoBehaviour {
 	}
 
 	void Update () {
-        if (ps.particleCount == 0)
+        if (ps.particleCount > 0 && !started)
+            started = true;
+        if (ps.particleCount == 0 && started)
             Destroy(gameObject);
 	}
 }
