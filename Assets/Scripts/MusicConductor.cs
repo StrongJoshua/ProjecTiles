@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MusicConductor : MonoBehaviour {
 	// Use this for initialization
+	public AudioClip[] playlist;
 	void Start () {		
 	}
 	

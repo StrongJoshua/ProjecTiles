@@ -121,7 +121,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 200
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -150,7 +150,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 1
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -197,7 +197,6 @@ MonoBehaviour:
   maxDamage: 2
   numToFire: 10
   speed: 1000
-  team: 0
   damageFalloff: 1
   explodes: 0
   explodeRange: 0
