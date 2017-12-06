@@ -43,9 +43,16 @@ public class DroneControl : MonoBehaviour
 			explode ();
 		}
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        TileManager tm = collision.gameObject.GetComponentInParent<TileManager>();
+        if (tm != null && !tm.Destroyed)
+            explode();
+    }
+
+    // Update is called once per frame
+    void Update ()
 	{
 		userControl.mapControl = false;
 		if (!exploded) {
@@ -71,10 +78,19 @@ public class DroneControl : MonoBehaviour
 		AudioSource.PlayClipAtPoint (explosion, transform.position);
 		Collider[] allColliders = Physics.OverlapSphere (transform.position, explodeRange * MapGenerator.step);
 		foreach (Collider c in allColliders) {
-			Unit t = c.gameObject.GetComponent<Unit> ();
+            int damage = (int)(maxDamage * (1 - Vector3.Distance(c.gameObject.transform.position, this.gameObject.transform.position) / (2 * explodeRange * MapGenerator.step)));
+            Unit t = c.gameObject.GetComponent<Unit> ();
 			if (t != null && !t.team.Equals (team) && c.gameObject != origin) {
-				t.takeDamage ((int)(maxDamage * (1 - Vector3.Distance (t.gameObject.transform.position, this.gameObject.transform.position) / (2 * explodeRange * MapGenerator.step))));
+				t.takeDamage(damage);
 			}
+
+            RockManager rm = c.gameObject.GetComponent<RockManager>();
+            if (rm != null && !rm.Destroyed)
+                rm.hit(damage, null);
+
+            BarrelManager bm = c.gameObject.GetComponent<BarrelManager>();
+            if (bm != null && !bm.Destroyed)
+                bm.hit(damage, null);
 		}
 		//gameObject.SetActive (false);
 		exploded = true;

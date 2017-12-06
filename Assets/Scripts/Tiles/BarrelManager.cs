@@ -88,7 +88,7 @@ public class BarrelManager : TileManager {
 	public void hit(int damage, GameObject projectile)
 	{
         if (currHealth <= 0) return;
-		if (lastHitBy != null && lastHitBy == projectile) return;
+		if (projectile != null && lastHitBy == projectile) return;
 
 		lastHitBy = projectile;
 

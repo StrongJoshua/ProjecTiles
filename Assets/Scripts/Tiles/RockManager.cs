@@ -78,7 +78,7 @@ public class RockManager : TileManager {
 
     public void hit(int damage, GameObject projectile)
     {
-        if (lastHitBy == projectile) return;
+        if (projectile != null && lastHitBy == projectile) return;
 
         lastHitBy = projectile;
 
