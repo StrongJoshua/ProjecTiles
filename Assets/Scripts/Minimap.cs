@@ -14,6 +14,8 @@ public class Minimap : MonoBehaviour {
         Rect r = GetComponent<RectTransform>().rect;
         scale = (int) r.width / map.SizeX;
 
+        GetComponent<RectTransform>().sizeDelta = new Vector2(map.SizeX * scale, map.SizeY * scale);
+
         minimap = new Texture2D(map.SizeX * scale, map.SizeY * scale, TextureFormat.ARGB4444, false);
         minimap.filterMode = FilterMode.Point;
 
