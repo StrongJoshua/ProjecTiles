@@ -31,6 +31,22 @@ public class Unit : MonoBehaviour
 
     private int xp;
 
+    public float HealthPercent
+    {
+        get
+        {
+            return (float)health / maxHealth;
+        }
+    }
+
+    public float APPercent
+    {
+        get
+        {
+            return AP / maxAP;
+        }
+    }
+
     public int XP {
         get { return xp; }
     }
