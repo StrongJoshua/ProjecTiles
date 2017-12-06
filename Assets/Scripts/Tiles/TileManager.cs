@@ -11,7 +11,8 @@ public class TileManager : MonoBehaviour {
         set
         {
             destroyed = value;
-            tileChangedCallback();
+            if(tileChangedCallback != null)
+                tileChangedCallback();
         }
     }
 }
