@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 135606694745157284}
   - component: {fileID: 120852546913029320}
   - component: {fileID: 82608679781595112}
+  - component: {fileID: 95594813621910070}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -3789,6 +3790,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &95594813621910070
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1096361828472138}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114513017396642552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3802,7 +3820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 4
   turnRate: 150
-  lifetime: 5
+  lifetime: 50
   explodeParticle: {fileID: 1532705254353270, guid: ecb70069459ef8344bae8a3a0f1c929c,
     type: 2}
   team: 0
@@ -3812,6 +3830,7 @@ MonoBehaviour:
   userControl: {fileID: 0}
   droneModel: {fileID: 1104915917099916}
   explosion: {fileID: 8300000, guid: 5c8b23b6e607d704e928919a293098d5, type: 3}
+  dronedot: {fileID: 1784523692764932, guid: c8f42706463d9f04181558def12d7998, type: 2}
 --- !u!120 &120852546913029320
 LineRenderer:
   m_ObjectHideFlags: 1

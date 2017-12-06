@@ -17,9 +17,11 @@ public class DroneControl : MonoBehaviour
 	bool exploded;
 	public GameObject droneModel;
 	public AudioClip explosion;
+	public GameObject dronedot;
 
 	float startTime;
 	Rigidbody rigidbody;
+	GameObject DroneDot;
 	// Use this for initialization
 	void Start ()
 	{
@@ -29,6 +31,9 @@ public class DroneControl : MonoBehaviour
 		startTime = Time.timeSinceLevelLoad;
 		offset = new Vector3 (0, Camera.main.gameObject.transform.position.y - transform.position.y, Camera.main.gameObject.transform.position.z - transform.position.z);
 		exploded = false;
+		DroneDot = Instantiate (dronedot, transform.position + transform.forward * explodeRange * MapGenerator.step, transform.rotation);
+		DroneDot.transform.parent = transform;
+
 	}
 
 	void OnTriggerEnter (Collider col)
@@ -42,7 +47,7 @@ public class DroneControl : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-        userControl.mapControl = false;
+		userControl.mapControl = false;
 		if (!exploded) {
 			DoRenderer ();
 			if (Time.timeSinceLevelLoad - startTime > lifetime) {
@@ -53,7 +58,7 @@ public class DroneControl : MonoBehaviour
 			transform.Rotate (0, Input.GetAxis ("Horizontal") * Time.deltaTime * turnRate, 0);
 		} else {
 			if (Time.timeSinceLevelLoad - startTime > 1f) {
-                userControl.returnMapControl();
+				userControl.returnMapControl ();
 				Destroy (gameObject);
 			}
 		}
@@ -63,7 +68,7 @@ public class DroneControl : MonoBehaviour
 	private void explode ()
 	{
 		Instantiate (explodeParticle, transform.position, transform.rotation);
-		AudioSource.PlayClipAtPoint(explosion, transform.position);
+		AudioSource.PlayClipAtPoint (explosion, transform.position);
 		Collider[] allColliders = Physics.OverlapSphere (transform.position, explodeRange * MapGenerator.step);
 		foreach (Collider c in allColliders) {
 			Unit t = c.gameObject.GetComponent<Unit> ();
@@ -76,12 +81,21 @@ public class DroneControl : MonoBehaviour
 		droneModel.SetActive (false);
 		GetComponent<ParticleSystem> ().Stop ();
 		gameObject.GetComponent<LineRenderer> ().enabled = false;
-        startTime = Time.timeSinceLevelLoad;
+		startTime = Time.timeSinceLevelLoad;
+		Destroy (DroneDot);
 	}
 
 	void LateUpdate ()
 	{
-		Camera.main.gameObject.transform.position = transform.position + offset;
+		if (!exploded) {
+			Camera.main.gameObject.transform.position = transform.position + offset;
+			if (Mathf.Abs (Input.GetAxis ("Vertical")) > 0 || Mathf.Abs (Input.GetAxis ("Horizontal")) > 0) {
+				//DroneDot.transform.RotateAround (transform.position, Vector3.up, Mathf.Atan (Input.GetAxis ("Vertical") / Input.GetAxis ("Horizontal")));
+				float degrees = Mathf.Atan2 (Input.GetAxis ("Vertical") , Input.GetAxis ("Horizontal"));
+				//print (degrees);
+				DroneDot.transform.position = transform.position +  new Vector3 (explodeRange * MapGenerator.step * Mathf.Cos(degrees), 0, explodeRange * MapGenerator.step * Mathf.Sin(degrees));
+			}
+		}
 	}
 
 
@@ -91,20 +105,24 @@ public class DroneControl : MonoBehaviour
 		int numSegments = 128;
 		LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer> ();
 		Color c1 = new Color (1, 0f, 0f, 1);
-        Color c2 = new Color(1, .8f, 0, 1);
+		Color c2 = new Color (1, .8f, 0, 1);
 
-        Gradient gradient = new Gradient();
-        gradient.colorKeys = new GradientColorKey[] { new GradientColorKey(c1, 0), new GradientColorKey(c2, .5f), new GradientColorKey(c1, 1) };
+		Gradient gradient = new Gradient ();
+		gradient.colorKeys = new GradientColorKey[] {
+			new GradientColorKey (c1, 0),
+			new GradientColorKey (c2, .5f),
+			new GradientColorKey (c1, 1)
+		};
 
 		lineRenderer.material = new Material (Shader.Find ("Particles/Additive"));
-        lineRenderer.colorGradient = gradient;
-		lineRenderer.startWidth = 0.2f;
-        lineRenderer.endWidth = .2f;
+		lineRenderer.colorGradient = gradient;
+		lineRenderer.startWidth = .2f;
+		lineRenderer.endWidth = .2f;
 		lineRenderer.positionCount = numSegments + 1;
 		lineRenderer.useWorldSpace = false;
 
 		float deltaTheta = (float)(2.0 * Mathf.PI) / numSegments;
-		float theta = 0f;
+		float theta = Mathf.PI / 2;
 
 		for (int i = 0; i < numSegments + 1; i++) {
 			float x = radius * Mathf.Cos (theta);
@@ -113,5 +131,7 @@ public class DroneControl : MonoBehaviour
 			lineRenderer.SetPosition (i, pos);
 			theta += deltaTheta;
 		}
+			
+
 	}
 }
