@@ -11,6 +11,7 @@ public class MainMenuButtons : MonoBehaviour {
     public AudioClip click, hover;
     public Animator mainAnim, createAnim;
     public AnimationEventHandler mainRemover, createRemover;
+	public MusicConductor conductor;
 
 	Rect ScreenRect = new Rect(0,0,Screen.width,Screen.height);
 
@@ -117,11 +118,18 @@ public class MainMenuButtons : MonoBehaviour {
 		controlsDisplay.SetActive(false);
 	}
 
-	public void volumeAdjust()
+	public void volumeSelect()
 	{
 		volumeSlider.SetActive (true);
 		EventSystem.current.SetSelectedGameObject(volumeSlider);
 
+	}
+
+	public void volumeAdjust()
+	{
+		PersistentInfo pi = PersistentInfo.Instance();
+		pi.volume = (int)volumeSlider.GetComponent<Slider> ().value;
+		conductor.adjustMusicVolume (pi.volume);
 	}
 
 	public void volumePicked()
