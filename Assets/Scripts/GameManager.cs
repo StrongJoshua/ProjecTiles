@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
     // map tile x and y => which unit is occupying tile
     public Unit[,] characters;
 
-    private Unit[] enemies;
+    public Unit[] enemies;
 
     public Player player;
 

@@ -34,14 +34,14 @@ public class MapGenerator : MonoBehaviour
 			generateMap ();
 	}
 
-	public ArrayList readText ()
+	public List<List<int>> readText ()
 	{
 		StringReader sr = new StringReader (map.text);
 		string line;
-		ArrayList rows = new ArrayList ();
+		List<List<int>> rows = new List<List<int>> ();
 		int width = 0;
 		while ((line = sr.ReadLine ()) != null) {
-			ArrayList row = new ArrayList ();
+			List<int> row = new List<int>();
 			foreach (char c in line) {
 				if (c == ',')
 					continue;
@@ -56,23 +56,8 @@ public class MapGenerator : MonoBehaviour
 
 	internal void generateMap ()
 	{
-        StringReader sr = new StringReader(map.text);
-        string line;
-        ArrayList rows = new ArrayList();
-        int width = 0;
-        while((line = sr.ReadLine()) != null)
-        {
-            ArrayList row = new ArrayList();
-            foreach(char c in line)
-            {
-                if (c == ',')
-                    continue;
-                int tileInt = (int)char.GetNumericValue(c);
-                row.Add(tileInt);
-            }
-            width = row.Count;
-            rows.Add(row);
-        }
+        List<List<int>> rows = readText();
+        int width = rows[0].Count;
 
 		int height = rows.Count;
 		tiles = new Tile[width, height];
@@ -82,7 +67,7 @@ public class MapGenerator : MonoBehaviour
 		tileObjects = new GameObject[width, height];
 		highlights = new GameObject[width, height];
 
-		foreach (ArrayList arr in rows) {
+		foreach (List<int> arr in rows) {
 			foreach (int k in arr) {
 				tiles [x, height - 1 - y] = Tile.GetTile (k);
 
