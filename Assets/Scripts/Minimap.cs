@@ -34,7 +34,7 @@ public class Minimap : MonoBehaviour {
 				colors [i] = new Color (0.5f, 0.5f, 0.5f,1f);
 			}
 			minimap.SetPixels (colors);
-			print(x + " " + y + " " + minimap.height);
+			//print(x + " " + y + " " + minimap.height);
 			//created = true;
 			//gameObject.AddComponent<RawImage> ();
 			GetComponent<RawImage> ().texture = minimap as Texture;
