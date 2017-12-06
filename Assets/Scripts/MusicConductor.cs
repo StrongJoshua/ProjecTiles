@@ -5,18 +5,22 @@ using UnityEngine;
 public class MusicConductor : MonoBehaviour {
 	// Use this for initialization
 	public AudioClip[] playlist;
+	public AudioSource audio;
 	void Start () {		
+		audio = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	
+		if (!audio.isPlaying) {
+			audio.clip = playlist [Random.Range (0, playlist.Length)];
+			audio.Play ();
+		}
 	}
 
 	public void adjustMusicVolume(int volume)
 	{
-		GetComponent<AudioSource> ().volume = volume/100f;
+		audio.volume = volume/100f;
 	}
 		
 }
