@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class MainMenuButtons : MonoBehaviour {
     public Canvas canvas;
-    public GameObject mainMenuGroup, creditsGroup, backButton, createTeamGroup, settingsGroup, controlsDisplay;
+    public GameObject mainMenuGroup, creditsGroup, backButton, createTeamGroup, settingsGroup, controlsDisplay, volumeSlider;
     public AudioClip click, hover;
     public Animator mainAnim, createAnim;
     public AnimationEventHandler mainRemover, createRemover;
@@ -99,6 +99,7 @@ public class MainMenuButtons : MonoBehaviour {
 		mainAnim.SetTrigger("RemoveMenu");
 		settingsGroup.SetActive(true);
 		backButton.SetActive (true);
+		volumeSlider.SetActive (false);
 		EventSystem.current.SetSelectedGameObject(backButton);
 	}
 
@@ -114,6 +115,19 @@ public class MainMenuButtons : MonoBehaviour {
 	public void controlsExit()
 	{
 		controlsDisplay.SetActive(false);
+	}
+
+	public void volumeAdjust()
+	{
+		volumeSlider.SetActive (true);
+		EventSystem.current.SetSelectedGameObject(volumeSlider);
+
+	}
+
+	public void volumePicked()
+	{
+		volumeSlider.SetActive (false);
+		EventSystem.current.SetSelectedGameObject(backButton);
 	}
 
 	void Update()
