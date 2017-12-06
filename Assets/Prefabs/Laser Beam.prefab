@@ -216,6 +216,7 @@ MonoBehaviour:
   explodeParticle: {fileID: 0}
   origin: {fileID: 0}
   explosion: {fileID: 0}
+  hitEffect: {fileID: 1687203719398804, guid: bc38ceb81beec1d43b701aa963646ecf, type: 2}
 --- !u!136 &136644806962469732
 CapsuleCollider:
   m_ObjectHideFlags: 1
