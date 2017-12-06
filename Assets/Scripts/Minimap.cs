@@ -7,11 +7,12 @@ public class Minimap : MonoBehaviour {
 	public Texture2D tileset;
 	private Texture2D minimap;
 	public MapGenerator map;
-    public int scale;
+    private int scale;
 
     private void updateMap()
     {
-        GetComponent<RectTransform>().sizeDelta = new Vector2(map.SizeX * scale, map.SizeY * scale);
+        Rect r = GetComponent<RectTransform>().rect;
+        scale = (int) r.width / map.SizeX;
 
         minimap = new Texture2D(map.SizeX * scale, map.SizeY * scale, TextureFormat.ARGB4444, false);
         minimap.filterMode = FilterMode.Point;
