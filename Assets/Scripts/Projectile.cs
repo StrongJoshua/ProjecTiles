@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour {
             damage = maxDamage;
 
 
-        if (hitUnit != null && col.gameObject != origin.gameObject && !hitUnit.IsDead)
+		if (hitUnit != null && col.gameObject != origin.gameObject && !hitUnit.IsDead && tm == null)
         {
             if (explodes)
                 explode();
@@ -86,6 +86,7 @@ public class Projectile : MonoBehaviour {
             else
             {
                 tm.hit(damage, gameObject);
+				Instantiate(hitEffect, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
         }
