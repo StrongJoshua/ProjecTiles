@@ -76,9 +76,10 @@ public class RockManager : TileManager {
         currRock = Instantiate(nextRock, this.transform);
     }
 
-    public void hit(int damage, GameObject projectile)
+    public override void hit(int damage, GameObject projectile)
     {
-        if (projectile != null && lastHitBy == projectile) return;
+        if (currHealth <= 0) return;
+        if (lastHitBy == projectile) return;
 
         lastHitBy = projectile;
 

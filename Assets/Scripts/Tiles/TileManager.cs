@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class TileManager : MonoBehaviour {
+public abstract class TileManager : MonoBehaviour {
     public Action tileChangedCallback;
     private bool destroyed;
 
@@ -15,4 +15,6 @@ public class TileManager : MonoBehaviour {
                 tileChangedCallback();
         }
     }
+
+    public abstract void hit(int damage, GameObject projectile);
 }

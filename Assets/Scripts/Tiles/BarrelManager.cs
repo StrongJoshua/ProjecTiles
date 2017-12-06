@@ -70,25 +70,17 @@ public class BarrelManager : TileManager {
 				t.takeDamage(damage);
 			}
 
-			RockManager rm = c.gameObject.GetComponent<RockManager>();
-			if(rm != null)
-			{
-				rm.hit(damage, this.gameObject);
-			}
-
-			BarrelManager bm = c.gameObject.GetComponent<BarrelManager>();
-			if(bm != null)
-			{
-				bm.hit(damage, this.gameObject);
-			}
+            TileManager tm = c.gameObject.GetComponent<TileManager>();
+            if (tm != null && !tm.Destroyed)
+                tm.hit(damage, gameObject);
 		}
 		Destroy(currBarrel);
 	}
 
-	public void hit(int damage, GameObject projectile)
+	public override void hit(int damage, GameObject projectile)
 	{
         if (currHealth <= 0) return;
-		if (projectile != null && lastHitBy == projectile) return;
+		if (lastHitBy == projectile) return;
 
 		lastHitBy = projectile;
 

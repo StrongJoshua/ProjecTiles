@@ -49,46 +49,44 @@ public class Projectile : MonoBehaviour {
 		float distance = Vector3.Distance (last, gameObject.transform.position); 
 		Unit hitUnit = col.gameObject.GetComponent<Unit> ();
 
-        RockManager rock = col.gameObject.GetComponentInParent<RockManager>();
-		BarrelManager barrel = col.gameObject.GetComponentInParent<BarrelManager> ();
+        TileManager tm = col.gameObject.GetComponent<TileManager>();
 
         int damage;
         if (damageFalloff)
             damage = gameObject.tag == "Sniper" ? (int)(maxDamage * (1 + (distance / (range * MapGenerator.step)))) : (int)(maxDamage * (1 - (distance / (2 * range * MapGenerator.step))));
         else
             damage = maxDamage;
-        
 
-		if (hitUnit != null && col.gameObject != origin.gameObject && !hitUnit.IsDead) {
-			if (explodes)
-				explode ();
-			else {
-				if (hitUnit.team != origin.team) {
-					if (projectileEffect != null)
-						projectileEffect.affect (origin, hitUnit);
-					hitUnit.takeDamage (damage); // multiply by 2 to min at half damage
-					if (hitUnit.IsDead)
-						origin.gainKillXP (hitUnit);
-					else
-						origin.gainDamageXP (hitUnit);
-				}
-				Destroy (gameObject);
-			}
-		} else if (rock != null) {
-			if (explodes)
-				explode ();
-			else {
-				rock.hit (damage, gameObject);
-				Destroy (gameObject);
-			}
-		} else if (barrel != null) {
-			if (explodes)
-				explode ();
-			else {
-				barrel.hit (damage, gameObject);
-				Destroy (gameObject);
-			}
-		}
+
+        if (hitUnit != null && col.gameObject != origin.gameObject && !hitUnit.IsDead)
+        {
+            if (explodes)
+                explode();
+            else
+            {
+                if (hitUnit.team != origin.team)
+                {
+                    if (projectileEffect != null)
+                        projectileEffect.affect(origin, hitUnit);
+                    hitUnit.takeDamage(damage); // multiply by 2 to min at half damage
+                    if (hitUnit.IsDead)
+                        origin.gainKillXP(hitUnit);
+                    else
+                        origin.gainDamageXP(hitUnit);
+                }
+                Destroy(gameObject);
+            }
+        }
+        else if (tm != null && !tm.Destroyed)
+        {
+            if (explodes)
+                explode();
+            else
+            {
+                tm.hit(damage, gameObject);
+                Destroy(gameObject);
+            }
+        }
 	}
 
     private void explode()
@@ -124,18 +122,10 @@ public class Projectile : MonoBehaviour {
                     }
                 }
             }
-            
-            RockManager rm = c.gameObject.GetComponent<RockManager>();
-            if(rm != null)
-            {
-                rm.hit(damage, this.gameObject);
-            }
 
-			BarrelManager bm = c.gameObject.GetComponent<BarrelManager>();
-			if(bm != null)
-			{
-				bm.hit(damage, this.gameObject);
-			}
+            TileManager tm = c.gameObject.GetComponent<TileManager>();
+            if (tm != null && !tm.Destroyed)
+                tm.hit(damage, gameObject);
         }
         Destroy(gameObject);
     }

@@ -84,13 +84,9 @@ public class DroneControl : MonoBehaviour
 				t.takeDamage(damage);
 			}
 
-            RockManager rm = c.gameObject.GetComponent<RockManager>();
-            if (rm != null && !rm.Destroyed)
-                rm.hit(damage, null);
-
-            BarrelManager bm = c.gameObject.GetComponent<BarrelManager>();
-            if (bm != null && !bm.Destroyed)
-                bm.hit(damage, null);
+            TileManager tm = c.gameObject.GetComponent<TileManager>();
+            if (tm != null && !tm.Destroyed)
+                tm.hit(damage, gameObject);
 		}
 		//gameObject.SetActive (false);
 		exploded = true;
