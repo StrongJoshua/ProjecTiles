@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class MainMenuButtons : MonoBehaviour {
     public Canvas canvas;
-    public GameObject mainMenuGroup, creditsGroup, backButton, createTeamGroup, settingsGroup, controlsDisplay, volumeSlider;
+    public GameObject mainMenuGroup, creditsGroup, backButton, createTeamGroup, settingsGroup, controlsDisplay, musicVolumeSlider, sfxVolumeSlider;
     public AudioClip click, hover;
     public Animator mainAnim, createAnim;
     public AnimationEventHandler mainRemover, createRemover;
@@ -100,7 +100,8 @@ public class MainMenuButtons : MonoBehaviour {
 		mainAnim.SetTrigger("RemoveMenu");
 		settingsGroup.SetActive(true);
 		backButton.SetActive (true);
-		volumeSlider.SetActive (false);
+		musicVolumeSlider.SetActive (false);
+		sfxVolumeSlider.SetActive (false);
 		EventSystem.current.SetSelectedGameObject(backButton);
 	}
 
@@ -118,23 +119,42 @@ public class MainMenuButtons : MonoBehaviour {
 		controlsDisplay.SetActive(false);
 	}
 
-	public void volumeSelect()
+	public void musicVolumeSelect()
 	{
-		volumeSlider.SetActive (true);
-		EventSystem.current.SetSelectedGameObject(volumeSlider);
+		musicVolumeSlider.SetActive (true);
+		EventSystem.current.SetSelectedGameObject(musicVolumeSlider);
 
 	}
 
-	public void volumeAdjust()
+	public void musicVolumeAdjust()
 	{
 		PersistentInfo pi = PersistentInfo.Instance();
-		pi.volume = (int)volumeSlider.GetComponent<Slider> ().value;
-		conductor.adjustMusicVolume (pi.volume);
+		pi.musicVolume = (int)musicVolumeSlider.GetComponent<Slider> ().value;
+		conductor.adjustMusicVolume (pi.musicVolume);
 	}
 
-	public void volumePicked()
+	public void musicVolumePicked()
 	{
-		volumeSlider.SetActive (false);
+		musicVolumeSlider.SetActive (false);
+		EventSystem.current.SetSelectedGameObject(backButton);
+	}
+
+	public void sfxVolumeSelect()
+	{
+		sfxVolumeSlider.SetActive (true);
+		EventSystem.current.SetSelectedGameObject(sfxVolumeSlider);
+
+	}
+
+	public void sfxVolumeAdjust()
+	{
+		PersistentInfo pi = PersistentInfo.Instance();
+		pi.sfxVolume = (int) sfxVolumeSlider.GetComponent<Slider> ().value;
+	}
+
+	public void sfxVolumePicked()
+	{
+		sfxVolumeSlider.SetActive (false);
 		EventSystem.current.SetSelectedGameObject(backButton);
 	}
 
