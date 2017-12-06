@@ -36,28 +36,23 @@ public class Minimap : MonoBehaviour {
             y++;
             x = 0;
         }
-
-        minimap.Apply();
-        GetComponent<RawImage>().texture = minimap;
     }
 
-    public void updateForCharacters(GameManager game)
+    private void updateCharacters(IEnumerable<Unit> units, Color color)
+    {
+        foreach(Unit u in units)
+        {
+            if (u.IsDead)
+                continue;
+            drawCircle(u.XY, scale, color);
+        }
+    }
+
+    public void refresh(GameManager game)
     {
         updateMap();
-
-        foreach(Unit u in game.player.units)
-        {
-            if (u.IsDead)
-                continue;
-            drawCircle(u.XY, scale, game.playerColor);
-        }
-
-        foreach(Unit u in game.enemies)
-        {
-            if (u.IsDead)
-                continue;
-            drawCircle(u.XY, scale, game.enemyColor);
-        }
+        updateCharacters(game.player.units, game.playerColor);
+        updateCharacters(game.enemies, game.enemyColor);
 
         minimap.Apply();
         GetComponent<RawImage>().texture = minimap;

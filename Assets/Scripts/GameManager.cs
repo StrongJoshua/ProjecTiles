@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour {
         ai.debug = debug;
 
 		hud.initialize(player);
-        minimap.updateForCharacters(this);
+        minimap.refresh(this);
 	}
 
     Unit[] generateUnits(Transform container, Level level, Color color, Unit.Team team)
@@ -247,6 +247,9 @@ public class GameManager : MonoBehaviour {
         unit.costAP(unit.isFlying ? 1 : mapGenerator.Tiles[unit.X, unit.Y].MovementCost);
         path.RemoveAt(0);
         hasUpdate = true;
+
+        minimap.refresh(this);
+        
         if (path.Count == 0)
         {
             pathManager.Remove(unit);
@@ -261,8 +264,6 @@ public class GameManager : MonoBehaviour {
         unit.setTarget(path[0]);
         characters[unit.X, unit.Y] = null;
         characters[(int)path[0].x, (int)path[0].y] = unit;
-
-        minimap.updateForCharacters(this);
     }
 
     internal void uiCallback(Unit unit)
@@ -292,7 +293,7 @@ public class GameManager : MonoBehaviour {
         characters[unit.X, unit.Y] = null;
         if(controlDeathCallback != null)
             controlDeathCallback(unit);
-        minimap.updateForCharacters(this);
+        minimap.refresh(this);
     }
 
     public bool playerUnitsAlive()
