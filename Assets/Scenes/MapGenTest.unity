@@ -5430,6 +5430,7 @@ MonoBehaviour:
   - {fileID: 1023700816672368, guid: 6fe0ef1bd10cc0246b28a8452218f173, type: 2}
   playerColor: {r: 0.3019608, g: 0.3019608, b: 1, a: 1}
   enemyColor: {r: 1, g: 0.3019608, b: 0.3019608, a: 1}
+  enemies: []
   enemiesContainer: {fileID: 105193290}
   hud: {fileID: 396746550}
   playerContainer: {fileID: 236007439}
@@ -5437,6 +5438,7 @@ MonoBehaviour:
   AIDelay: 2
   debug: 0
   statsXML: {fileID: 4900000, guid: 408ecaf91847ce040b56194e868e83dd, type: 3}
+  minimap: {fileID: 2057905258}
 --- !u!1 &1921142596
 GameObject:
   m_ObjectHideFlags: 0
@@ -6213,7 +6215,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2057905256}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -378.5, y: 200.5, z: 0}
+  m_LocalPosition: {x: -464.5, y: -97.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 396746549}
@@ -6221,7 +6223,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 386, y: -116}
+  m_AnchoredPosition: {x: 300, y: -414}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2057905258
@@ -6236,8 +6238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileset: {fileID: 2800000, guid: 913fffc0bcaacd740b21748cedd517a4, type: 3}
-  game: {fileID: 1912892306}
   map: {fileID: 2063454713}
+  scale: 10
 --- !u!114 &2057905259
 MonoBehaviour:
   m_ObjectHideFlags: 0

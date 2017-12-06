@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour {
 
     public TextAsset statsXML;
 
+    public Minimap minimap;
+
     internal Action<Unit> controlDeathCallback;
 
 	void Awake() {
@@ -149,6 +151,7 @@ public class GameManager : MonoBehaviour {
         ai.debug = debug;
 
 		hud.initialize(player);
+        minimap.updateForCharacters(this);
 	}
 
     Unit[] generateUnits(Transform container, Level level, Color color, Unit.Team team)
@@ -259,7 +262,7 @@ public class GameManager : MonoBehaviour {
         characters[unit.X, unit.Y] = null;
         characters[(int)path[0].x, (int)path[0].y] = unit;
 
-	//TODO add call to minimap
+        minimap.updateForCharacters(this);
     }
 
     internal void uiCallback(Unit unit)
@@ -289,6 +292,7 @@ public class GameManager : MonoBehaviour {
         characters[unit.X, unit.Y] = null;
         if(controlDeathCallback != null)
             controlDeathCallback(unit);
+        minimap.updateForCharacters(this);
     }
 
     public bool playerUnitsAlive()
