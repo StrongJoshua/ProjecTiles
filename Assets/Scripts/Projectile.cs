@@ -92,7 +92,7 @@ public class Projectile : MonoBehaviour {
     private void explode()
     {
         Instantiate(explodeParticle, transform.position, transform.rotation);
-		AudioSource.PlayClipAtPoint(explosion, Camera.main.transform.position);
+		//AudioSource.PlayClipAtPoint(explosion, Camera.main.transform.position);
         Collider[] allColliders = Physics.OverlapSphere(transform.position, explodeRange * MapGenerator.step);
         foreach (Collider c in allColliders)
         {
