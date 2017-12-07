@@ -17,8 +17,9 @@ public class Medic : MonoBehaviour
 		currTime = Time.timeSinceLevelLoad;
 		delay = 2f;
 		parent = GetComponentInParent<Unit> ();
-		// meshRenderer = GetComponent<MeshRenderer>();
-	}
+        healingRing.Play();
+        healingRing.gameObject.SetActive(false);
+    }
 
 	// Update is called once per frame
 	void Update ()
@@ -31,18 +32,14 @@ public class Medic : MonoBehaviour
 				Unit unit = c.gameObject.GetComponent<Unit> ();
 				if (unit != null && parent.team == unit.team && (c.gameObject.GetComponent<Medic>() == null || c.gameObject.GetComponent<Medic>() == this)) {
 					unit.heal (this.GetComponent<Unit> ().Level);
-					//print ("Healing" + unit.name);
 				}
 			}
 		}
-
-		//ringRenderer.enabled = parent.highlighted;
+        
 		if (parent.highlighted) {
-			healingRing.Play ();
 			healingRing.gameObject.SetActive (true);
-		} else {
-			healingRing.Pause ();
-			healingRing.gameObject.SetActive (false);
+		} else if (!parent.highlighted) {
+            healingRing.gameObject.SetActive (false);
 		}
 	}
 
