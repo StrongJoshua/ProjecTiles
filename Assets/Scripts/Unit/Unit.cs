@@ -287,7 +287,8 @@ public class Unit : MonoBehaviour
     private void levelUp()
     {
         level++;
-        levelUI.setLevel(level);
+        if(levelUI != null)
+            levelUI.setLevel(level);
         if (increase(healthGrowth))
             hiddenMaxHealth *= 1 + healthGrowthRate;
         if (increase(maxAPGrowth))
