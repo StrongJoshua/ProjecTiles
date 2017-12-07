@@ -29,6 +29,9 @@ public class Unit : MonoBehaviour
     public float perceptionGrowth, perceptionGrowthRate;
     public float accuracyGrowth, accuracyGrowthRate;
 
+    public GameObject unitHUDObject;
+    public UnitHUD hud;
+
     private int xp;
 
     public float HealthPercent
@@ -72,7 +75,7 @@ public class Unit : MonoBehaviour
         get { return projectileFab.GetComponent<Projectile>(); }
     }
 
-    public Image APBar, healthBar;
+    //public Image APBar, healthBar;
     public AnimationEventHandler animEvent;
     public Animator anim;
 
@@ -155,6 +158,8 @@ public class Unit : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        hud = unitHUDObject.GetComponent<UnitHUD>();
+        hud.unit = this;
         resetHealthAP();
         target = nullVector;
 
@@ -162,6 +167,7 @@ public class Unit : MonoBehaviour
 
     void Start()
     {
+
         isMoving = false;
         highlighted = false;
         isShooting = false;
@@ -179,8 +185,10 @@ public class Unit : MonoBehaviour
         isDead = false;
         health = maxHealth;
         AP = maxAP;
-        updateHealthBar();
-        updateAPBar();
+
+        hud.update();
+        //updateHealthBar();
+        //updateAPBar();
     }
 
     void rechargeAP()
@@ -234,7 +242,8 @@ public class Unit : MonoBehaviour
             }
         }
         autoAttack();
-        updateAPBar();
+        hud.update();
+        //updateAPBar();
     }
 
     public void Die()
@@ -303,7 +312,9 @@ public class Unit : MonoBehaviour
         apChargeRate = Mathf.Floor(hiddenAPChargeRate * 100) / 100f;
         perception = (int)hiddenPerception;
         accuracy = (int)hiddenAccuracy;
-        updateHealthBar();
+
+        hud.update();
+        //hudupdateHealthBar();
     }
 
     private bool increase(float growth)
@@ -399,23 +410,24 @@ public class Unit : MonoBehaviour
             Die();
         }
         //Debug.Log (incomingDamage);
-        updateHealthBar();
+        hud.update();
+        //updateHealthBar();
     }
 
 
-    public void updateHealthBar()
-    {
-        Vector3 scale = healthBar.rectTransform.localScale;
-        scale.x = (float)health / maxHealth;
-        healthBar.rectTransform.localScale = scale;
-    }
+    //public void updateHealthBar()
+    //{
+    //    Vector3 scale = healthBar.rectTransform.localScale;
+    //    scale.x = (float)health / maxHealth;
+    //    healthBar.rectTransform.localScale = scale;
+    //}
 
-    public void updateAPBar()
-    {
-        Vector3 scale = APBar.rectTransform.localScale;
-        scale.x = AP / (float)maxAP;
-        APBar.rectTransform.localScale = scale;
-    }
+    //public void updateAPBar()
+    //{
+    //    Vector3 scale = APBar.rectTransform.localScale;
+    //    scale.x = AP / (float)maxAP;
+    //    APBar.rectTransform.localScale = scale;
+    //}
 
     public void setTarget(Vector2 mapTarget)
     {
@@ -448,7 +460,8 @@ public class Unit : MonoBehaviour
     public void heal(int amount)
     {
         health = Mathf.Min(health + amount, maxHealth);
-        updateHealthBar();
+        //updateHealthBar();
+        hud.update();
         gameManager.uiCallback(this);
     }
 
