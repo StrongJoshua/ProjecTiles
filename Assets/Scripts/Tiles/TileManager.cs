@@ -16,5 +16,12 @@ public abstract class TileManager : MonoBehaviour {
         }
     }
 
+    private bool dealsDamage;
+    public bool DealsDamage
+    {
+        get { return dealsDamage; }
+        protected set { dealsDamage = value; }
+    }
+
     public abstract void hit(int damage, GameObject projectile);
 }

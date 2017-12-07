@@ -47,8 +47,13 @@ public class EnemyAI {
                 cur.fire(false);
             } else
             {
-                print("Moving to target");
-                setStrategicDestination(cur, target);
+                if (useEnvironment(cur, target)) {
+                    print(cur.name + " shot at environment to harm " + target.name + " at " + target.XY);
+                }
+                else {
+                    print("Moving to target");
+                    setStrategicDestination(cur, target);
+                }
             }
         }
     }
@@ -153,5 +158,48 @@ public class EnemyAI {
     {
         if (debug)
             Debug.Log(s);
+    }
+
+    private bool useEnvironment(Unit unit, Unit target)
+    {
+        List<GameObject> inRange = new List<GameObject>();
+        foreach(GameObject tile in gameManager.mapGenerator.tileObjects)
+        {
+            TileManager tm = tile.GetComponent<TileManager>();
+            if (tm == null || tm.Destroyed)
+                continue;
+            if(tm.DealsDamage)
+            {
+                BarrelManager bm = tile.GetComponent<BarrelManager>();
+                if (Vector3.Distance(unit.transform.position, tile.transform.position) <= unit.Projectile.range * MapGenerator.step)
+                {
+                    if (Vector3.Distance(tile.transform.position, target.transform.position) <= bm.explodeRange * MapGenerator.step)
+                    {
+                        inRange.Add(tile);
+                    }
+                }
+            }
+        }
+
+        if (inRange.Count == 0)
+            return false;
+
+        GameObject go = inRange[0];
+        float max = Vector3.Distance(go.transform.position, unit.transform.position);
+        
+        for(int i = 1; i < inRange.Count; i++)
+        {
+            float dist = Vector3.Distance(inRange[i].transform.position, unit.transform.position);
+            if(dist > max)
+            {
+                max = dist;
+                go = inRange[i];
+            }
+        }
+
+        unit.lookAt(go.transform.position / MapGenerator.step);
+        unit.fire(false);
+
+        return true;
     }
 }

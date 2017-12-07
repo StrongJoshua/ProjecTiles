@@ -38,6 +38,8 @@ public class BarrelManager : TileManager {
 
 		tileX = gameObject.GetComponentInParent<TileInfo>().x;
 		tileY = gameObject.GetComponentInParent<TileInfo>().y;
+
+        DealsDamage = true;
 	}
 
 	// Update is called once per frame
