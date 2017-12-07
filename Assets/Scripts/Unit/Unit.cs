@@ -633,7 +633,7 @@ public class Unit : MonoBehaviour
         maxAP = (int)hiddenMaxAP;
 
         hiddenAPChargeRate = stats["apChargeRate"];
-        apChargeRate = hiddenAPChargeRate;
+        apChargeRate = Mathf.Floor(hiddenAPChargeRate * 100) / 100f;
 
         hiddenPerception = stats["perception"];
         perception = (int)hiddenPerception;
