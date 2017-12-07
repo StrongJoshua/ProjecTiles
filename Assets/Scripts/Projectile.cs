@@ -45,12 +45,17 @@ public class Projectile : MonoBehaviour {
         last = gameObject.transform.position;
 	}
 
-	void OnTriggerEnter(Collider col)
-	{
-		float distance = Vector3.Distance (last, gameObject.transform.position); 
-		Unit hitUnit = col.gameObject.GetComponent<Unit> ();
+    private void OnCollisionEnter(Collision collision)
+    {
+        OnTriggerEnter(collision.collider);
+    }
 
-        TileManager tm = col.gameObject.GetComponent<TileManager>();
+    void OnTriggerEnter(Collider col)
+	{
+		float distance = Vector3.Distance (last, gameObject.transform.position);
+
+        Unit hitUnit = col.gameObject.GetComponent<Unit> ();
+        TileManager tm = col.gameObject.GetComponentInParent<TileManager>();
 
         int damage;
         if (damageFalloff)
