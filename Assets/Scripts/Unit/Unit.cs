@@ -109,7 +109,7 @@ public class Unit : MonoBehaviour
 
     private float autoAttackLast;
     private readonly float AutoAttackDelay = 5f;
-
+    public LevelUI levelUI;
     public int X {
         get { return x; }
         set {
@@ -287,6 +287,7 @@ public class Unit : MonoBehaviour
     private void levelUp()
     {
         level++;
+        levelUI.setLevel(level);
         if (increase(healthGrowth))
             hiddenMaxHealth *= 1 + healthGrowthRate;
         if (increase(maxAPGrowth))

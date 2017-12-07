@@ -15,7 +15,7 @@ public class APBar : MonoBehaviour {
 		Image barHolder = transform.GetChild (0).gameObject.GetComponent<Image> ();
 		Image barAmount = transform.GetChild (1).gameObject.GetComponent<Image> ();
 
-		if (mat != null) {
+		if (mat != null && barHolder != null && barAmount != null) {
 			barHolder.material = mat;
 			barAmount.material = mat;
 		}
