@@ -94,6 +94,7 @@ public class MapGenerator : MonoBehaviour
 
 				GameObject tile = Instantiate (choices == null ? unknownTilePrefab : choices [UnityEngine.Random.Range (0, choices.Length)], new Vector3 (x * step, 0, (height - 1 - y) * step),
 					                              Quaternion.identity, parent);
+                tile.tag = "ground";
 
                 TileManager tm = tile.GetComponent<TileManager>();
                 if (tm != null)

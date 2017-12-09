@@ -333,7 +333,6 @@ public class DroneAnimationControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        userControl.mapControl = false;
         if (!exploded)
         {
             DoRenderer();
@@ -352,7 +351,7 @@ public class DroneAnimationControl : MonoBehaviour
             time -= Time.deltaTime;
             yield return null;
         }
-        print("Returning control");
+
         Destroy(gameObject);
         userControl.returnMapControl();
     }
