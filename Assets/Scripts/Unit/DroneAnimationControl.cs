@@ -31,10 +31,10 @@ public class DroneAnimationControl : MonoBehaviour
         get { return groundContacts > 0; }
     }
 
+    public bool userControl;
 
     void Awake()
     {
-
         anim = GetComponent<Animator>();
 
         if (anim == null)
@@ -58,17 +58,16 @@ public class DroneAnimationControl : MonoBehaviour
         if (leftFoot == null || rightFoot == null)
             Debug.Log("One of the feet could not be found");
 
+        userControl = true;
     }
-
-
-
-
 
     //Update whenever physics updates with FixedUpdate()
     //Updating the animator here should coincide with "Animate Physics"
     //setting in Animator component under the Inspector
     void FixedUpdate()
     {
+        if (!userControl)
+            return;
 
         //GetAxisRaw() so we can do filtering here instead of the InputManager
         float h = Input.GetAxisRaw("Horizontal");// setup h variable as our horizontal input axis
