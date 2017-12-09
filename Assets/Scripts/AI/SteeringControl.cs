@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SteeringControl : MonoBehaviour {
-    private Vector3 target;
+    public Vector3 target;
     private Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     private void Update()
     {
