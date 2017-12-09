@@ -19,9 +19,10 @@ public class MusicConductor : MonoBehaviour {
 		}
 	}
 
-	public void adjustMusicVolume(int volume)
+	public void adjustMusicVolume(float volume)
 	{
-		audio.volume = volume/100f;
+		audio.volume = volume;
+		print (volume);
 	}
 		
 }

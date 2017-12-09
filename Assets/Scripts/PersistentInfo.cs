@@ -5,18 +5,18 @@ public class PersistentInfo {
 	static PersistentInfo instance;
 	public int currentLevel;
 
-	private int musicVolume;
-    public int MusicVolume
+	private float musicVolume;
+    public float MusicVolume
     {
         get { return musicVolume; }
-        set { musicVolume = value; PlayerPrefs.SetInt("musicVolume", value); }
+        set { musicVolume = value; PlayerPrefs.SetFloat("musicVolume", value); }
     }
 
-	private int sfxVolume;
-    public int SFXVolume
+	private float sfxVolume;
+    public float SFXVolume
     {
         get { return sfxVolume; }
-        set { sfxVolume = value; PlayerPrefs.SetInt("sfxVolume", value); }
+        set { sfxVolume = value; PlayerPrefs.SetFloat("sfxVolume", value); }
     }
 
 	public Player currentPlayer;
@@ -25,8 +25,8 @@ public class PersistentInfo {
     {
         // this is 0 indexed
         currentLevel = 0;
-		musicVolume = PlayerPrefs.GetInt("musicVolume", 100);
-		sfxVolume = PlayerPrefs.GetInt("sfxVolume", 100);
+		musicVolume = PlayerPrefs.GetFloat("musicVolume", 100);
+		sfxVolume = PlayerPrefs.GetFloat("sfxVolume", 100);
     }
 
 	public static PersistentInfo Instance()
