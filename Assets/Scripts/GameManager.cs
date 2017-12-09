@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
 	private ArrayList unitBaseStats;
 
     private bool hasUpdate;
+    public bool winInsantly, loseInsantly; // for testing
     public bool HasUpdate
     {
         get
@@ -294,9 +295,9 @@ public class GameManager : MonoBehaviour {
 
     private void Update()
     {
-		if (!playerUnitsAlive ())
+		if (!playerUnitsAlive () || loseInsantly)
 			StartCoroutine(endWait(gameOver));
-		if (!enemiesAlive ())
+		if (!enemiesAlive () || winInsantly)
 			StartCoroutine(endWait(victory));
         while (actions.Count > 0)
             actions.Dequeue().Invoke();
