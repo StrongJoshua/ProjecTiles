@@ -3712,6 +3712,7 @@ MonoBehaviour:
   name: Medic
   health: 20
   AP: 10
+  specialName: Bionade
   maxHealth: 80
   maxAP: 10
   apChargeRate: 2

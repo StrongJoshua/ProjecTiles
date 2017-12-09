@@ -3650,6 +3650,7 @@ MonoBehaviour:
   name: Infantry
   health: 20
   AP: 10
+  specialName: Snipe
   maxHealth: 100
   maxAP: 10
   apChargeRate: 1
@@ -3683,7 +3684,7 @@ MonoBehaviour:
   aimRing: {fileID: 1655205706640374}
   isFlying: 0
   specialType: 0
-  levelUI: {fileID: 114737218108835294}
+  levelUI: {fileID: 0}
 --- !u!114 &114656396441629296
 MonoBehaviour:
   m_ObjectHideFlags: 1

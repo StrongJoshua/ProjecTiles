@@ -469,6 +469,11 @@ public class UserControl : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(unitMenu.GetComponentInChildren<Button>().gameObject);
             unitMenu.GetComponentsInChildren<Button>()[1].interactable = unit.canShoot();
             unitMenu.GetComponentsInChildren<Button>()[2].interactable = unit.canSpecial();
+            if (unit.canSpecial())
+            {
+                unitMenu.GetComponentsInChildren<Button>()[2].GetComponentInChildren<Text>().text = unit.specialName;
+            }
+
             selected = unit;
         }
     }
