@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAI {
@@ -9,6 +10,15 @@ public class EnemyAI {
     public float delay;
     public bool debug;
 
+    private List<Aggro> aggroStates;
+
+    private enum Aggro
+    {
+        move,
+        moveClose,
+        noMove
+    }
+
 	public EnemyAI(GameManager gameManager, Unit[] control, Unit[] target, float delay)
     {
         this.gameManager = gameManager;
@@ -16,14 +26,18 @@ public class EnemyAI {
         this.controls = new List<Unit>(control);
         this.targets = new List<Unit>(target);
         this.delay = delay;
+
+        this.aggroStates = new List<Aggro>();
+        foreach (Unit u in controls)
+            aggroStates.Add((Aggro) UnityEngine.Random.Range(2, Enum.GetValues(typeof(Aggro)).Length + 1));
     }
 
     public void think()
     {
 		if (Time.timeSinceLevelLoad - lastAction < delay )
             return;
-        controls.RemoveAll((unit) => unit.IsDead);
-        targets.RemoveAll((unit) => unit.IsDead);
+
+        removeDeads();
         lastAction = Time.timeSinceLevelLoad;
 
         Unit cur = getNextControl();
@@ -33,33 +47,12 @@ public class EnemyAI {
 
         print("AI currently controlling " + cur.name + " at " + cur.XY);
 
-        Unit target = getTarget(cur);
-        if(target != null)
-        {
-            print("Found target " + target.name + " at " + target.XY);
-            if(inRange(cur, target))
-            {
-                print("In range of target");
-                if (!cur.canShoot())
-                    return;
-                print("Shot at target");
-                cur.lookAt(target.XY);
-                cur.fire(false);
-            } else
-            {
-                if (useEnvironment(cur, target)) {
-                    print(cur.name + " shot at environment to harm " + target.name + " at " + target.XY);
-                }
-                else {
-                    print("Moving to target");
-                    setStrategicDestination(cur, target);
-                }
-            }
-        }
+        act(cur, aggroStates[controls.IndexOf(cur)]);
     }
 
     private Unit getNextControl()
     {
+        print("Getting next control");
         if (controls.Count == 0)
             return null;
 
@@ -70,8 +63,20 @@ public class EnemyAI {
         {
             if (u.IsDead || u.IsMoving || (u.IsMedic && damaged == null))
                 continue;
-            if (u.IsMedic && inRange(u, getDamagedTarget(u)))
+
+            Unit target = getTarget(u);
+
+            if (u.IsMedic && inRange(u, target))
                 continue;
+
+            Aggro aggro = aggroStates[controls.IndexOf(u)];
+            print(aggro + "");
+            if (!u.IsMedic) {
+                if (aggro == Aggro.noMove && Vector3.Distance(target.transform.position, u.transform.position) > u.Projectile.range * MapGenerator.step)
+                    continue;
+                else if (aggro == Aggro.moveClose && moveIters(u, target) > 1)
+                    continue;
+            }
             if(u.AP > ap)
             {
                 maxAPUnit = u;
@@ -201,5 +206,57 @@ public class EnemyAI {
         unit.fire(false);
 
         return true;
+    }
+
+    private void removeDeads()
+    {
+        for (int i = controls.Count - 1; i >= 0; i--)
+            if (controls[i].IsDead)
+                aggroStates.RemoveAt(i);
+        controls.RemoveAll((unit) => unit.IsDead);
+        targets.RemoveAll((unit) => unit.IsDead);
+    }
+
+    private void act(Unit cur, Aggro aggro)
+    {
+        Unit target = getTarget(cur);
+        if (target != null)
+        {
+            print("Found target " + target.name + " at " + target.XY);
+            if (inRange(cur, target))
+            {
+                print("In range of target");
+                if (!cur.canShoot())
+                    return;
+                print("Shot at target");
+                cur.lookAt(target.XY);
+                cur.fire(false);
+            }
+            else
+            {
+                if (useEnvironment(cur, target))
+                {
+                    print(cur.name + " shot at environment to harm " + target.name + " at " + target.XY);
+                }
+                else
+                {
+                    print("Moving to target");
+                    setStrategicDestination(cur, target);
+                }
+            }
+        }
+    }
+
+    private int moveIters(Unit unit, Unit dest)
+    {
+        float range = unit.IsMedic ? unit.GetComponent<Medic>().healRadius : unit.Projectile.range * .8F;
+
+        List<Vector2> path = AStar.AStarSearch(tiles, unit.XY, dest.XY, unit.isFlying, (Unit[,])gameManager.characters.Clone());
+        path = stopAtRange(AStar.ConstrainPath(tiles, path.GetRange(1, path.Count - 1), (int)unit.AP, unit.isFlying), range, dest.XY);
+
+        int ap = 0;
+        foreach (Vector2 v in path)
+            ap += gameManager.mapGenerator.Tiles[(int)v.x, (int)v.y].MovementCost;
+        return Mathf.CeilToInt(ap / (float) unit.maxAP);
     }
 }
