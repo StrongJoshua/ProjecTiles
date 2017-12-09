@@ -38,10 +38,12 @@ public class DroneAnimationControl : MonoBehaviour
     public int maxDamage;
     public UserControl userControl;
     public bool hasUserControl;
-    public AudioClip explosion;
+
+    public GameObject[] toHide;
 
     private float startTime;
     private bool exploded;
+    private Vector3 offset;
 
     void Awake()
     {
@@ -70,6 +72,7 @@ public class DroneAnimationControl : MonoBehaviour
 
         userControl.mapControl = false;
         startTime = Time.timeSinceLevelLoad;
+        offset = new Vector3(0, Camera.main.gameObject.transform.position.y - transform.position.y, Camera.main.gameObject.transform.position.z - transform.position.z);
     }
 
     //Update whenever physics updates with FixedUpdate()
@@ -258,7 +261,6 @@ public class DroneAnimationControl : MonoBehaviour
     private void explode()
     {
         Instantiate(explodeParticle, transform.position, transform.rotation);
-        AudioSource.PlayClipAtPoint(explosion, transform.position);
         Collider[] allColliders = Physics.OverlapSphere(transform.position, explodeRange * MapGenerator.step);
         foreach (Collider c in allColliders)
         {
@@ -275,10 +277,10 @@ public class DroneAnimationControl : MonoBehaviour
         }
         //gameObject.SetActive (false);
         exploded = true;
-        GetComponent<ParticleSystem>().Stop();
         gameObject.GetComponent<LineRenderer>().enabled = false;
-        startTime = Time.timeSinceLevelLoad;
-        Destroy(gameObject);
+        foreach (GameObject go in toHide)
+            go.SetActive(false);
+        StartCoroutine(returnControl());
     }
 
     public void DoRenderer()
@@ -314,5 +316,37 @@ public class DroneAnimationControl : MonoBehaviour
             lineRenderer.SetPosition(i, pos);
             theta += deltaTheta;
         }
+    }
+
+    private void LateUpdate()
+    {
+        Camera.main.gameObject.transform.position = transform.position + offset;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        userControl.mapControl = false;
+        if (!exploded)
+        {
+            DoRenderer();
+            if (Time.timeSinceLevelLoad - startTime > lifetime)
+            {
+                explode();
+            }
+        }
+    }
+
+    IEnumerator returnControl()
+    {
+        float time = 1f;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+        print("Returning control");
+        Destroy(gameObject);
+        userControl.returnMapControl();
     }
 }
