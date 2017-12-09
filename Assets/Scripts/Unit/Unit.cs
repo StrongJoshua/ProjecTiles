@@ -476,13 +476,14 @@ public class Unit : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
                 aimRing.transform.rotation = Quaternion.Euler(90, transform.rotation.eulerAngles.y - 90, 0);
                 GameObject special = Instantiate(specialFab, transform.position, transform.rotation);
+				DroneAnimationControl dac = special.GetComponent<DroneAnimationControl>();
+				dac.hasUserControl = true;
+				dac.origin = this;
+				dac.userControl = userControl;
 
-                if(true || team != Team.player)
+                if(team != Team.player)
                 {
-                    DroneAnimationControl dac = special.GetComponent<DroneAnimationControl>();
-                    dac.hasUserControl = false;
-                    dac.userControl = userControl;
-                    dac.origin = this;
+					dac.hasUserControl = false;
 
                     special.GetComponent<SteeringControl>().enabled = true;
                     special.GetComponent<SteeringControl>().target = Vector3.zero;
