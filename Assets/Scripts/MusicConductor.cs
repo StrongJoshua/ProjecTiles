@@ -8,7 +8,7 @@ public class MusicConductor : MonoBehaviour {
 	public AudioSource audio;
 	void Start () {		
 		audio = GetComponent<AudioSource> ();
-		audio.volume = PersistentInfo.Instance ().musicVolume;
+		audio.volume = PersistentInfo.Instance ().MusicVolume;
 	}
 	
 	// Update is called once per frame

@@ -5,9 +5,12 @@ using UnityEngine;
 public class ParticleEffectCleaner : MonoBehaviour {
     private ParticleSystem ps;
     private bool started = false;
+	private AudioSource audio;
 
 	void Start () {
         ps = GetComponent<ParticleSystem>();
+		audio = GetComponent<AudioSource> ();
+		audio.volume = PersistentInfo.Instance ().SFXVolume/100f;
         if (ps == null)
             Destroy(this);
 	}

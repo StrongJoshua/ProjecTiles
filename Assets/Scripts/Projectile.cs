@@ -20,6 +20,7 @@ public class Projectile : MonoBehaviour {
 
     private Vector3 last;
     private float distanceTraveled;
+	private AudioSource audio;
 
 	protected virtual void Awake () {
         projectileEffect = GetComponent<ProjectileEffect>();
@@ -30,6 +31,10 @@ public class Projectile : MonoBehaviour {
     {
         last = gameObject.transform.position;
         distanceTraveled = 0;
+		if (GetComponent<AudioSource> () != null) {
+			audio = GetComponent<AudioSource> ();
+			audio.volume = PersistentInfo.Instance ().SFXVolume/100f;
+		}
     }
 
     // Update is called once per frame

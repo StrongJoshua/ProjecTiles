@@ -53,6 +53,7 @@ public class UserControl : MonoBehaviour
 	public AudioClip click, hover, tileThud;
 
     private int cycleIndex = 0;
+	private AudioSource audio;
 
     public bool Paused {
         get { return pauseMenu.activeSelf; }
@@ -94,6 +95,8 @@ public class UserControl : MonoBehaviour
         arrow = Instantiate(movementArrow);
         arrow.SetActive(false);
         gameManager.controlDeathCallback = deathCallback;
+		audio = GetComponent<AudioSource> ();
+		audio.volume = PersistentInfo.Instance ().SFXVolume / 100f;
     }
 
     void OnPreRender()
