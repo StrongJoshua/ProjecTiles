@@ -31,7 +31,17 @@ public class DroneAnimationControl : MonoBehaviour
         get { return groundContacts > 0; }
     }
 
-    public bool userControl;
+    public float lifetime;
+    public GameObject explodeParticle;
+    public float explodeRange;
+    public Unit origin;
+    public int maxDamage;
+    public UserControl userControl;
+    public bool hasUserControl;
+    public AudioClip explosion;
+
+    private float startTime;
+    private bool exploded;
 
     void Awake()
     {
@@ -58,7 +68,8 @@ public class DroneAnimationControl : MonoBehaviour
         if (leftFoot == null || rightFoot == null)
             Debug.Log("One of the feet could not be found");
 
-        userControl = true;
+        userControl.mapControl = false;
+        startTime = Time.timeSinceLevelLoad;
     }
 
     //Update whenever physics updates with FixedUpdate()
@@ -66,7 +77,7 @@ public class DroneAnimationControl : MonoBehaviour
     //setting in Animator component under the Inspector
     void FixedUpdate()
     {
-        if (!userControl)
+        if (!hasUserControl)
             return;
 
         //GetAxisRaw() so we can do filtering here instead of the InputManager
@@ -202,12 +213,14 @@ public class DroneAnimationControl : MonoBehaviour
             }
         }
 
+        TileManager tm = collision.gameObject.GetComponentInParent<TileManager>();
+        if (tm != null && !tm.Destroyed)
+            explode();
     }
 
     //This is a physics callback
     void OnCollisionExit(Collision collision)
     {
-
         if (collision.transform.gameObject.tag == "ground")
             --groundContacts;
     }
@@ -233,4 +246,73 @@ public class DroneAnimationControl : MonoBehaviour
 
     }
 
+    void OnTriggerEnter(Collider col)
+    {
+        Unit hitUnit = col.gameObject.GetComponent<Unit>();
+        if (hitUnit != null && col.gameObject != origin.gameObject && !hitUnit.IsDead)
+        {
+            explode();
+        }
+    }
+
+    private void explode()
+    {
+        Instantiate(explodeParticle, transform.position, transform.rotation);
+        AudioSource.PlayClipAtPoint(explosion, transform.position);
+        Collider[] allColliders = Physics.OverlapSphere(transform.position, explodeRange * MapGenerator.step);
+        foreach (Collider c in allColliders)
+        {
+            int damage = (int)(maxDamage * (1 - Vector3.Distance(c.gameObject.transform.position, this.gameObject.transform.position) / (2 * explodeRange * MapGenerator.step)));
+            Unit t = c.gameObject.GetComponent<Unit>();
+            if (t != null && t.team != origin.team && c.gameObject != origin.gameObject)
+            {
+                t.takeDamage(damage);
+            }
+
+            TileManager tm = c.gameObject.GetComponent<TileManager>();
+            if (tm != null && !tm.Destroyed)
+                tm.hit(damage, gameObject);
+        }
+        //gameObject.SetActive (false);
+        exploded = true;
+        GetComponent<ParticleSystem>().Stop();
+        gameObject.GetComponent<LineRenderer>().enabled = false;
+        startTime = Time.timeSinceLevelLoad;
+        Destroy(gameObject);
+    }
+
+    public void DoRenderer()
+    {
+        float radius = explodeRange * MapGenerator.step;
+        int numSegments = 128;
+        LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer>();
+        Color c1 = new Color(1, 0f, 0f, 1);
+        Color c2 = new Color(1, .8f, 0, 1);
+
+        Gradient gradient = new Gradient();
+        gradient.colorKeys = new GradientColorKey[] {
+            new GradientColorKey (c1, 0),
+            new GradientColorKey (c2, .5f),
+            new GradientColorKey (c1, 1)
+        };
+
+        lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
+        lineRenderer.colorGradient = gradient;
+        lineRenderer.startWidth = .2f;
+        lineRenderer.endWidth = .2f;
+        lineRenderer.positionCount = numSegments + 1;
+        lineRenderer.useWorldSpace = false;
+
+        float deltaTheta = (float)(2.0 * Mathf.PI) / numSegments;
+        float theta = Mathf.PI / 2;
+
+        for (int i = 0; i < numSegments + 1; i++)
+        {
+            float x = radius * Mathf.Cos(theta);
+            float z = radius * Mathf.Sin(theta);
+            Vector3 pos = new Vector3(x, -1.5f, z);
+            lineRenderer.SetPosition(i, pos);
+            theta += deltaTheta;
+        }
+    }
 }

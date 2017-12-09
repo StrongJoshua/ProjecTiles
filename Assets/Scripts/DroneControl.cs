@@ -143,7 +143,5 @@ public class DroneControl : MonoBehaviour
 			lineRenderer.SetPosition (i, pos);
 			theta += deltaTheta;
 		}
-			
-
 	}
 }
