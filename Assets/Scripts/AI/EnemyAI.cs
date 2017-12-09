@@ -29,7 +29,7 @@ public class EnemyAI {
 
         this.aggroStates = new List<Aggro>();
         foreach (Unit u in controls)
-            aggroStates.Add((Aggro) UnityEngine.Random.Range(2, Enum.GetValues(typeof(Aggro)).Length + 1));
+            aggroStates.Add((Aggro) UnityEngine.Random.Range(0, Enum.GetValues(typeof(Aggro)).Length));
     }
 
     public void think()
@@ -52,28 +52,29 @@ public class EnemyAI {
 
     private Unit getNextControl()
     {
-        print("Getting next control");
         if (controls.Count == 0)
             return null;
 
         Unit maxAPUnit = null;
         float ap = 0;
-        Unit damaged = getDamagedTarget(controls[0]);
         foreach(Unit u in controls)
         {
-            if (u.IsDead || u.IsMoving || (u.IsMedic && damaged == null))
+            if (u.IsDead || u.IsMoving)
                 continue;
 
             Unit target = getTarget(u);
+            if (target == null)
+                continue;
 
             if (u.IsMedic && inRange(u, target))
                 continue;
 
             Aggro aggro = aggroStates[controls.IndexOf(u)];
-            print(aggro + "");
             if (!u.IsMedic) {
-                if (aggro == Aggro.noMove && Vector3.Distance(target.transform.position, u.transform.position) > u.Projectile.range * MapGenerator.step)
-                    continue;
+                if (aggro == Aggro.noMove) {
+                    if (!inRange(u, target) && explosivesInRange(u, target).Count == 0)
+                        continue;
+                }
                 else if (aggro == Aggro.moveClose && moveIters(u, target) > 1)
                     continue;
             }
@@ -165,18 +166,18 @@ public class EnemyAI {
             Debug.Log(s);
     }
 
-    private bool useEnvironment(Unit unit, Unit target)
+    private List<GameObject> explosivesInRange(Unit unit, Unit target)
     {
         List<GameObject> inRange = new List<GameObject>();
-        foreach(GameObject tile in gameManager.mapGenerator.tileObjects)
+        foreach (GameObject tile in gameManager.mapGenerator.tileObjects)
         {
             TileManager tm = tile.GetComponent<TileManager>();
             if (tm == null || tm.Destroyed)
                 continue;
-            if(tm.DealsDamage)
+            if (tm.DealsDamage)
             {
                 BarrelManager bm = tile.GetComponent<BarrelManager>();
-                if (Vector3.Distance(unit.transform.position, tile.transform.position) <= unit.Projectile.range * MapGenerator.step)
+                if (Vector3.Distance(unit.transform.position, tile.transform.position) <= unit.Projectile.range * MapGenerator.step * .8f)
                 {
                     if (Vector3.Distance(tile.transform.position, target.transform.position) <= bm.explodeRange * MapGenerator.step)
                     {
@@ -185,6 +186,12 @@ public class EnemyAI {
                 }
             }
         }
+        return inRange;
+    }
+
+    private bool useEnvironment(Unit unit, Unit target)
+    {
+        List<GameObject> inRange = explosivesInRange(unit, target);
 
         if (inRange.Count == 0)
             return false;
@@ -240,8 +247,11 @@ public class EnemyAI {
                 }
                 else
                 {
-                    print("Moving to target");
-                    setStrategicDestination(cur, target);
+                    if (cur.IsMedic || aggro == Aggro.move || (aggro == Aggro.moveClose && moveIters(cur, target) <= 1))
+                    {
+                        print("Moving to target");
+                        setStrategicDestination(cur, target);
+                    }
                 }
             }
         }
