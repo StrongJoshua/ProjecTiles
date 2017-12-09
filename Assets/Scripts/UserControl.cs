@@ -322,7 +322,8 @@ public class UserControl : MonoBehaviour
                 }
             }
         }
-        cam.gameObject.transform.position = Vector3.Lerp(cam.transform.position, highlight.transform.position + new Vector3(0, 22f, -49.5f), lerpSmooth);
+        if(mapControl || unitMenu.activeSelf)
+            cam.gameObject.transform.position = Vector3.Lerp(cam.transform.position, highlight.transform.position + new Vector3(0, 22f, -49.5f), lerpSmooth);
         return didMove;
     }
 
