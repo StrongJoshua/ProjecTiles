@@ -78,7 +78,10 @@ MonoBehaviour:
   - {fileID: 1255355883882430, guid: 4b6fccdb298063d498eab5b676d7a9b2, type: 2}
   explosiveTilePrefabs:
   - {fileID: 1153396052980584, guid: 013b5cf1fcb6e1f43b9731565c3535ea, type: 2}
-  unknownTilePrefab: {fileID: 0}
+  rampTilePrefabs:
+  - {fileID: 1999715616020242, guid: ba191a51d66ac894f8c5a5cc939ac0dd, type: 2}
+  unknownTilePrefab: {fileID: 1832193980050268, guid: 7f88b9a53543dc04baaefa4285738990,
+    type: 2}
   parent: {fileID: 0}
   highlightPlane: {fileID: 1117509993441026, guid: 3759411bb0a839f44ba600260b963948,
     type: 2}
