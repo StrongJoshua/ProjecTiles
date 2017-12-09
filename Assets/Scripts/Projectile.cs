@@ -70,7 +70,11 @@ public class Projectile : MonoBehaviour {
                 explode();
             else
             {
-				Instantiate(hitEffect, transform.position, transform.rotation);
+                if (hitEffect != null)
+                {
+                    Instantiate(hitEffect, transform.position, transform.rotation);
+
+                }
                 if (hitUnit.team != origin.team)
                 {
                     if (projectileEffect != null)
@@ -91,7 +95,10 @@ public class Projectile : MonoBehaviour {
             else
             {
                 tm.hit(damage, gameObject);
-				Instantiate(hitEffect, transform.position, transform.rotation);
+                if (hitEffect != null)
+                {
+                    Instantiate(hitEffect, transform.position, transform.rotation);
+                }
                 Destroy(gameObject);
             }
         }

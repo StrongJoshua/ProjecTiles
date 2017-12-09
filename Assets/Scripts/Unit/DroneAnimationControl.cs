@@ -118,6 +118,8 @@ public class DroneAnimationControl : MonoBehaviour
         filteredTurnInput = Mathf.Lerp(filteredTurnInput, h,
             Time.deltaTime * turnInputFilter);
 
+
+        Debug.Log("Setting: " + filteredForwardInput + " " + filteredTurnInput);
         //finally pass the processed input values to the animator
         anim.SetFloat("velx", filteredTurnInput);	// set our animator's float parameter 'Speed' equal to the vertical input axis				
         anim.SetFloat("vely", filteredForwardInput); // set our animator's float parameter 'Direction' equal to the horizontal input axis		
