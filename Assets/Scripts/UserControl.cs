@@ -313,8 +313,12 @@ public class UserControl : MonoBehaviour
                 y = Mathf.Max(Mathf.Min(y, map.SizeY - 1), 0);
                 if(x != oldX || y != oldY)
                 {
-                    highlight.transform.position = new Vector3(x * MapGenerator.step, 0, y * MapGenerator.step);
-
+					float height = 0;
+					Tile.TileType tileType = map.GetTileType (x, y);
+					if (tileType == Tile.TileType.hill) {
+						height = 1f;
+					}
+					highlight.transform.position = new Vector3(x * MapGenerator.step, height, y * MapGenerator.step);
                     if (delay > .1f)
                         delay -= .04f;
                     lastTime = Time.timeSinceLevelLoad;
