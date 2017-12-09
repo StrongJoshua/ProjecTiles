@@ -123,14 +123,14 @@ public class MainMenuButtons : MonoBehaviour {
 	{
 		musicVolumeSlider.SetActive (true);
 		EventSystem.current.SetSelectedGameObject(musicVolumeSlider);
-
+        musicVolumeSlider.GetComponent<Slider>().value = PersistentInfo.Instance().MusicVolume;
 	}
 
 	public void musicVolumeAdjust()
 	{
 		PersistentInfo pi = PersistentInfo.Instance();
-		pi.musicVolume = (int)musicVolumeSlider.GetComponent<Slider> ().value;
-		conductor.adjustMusicVolume (pi.musicVolume);
+		pi.MusicVolume = (int)musicVolumeSlider.GetComponent<Slider> ().value;
+		conductor.adjustMusicVolume (pi.MusicVolume);
 	}
 
 	public void musicVolumePicked()
@@ -143,13 +143,13 @@ public class MainMenuButtons : MonoBehaviour {
 	{
 		sfxVolumeSlider.SetActive (true);
 		EventSystem.current.SetSelectedGameObject(sfxVolumeSlider);
-
-	}
+        sfxVolumeSlider.GetComponent<Slider>().value = PersistentInfo.Instance().SFXVolume;
+    }
 
 	public void sfxVolumeAdjust()
 	{
 		PersistentInfo pi = PersistentInfo.Instance();
-		pi.sfxVolume = (int) sfxVolumeSlider.GetComponent<Slider> ().value;
+		pi.SFXVolume = (int) sfxVolumeSlider.GetComponent<Slider> ().value;
 	}
 
 	public void sfxVolumePicked()
