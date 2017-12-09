@@ -2096,6 +2096,17 @@ MonoBehaviour:
   groundContacts: 0
   forwardInputFilter: 5
   turnInputFilter: 5
+  lifetime: 0
+  explodeParticle: {fileID: 1532705254353270, guid: ecb70069459ef8344bae8a3a0f1c929c,
+    type: 2}
+  team: 0
+  explodeRange: 3
+  origin: {fileID: 0}
+  maxDamage: 100
+  userControl: {fileID: 0}
+  hasUserControl: 1
+  droneModel: {fileID: 0}
+  explosion: {fileID: 0}
 --- !u!114 &114768905665542638
 MonoBehaviour:
   m_ObjectHideFlags: 1
