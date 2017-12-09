@@ -15,7 +15,7 @@ public class AnimationEventHandler : MonoBehaviour {
 	{
 		audio = GetComponent<AudioSource> ();
 		if(audio != null)
-			audio.volume = PersistentInfo.Instance ().SFXVolume / 100f;
+			audio.volume = PersistentInfo.Instance ().SFXVolume;
 	}
     void DoDestroy()
     {
