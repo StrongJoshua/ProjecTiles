@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour {
         distanceTraveled = 0;
 		if (GetComponent<AudioSource> () != null) {
 			audio = GetComponent<AudioSource> ();
-			audio.volume = PersistentInfo.Instance ().SFXVolume/100f;
+			audio.volume = PersistentInfo.Instance ().SFXVolume;
 		}
     }
 

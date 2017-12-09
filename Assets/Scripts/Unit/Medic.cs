@@ -11,6 +11,7 @@ public class Medic : MonoBehaviour
 	Unit parent;
 	//public MeshRenderer ringRenderer;
 	public ParticleSystem healingRing;
+	public GameObject healthPack;
 	// Use this for initialization
 	void Start ()
 	{

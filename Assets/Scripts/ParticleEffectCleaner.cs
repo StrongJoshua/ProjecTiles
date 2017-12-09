@@ -10,7 +10,7 @@ public class ParticleEffectCleaner : MonoBehaviour {
 	void Start () {
         ps = GetComponent<ParticleSystem>();
 		audio = GetComponent<AudioSource> ();
-		audio.volume = PersistentInfo.Instance ().SFXVolume/100f;
+		audio.volume = PersistentInfo.Instance ().SFXVolume;
         if (ps == null)
             Destroy(this);
 	}
