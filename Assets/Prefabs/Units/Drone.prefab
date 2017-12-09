@@ -2063,7 +2063,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!95 &95669047632874950
 Animator:
@@ -2104,7 +2104,7 @@ MonoBehaviour:
   maxDamage: 100
   userControl: {fileID: 0}
   hasUserControl: 1
-  explosion: {fileID: 0}
+  explosion: {fileID: 8300000, guid: 5c8b23b6e607d704e928919a293098d5, type: 3}
 --- !u!114 &114768905665542638
 MonoBehaviour:
   m_ObjectHideFlags: 1

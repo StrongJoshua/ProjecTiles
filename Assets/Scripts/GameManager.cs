@@ -157,6 +157,9 @@ public class GameManager : MonoBehaviour {
     Unit[] generateUnits(Transform container, Level level, Color color, Unit.Team team)
     {
         Unit[] units = new Unit[team == Unit.Team.player ? level.playerSpawns.Length : level.enemyCount];
+
+        
+
         for (int i = 0; i < units.Length; i++)
         {
 			int randIndex = UnityEngine.Random.Range (0, unitTypes.Length);
