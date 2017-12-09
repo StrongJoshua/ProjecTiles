@@ -38,10 +38,12 @@ public class DroneAnimationControl : MonoBehaviour
     public int maxDamage;
     public UserControl userControl;
     public bool hasUserControl;
-    public AudioClip explosion;
+
+    public GameObject[] toHide;
 
     private float startTime;
     private bool exploded;
+    private Vector3 offset, last;
 
     void Awake()
     {
@@ -70,6 +72,7 @@ public class DroneAnimationControl : MonoBehaviour
 
         userControl.mapControl = false;
         startTime = Time.timeSinceLevelLoad;
+        offset = new Vector3(0, Camera.main.gameObject.transform.position.y - transform.position.y, Camera.main.gameObject.transform.position.z - transform.position.z);
     }
 
     //Update whenever physics updates with FixedUpdate()
@@ -258,7 +261,6 @@ public class DroneAnimationControl : MonoBehaviour
     private void explode()
     {
         Instantiate(explodeParticle, transform.position, transform.rotation);
-        AudioSource.PlayClipAtPoint(explosion, transform.position);
         Collider[] allColliders = Physics.OverlapSphere(transform.position, explodeRange * MapGenerator.step);
         foreach (Collider c in allColliders)
         {
@@ -273,12 +275,16 @@ public class DroneAnimationControl : MonoBehaviour
             if (tm != null && !tm.Destroyed)
                 tm.hit(damage, gameObject);
         }
-        //gameObject.SetActive (false);
         exploded = true;
-        GetComponent<ParticleSystem>().Stop();
         gameObject.GetComponent<LineRenderer>().enabled = false;
-        startTime = Time.timeSinceLevelLoad;
-        Destroy(gameObject);
+        foreach (GameObject go in toHide)
+            go.SetActive(false);
+        anim.enabled = false;
+        GetComponent<Rigidbody>().detectCollisions = false;
+
+        last = Camera.main.gameObject.transform.position;
+
+        StartCoroutine(returnControl());
     }
 
     public void DoRenderer()
@@ -310,9 +316,43 @@ public class DroneAnimationControl : MonoBehaviour
         {
             float x = radius * Mathf.Cos(theta);
             float z = radius * Mathf.Sin(theta);
-            Vector3 pos = new Vector3(x, -1.5f, z);
+            Vector3 pos = new Vector3(x, 0, z);
             lineRenderer.SetPosition(i, pos);
             theta += deltaTheta;
         }
+    }
+
+    private void LateUpdate()
+    {
+        if (!exploded)
+            Camera.main.gameObject.transform.position = transform.position + offset;
+        else
+            Camera.main.gameObject.transform.position = last;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!exploded)
+        {
+            DoRenderer();
+            if (Time.timeSinceLevelLoad - startTime > lifetime)
+            {
+                explode();
+            }
+        }
+    }
+
+    IEnumerator returnControl()
+    {
+        float time = 1f;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(gameObject);
+        userControl.returnMapControl();
     }
 }

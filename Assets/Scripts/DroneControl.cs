@@ -69,7 +69,6 @@ public class DroneControl : MonoBehaviour
 				Destroy (gameObject);
 			}
 		}
-
 	}
 
 	private void explode ()
