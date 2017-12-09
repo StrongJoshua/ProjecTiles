@@ -380,7 +380,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1635177178531116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8916838, y: 1.9, z: -18.215164}
+  m_LocalPosition: {x: 15.884482, y: 4.00305, z: 16.726744}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4419947288457408}
@@ -773,7 +773,7 @@ MonoBehaviour:
   team: 0
   projectileFab: {fileID: 1563048410146538, guid: 395d5b94d217ddd4486e731cf06e453b,
     type: 2}
-  specialFab: {fileID: 1096361828472138, guid: a0e32ddd53cd70f4482a1a3156c4adc9, type: 2}
+  specialFab: {fileID: 1378721284997648, guid: 7f472131fd1bf7c43b371749e1efd3fc, type: 2}
   equippedGun: {fileID: 0}
   APBar: {fileID: 114609208440154902}
   healthBar: {fileID: 114590197930602974}
@@ -788,6 +788,7 @@ MonoBehaviour:
   aimRing: {fileID: 1730132011882018}
   isFlying: 0
   specialType: 3
+  levelUI: {fileID: 0}
 --- !u!137 &137138281924699856
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

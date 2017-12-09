@@ -471,6 +471,7 @@ public class Unit : MonoBehaviour
 
         if (canSpecial()) {
             if (specialType == SpecialType.drone) {
+                Debug.Log("Making drone");
                 transform.rotation = Quaternion.Euler(0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
                 aimRing.transform.rotation = Quaternion.Euler(90, transform.rotation.eulerAngles.y - 90, 0);
                 GameObject special = Instantiate(specialFab, transform.position, transform.rotation);
