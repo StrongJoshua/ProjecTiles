@@ -14,6 +14,8 @@ public class MapGenerator : MonoBehaviour
 	public GameObject[] sandTilePrefabs;
 	public GameObject[] boulderTilePrefabs;
 	public GameObject[] explosiveTilePrefabs;
+	public GameObject[] rampTilePrefabs;
+	
 
 	public GameObject unknownTilePrefab;
 
@@ -27,11 +29,14 @@ public class MapGenerator : MonoBehaviour
 	public float rateOfDesctructibleTiles;
 	public GameObject water;
 	public Camera minimap;
+	public List<GameObject> rampTiles;
 
 	private void Awake ()
 	{
 		if (FindObjectOfType<GameManager>() == null)
 			generateMap (null);
+
+		rampTiles = new List<GameObject> ();
 	}
 
 	public List<List<int>> readText ()
@@ -89,8 +94,11 @@ public class MapGenerator : MonoBehaviour
 					choices = boulderTilePrefabs;
 				else if (tileType == Tile.TileType.explosive)
 					choices = explosiveTilePrefabs;
+				else if (tileType == Tile.TileType.ramp)
+					choices = rampTilePrefabs;
 				else
 					choices = null;
+
 
 				GameObject tile = Instantiate (choices == null ? unknownTilePrefab : choices [UnityEngine.Random.Range (0, choices.Length)], new Vector3 (x * step, 0, (height - 1 - y) * step),
 					                              Quaternion.identity, parent);
@@ -111,6 +119,10 @@ public class MapGenerator : MonoBehaviour
 				}
 				info.x = x;
 				info.y = height - y - 1;
+
+				if (choices == rampTilePrefabs) {
+					rampTiles.Add (tile);
+				}
 
 				tileObjects [x, height - y - 1] = tile;
 				highlights [x, height - y - 1] = highlight;
@@ -159,4 +171,44 @@ public class MapGenerator : MonoBehaviour
 	{
 		return tiles != null;
 	}
+
+	public List<Tile> GetAdjacentTiles(int x, int y) {
+		List<Tile> adjacentTiles = new List<Tile> ();
+
+		Tile down = GetTile (x, y - 1);
+		//if (down != null)
+		adjacentTiles.Add (down);
+
+		Tile left = GetTile (x - 1, y);
+		//if (left != null)
+		adjacentTiles.Add (left);
+
+		Tile up = GetTile (x, y + 1);
+		//if (up != null)
+		adjacentTiles.Add (up);
+
+		Tile right = GetTile (x + 1, y);
+		//if (right != null)
+		adjacentTiles.Add (right);
+
+	
+
+		return adjacentTiles;
+	}
+
+	public void rotateRamps() {
+		foreach (GameObject ramp in rampTiles) {
+			if (ramp != null) {
+				TileInfo info = ramp.GetComponent<TileInfo> ();
+				List<Tile> adjTiles = GetAdjacentTiles (info.x, info.y);
+
+				foreach (Tile adjTile in adjTiles) {
+					if (adjTile != null && adjTile.Type == Tile.TileType.hill) {
+						ramp.transform.Rotate (new Vector3 (0, 90 * adjTiles.IndexOf (adjTile), 0));
+					}
+				}
+			}
+		}
+	}
+
 }

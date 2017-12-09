@@ -13,6 +13,7 @@ public class Tile {
         sand,
         explosive,
         boulder,
+		ramp,
 		unknown
     }
 
@@ -24,6 +25,7 @@ public class Tile {
     public static readonly Tile Sand = new Tile(TileType.sand, 3, true);
     public static readonly Tile Explosive = new Tile(TileType.explosive, 2, false, true);
     public static readonly Tile Boulder = new Tile(TileType.boulder, 2, false, true);
+	public static readonly Tile Ramp = new Tile (TileType.ramp, 4, false);
 
     private TileType type;
     public TileType Type
@@ -76,6 +78,7 @@ public class Tile {
             case TileType.sand: return (Tile) Sand.MemberwiseClone();
             case TileType.explosive: return (Tile)Explosive.MemberwiseClone();
             case TileType.boulder: return (Tile) Boulder.MemberwiseClone();
+			case TileType.ramp: return (Tile) Ramp.MemberwiseClone();
             default: return null;
         }
     }
