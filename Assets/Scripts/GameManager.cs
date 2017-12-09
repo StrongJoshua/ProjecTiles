@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour {
 	void initializeLevel(int currentLevel) {
 		mapGenerator.map = levelData[currentLevel].map;
 		mapGenerator.generateMap(tileChangedCallback);
+		mapGenerator.rotateRamps ();
 
 		enemies = new Unit[levelData[currentLevel].enemyCount];
 		characters = new Unit[mapGenerator.SizeX, mapGenerator.SizeY];
