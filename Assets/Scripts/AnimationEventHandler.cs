@@ -5,13 +5,18 @@ using UnityEngine;
 
 public class AnimationEventHandler : MonoBehaviour {
     public Action<GameObject> callback;
-	public AudioClip footstep;
+	private AudioSource audio;
 
     void Awake()
     {
         callback = null;
     }
-
+	void Start()
+	{
+		audio = GetComponent<AudioSource> ();
+		if(audio != null)
+			audio.volume = PersistentInfo.Instance ().SFXVolume / 100f;
+	}
     void DoDestroy()
     {
         if (callback != null)
@@ -29,6 +34,6 @@ public class AnimationEventHandler : MonoBehaviour {
 
 	void Footstep()
 	{
-		AudioSource.PlayClipAtPoint (footstep, transform.position);
+		audio.Play ();
 	}
 }
