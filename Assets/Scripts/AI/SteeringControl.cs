@@ -16,7 +16,8 @@ public class SteeringControl : MonoBehaviour {
         float angle = angleDifference();
         float distance = getDistance();
         anim.SetFloat("turn", angle / 180f);
-        anim.SetFloat("foward", Mathf.Min(1, distance / MapGenerator.step));
+        anim.SetFloat("forward", Mathf.Min(1, distance / MapGenerator.step));
+        print("Update. " + anim.GetFloat("turn") + " " + anim.GetFloat("forward"));
     }
 
     private float angleDifference()
