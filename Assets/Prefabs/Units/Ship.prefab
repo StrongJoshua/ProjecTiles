@@ -656,6 +656,7 @@ MonoBehaviour:
   name: Ship
   health: 0
   AP: 10
+  specialName: Bomb
   maxHealth: 150
   maxAP: 10
   apChargeRate: 0.75
@@ -689,6 +690,7 @@ MonoBehaviour:
   aimRing: {fileID: 1668612393907606}
   isFlying: 1
   specialType: 2
+  levelUI: {fileID: 0}
 --- !u!114 &114745855181456230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4100,7 +4102,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2078869818
+  randomSeed: 360847337
   InitialModule:
     serializedVersion: 3
     enabled: 1

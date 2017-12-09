@@ -14,6 +14,7 @@ public class Unit : MonoBehaviour
     public float AP;
     private int x;
     private int y;
+    public string specialName = "Special";
 
     public int maxHealth;
     public int maxAP;

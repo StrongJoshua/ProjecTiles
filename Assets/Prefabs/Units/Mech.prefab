@@ -755,6 +755,7 @@ MonoBehaviour:
   name: Mech
   health: 200
   AP: 10
+  specialName: Drone
   maxHealth: 30
   maxAP: 10
   apChargeRate: 0.5
