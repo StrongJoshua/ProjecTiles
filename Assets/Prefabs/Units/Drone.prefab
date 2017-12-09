@@ -2274,7 +2274,7 @@ MonoBehaviour:
   groundContacts: 0
   forwardInputFilter: 5
   turnInputFilter: 5
-  lifetime: 2
+  lifetime: 5
   explodeParticle: {fileID: 1532705254353270, guid: ecb70069459ef8344bae8a3a0f1c929c,
     type: 2}
   explodeRange: 3
