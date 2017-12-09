@@ -275,11 +275,12 @@ public class DroneAnimationControl : MonoBehaviour
             if (tm != null && !tm.Destroyed)
                 tm.hit(damage, gameObject);
         }
-        //gameObject.SetActive (false);
         exploded = true;
         gameObject.GetComponent<LineRenderer>().enabled = false;
         foreach (GameObject go in toHide)
             go.SetActive(false);
+        anim.enabled = false;
+        Destroy(GetComponent<Rigidbody>());
         StartCoroutine(returnControl());
     }
 
@@ -312,7 +313,7 @@ public class DroneAnimationControl : MonoBehaviour
         {
             float x = radius * Mathf.Cos(theta);
             float z = radius * Mathf.Sin(theta);
-            Vector3 pos = new Vector3(x, -1.5f, z);
+            Vector3 pos = new Vector3(x, 0, z);
             lineRenderer.SetPosition(i, pos);
             theta += deltaTheta;
         }

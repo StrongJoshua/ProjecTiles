@@ -157,7 +157,24 @@ public class GameManager : MonoBehaviour {
     Unit[] generateUnits(Transform container, Level level, Color color, Unit.Team team)
     {
         Unit[] units = new Unit[team == Unit.Team.player ? level.playerSpawns.Length : level.enemyCount];
-        for (int i = 0; i < units.Length; i++)
+
+        // make sure player has all units for testing
+        // TODO: remove
+        int i = 0;
+        if (team == Unit.Team.player && units.Length >= unitTypes.Length)
+        {
+            for (; i < unitTypes.Length; i++)
+            {
+                Dictionary<string, float> Stats = (Dictionary<string, float>)unitBaseStats[i];
+
+                Unit newUnit = createUnit(unitTypes[i], Stats, container, color, team, xmlParser);
+                addUnit(newUnit, level.enemySpawnAreas);
+                units[i] = newUnit;
+            }
+
+        }
+
+        for (; i < units.Length; i++)
         {
 			int randIndex = UnityEngine.Random.Range (0, unitTypes.Length);
             GameObject unitType = unitTypes[randIndex];
