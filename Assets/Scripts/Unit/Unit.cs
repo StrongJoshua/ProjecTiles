@@ -654,4 +654,9 @@ public class Unit : MonoBehaviour
         stats["accuracy"] = hiddenAccuracy;
         return stats;
     }
+
+	public void Footstep()
+	{
+		print ("STEP");
+	}
 }
