@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44184443, g: 0.4907779, b: 0.5707437, a: 1}
+  m_IndirectSpecularColor: {r: 0.44184405, g: 0.49077713, b: 0.5707427, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -495,46 +495,6 @@ Prefab:
     - target: {fileID: 4573224720107598, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
       propertyPath: m_RootOrder
       value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1800523477184620, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1176466502913496, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1222726200476102, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1519082664484934, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054277063459222, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1407599707517540, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1862615253462252, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1108485497140832, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1763689811583484, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1763689811583484, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c67054a22ce82194d8112a83f6774e0c, type: 2}
@@ -2788,10 +2748,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1462355144702012, guid: 582ab29153ca2ca47905b56a999e937c, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 582ab29153ca2ca47905b56a999e937c, type: 2}
   m_IsPrefabParent: 0
@@ -3500,18 +3456,6 @@ Prefab:
     - target: {fileID: 4874705264382378, guid: 56a3031e0d5324f4f9daad2d0d79b413, type: 2}
       propertyPath: m_RootOrder
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1050143185150086, guid: 56a3031e0d5324f4f9daad2d0d79b413, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1050143185150086, guid: 56a3031e0d5324f4f9daad2d0d79b413, type: 2}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1050143185150086, guid: 56a3031e0d5324f4f9daad2d0d79b413, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56a3031e0d5324f4f9daad2d0d79b413, type: 2}
@@ -8415,6 +8359,7 @@ MonoBehaviour:
   aimRing: {fileID: 1101087966}
   isFlying: 0
   specialType: 0
+  levelUI: {fileID: 0}
 --- !u!95 &1752816590
 Animator:
   serializedVersion: 3
@@ -8961,14 +8906,6 @@ Prefab:
     - target: {fileID: 4709176961404064, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
       propertyPath: m_RootOrder
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1692496857986734, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ec6309d34f29f24189e3d9a4aed2859, type: 2}

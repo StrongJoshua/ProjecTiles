@@ -25,10 +25,10 @@ GameObject:
   - component: {fileID: 23810684535490804}
   m_Layer: 0
   m_Name: Plain Tile
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &4709176961404064
 Transform:
