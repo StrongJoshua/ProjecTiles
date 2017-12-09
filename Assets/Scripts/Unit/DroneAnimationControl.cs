@@ -44,6 +44,7 @@ public class DroneAnimationControl : MonoBehaviour
     private float startTime;
     private bool exploded;
     private Vector3 offset;
+    private float startY;
 
     void Awake()
     {
@@ -280,7 +281,7 @@ public class DroneAnimationControl : MonoBehaviour
         foreach (GameObject go in toHide)
             go.SetActive(false);
         anim.enabled = false;
-        Destroy(GetComponent<Rigidbody>());
+        GetComponent<Rigidbody>().detectCollisions = false;
         StartCoroutine(returnControl());
     }
 
@@ -321,7 +322,7 @@ public class DroneAnimationControl : MonoBehaviour
 
     private void LateUpdate()
     {
-        Camera.main.gameObject.transform.position = transform.position + offset;
+        Camera.main.gameObject.transform.position = transform.position + offset + new Vector3(0, -transform.position.y + startY, 0);
     }
 
     // Update is called once per frame
@@ -330,6 +331,7 @@ public class DroneAnimationControl : MonoBehaviour
         userControl.mapControl = false;
         if (!exploded)
         {
+            startY = transform.position.y;
             DoRenderer();
             if (Time.timeSinceLevelLoad - startTime > lifetime)
             {
@@ -346,7 +348,7 @@ public class DroneAnimationControl : MonoBehaviour
             time -= Time.deltaTime;
             yield return null;
         }
-        print("Returning control");
+
         Destroy(gameObject);
         userControl.returnMapControl();
     }
