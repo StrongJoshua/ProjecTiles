@@ -129,7 +129,7 @@ public class MainMenuButtons : MonoBehaviour {
 	public void musicVolumeAdjust()
 	{
 		PersistentInfo pi = PersistentInfo.Instance();
-		pi.MusicVolume = (int)musicVolumeSlider.GetComponent<Slider> ().value;
+		pi.MusicVolume = musicVolumeSlider.GetComponent<Slider> ().value;
 		conductor.adjustMusicVolume (pi.MusicVolume);
 	}
 
@@ -149,7 +149,7 @@ public class MainMenuButtons : MonoBehaviour {
 	public void sfxVolumeAdjust()
 	{
 		PersistentInfo pi = PersistentInfo.Instance();
-		pi.SFXVolume = (int) sfxVolumeSlider.GetComponent<Slider> ().value;
+		pi.SFXVolume = sfxVolumeSlider.GetComponent<Slider> ().value;
 	}
 
 	public void sfxVolumePicked()
