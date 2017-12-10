@@ -627,7 +627,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45e6422f36f9924fb2949a7fbb25a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footstep: {fileID: 0}
 --- !u!114 &114599098702221374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -685,6 +684,7 @@ MonoBehaviour:
   perceptionGrowthRate: 0
   accuracyGrowth: 1
   accuracyGrowthRate: 0
+  icon: {fileID: 21300000, guid: feb1114173562444ba71a66f4c5ad138, type: 3}
   team: 0
   projectileFab: {fileID: 1293650728090910, guid: 445992a121c91654a975085fe9b84215,
     type: 2}
@@ -4115,7 +4115,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 360847337
+  randomSeed: 315193179
   InitialModule:
     serializedVersion: 3
     enabled: 1
