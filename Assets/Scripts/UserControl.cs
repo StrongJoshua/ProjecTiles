@@ -108,8 +108,6 @@ public class UserControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameVictory();
-        return;
         if (backgroundTasks.Count > 0)
         {
             Thread t = backgroundTasks.Peek();
