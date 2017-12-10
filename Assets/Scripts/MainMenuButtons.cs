@@ -54,11 +54,13 @@ public class MainMenuButtons : MonoBehaviour {
 
     public void playClick()
     {
+        GetComponent<AudioSource>().volume = PersistentInfo.Instance().SFXVolume;
         GetComponent<AudioSource>().PlayOneShot(click);
     }
 
     public void playHover()
     {
+        GetComponent<AudioSource>().volume = PersistentInfo.Instance().SFXVolume;
         GetComponent<AudioSource>().PlayOneShot(hover);
     }
 
@@ -129,8 +131,8 @@ public class MainMenuButtons : MonoBehaviour {
 	public void musicVolumeAdjust()
 	{
 		PersistentInfo pi = PersistentInfo.Instance();
-		pi.MusicVolume = musicVolumeSlider.GetComponent<Slider> ().value;
-		conductor.adjustMusicVolume (pi.MusicVolume);
+		pi.MusicVolume = musicVolumeSlider.GetComponent<Slider>().value;
+		conductor.adjustMusicVolume(pi.MusicVolume);
 	}
 
 	public void musicVolumePicked()
@@ -149,7 +151,7 @@ public class MainMenuButtons : MonoBehaviour {
 	public void sfxVolumeAdjust()
 	{
 		PersistentInfo pi = PersistentInfo.Instance();
-		pi.SFXVolume = sfxVolumeSlider.GetComponent<Slider> ().value;
+		pi.SFXVolume = sfxVolumeSlider.GetComponent<Slider>().value;
 	}
 
 	public void sfxVolumePicked()
