@@ -5,7 +5,12 @@ using UnityEngine.UI;
 
 public class UnitImage : MonoBehaviour {
 
-    public Image health, AP;
+    public Image health, AP, icon;
+
+    public void setIcon(Sprite icn)
+    {
+        icon.sprite = icn;
+    }
 
 	public void updateHealth(float percent)
     {

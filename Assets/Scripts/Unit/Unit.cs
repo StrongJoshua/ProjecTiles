@@ -60,7 +60,7 @@ public class Unit : MonoBehaviour
 
     public Dictionary<string, float> initialStats;
     private Dictionary<string, float> growthRates;
-
+    public Sprite icon;
     public Team team;
 
     public Player player;
