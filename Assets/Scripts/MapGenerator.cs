@@ -15,6 +15,7 @@ public class MapGenerator : MonoBehaviour
 	public GameObject[] boulderTilePrefabs;
 	public GameObject[] explosiveTilePrefabs;
 	public GameObject[] rampTilePrefabs;
+	public GameObject[] pillarTilePrefabs;
 	
 
 	public GameObject unknownTilePrefab;
@@ -95,6 +96,8 @@ public class MapGenerator : MonoBehaviour
 					choices = explosiveTilePrefabs;
 				else if (tileType == Tile.TileType.ramp)
 					choices = rampTilePrefabs;
+				else if (tileType == Tile.TileType.pillar)
+					choices = pillarTilePrefabs;
 				else
 					choices = null;
 
