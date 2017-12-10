@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CreateTeamManager : MonoBehaviour {
+    public MainMenuButtons audio;
     public InputField nameInput;
     public Dropdown unitTypeDropdown;
     public Button beginButton;
@@ -34,6 +35,20 @@ public class CreateTeamManager : MonoBehaviour {
             Button b = buttonGO.GetComponent<Button>();
             int index = i;
             b.onClick.AddListener(() => setInfo(index));
+            b.onClick.AddListener(audio.playClick);
+
+            EventTrigger.Entry entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.Select;
+            entry.callback.AddListener((data) => audio.playHover());
+
+            EventTrigger.Entry entry2 = new EventTrigger.Entry();
+            entry2.eventID = EventTriggerType.PointerEnter;
+            entry2.callback.AddListener((data) => audio.playHover());
+
+            EventTrigger et = b.gameObject.AddComponent<EventTrigger>();
+            et.triggers.Add(entry);
+            et.triggers.Add(entry2);
+
             Navigation buttonNav = b.navigation;
             buttonNav.mode = Navigation.Mode.Explicit;
             if (i > 0)
