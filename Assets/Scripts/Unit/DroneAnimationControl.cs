@@ -70,7 +70,8 @@ public class DroneAnimationControl : MonoBehaviour
         if (leftFoot == null || rightFoot == null)
             Debug.Log("One of the feet could not be found");
 
-        userControl.mapControl = false;
+        if(userControl != null)
+            userControl.mapControl = false;
         startTime = Time.timeSinceLevelLoad;
         offset = new Vector3(0, Camera.main.gameObject.transform.position.y - transform.position.y, Camera.main.gameObject.transform.position.z - transform.position.z);
     }
@@ -353,6 +354,7 @@ public class DroneAnimationControl : MonoBehaviour
         }
 
         Destroy(gameObject);
-        userControl.returnMapControl();
+        if(userControl != null)
+            userControl.returnMapControl();
     }
 }

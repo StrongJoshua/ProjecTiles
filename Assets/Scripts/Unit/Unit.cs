@@ -471,9 +471,8 @@ public class Unit : MonoBehaviour
     }
 
     // Fires special
-    public void special(UserControl userControl)
+    public void special(UserControl userControl, Unit target = null)
     {
-
         if (canSpecial()) {
             if (specialType == SpecialType.drone) {
                 Debug.Log("Making drone");
@@ -490,10 +489,11 @@ public class Unit : MonoBehaviour
 					dac.hasUserControl = false;
 
                     special.GetComponent<SteeringControl>().enabled = true;
-                    special.GetComponent<SteeringControl>().target = Vector3.zero;
+                    special.GetComponent<SteeringControl>().target = target;
                 }
 
-                userControl.phase = UserControl.Phase.free;
+                if(userControl != null)
+                    userControl.phase = UserControl.Phase.free;
                 isShooting = false;
                 aimRing.SetActive(false);
             } else if (specialType == SpecialType.bionade) {
@@ -510,11 +510,13 @@ public class Unit : MonoBehaviour
                 //print(aim.ToString());
                 temp.GetComponent<Rigidbody>().AddForce(aim);
 
-                userControl.returnMapControl();
+                if(userControl != null)
+                    userControl.returnMapControl();
             } else if (specialType == SpecialType.bombs) {
                 StartCoroutine(bombSpecial(userControl));
 
-                userControl.returnMapControl();
+                if(userControl != null)
+                    userControl.returnMapControl();
             } else if (specialType == SpecialType.sniper) {
                 Vector3 gunOrigin = transform.position + transform.forward + transform.up;
                 if (equippedGun != null) {
@@ -533,7 +535,8 @@ public class Unit : MonoBehaviour
                 //print(aim.ToString());
                 temp.GetComponent<Rigidbody>().AddForce(aim);
 
-                userControl.returnMapControl();
+                if(userControl != null)
+                    userControl.returnMapControl();
             }
             costAP(specialCost);
         }
@@ -599,6 +602,8 @@ public class Unit : MonoBehaviour
 
     IEnumerator bombSpecial(UserControl uc)
     {
+        if (uc == null)
+            uc = GameObject.Find("UserControl").GetComponent<UserControl>();
         isMoving = true;
         Vector3 start = transform.position;
         uc.gameManager.mapGenerator.Tiles[x, y].Impassable = true;
