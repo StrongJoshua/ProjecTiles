@@ -61,4 +61,9 @@ public class Medic : MonoBehaviour
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere (transform.position, healRadius * MapGenerator.step);
 	}
+
+	public void die()
+	{
+		healthPack.GetComponent<Rigidbody> ().useGravity = true;
+	}
 }
