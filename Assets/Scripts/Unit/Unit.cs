@@ -390,10 +390,7 @@ public class Unit : MonoBehaviour
             //print(aim.ToString());
             temp.GetComponent<Rigidbody>().AddForce(aim);
         }
-
     }
-
-
 
     public void takeDamage(int incomingDamage)
     {
@@ -693,4 +690,10 @@ public class Unit : MonoBehaviour
 	{
 		print ("STEP");
 	}
+
+    private void OnDestroy()
+    {
+        Destroy(APBar.gameObject);
+        Destroy(healthBar.gameObject);
+    }
 }

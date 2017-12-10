@@ -351,12 +351,10 @@ public class UserControl : MonoBehaviour
 	}
 
 	public void retryGame() {
-		resumeGame ();
 		gameManager.retry ();
 	}
 
 	public void nextLevel() {
-		resumeGame ();
 		gameManager.nextLevel ();
 	}
 
