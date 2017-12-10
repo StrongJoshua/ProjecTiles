@@ -14,7 +14,7 @@ public class EnemyAI {
 
     private List<Aggro> aggroStates;
 
-    private enum Aggro
+    public enum Aggro
     {
         move,
         moveClose,
@@ -293,5 +293,10 @@ public class EnemyAI {
             case Unit.SpecialType.bombs: return distance <= 5;
             default: return false;
         }
+    }
+
+    public Aggro getAggro(Unit unit)
+    {
+        return aggroStates[controls.IndexOf(unit)];
     }
 }

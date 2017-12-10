@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private EnemyAI ai;
+    internal EnemyAI ai;
     public bool AI;
     public float AIDelay;
     public bool debug;
