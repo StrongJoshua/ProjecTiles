@@ -493,15 +493,8 @@ public class Unit : MonoBehaviour
                 isShooting = false;
                 aimRing.SetActive(false);
             } else if (specialType == SpecialType.bionade) {
-                transform.rotation = Quaternion.Euler(0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
-                GameObject temp = Instantiate(specialFab, transform.position + transform.forward + transform.up, transform.rotation);
-                temp.GetComponent<Projectile>().origin = this;
-                temp.transform.Rotate(new Vector3(90, 0, 0));
-                Vector3 aim = this.transform.forward * temp.GetComponent<Projectile>().speed;
-                temp.GetComponent<Rigidbody>().AddForce(aim);
-
-                if(userControl != null)
-                    userControl.returnMapControl();
+                anim.SetTrigger("shoot");
+                animEvent.callback = (gameObject) => bionadeSpecial();
             } else if (specialType == SpecialType.bombs) {
                 StartCoroutine(bombSpecial(userControl));
 
@@ -535,6 +528,19 @@ public class Unit : MonoBehaviour
         Vector3 aim = this.transform.forward * temp.GetComponent<Projectile>().speed;
         aim.x = aim.x + Random.Range((200 - 2.5f * accuracy) / 100f, (200 - 2.5f * accuracy) / 100f);
         //print(aim.ToString());
+        temp.GetComponent<Rigidbody>().AddForce(aim);
+
+        if (team == Team.player)
+            FindObjectOfType<UserControl>().returnMapControl();
+    }
+
+    public void bionadeSpecial()
+    {
+        transform.rotation = Quaternion.Euler(0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
+        GameObject temp = Instantiate(specialFab, transform.position + transform.forward + transform.up, transform.rotation);
+        temp.GetComponent<Projectile>().origin = this;
+        temp.transform.Rotate(new Vector3(90, 0, 0));
+        Vector3 aim = this.transform.forward * temp.GetComponent<Projectile>().speed;
         temp.GetComponent<Rigidbody>().AddForce(aim);
 
         if (team == Team.player)
