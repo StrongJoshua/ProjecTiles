@@ -12,7 +12,11 @@ public class Medic : MonoBehaviour
 	//public MeshRenderer ringRenderer;
 	public ParticleSystem healingRing;
 	public GameObject healthPack;
-	// Use this for initialization
+    // Use this for initialization
+
+    private Vector3 healthPackPos;
+    private Quaternion healthPackRot;
+    
 	void Start ()
 	{
 		currTime = Time.timeSinceLevelLoad;
@@ -64,6 +68,15 @@ public class Medic : MonoBehaviour
 
 	public void die()
 	{
-		healthPack.GetComponent<Rigidbody> ().useGravity = true;
+        healthPackPos = healthPack.transform.localPosition;
+        healthPackRot = healthPack.transform.localRotation;
+		healthPack.GetComponent<Rigidbody>().useGravity = true;
 	}
+
+    public void resurrect()
+    {
+        healthPack.GetComponent<Rigidbody>().useGravity = false;
+        healthPack.transform.localPosition = healthPackPos;
+        healthPack.transform.rotation = healthPackRot;
+    }
 }

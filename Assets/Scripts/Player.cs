@@ -66,6 +66,11 @@ public class Player {
             units[i].setHiddenStats((int) confirmedStats[i]["level"], confirmedStats[i]);
             units[i].resetHealthAP();
             units[i].gameObject.SetActive(true);
+            if (units[i].anim != null)
+                units[i].anim.SetTrigger("cancel");
+            if (units[i].IsMedic)
+                units[i].GetComponent<Medic>().resurrect();
+            units[i].lookAt(units[i].XY);
         }
     }
 

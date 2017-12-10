@@ -248,7 +248,7 @@ public class Unit : MonoBehaviour
             GameObject.FindGameObjectWithTag("HUD").GetComponent<HUDManager>().decrementEnemyCount();
         }
 
-		if (name.Equals("Medic")) {
+		if (IsMedic) {
 			GetComponent<Medic> ().die ();
 		}
 
