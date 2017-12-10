@@ -340,7 +340,7 @@ public class DroneAnimationControl : MonoBehaviour
         if (!exploded)
         {
             DoRenderer();
-            if (Time.timeSinceLevelLoad - startTime > lifetime)
+            if (fellOffMap() || Time.timeSinceLevelLoad - startTime > lifetime)
             {
                 explode();
             }
@@ -359,5 +359,13 @@ public class DroneAnimationControl : MonoBehaviour
         Destroy(gameObject);
         if(userControl != null)
             userControl.returnMapControl();
+    }
+
+    private bool fellOffMap()
+    {
+        MapGenerator mg = FindObjectOfType<MapGenerator>();
+        if (transform.position.x <= 0 || transform.position.y <= 0 || transform.position.x > mg.SizeX * MapGenerator.step || transform.position.y > mg.SizeY * MapGenerator.step)
+            return true;
+        return false;
     }
 }
