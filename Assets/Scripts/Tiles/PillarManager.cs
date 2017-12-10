@@ -11,7 +11,6 @@ public class PillarManager : TileManager {
 	public GameObject pillarBase;
 	public float fallSpeed;
 
-
 	public int currHealth, maxHealth, maxDamage;
 
 	private int tileX, tileY;
@@ -47,7 +46,7 @@ public class PillarManager : TileManager {
 	}
 
 	void fall() {
-		Vector3 dirToFall = lastHitBy.transform.up * fallSpeed;
+		Vector3 dirToFall = (transform.position - lastHitBy.transform.position).normalized * fallSpeed;
 		currPillar.transform.SetParent (null);
 		currPillar.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
 		currPillar.GetComponent<Rigidbody> ().AddForce (dirToFall);

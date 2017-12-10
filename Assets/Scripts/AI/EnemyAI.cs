@@ -179,6 +179,8 @@ public class EnemyAI {
             if (tm.DealsDamage)
             {
                 BarrelManager bm = tile.GetComponent<BarrelManager>();
+                if (bm == null)
+                    continue;
                 if (Vector3.Distance(unit.transform.position, tile.transform.position) <= unit.Projectile.range * MapGenerator.step * rangeMod)
                 {
                     if (Vector3.Distance(tile.transform.position, target.transform.position) <= bm.explodeRange * MapGenerator.step)
