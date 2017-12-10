@@ -353,19 +353,23 @@ public class UserControl : MonoBehaviour
 	}
 
 	public void retryGame() {
+        resumeGame();
 		gameManager.retry ();
 	}
 
     public GameObject hud;
+
 	public void nextLevel() {
 		gameManager.nextLevel ();
-        if (PersistentInfo.Instance().currentLevel == 2)
+        if (PersistentInfo.Instance().currentLevel == gameManager.levels.Length)
         {
             Debug.Log("Game done");
             gameVictory();
         }
 	}
+
     public FinalUnitInfo lastVictoryScreen;
+
     void gameVictory()
     {
         finishedGameScreen.SetActive(true);
@@ -383,7 +387,6 @@ public class UserControl : MonoBehaviour
 
     public void pauseGame()
     {
-        
         pauseMenu.SetActive(true);
 		pause (pauseMenu);
     }
