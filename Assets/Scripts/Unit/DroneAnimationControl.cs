@@ -196,7 +196,7 @@ public class DroneAnimationControl : MonoBehaviour
         }
 
 
-        anim.SetBool("IsFalling", isFalling);
+        //anim.SetBool("IsFalling", isFalling);
     }
 
 
