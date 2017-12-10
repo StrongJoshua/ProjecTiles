@@ -514,6 +514,7 @@ public class Unit : MonoBehaviour
                 if(userControl != null)
                     userControl.returnMapControl();
             } else if (specialType == SpecialType.sniper) {
+                anim.SetTrigger("shoot");
                 Vector3 gunOrigin = transform.position + transform.forward + transform.up;
                 if (equippedGun != null) {
                     Transform gunOriginObject = equippedGun.transform.Find("gunOrigin");
