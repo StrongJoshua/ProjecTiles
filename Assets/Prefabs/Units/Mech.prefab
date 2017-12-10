@@ -864,6 +864,7 @@ MonoBehaviour:
   perceptionGrowthRate: 0
   accuracyGrowth: 1
   accuracyGrowthRate: 0
+  icon: {fileID: 21300000, guid: fba81148f5e1687408d7dff1c4f8cfba, type: 3}
   team: 0
   projectileFab: {fileID: 1563048410146538, guid: 395d5b94d217ddd4486e731cf06e453b,
     type: 2}

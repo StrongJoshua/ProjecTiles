@@ -3738,6 +3738,7 @@ MonoBehaviour:
   healRadius: 2.5
   triggerList: []
   healingRing: {fileID: 198324603618181648}
+  healthPack: {fileID: 0}
 --- !u!114 &114679677505938252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3808,6 +3809,7 @@ MonoBehaviour:
   perceptionGrowthRate: 0
   accuracyGrowth: 1
   accuracyGrowthRate: 0
+  icon: {fileID: 21300000, guid: 7ec945dcabe0a094d94266a26bfa1c34, type: 3}
   team: 0
   projectileFab: {fileID: 1503504545923832, guid: 1f61992ee53785c4882c39a3b6e7425a,
     type: 2}

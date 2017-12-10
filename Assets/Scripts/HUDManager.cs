@@ -13,6 +13,8 @@ public class HUDManager : MonoBehaviour {
     public Dictionary<Unit, GameObject> unitImageMap;
     public Dictionary<GameObject, Unit> imageUnitMap;
 
+    public Sprite infantry, mech, ship, medic;
+
     int enemyCount;
 
     private List<GameObject> unitImages;
@@ -37,6 +39,7 @@ public class HUDManager : MonoBehaviour {
                 UnitImage imageInfo = image.GetComponent<UnitImage>();
                 imageInfo.updateHealth(u.HealthPercent);
                 imageInfo.updateAP(u.APPercent);
+                imageInfo.setIcon(u.icon);
             }
         }
     }
