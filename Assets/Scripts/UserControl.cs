@@ -28,8 +28,6 @@ public class UserControl : MonoBehaviour
 	public GameObject gameOverMenu;
 	public GameObject victoryMenu;
     public bool mapControl = true;
-	public bool droneControl = false;
-	public GameObject drone;
 
     public GameObject movementArrow;
 
@@ -54,6 +52,8 @@ public class UserControl : MonoBehaviour
 
     private int cycleIndex = 0;
 	private AudioSource audio;
+
+    public Sprite[] aggroSprites;
 
     public bool Paused {
         get { return pauseMenu.activeSelf; }
@@ -278,15 +278,6 @@ public class UserControl : MonoBehaviour
 
     }
 
-	void LateUpdate()
-	{
-		if(droneControl)
-		{
-			Vector3 offset = new Vector3(0f, 3f, -4f);
-			transform.position = drone.transform.position + offset;
-		}
-	}
-
     private void moveHighlightAbsolute(int newX, int newY)
     {
         x = newX;
@@ -430,6 +421,16 @@ public class UserControl : MonoBehaviour
             else if (text.name == "XP")
                 text.text = unit.XP + "/" + (100 * unit.Level);
         }
+
+        if(unit.team == Unit.Team.enemy && !unit.IsMedic)
+        {
+            unitInfo.GetComponentsInChildren<Image>()[1].enabled = true;
+            unitInfo.GetComponentsInChildren<Image>()[1].sprite = aggroSprites[(int)gameManager.ai.getAggro(unit)];
+        } else
+        {
+            unitInfo.GetComponentsInChildren<Image>()[1].enabled = false;
+        }
+
         Color color = unit.team == Unit.Team.enemy ? gameManager.enemyColor : gameManager.playerColor;
         color.a = unitInfo.GetComponent<Image>().color.a;
         unitInfo.GetComponent<Image>().color = color;

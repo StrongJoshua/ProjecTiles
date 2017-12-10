@@ -325,6 +325,9 @@ public class DroneAnimationControl : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!hasUserControl)
+            return;
+
         if (!exploded)
             Camera.main.gameObject.transform.position = transform.position + offset;
         else

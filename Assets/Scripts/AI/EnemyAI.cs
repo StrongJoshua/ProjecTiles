@@ -14,7 +14,7 @@ public class EnemyAI {
 
     private List<Aggro> aggroStates;
 
-    private enum Aggro
+    public enum Aggro
     {
         move,
         moveClose,
@@ -47,7 +47,7 @@ public class EnemyAI {
         if (cur == null)
             return;
 
-        print("AI currently controlling " + cur.name + " at " + cur.XY);
+        print("AI currently controlling " + cur.name + " at " + cur.XY + ". Has aggro state: " + aggroStates[controls.IndexOf(cur)]);
 
         act(cur, aggroStates[controls.IndexOf(cur)]);
     }
@@ -71,8 +71,8 @@ public class EnemyAI {
             if (u.IsMedic && inRange(u, target))
                 continue;
 
-            Aggro aggro = aggroStates[controls.IndexOf(u)];
-            if (!u.canSpecial() && !inSpecialRange(u, target) && !u.IsMedic) {
+            if (!(u.canSpecial() && inSpecialRange(u, target)) && !u.IsMedic) {
+                Aggro aggro = aggroStates[controls.IndexOf(u)];
                 if (aggro == Aggro.noMove) {
                     if (!inRange(u, target) && explosivesInRange(u, target).Count == 0)
                         continue;
@@ -233,8 +233,9 @@ public class EnemyAI {
         {
             print("Found target " + target.name + " at " + target.XY);
 
-            if(inSpecialRange(cur, target))
+            if(cur.canSpecial() && inSpecialRange(cur, target))
             {
+                print("Using special (" + cur.specialName + ")");
                 cur.lookAt(target.XY);
                 cur.special(null, target);
             }
@@ -259,6 +260,9 @@ public class EnemyAI {
                     {
                         print("Moving to target");
                         setStrategicDestination(cur, target);
+                    } else
+                    {
+                        print("This path is an error. Probably chose a noMove with no target in range.");
                     }
                 }
             }
@@ -289,5 +293,10 @@ public class EnemyAI {
             case Unit.SpecialType.bombs: return distance <= 5;
             default: return false;
         }
+    }
+
+    public Aggro getAggro(Unit unit)
+    {
+        return aggroStates[controls.IndexOf(unit)];
     }
 }
