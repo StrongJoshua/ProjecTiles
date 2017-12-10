@@ -175,6 +175,9 @@ MonoBehaviour:
   bigRockHealth: 10
   medRockHealth: 5
   smallRockHealth: 1
+  explodeRocks:
+  - {fileID: 1389038482140796, guid: a8ebc45769943f040b1be155a093b92c, type: 2}
+  explodingRocks: []
 --- !u!114 &114105673673565240
 MonoBehaviour:
   m_ObjectHideFlags: 1

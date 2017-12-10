@@ -18,6 +18,10 @@ public class RockManager : TileManager {
     public int medRockHealth;
     public int smallRockHealth;
 
+    public GameObject[] explodeRocks;
+
+    public GameObject[] explodingRocks;
+
     private int tileX, tileY;
 
     GameObject lastHitBy;
@@ -67,6 +71,8 @@ public class RockManager : TileManager {
             Tile tile = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>().GetTile(tileX, tileY);
             tile.Impassable = false;
             healthBarContainer.SetActive(false);
+
+            shootOutRocks();
             Destroyed = true;
             return;
         }
@@ -74,6 +80,28 @@ public class RockManager : TileManager {
         currHealth = healthForType(currType);
         healthBar.rectTransform.localScale = new Vector3(currHealth/(float)maxHealth, 1, 1);
         currRock = Instantiate(nextRock, this.transform);
+    }
+
+    void shootOutRocks()
+    {
+        int numRocks = 3;
+        explodingRocks = new GameObject[numRocks];
+        for (int i = 0; i < numRocks; i++)
+        {
+            explodingRocks[i] = Instantiate(choose(explodeRocks));
+            explodingRocks[i].transform.position = this.transform.position;
+
+            explodingRocks[i].GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-300f, 300f), Random.Range(300f, 400f), Random.Range(-300f, 300f)));
+        }
+
+        for (int i = 0; i < numRocks; i++)
+        {
+            for (int j = 0; j < numRocks; j++)
+            {
+                if (i == j) continue;
+                Physics.IgnoreCollision(explodingRocks[i].GetComponent<Collider>(), explodingRocks[j].GetComponent<Collider>(), true);
+            }
+        }
     }
 
     public override void hit(int damage, GameObject projectile)
