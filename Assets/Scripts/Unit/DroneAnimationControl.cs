@@ -317,7 +317,7 @@ public class DroneAnimationControl : MonoBehaviour
         {
             float x = radius * Mathf.Cos(theta);
             float z = radius * Mathf.Sin(theta);
-            Vector3 pos = new Vector3(x, .1f, z);
+            Vector3 pos = new Vector3(x, .5f, z);
             lineRenderer.SetPosition(i, pos);
             theta += deltaTheta;
         }
