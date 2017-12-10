@@ -16,6 +16,7 @@ public class PillarManager : TileManager {
 	private int tileX, tileY;
 
 	GameObject lastHitBy;
+	PhysicsProjectile phys;
 
 
 	// Use this for initialization
@@ -23,7 +24,8 @@ public class PillarManager : TileManager {
 		//currPillar.transform.localScale = new Vector3(0.333f, 5f, 0.333f);
 		//currPillar.transform.localPosition = new Vector3 (0f, 6.7f, 0f);
 		currHealth = maxHealth;
-
+		phys = currPillar.GetComponent<PhysicsProjectile> ();
+		phys.origin = gameObject;
 		lastHitBy = null;
 		//currRock.transform.position = new Vector3(0.002f, 0.75f, -0.002f);
 
@@ -48,6 +50,7 @@ public class PillarManager : TileManager {
 	void fall() {
 		Vector3 dirToFall = (transform.position - lastHitBy.transform.position).normalized * fallSpeed;
 		currPillar.transform.SetParent (null);
+		phys.enabled = true;
 		currPillar.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
 		currPillar.GetComponent<Rigidbody> ().AddForce (dirToFall);
 	}
