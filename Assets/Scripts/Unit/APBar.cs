@@ -12,15 +12,15 @@ public class APBar : MonoBehaviour {
     // Use this for initialization
     private Quaternion rot;
     void Start () {
-        yFreeze = new Vector3(1f, 0f, 1f);
-		Image barHolder = transform.GetChild (0).gameObject.GetComponent<Image> ();
-		Image barAmount = transform.GetChild (1).gameObject.GetComponent<Image> ();
+  //      yFreeze = new Vector3(1f, 0f, 1f);
+		//Image barHolder = transform.GetChild (0).gameObject.GetComponent<Image> ();
+		//Image barAmount = transform.GetChild (1).gameObject.GetComponent<Image> ();
 
-		if (mat != null && barHolder != null && barAmount != null) {
-			barHolder.material = mat;
-			barAmount.material = mat;
-		}
-        rot = transform.rotation;
+		//if (mat != null && barHolder != null && barAmount != null) {
+		//	barHolder.material = mat;
+		//	barAmount.material = mat;
+		//}
+  //      rot = transform.rotation;
 
 	}
 	
