@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class APBar : MonoBehaviour {
 
-    private int offset = 3;
     public float yOffset = 0;
+    public float xOffset = 0;
     Vector3 yFreeze;
 	public Material mat;
 	// Use this for initialization
@@ -27,7 +27,7 @@ public class APBar : MonoBehaviour {
         Vector3 vec = (Camera.main.transform.position - transform.parent.position);
         Vector3 newPos = new Vector3(0f, 0f, 0f);
         newPos.y = oldY;
-        newPos.x = transform.parent.position.x + Mathf.Cos(Mathf.Atan2(vec.z, vec.x)) * 2;
+        newPos.x = transform.parent.position.x + Mathf.Cos(Mathf.Atan2(vec.z, vec.x)) * 2 + xOffset;
         newPos.z = transform.parent.position.z + Mathf.Sin(Mathf.Atan2(vec.z, vec.x)) * 2;
         transform.position = newPos;
 
