@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SteeringControl : MonoBehaviour {
-    public Vector3 target;
+    public Unit target;
     private Animator anim;
 
     private void Start()
@@ -28,7 +28,7 @@ public class SteeringControl : MonoBehaviour {
 
     private float getTurn()
     {
-        float angle = Vector3.SignedAngle(gameObject.transform.forward, target - gameObject.transform.position, Vector3.up);
+        float angle = Vector3.SignedAngle(gameObject.transform.forward, target.transform.position - gameObject.transform.position, Vector3.up);
         if (Mathf.Abs(angle) <= 5)
             return 0;
         return angle / 180f;
@@ -36,6 +36,6 @@ public class SteeringControl : MonoBehaviour {
 
     private float getDistance()
     {
-        return Vector3.Distance(gameObject.transform.position, target);
+        return Vector3.Distance(gameObject.transform.position, target.transform.position);
     }
 }

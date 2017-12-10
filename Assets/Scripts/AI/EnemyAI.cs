@@ -72,7 +72,7 @@ public class EnemyAI {
                 continue;
 
             Aggro aggro = aggroStates[controls.IndexOf(u)];
-            if (!u.IsMedic) {
+            if (!u.canSpecial() && !inSpecialRange(u, target) && !u.IsMedic) {
                 if (aggro == Aggro.noMove) {
                     if (!inRange(u, target) && explosivesInRange(u, target).Count == 0)
                         continue;
@@ -232,8 +232,13 @@ public class EnemyAI {
         if (target != null)
         {
             print("Found target " + target.name + " at " + target.XY);
-            print(moveIters(cur, target));
-            if (inRange(cur, target))
+
+            if(inSpecialRange(cur, target))
+            {
+                cur.lookAt(target.XY);
+                cur.special(null, target);
+            }
+            else if (inRange(cur, target))
             {
                 print("In range of target");
                 if (!cur.canShoot())
@@ -271,5 +276,18 @@ public class EnemyAI {
         foreach (Vector2 v in path)
             ap += unit.isFlying ? 1 : gameManager.mapGenerator.Tiles[(int)v.x, (int)v.y].MovementCost;
         return Mathf.CeilToInt(ap / (float) unit.maxAP);
+    }
+
+    private bool inSpecialRange(Unit unit, Unit target)
+    {
+        float distance = Vector2.Distance(unit.XY, target.XY);
+        switch(unit.specialType)
+        {
+            case Unit.SpecialType.sniper: return distance <= 10;
+            case Unit.SpecialType.bionade: return distance <= 4;
+            case Unit.SpecialType.drone: return distance <= 10;
+            case Unit.SpecialType.bombs: return distance <= 5;
+            default: return false;
+        }
     }
 }
