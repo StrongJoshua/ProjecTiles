@@ -627,7 +627,14 @@ public class Unit : MonoBehaviour
             }
             yield return null;
         }
-        transform.LookAt(start);
+
+        Quaternion q = Quaternion.LookRotation(start - transform.position, Vector3.up);
+        while(Quaternion.Angle(q, transform.rotation) > 0.1f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, q, .1f);
+            yield return null;
+        }
+
         while (Vector3.Distance(transform.position, start) > .05)
         {
             Vector3 diff = transform.forward * 4f;
@@ -638,7 +645,14 @@ public class Unit : MonoBehaviour
             yield return null;
         }
         transform.position = start;
-        this.lookAt(XY);
+
+        q = Quaternion.LookRotation(start - transform.position, Vector3.up);
+        while (Quaternion.Angle(q, transform.rotation) > 0.1f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, q, .1f);
+            yield return null;
+        }
+
         uc.gameManager.mapGenerator.Tiles[x, y].Impassable = false;
         uc.gameManager.characters[x, y] = this;
         isMoving = false;
