@@ -1749,7 +1749,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1378721284997648}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.28, y: 5.84, z: 17.04}
+  m_LocalPosition: {x: 32.786472, y: 0.5, z: -16.547503}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4966182442417932}
@@ -2274,7 +2274,7 @@ MonoBehaviour:
   groundContacts: 0
   forwardInputFilter: 5
   turnInputFilter: 5
-  lifetime: 5
+  lifetime: 10
   explodeParticle: {fileID: 1532705254353270, guid: ecb70069459ef8344bae8a3a0f1c929c,
     type: 2}
   explodeRange: 3
@@ -2296,7 +2296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e0a796c78c5534e8688d5349341aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {x: 0, y: 0, z: 0}
+  target: {fileID: 0}
 --- !u!120 &120828654944283880
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -2395,9 +2395,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!137 &137087752747195214
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

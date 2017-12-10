@@ -104,11 +104,13 @@ public class UserControl : MonoBehaviour
         selector.curTileX = x;
         selector.curTileY = y;
     }
-
+    public GameObject finishedGameScreen;
     // Update is called once per frame
     void Update()
     {
-        if(backgroundTasks.Count > 0)
+        gameVictory();
+        return;
+        if (backgroundTasks.Count > 0)
         {
             Thread t = backgroundTasks.Peek();
             if (t.ThreadState == ThreadState.Unstarted)
@@ -351,14 +353,32 @@ public class UserControl : MonoBehaviour
 	}
 
 	public void retryGame() {
-		resumeGame ();
+        resumeGame();
 		gameManager.retry ();
 	}
 
+    public GameObject hud;
+
 	public void nextLevel() {
-		resumeGame ();
 		gameManager.nextLevel ();
+        if (PersistentInfo.Instance().currentLevel == gameManager.levels.Length)
+        {
+            Debug.Log("Game done");
+            gameVictory();
+        }
 	}
+
+    public FinalUnitInfo lastVictoryScreen;
+
+    void gameVictory()
+    {
+        finishedGameScreen.SetActive(true);
+        // delete HUD, go to main menu
+        hud.SetActive(false);
+        // show victory screen
+        lastVictoryScreen.setupInfo(gameManager.player.units);
+
+    }
 
 	public void quitGame()
 	{
@@ -367,7 +387,6 @@ public class UserControl : MonoBehaviour
 
     public void pauseGame()
     {
-        
         pauseMenu.SetActive(true);
 		pause (pauseMenu);
     }

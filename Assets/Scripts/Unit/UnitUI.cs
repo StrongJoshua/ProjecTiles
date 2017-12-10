@@ -13,7 +13,7 @@ public class UnitUI : MonoBehaviour {
 	void Start () {
         unitTransform = transform.parent;
         diff = transform.parent.position - transform.position;
-        transform.parent = null;
+        //transform.parent = null;
 	}
 	
 	// Update is called once per frame

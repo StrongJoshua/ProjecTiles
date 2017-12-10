@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23422067668859692}
   - component: {fileID: 64922568240778930}
   - component: {fileID: 54722741453964362}
+  - component: {fileID: 114364331719628714}
   m_Layer: 0
   m_Name: rock_d
   m_TagString: Untagged
@@ -113,3 +114,26 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: d22ae57396e04fa4698c98f223d7994e, type: 3}
+--- !u!114 &114364331719628714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1389038482140796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e97173ff4b0c4f44b376e46d1ccd503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 3
+  timed: 1
+  maxDamage: 5
+  numToFire: 0
+  speed: 0
+  damageFalloff: 0
+  explodes: 0
+  explodeRange: 0
+  explodeParticle: {fileID: 0}
+  origin: {fileID: 0}
+  explosion: {fileID: 0}
+  hitEffect: {fileID: 0}

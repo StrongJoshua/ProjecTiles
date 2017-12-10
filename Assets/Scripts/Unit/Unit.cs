@@ -390,10 +390,7 @@ public class Unit : MonoBehaviour
             //print(aim.ToString());
             temp.GetComponent<Rigidbody>().AddForce(aim);
         }
-
     }
-
-
 
     public void takeDamage(int incomingDamage)
     {
@@ -475,7 +472,6 @@ public class Unit : MonoBehaviour
     {
         if (canSpecial()) {
             if (specialType == SpecialType.drone) {
-                Debug.Log("Making drone");
                 transform.rotation = Quaternion.Euler(0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
                 aimRing.transform.rotation = Quaternion.Euler(90, transform.rotation.eulerAngles.y - 90, 0);
                 GameObject special = Instantiate(specialFab, transform.position, transform.rotation);
@@ -497,49 +493,58 @@ public class Unit : MonoBehaviour
                 isShooting = false;
                 aimRing.SetActive(false);
             } else if (specialType == SpecialType.bionade) {
-                if (anim != null) {
-                    anim.SetTrigger("shoot");
-                }
-                //TODO Animate turn towards aim ring
-                transform.rotation = Quaternion.Euler(0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
-                GameObject temp = Instantiate(specialFab, transform.position + transform.forward + transform.up, transform.rotation);
-                temp.GetComponent<Projectile>().origin = this;
-                temp.transform.Rotate(new Vector3(90, 0, 0));
-                Vector3 aim = this.transform.forward * temp.GetComponent<Projectile>().speed;
-                //aim.x = aim.x + Random.Range (-gunSpread * (200 - 2.5f * accuracy) / 100f, gunSpread * (200 - 2.5f * accuracy) / 100f);
-                //print(aim.ToString());
-                temp.GetComponent<Rigidbody>().AddForce(aim);
-
-                if(userControl != null)
-                    userControl.returnMapControl();
+                anim.SetTrigger("shoot");
+                animEvent.callback = (gameObject) => bionadeSpecial();
             } else if (specialType == SpecialType.bombs) {
                 StartCoroutine(bombSpecial(userControl));
 
                 if(userControl != null)
                     userControl.returnMapControl();
             } else if (specialType == SpecialType.sniper) {
-                Vector3 gunOrigin = transform.position + transform.forward + transform.up;
-                if (equippedGun != null) {
-                    Transform gunOriginObject = equippedGun.transform.Find("gunOrigin");
-                    if (gunOriginObject != null)
-                        gunOrigin = gunOriginObject.position;
-                }
-                //TODO Animate turn towards aim ring
-                transform.rotation = Quaternion.Euler(0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
-                aimRing.transform.rotation = Quaternion.Euler(90, transform.rotation.eulerAngles.y - 90, 0);
-                GameObject temp = Instantiate(specialFab, gunOrigin, transform.rotation);
-                temp.GetComponent<Projectile>().origin = this;
-                temp.transform.Rotate(new Vector3(90, 0, 0));
-                Vector3 aim = this.transform.forward * temp.GetComponent<Projectile>().speed;
-                aim.x = aim.x + Random.Range((200 - 2.5f * accuracy) / 100f, (200 - 2.5f * accuracy) / 100f);
-                //print(aim.ToString());
-                temp.GetComponent<Rigidbody>().AddForce(aim);
-
-                if(userControl != null)
-                    userControl.returnMapControl();
+                anim.SetTrigger("shoot");
+                animEvent.callback = (gameObject) => {
+                    snipeSpecial();
+                };
             }
             costAP(specialCost);
         }
+    }
+
+    public void snipeSpecial()
+    {
+        Vector3 gunOrigin = transform.position + transform.forward + transform.up;
+        if (equippedGun != null)
+        {
+            Transform gunOriginObject = equippedGun.transform.Find("gunOrigin");
+            if (gunOriginObject != null)
+                gunOrigin = gunOriginObject.position;
+        }
+        //TODO Animate turn towards aim ring
+        transform.rotation = Quaternion.Euler(0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
+        aimRing.transform.rotation = Quaternion.Euler(90, transform.rotation.eulerAngles.y - 90, 0);
+        GameObject temp = Instantiate(specialFab, gunOrigin, transform.rotation);
+        temp.GetComponent<Projectile>().origin = this;
+        temp.transform.Rotate(new Vector3(90, 0, 0));
+        Vector3 aim = this.transform.forward * temp.GetComponent<Projectile>().speed;
+        aim.x = aim.x + Random.Range((200 - 2.5f * accuracy) / 100f, (200 - 2.5f * accuracy) / 100f);
+        //print(aim.ToString());
+        temp.GetComponent<Rigidbody>().AddForce(aim);
+
+        if (team == Team.player)
+            FindObjectOfType<UserControl>().returnMapControl();
+    }
+
+    public void bionadeSpecial()
+    {
+        transform.rotation = Quaternion.Euler(0, aimRing.transform.rotation.eulerAngles.y + 90, 0);
+        GameObject temp = Instantiate(specialFab, transform.position + transform.forward + transform.up, transform.rotation);
+        temp.GetComponent<Projectile>().origin = this;
+        temp.transform.Rotate(new Vector3(90, 0, 0));
+        Vector3 aim = this.transform.forward * temp.GetComponent<Projectile>().speed;
+        temp.GetComponent<Rigidbody>().AddForce(aim);
+
+        if (team == Team.player)
+            FindObjectOfType<UserControl>().returnMapControl();
     }
 
     public void gainDamageXP(Unit damaged)
@@ -693,4 +698,10 @@ public class Unit : MonoBehaviour
 	{
 		print ("STEP");
 	}
+
+    private void OnDestroy()
+    {
+        Destroy(APBar.gameObject);
+        Destroy(healthBar.gameObject);
+    }
 }
