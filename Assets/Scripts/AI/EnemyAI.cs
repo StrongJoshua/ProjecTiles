@@ -10,6 +10,8 @@ public class EnemyAI {
     public float delay;
     public bool debug;
 
+    public float rangeMod = .8f;
+
     private List<Aggro> aggroStates;
 
     private enum Aggro
@@ -135,12 +137,12 @@ public class EnemyAI {
 
     private bool inRange(Unit u, Unit u2)
     {
-        return Vector2.Distance(u.XY, u2.XY) <= (u.IsMedic ? u.GetComponent<Medic>().healRadius : u.Projectile.range * .8F);
+        return Vector2.Distance(u.XY, u2.XY) <= (u.IsMedic ? u.GetComponent<Medic>().healRadius : u.Projectile.range * rangeMod);
     }
 
     private void setStrategicDestination(Unit unit, Unit dest)
     {
-        float range = unit.IsMedic ? unit.GetComponent<Medic>().healRadius : unit.Projectile.range * .8F;
+        float range = unit.IsMedic ? unit.GetComponent<Medic>().healRadius : unit.Projectile.range * rangeMod;
 
         List<Vector2> path = AStar.AStarSearch(tiles, unit.XY, dest.XY, unit.isFlying, (Unit[,])gameManager.characters.Clone());
         path = stopAtRange(AStar.ConstrainPath(tiles, path.GetRange(1, path.Count - 1), (int)unit.AP, unit.isFlying), range, dest.XY);
@@ -160,10 +162,10 @@ public class EnemyAI {
         return path;
     }
 
-    private void print(string s)
+    private void print(object o)
     {
         if (debug)
-            Debug.Log(s);
+            Debug.Log(o);
     }
 
     private List<GameObject> explosivesInRange(Unit unit, Unit target)
@@ -177,7 +179,7 @@ public class EnemyAI {
             if (tm.DealsDamage)
             {
                 BarrelManager bm = tile.GetComponent<BarrelManager>();
-                if (Vector3.Distance(unit.transform.position, tile.transform.position) <= unit.Projectile.range * MapGenerator.step * .8f)
+                if (Vector3.Distance(unit.transform.position, tile.transform.position) <= unit.Projectile.range * MapGenerator.step * rangeMod)
                 {
                     if (Vector3.Distance(tile.transform.position, target.transform.position) <= bm.explodeRange * MapGenerator.step)
                     {
@@ -230,6 +232,7 @@ public class EnemyAI {
         if (target != null)
         {
             print("Found target " + target.name + " at " + target.XY);
+            print(moveIters(cur, target));
             if (inRange(cur, target))
             {
                 print("In range of target");
@@ -259,14 +262,14 @@ public class EnemyAI {
 
     private int moveIters(Unit unit, Unit dest)
     {
-        float range = unit.IsMedic ? unit.GetComponent<Medic>().healRadius : unit.Projectile.range * .8F;
+        float range = unit.IsMedic ? unit.GetComponent<Medic>().healRadius : unit.Projectile.range * rangeMod;
 
         List<Vector2> path = AStar.AStarSearch(tiles, unit.XY, dest.XY, unit.isFlying, (Unit[,])gameManager.characters.Clone());
-        path = stopAtRange(AStar.ConstrainPath(tiles, path.GetRange(1, path.Count - 1), (int)unit.AP, unit.isFlying), range, dest.XY);
+        path = stopAtRange(path.GetRange(1, path.Count - 1), range, dest.XY);
 
-        int ap = 0;
+        float ap = 0;
         foreach (Vector2 v in path)
-            ap += gameManager.mapGenerator.Tiles[(int)v.x, (int)v.y].MovementCost;
+            ap += unit.isFlying ? 1 : gameManager.mapGenerator.Tiles[(int)v.x, (int)v.y].MovementCost;
         return Mathf.CeilToInt(ap / (float) unit.maxAP);
     }
 }
