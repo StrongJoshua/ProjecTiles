@@ -358,6 +358,7 @@ public class UserControl : MonoBehaviour
     public GameObject hud;
 
 	public void nextLevel() {
+        resumeGame();
 		gameManager.nextLevel ();
         if (PersistentInfo.Instance().currentLevel == gameManager.levels.Length)
         {
