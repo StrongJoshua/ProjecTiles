@@ -152,7 +152,9 @@ Feedback from playtesters was positive and we have tuned the final game to their
 Known Bugs
 ----------------------------------
 
-No turn in place for the mech drone
+No turn in place for the mech drone.
+There is a possibility that the pillar stretches when hit before detaching it from the base.
+Units turn instantaneously for aiming.
 
 ----------------------------------
 Credits
