@@ -52,6 +52,7 @@ public class PillarManager : TileManager {
 		currPillar.transform.SetParent (null);
 		phys.enabled = true;
 		currPillar.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
+		currPillar.GetComponent<Rigidbody> ().freezeRotation = false;
 		currPillar.GetComponent<Rigidbody> ().AddForce (dirToFall);
 	}
 
