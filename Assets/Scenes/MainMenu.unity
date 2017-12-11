@@ -3495,7 +3495,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -578}
-  m_SizeDelta: {x: 450, y: 550}
+  m_SizeDelta: {x: 450, y: 650}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &909362330
 MonoBehaviour:
@@ -3554,7 +3554,10 @@ MonoBehaviour:
     Map Foliage and Human from /u/QuaterniusDev on Reddit
 
 
-    Vehicle models from Poly by Google and Liz Reddington on poly.google.com
+    Models from Poly by Google and Liz Reddington on poly.google.com
+
+
+    Icons from thenounproject
 
 
 '
