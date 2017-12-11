@@ -8,7 +8,7 @@ GitHub Repository: https://github.com/StrongJoshua/ProjecTiles
 Installation
 -------------------------------------------------
 Run the EXE
-To view scenes in Unity, start with the MainMenu scene
+To view scenes in Unity, start with the MainMenu scene. The main game scene is MapGenTest.
 
 Gameplay Instructions
 -------------------------------------------------
