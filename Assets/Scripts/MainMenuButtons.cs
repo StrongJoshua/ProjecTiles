@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class MainMenuButtons : MonoBehaviour
 {
 	public Canvas canvas;
-	public GameObject mainMenuGroup, creditsGroup, backButton, createTeamGroup, settingsGroup, controlsDisplay, musicVolumeSlider, sfxVolumeSlider, tutGroup;
+	public GameObject mainMenuGroup, creditsGroup, backButton, createTeamGroup, settingsGroup, controlsDisplay, musicVolumeSlider, sfxVolumeSlider, tutGroup, tutNext, tutPrev;
 	public GameObject[] tutScreens;
 	public int tutScreen = 0;
 	public AudioClip click, hover;
@@ -63,8 +63,16 @@ public class MainMenuButtons : MonoBehaviour
 			tutScreens [tutScreen].SetActive (false);
 			tutScreens [tutScreen + 1].SetActive (true);
 			tutScreen++;
-		}
-	}
+        }
+
+        tutPrev.SetActive(true);
+
+        if (tutScreen == tutScreens.Length - 1)
+        {
+            tutNext.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(tutGroup.GetComponentsInChildren<Button>()[0].gameObject);
+        }
+    }
 
 	public void prevTut ()
 	{
@@ -72,7 +80,15 @@ public class MainMenuButtons : MonoBehaviour
 			tutScreens [tutScreen].SetActive (false);
 			tutScreens [tutScreen - 1].SetActive (true);
 			tutScreen--;
-		}
+        }
+
+        tutNext.SetActive(true);
+
+        if (tutScreen == 0)
+        {
+            tutPrev.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(tutNext);
+        }
 	}
 
 
