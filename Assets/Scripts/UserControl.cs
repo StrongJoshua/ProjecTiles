@@ -271,7 +271,7 @@ public class UserControl : MonoBehaviour
 
 		if (Input.GetButtonDown("Cancel"))
         {
-			if (!gameOverMenu.activeSelf && !victoryMenu.activeSelf) {
+			if (!gameOverMenu.activeSelf && !victoryMenu.activeSelf && !finishedGameScreen.activeSelf) {
 				closeAll ();
 			}
         }
@@ -360,23 +360,17 @@ public class UserControl : MonoBehaviour
 	public void nextLevel() {
         resumeGame();
 		gameManager.nextLevel ();
-        if (PersistentInfo.Instance().currentLevel == gameManager.levels.Length)
-        {
-            Debug.Log("Game done");
-            gameVictory();
-        }
 	}
 
     public FinalUnitInfo lastVictoryScreen;
 
-    void gameVictory()
+    internal void gameVictory()
     {
         finishedGameScreen.SetActive(true);
         // delete HUD, go to main menu
         hud.SetActive(false);
         // show victory screen
         lastVictoryScreen.setupInfo(gameManager.player.units);
-
     }
 
 	public void quitGame()

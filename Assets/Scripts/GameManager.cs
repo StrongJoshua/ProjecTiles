@@ -299,7 +299,12 @@ public class GameManager : MonoBehaviour {
 		if (!playerUnitsAlive () || loseInsantly)
 			StartCoroutine(endWait(gameOver));
 		if (!enemiesAlive () || winInsantly)
-			StartCoroutine(endWait(victory));
+        {
+            if (PersistentInfo.Instance().currentLevel < levels.Length - 1)
+                StartCoroutine(endWait(victory));
+            else
+                StartCoroutine(endWait(FindObjectOfType<UserControl>().gameVictory));
+        }
         while (actions.Count > 0)
             actions.Dequeue().Invoke();
         if(AI)
@@ -338,7 +343,7 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator endWait(Action callAfterWait)
     {
-        GameObject.FindObjectOfType<UserControl>().mapControl = false;
+        FindObjectOfType<UserControl>().mapControl = false;
         float time = 2;
         while(time > 0)
         {
