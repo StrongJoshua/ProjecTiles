@@ -289,9 +289,9 @@ public class EnemyAI {
         float distance = Vector2.Distance(unit.XY, target.XY);
         switch(unit.specialType)
         {
-            case Unit.SpecialType.sniper: return distance <= 10;
+            case Unit.SpecialType.sniper: return distance <= 8;
             case Unit.SpecialType.bionade: return distance <= 4;
-            case Unit.SpecialType.drone: return distance <= 10;
+            case Unit.SpecialType.drone: return distance <= 6;
             case Unit.SpecialType.bombs: return distance <= 5;
             default: return false;
         }
