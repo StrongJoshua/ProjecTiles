@@ -158,6 +158,7 @@ Resources used
 Music by Waterflame and 95TurboSol
 3D models from Poly by Google contributors and /u/QuaterniusDev on Reddit
 Sounds from freesound.org
+Icons from The Noun Project
 
 Jan Risse: Maps, UI, Shading, AI, Movement
 
