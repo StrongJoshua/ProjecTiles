@@ -54,7 +54,8 @@ public class MainMenuButtons : MonoBehaviour
 		backButton.SetActive (false);
 		createTeamGroup.SetActive (false);
 		mainMenuGroup.SetActive (true);
-		EventSystem.current.SetSelectedGameObject (mainMenuGroup.GetComponentInChildren<Button> ().gameObject);
+        if(EventSystem.current.currentSelectedGameObject != mainMenuGroup.GetComponentInChildren<Button>().gameObject)
+		    EventSystem.current.SetSelectedGameObject (mainMenuGroup.GetComponentInChildren<Button>().gameObject);
 	}
 
 	public void nextTut ()
@@ -199,12 +200,29 @@ public class MainMenuButtons : MonoBehaviour
 		EventSystem.current.SetSelectedGameObject (backButton);
 	}
 
+    bool justCanceled;
+
 	void Update ()
 	{
-		if (Input.GetAxis ("Cancel") > 0 && createTeamGroup.GetComponent<CreateTeamManager> ().allowBack ()) {
-			showMainMenu ();
-			return;
-		}
+        if (Input.GetAxis("Cancel") > 0 && !justCanceled)
+        {
+            justCanceled = true;
+            if (settingsGroup.activeSelf && musicVolumeSlider.activeSelf)
+            {
+                musicVolumePicked();
+            }
+            else if (settingsGroup.activeSelf && sfxVolumeSlider.activeSelf)
+            {
+                sfxVolumePicked();
+            }
+            else if (createTeamGroup.GetComponent<CreateTeamManager>().allowBack())
+            {
+                showMainMenu();
+                return;
+            }
+        }
+        else if (Input.GetAxis("Cancel") == 0)
+            justCanceled = false;
 
 		if (creditsGroup.activeSelf) {
 			creditsGroup.GetComponent<RectTransform> ().position += new Vector3 (0, Screen.height / 10f * Time.deltaTime, 0);
