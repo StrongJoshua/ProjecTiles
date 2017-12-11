@@ -154,6 +154,10 @@ Known Bugs
 
 No turn in place for the mech drone
 
+----------------------------------
+Credits
+----------------------------------
+
 Resources used
 Music by Waterflame and 95TurboSol
 3D models from Poly by Google contributors and /u/QuaterniusDev on Reddit
