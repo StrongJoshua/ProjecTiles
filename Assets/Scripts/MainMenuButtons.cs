@@ -20,7 +20,7 @@ public class MainMenuButtons : MonoBehaviour
 
 	void Start ()
 	{
-		EventSystem.current.SetSelectedGameObject (tutGroup.GetComponentInChildren<Button> ().gameObject);
+		EventSystem.current.SetSelectedGameObject (tutNext);
 
 		creditsGroup.SetActive (false);
 		backButton.SetActive (false);
