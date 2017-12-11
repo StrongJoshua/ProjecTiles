@@ -446,7 +446,7 @@ public class Unit : MonoBehaviour
 
     public bool canShoot()
     {
-        return AP >= attackCost && !name.Equals("Medic");
+        return AP >= attackCost && !IsMedic;
     }
 
     public void heal(int amount)
